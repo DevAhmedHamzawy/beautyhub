@@ -1,6 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityLogController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminPanelController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminForgotPasswordController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\LocalizationController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,11 +22,54 @@ Route::get('admin/login', [AdminLoginController::class, 'showLoginForm']);
 Route::post('admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
 Route::post('admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 
-Route::group(['prefix' => 'admin','middleware' => 'assign.guard:admin,admin/login'], function () {
+// Forget Password
+Route::prefix('admin')->group(function () {
+    Route::get('forget-password', [AdminForgotPasswordController::class, 'showForgetPasswordForm'])->name('admin.forget-password');
+    Route::post('forget-password', [AdminForgotPasswordController::class, 'sendResetLink'])->name('admin.send-reset-link');
+    Route::get('reset-password/{token}', [AdminForgotPasswordController::class, 'showResetPasswordForm'])->name('admin.reset-password');
+    Route::post('reset-password', [AdminForgotPasswordController::class, 'resetPassword'])->name('admin.reset-password.submit');
+});
 
-    Route::get('dashboard', function(){
-        return 'Dashboard';
-    });
+
+// Change Language
+Route::get('lang/{lang}', [LocalizationController::class, 'index'])->name('language');
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guard:admin,admin/login'], function () {
+
+    Route::get('dashboard', action: [AdminPanelController::class, 'index'])->name('dashboard');
+
+    Route::resource('roles', RoleController::class);
+    Route::get('roles/{role}/active', [RoleController::class, 'active'])->name('roles.active');
+    Route::get('trash_roles', [RoleController::class, 'trash'])->name('roles.trash');
+    Route::get('roles/{id}/restore', [RoleController::class, 'restore'])->name('roles.restore');
+
+
+    Route::resource('admins', AdminController::class);
+    Route::get('admins/{admin}/active', [AdminController::class, 'active'])->name('admins.active');
+    Route::get('trash_admins', [AdminController::class, 'trash'])->name('admins.trash');
+    Route::get('admins/{id}/restore', [AdminController::class, 'restore'])->name('admins.restore');
+
+
+    Route::resource('users', UserController::class);
+    Route::get('users/{user}/active', [UserController::class, 'active'])->name('users.active');
+    Route::get('trash_users', [UserController::class, 'trash'])->name('users.trash');
+    Route::get('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+
+    // Categories
+    Route::resource('categories', CategoryController::class);
+    Route::get('categories/{category}/active', [CategoryController::class, 'active'])->name('categories.active');
+    Route::get('categories/{category}/appear_home', [CategoryController::class, 'appearHome'])->name('categories.appear_home');
+    Route::get('trash_categories', [CategoryController::class, 'trash'])->name('categories.trash');
+    Route::get('categories/{slug}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
+
+    // Subcategories
+    Route::resource('categories/{category}/subcategories', SubCategoryController::class)->except('show');
+    Route::get('categories/{category}/subcategories/{subcategory}/active', [SubCategoryController::class, 'active'])->name('subcategories.active');
+    Route::get('categories/{category}/subcategories/{subcategory}/appear_home', [SubCategoryController::class, 'appearHome'])->name('subcategories.appear_home');
+    Route::get('categories/{category}/trash_subcategories', [SubCategoryController::class, 'trash'])->name('subcategories.trash');
+    Route::get('categories/{category}/subcategories/{slug}/restore', [SubCategoryController::class, 'restore'])->name('subcategories.restore');
+
+    Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 
 });
 
@@ -24,3 +77,12 @@ Route::group(['prefix' => 'admin','middleware' => 'assign.guard:admin,admin/logi
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/storage_link', function () {
+    Artisan::call('storage:link');
+});
+
+Route::get('/optimize-clear', function () {
+    Artisan::call('optimize:clear');
+    return 'Optimization cache cleared!';
+});

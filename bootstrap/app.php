@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Middleware\AssignGuard;
+use App\Http\Middleware\Localization;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,8 +15,16 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-           'assign.guard' => AssignGuard::class
+           'guest' => RedirectIfAuthenticated::class,
+           'assign.guard' => AssignGuard::class,
+           'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
         ]);
+
+        $middleware->web(
+            append: [
+                Localization::class
+            ]
+        );
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

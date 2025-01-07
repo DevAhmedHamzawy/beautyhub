@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'welcome'   => 'Hi, welcome back!',
+    'dashboard' => 'Admin Dashboard',
+    'users' => 'users',
+    'admins' => 'admins',
+    'main' => 'main',
+    'name' => 'Name',
+    'image' => 'Image',
+    'actions' => 'Actions',
+    'created' => 'Created',
+    'create' => 'create',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'active' => 'Active',
+    'deactive' => 'Deactive',
+    'restore' => 'Restore',
+    'add' => 'Add',
+    'admin' => 'Administration',
+    'sign_out' => 'Sign Out',
+    'english' => 'English',
+    'arabic' => 'Arabic',
+    'are_you_sure' => 'Are you sure?',
+    'you_will_not_be_able_to_revert_this' => 'You will not be able to revert this!',
+    'yes' => 'Yes, delete it!',
+    'no' => 'No, cancel!',
+    'activity_logs' => 'Activity Logs',
+    'categories_and_brands' => 'Categories And Brands'
+];
