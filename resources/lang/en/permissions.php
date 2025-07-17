@@ -31,6 +31,13 @@ return [
     'active_category' => 'Active Category',
     'restore_category' => 'Restore Category',
     'add_home_category' => 'Add Home Category',
+    'Tax' => 'Tax',
+    'add_tax' => 'Add Tax',
+    'edit_tax' => 'Edit Tax',
+    'delete_tax' => 'Delete Tax',
+    'view_tax' => 'View Tax',
+    'active_tax' => 'Active Tax',
+    'restore_tax' => 'Restore Tax',
     'activity_logs' => 'Activity Logs',
     'view_activity_log' => 'View Activity Log'
 ];

@@ -16,6 +16,8 @@ class CategoryController extends Controller
         $this->middleware(['permission:edit_category'])->only(['edit', 'update']);
         $this->middleware(['permission:view_category'])->only(['index']);
         $this->middleware(['permission:delete_category'])->only(['delete']);
+        $this->middleware(['permission:active_category'])->only(['active']);
+        $this->middleware(['permission:restore_category'])->only(['restore']);
     }
 
     /**

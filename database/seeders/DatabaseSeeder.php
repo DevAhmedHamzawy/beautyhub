@@ -81,6 +81,18 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('restore_category');
         Permission::create(['name' => 'add_home_category', 'guard_name' => 'admin', 'group_name' => 'Category']);
         $role->givePermissionTo('add_home_category');
+        Permission::create(['name' => 'add_tax', 'guard_name' => 'admin', 'group_name' => 'Tax']);
+        $role->givePermissionTo('add_tax');
+        Permission::create(['name' => 'edit_tax', 'guard_name' => 'admin', 'group_name' => 'Tax']);
+        $role->givePermissionTo('edit_tax');
+        Permission::create(['name' => 'delete_tax', 'guard_name' => 'admin', 'group_name' => 'Tax']);
+        $role->givePermissionTo('delete_tax');
+        Permission::create(['name' => 'view_tax', 'guard_name' => 'admin', 'group_name' => 'Tax']);
+        $role->givePermissionTo('view_tax');
+        Permission::create(['name' => 'active_tax', 'guard_name' => 'admin', 'group_name' => 'Tax']);
+        $role->givePermissionTo('active_tax');
+        Permission::create(['name' => 'restore_tax', 'guard_name' => 'admin', 'group_name' => 'Tax']);
+        $role->givePermissionTo('restore_tax');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 

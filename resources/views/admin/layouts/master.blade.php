@@ -58,7 +58,7 @@
                             swal({
                                     title: "{{ trans('dashboard.are_you_sure') }}",
                                     text: "{{ trans('dashboard.you_will_not_be_able_to_revert_this') }}",
-                                    icon: "warning",
+                                    type: "warning",
                                     showCancelButton: true,
                                     confirmButtonColor: "#3085d6",
                                     cancelButtonColor: "#d33",

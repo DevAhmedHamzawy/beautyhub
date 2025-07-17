@@ -16,6 +16,7 @@ return [
     'active' => 'Active',
     'deactive' => 'Deactive',
     'restore' => 'Restore',
+    'close' => 'Close',
     'add' => 'Add',
     'admin' => 'Administration',
     'sign_out' => 'Sign Out',
@@ -26,5 +27,6 @@ return [
     'yes' => 'Yes, delete it!',
     'no' => 'No, cancel!',
     'activity_logs' => 'Activity Logs',
-    'categories_and_brands' => 'Categories And Brands'
+    'categories_and_brands' => 'Categories And Brands',
+    'product_settings' => 'Product Settings',
 ];

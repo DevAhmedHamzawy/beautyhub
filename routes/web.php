@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\LocalizationController;
 use Illuminate\Support\Facades\Artisan;
@@ -68,6 +69,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('categories/{category}/subcategories/{subcategory}/appear_home', [SubCategoryController::class, 'appearHome'])->name('subcategories.appear_home');
     Route::get('categories/{category}/trash_subcategories', [SubCategoryController::class, 'trash'])->name('subcategories.trash');
     Route::get('categories/{category}/subcategories/{slug}/restore', [SubCategoryController::class, 'restore'])->name('subcategories.restore');
+
+    // Taxes
+    Route::resource('taxes', TaxController::class);
+    Route::get('taxes/{tax}/active', [TaxController::class, 'active'])->name('taxes.active');
+    Route::get('trash_taxes', [TaxController::class, 'trash'])->name('taxes.trash');
+    Route::get('taxes/{id}/restore', [TaxController::class, 'restore'])->name('taxes.restore');
 
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

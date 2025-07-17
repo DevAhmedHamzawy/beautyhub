@@ -31,6 +31,13 @@ return [
     'active_category' => 'تفعيل التصنيف',
     'restore_category' => 'استعادة التصنيف',
     'add_home_category' => 'اضافة تصنيف للصفحة الرئيسية',
+    'Tax' => 'الضرائب',
+    'add_tax' => 'اضافة ضريبة',
+    'edit_tax' => 'تعديل ضريبة',
+    'delete_tax' => 'حذف ضريبة',
+    'view_tax' => 'عرض ضريبة',
+    'active_tax' => 'تفعيل ضريبة',
+    'restore_tax' => 'استعادة ضريبة',
     'activity_logs' => 'سجل النشاطات',
     'view_activity_log' => 'عرض سجل النشاطات'
 ];

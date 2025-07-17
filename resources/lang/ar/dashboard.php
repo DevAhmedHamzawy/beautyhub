@@ -16,6 +16,7 @@ return [
     'active' => 'تفعيل',
     'deactive' => 'تعطيل',
     'restore' => 'تراجع',
+    'close' => 'إغلاق',
     'add' => 'إضافة',
     'admin' => 'إدارة الموقع',
     'sign_out' => 'تسجيل الخروج',
@@ -26,5 +27,6 @@ return [
     'yes' => 'نعم ، حذفه!',
     'no' => 'لا ، لا تحذفه!',
     'activity_logs' => 'سجل النشاطات',
-    'categories_and_brands' => 'التصنيفات و العلامات التجارية'
+    'categories_and_brands' => 'التصنيفات و العلامات التجارية',
+    'product_settings' => 'اعدادات المنتجات',
 ];
