@@ -6,10 +6,13 @@
     <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+
+    <!---Internal Fileupload css-->
+    <link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('title')
-    {{ trans('tax.taxes') }}
+    {{ trans('brand.brands') }}
 @endsection
 
 @section('content')
@@ -23,7 +26,7 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">{{ trans('dashboard.dashboard') }}</a>
                     </li>
-                    <li class="breadcrumb-item active">{{ trans('tax.taxes') }}</li>
+                    <li class="breadcrumb-item active">{{ trans('brand.brands') }}</li>
                 </ol>
             </nav>
 
@@ -31,14 +34,14 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mg-b-0">{{ trans('tax.taxes') }}</h4>
+                        <h4 class="card-title mg-b-0">{{ trans('brand.brands') }}</h4>
                         <div class="d-flex">
-                            <a class="btn btn-primary text-white" data-toggle="modal" data-target="#addTaxModal">
-                                {{ trans('tax.add_new_tax') }}
+                            <a class="btn btn-primary text-white" data-toggle="modal" data-target="#addBrandModal">
+                                {{ trans('brand.add_new_brand') }}
                             </a>
                             &nbsp;&nbsp;
-                            <a class="btn btn-primary text-white" href="{{ route('admin.taxes.trash') }}">
-                                {{ trans('tax.trashed_taxes') }}
+                            <a class="btn btn-primary text-white" href="{{ route('admin.brands.trash') }}">
+                                {{ trans('brand.trashed_brands') }}
                             </a>
                         </div>
                     </div>
@@ -48,10 +51,10 @@
                         <table id="example-ajax" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('tax.name') }}</th>
-                                    <th class="border-bottom-0">{{ trans('tax.code') }}</th>
-                                    <th class="border-bottom-0">{{ trans('tax.rate') }}</th>
-                                    @canany(['view_tax', 'edit_tax', 'delete_tax', 'active_tax', 'restore_tax'])
+                                    <th class="'border-bottom-0">{{ trans('dashboard.image') }}</th>
+                                    <th class="border-bottom-0">{{ trans('brand.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('brand.description') }}</th>
+                                    @canany(['view_brand', 'edit_brand', 'delete_brand', 'active_brand', 'restore_brand'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
                                     <th class="border-bottom-0">{{ trans('dashboard.created') }}</th>
@@ -67,9 +70,9 @@
         <!--/div-->
     </div>
 
-    @include('admin.taxes.partials.add')
+    @include('admin.brands.partials.add')
 
-    @include('admin.taxes.partials.edit')
+    @include('admin.brands.partials.edit')
 @endsection
 
 @section('js')
@@ -97,18 +100,18 @@
         // تهيئة DataTable
         const table = $('#example-ajax').DataTable({
             processing: true,
-            ajax: '{{ route('admin.taxes.index') }}',
+            ajax: '{{ route('admin.brands.index') }}',
             columns: [{
+                    data: 'img_path',
+                    name: 'img_path'
+                },
+                {
                     data: 'name',
                     name: 'name'
                 },
                 {
-                    data: 'code',
-                    name: 'code'
-                },
-                {
-                    data: 'rate',
-                    name: 'rate'
+                    data: 'description',
+                    name: 'description'
                 },
                 {
                     data: 'actions',
@@ -164,30 +167,38 @@
             $(this).toggleClass('on');
         });
 
-        $('#createTaxForm').on('submit', function(e) {
+        $('#createBrandForm').on('submit', function(e) {
             e.preventDefault();
 
-            $('#createTaxForm .text-danger').text('');
+            $('#createBrandForm .text-danger').text('');
+
+            let formData = new FormData(this);
 
             $.ajax({
-                url: '{{ route('admin.taxes.store') }}',
+                url: '{{ route('admin.brands.store') }}',
                 method: 'POST',
-                data: $(this).serialize(),
+                data: formData,
+                processData: false, // ⬅️ مهم
+                contentType: false, // ⬅️ مهم
                 success: function() {
                     swal({
                         type: 'success',
-                        title: '{{ trans('tax.add_success') }}',
+                        title: '{{ trans('brand.add_success') }}',
                         showConfirmButton: true
                     })
-                    $('#addTaxModal').modal('hide');
-                    $('#createTaxForm')[0].reset();
-                    $('#createTaxForm .text-danger').text('');
+                    $('#addBrandModal').modal('hide');
+                    $('#createBrandForm')[0].reset();
+
+                    let drEvent = $('.dropify').data('dropify');
+                    drEvent.clearElement();
+
+                    $('#createBrandForm .text-danger').text('');
                     table.ajax.reload();
                 },
                 error: function(err) {
                     let errors = err.responseJSON.errors;
 
-                    $('#createTaxForm .text-danger').text('');
+                    $('#createBrandForm .text-danger').text('');
 
                     Object.keys(errors).forEach(function(key) {
                         let message = errors[key][0];
@@ -201,34 +212,38 @@
         // فتح مودال التعديل
         $(document).on('click', '.edit-btn', function() {
             const id = $(this).data('id');
-            $.get('/admin/taxes/' + id + '/edit', function(data) {
-                $('#editTaxForm').find('input[name="id"]').val(data.id);
-                $('#editTaxForm').find('input[name="name"]').val(data.name);
-                $('#editTaxForm').find('input[name="code"]').val(data.code);
-                $('#editTaxForm').find('input[name="rate"]').val(data.rate);
-                $('#editTaxModal').modal('show');
+            $.get('/admin/brands/' + id + '/edit', function(data) {
+                $('#editBrandForm').find('input[name="id"]').val(data.id);
+                $('#editBrandForm').find('input[name="name"]').val(data.name);
+                $('#editBrandForm').find('input[name="description"]').val(data.description);
+                $('#editBrandModal').modal('show');
             });
         });
 
         // تعديل ضريبة
-        $('#editTaxForm').on('submit', function(e) {
+        $('#editBrandForm').on('submit', function(e) {
             e.preventDefault();
 
-            $('#editTaxForm .text-danger').text('');
+            $('#editBrandForm .text-danger').text('');
+
+            let formData = new FormData(this);
+            formData.append('_method', 'PATCH');
 
             let id = $(this).find('input[name="id"]').val();
             $.ajax({
-                url: '/admin/taxes/' + id,
+                url: '/admin/brands/' + id,
                 method: 'POST',
-                data: $(this).serialize(),
+                data: formData,
+                processData: false, // ⬅️ مهم
+                contentType: false, // ⬅️ مهم
                 success: function() {
                     swal({
                         type: 'success',
-                        title: '{{ trans('tax.updated_success') }}',
+                        title: '{{ trans('brand.updated_success') }}',
                         showConfirmButton: true
                     })
-                    $('#editTaxModal').modal('hide');
-                    $('#editTaxForm .text-danger').text('');
+                    $('#editBrandModal').modal('hide');
+                    $('#editBrandForm .text-danger').text('');
                     table.ajax.reload();
                 },
                 error: function(err) {
@@ -255,7 +270,7 @@
                 function(isConfirm) {
                     if (isConfirm) {
                         $.ajax({
-                            url: '/admin/taxes/' + id,
+                            url: '/admin/brands/' + id,
                             method: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
@@ -264,7 +279,7 @@
                             success: function() {
                                 swal({
                                     type: 'success',
-                                    title: '{{ trans('tax.deleted_success') }}',
+                                    title: '{{ trans('brand.deleted_success') }}',
                                     showConfirmButton: true
                                 })
                                 table.ajax.reload();
@@ -283,4 +298,8 @@
             });
         });
     </script>
+
+    <!--Internal Fileuploads js-->
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
 @endsection

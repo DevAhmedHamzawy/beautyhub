@@ -142,6 +142,15 @@
             @endcanany
 
 
+            @canany(['view_brand', 'add_brand', 'edit_brand', 'delete_brand', 'active_brand', 'restore_brand'])
+                <li class="slide">
+                    <a class="side-menu__item" href="{{ route('admin.brands.index') }}">
+                        <i class="side-menu__icon fa fa-tags"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('brand.brands') }}</span></a>
+                </li>
+            @endcanany
+
+
 
             <li class="side-item side-item-category">{{ trans('dashboard.activity_logs') }}</li>
 

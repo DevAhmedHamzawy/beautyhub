@@ -38,6 +38,13 @@ return [
     'view_tax' => 'عرض ضريبة',
     'active_tax' => 'تفعيل ضريبة',
     'restore_tax' => 'استعادة ضريبة',
+    'brand' => 'العلامات التجارية',
+    'add_brand' => 'اضافة علامة تجارية',
+    'edit_brand' => 'تعديل علامة تجارية',
+    'delete_brand' => 'حذف علامة تجارية',
+    'view_brand' => 'عرض علامة تجارية',
+    'active_brand' => 'تفعيل علامة تجارية',
+    'restore_brand' => 'استعادة علامة تجارية',
     'activity_logs' => 'سجل النشاطات',
     'view_activity_log' => 'عرض سجل النشاطات'
 ];

@@ -38,6 +38,13 @@ return [
     'view_tax' => 'View Tax',
     'active_tax' => 'Active Tax',
     'restore_tax' => 'Restore Tax',
+    'Brands' => 'Brands',
+    'add_brand' => 'Add Brand',
+    'edit_brand' => 'Edit Brand',
+    'delete_brand' => 'Delete Brand',
+    'view_brand' => 'View Brand',
+    'active_brand' => 'Active Brand',
+    'restore_brand' => 'Restore Brand',
     'activity_logs' => 'Activity Logs',
     'view_activity_log' => 'View Activity Log'
 ];
