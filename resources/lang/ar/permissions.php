@@ -45,6 +45,13 @@ return [
     'view_brand' => 'عرض علامة تجارية',
     'active_brand' => 'تفعيل علامة تجارية',
     'restore_brand' => 'استعادة علامة تجارية',
+    'Units' => 'الوحدات',
+    'add_unit' => 'اضافة وحدة',
+    'edit_unit' => 'تعديل وحدة',
+    'delete_unit' => 'حذف وحدة',
+    'view_unit' => 'عرض وحدة',
+    'active_unit' => 'تفعيل وحدة',
+    'restore_unit' => 'استعادة وحدة',
     'activity_logs' => 'سجل النشاطات',
     'view_activity_log' => 'عرض سجل النشاطات'
 ];

@@ -103,7 +103,7 @@ class BrandController extends Controller
 
         $brand = Brand::create($data);
 
-        activity()->log('قام '.auth()->user()->name.' باضافة ضريبة جديدة'.$brand->name);
+        activity()->log('قام '.auth()->user()->name.' باضافة علامة تجارية جديدة'.$brand->name);
 
         $message = [
             'alert-type' => 'success',
@@ -143,7 +143,7 @@ class BrandController extends Controller
         // تحديث البراند
         $brand->update($data);
 
-        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل ضريبة'.$brand->name);
+        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل علامة تجارية'.$brand->name);
 
         $message = [
             'alert-type' => 'success',
@@ -161,7 +161,7 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف ضريبة '.$brand->name);
+        activity()->log('قام '.auth()->user()->name.'بحذف علامة تجارية '.$brand->name);
 
         $message = [
             'alert-type' => 'success',
@@ -196,7 +196,7 @@ class BrandController extends Controller
             'message' => trans('brand.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة التصنيف '.Brand::find($id)->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة العلامة التجارية '.Brand::find($id)->name);
 
         return redirect()->back()->with($message);
     }

@@ -9,7 +9,7 @@
 @endsection
 
 @section('title')
-    {{ trans('tax.taxes') }}
+    {{ trans('unit.units') }}
 @endsection
 
 @section('content')
@@ -23,7 +23,7 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">{{ trans('dashboard.dashboard') }}</a>
                     </li>
-                    <li class="breadcrumb-item active">{{ trans('tax.taxes') }}</li>
+                    <li class="breadcrumb-item active">{{ trans('unit.units') }}</li>
                 </ol>
             </nav>
 
@@ -31,14 +31,14 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mg-b-0">{{ trans('tax.taxes') }}</h4>
+                        <h4 class="card-title mg-b-0">{{ trans('unit.units') }}</h4>
                         <div class="d-flex">
-                            <a class="btn btn-primary text-white" data-toggle="modal" data-target="#addTaxModal">
-                                {{ trans('tax.add_new_tax') }}
+                            <a class="btn btn-primary text-white" data-toggle="modal" data-target="#addUnitModal">
+                                {{ trans('unit.add_new_unit') }}
                             </a>
                             &nbsp;&nbsp;
-                            <a class="btn btn-primary text-white" href="{{ route('admin.taxes.trash') }}">
-                                {{ trans('tax.trashed_taxes') }}
+                            <a class="btn btn-primary text-white" href="{{ route('admin.units.trash') }}">
+                                {{ trans('unit.trashed_units') }}
                             </a>
                         </div>
                     </div>
@@ -48,10 +48,9 @@
                         <table id="example-ajax" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('tax.name') }}</th>
-                                    <th class="border-bottom-0">{{ trans('tax.code') }}</th>
-                                    <th class="border-bottom-0">{{ trans('tax.rate') }}</th>
-                                    @canany(['view_tax', 'edit_tax', 'delete_tax', 'active_tax', 'restore_tax'])
+                                    <th class="border-bottom-0">{{ trans('unit.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('unit.code') }}</th>
+                                    @canany(['view_unit', 'edit_unit', 'delete_unit', 'active_unit', 'restore_unit'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
                                     <th class="border-bottom-0">{{ trans('dashboard.created') }}</th>
@@ -67,9 +66,9 @@
         <!--/div-->
     </div>
 
-    @include('admin.taxes.partials.add')
+    @include('admin.units.partials.add')
 
-    @include('admin.taxes.partials.edit')
+    @include('admin.units.partials.edit')
 @endsection
 
 @section('js')
@@ -97,7 +96,7 @@
         // تهيئة DataTable
         const table = $('#example-ajax').DataTable({
             processing: true,
-            ajax: '{{ route('admin.taxes.index') }}',
+            ajax: '{{ route('admin.units.index') }}',
             columns: [{
                     data: 'name',
                     name: 'name'
@@ -105,10 +104,6 @@
                 {
                     data: 'code',
                     name: 'code'
-                },
-                {
-                    data: 'rate',
-                    name: 'rate'
                 },
                 {
                     data: 'actions',
@@ -164,30 +159,30 @@
             $(this).toggleClass('on');
         });
 
-        $('#createTaxForm').on('submit', function(e) {
+        $('#createUnitForm').on('submit', function(e) {
             e.preventDefault();
 
-            $('#createTaxForm .text-danger').text('');
+            $('#createUnitForm .text-danger').text('');
 
             $.ajax({
-                url: '{{ route('admin.taxes.store') }}',
+                url: '{{ route('admin.units.store') }}',
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function() {
                     swal({
                         type: 'success',
-                        title: '{{ trans('tax.add_success') }}',
+                        title: '{{ trans('unit.add_success') }}',
                         showConfirmButton: true
                     })
-                    $('#addTaxModal').modal('hide');
-                    $('#createTaxForm')[0].reset();
-                    $('#createTaxForm .text-danger').text('');
+                    $('#addUnitModal').modal('hide');
+                    $('#createUnitForm')[0].reset();
+                    $('#createUnitForm .text-danger').text('');
                     table.ajax.reload();
                 },
                 error: function(err) {
                     let errors = err.responseJSON.errors;
 
-                    $('#createTaxForm .text-danger').text('');
+                    $('#createUnitForm .text-danger').text('');
 
                     Object.keys(errors).forEach(function(key) {
                         let message = errors[key][0];
@@ -201,36 +196,35 @@
         // فتح مودال التعديل
         $(document).on('click', '.edit-btn', function() {
             const id = $(this).data('id');
-            $.get('/admin/taxes/' + id + '/edit', function(data) {
-                $('#editTaxForm').find('input[name="id"]').val(data.id);
-                $('#editTaxForm').find('input[name="name"]').val(data.name);
-                $('#editTaxForm').find('input[name="code"]').val(data.code);
-                $('#editTaxForm').find('input[name="rate"]').val(data.rate);
-                $('#editTaxModal').modal('show');
+            $.get('/admin/units/' + id + '/edit', function(data) {
+                $('#editUnitForm').find('input[name="id"]').val(data.id);
+                $('#editUnitForm').find('input[name="name"]').val(data.name);
+                $('#editUnitForm').find('input[name="code"]').val(data.code);
+                $('#editUnitModal').modal('show');
             });
         });
 
         // تعديل ضريبة
-        $('#editTaxForm').on('submit', function(e) {
+        $('#editUnitForm').on('submit', function(e) {
             e.preventDefault();
 
-            $('#editTaxForm .text-danger').text('');
+            $('#editUnitForm .text-danger').text('');
 
             let formData = $(this).serialize() + '&_method=PUT';
 
             let id = $(this).find('input[name="id"]').val();
             $.ajax({
-                url: '/admin/taxes/' + id,
+                url: '/admin/units/' + id,
                 method: 'POST',
                 data: formData,
                 success: function() {
                     swal({
                         type: 'success',
-                        title: '{{ trans('tax.updated_success') }}',
+                        title: '{{ trans('unit.updated_success') }}',
                         showConfirmButton: true
                     })
-                    $('#editTaxModal').modal('hide');
-                    $('#editTaxForm .text-danger').text('');
+                    $('#editUnitModal').modal('hide');
+                    $('#editUnitForm .text-danger').text('');
                     table.ajax.reload();
                 },
                 error: function(err) {
@@ -257,7 +251,7 @@
                 function(isConfirm) {
                     if (isConfirm) {
                         $.ajax({
-                            url: '/admin/taxes/' + id,
+                            url: '/admin/units/' + id,
                             method: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
@@ -266,7 +260,7 @@
                             success: function() {
                                 swal({
                                     type: 'success',
-                                    title: '{{ trans('tax.deleted_success') }}',
+                                    title: '{{ trans('unit.deleted_success') }}',
                                     showConfirmButton: true
                                 })
                                 table.ajax.reload();

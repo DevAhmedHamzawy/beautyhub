@@ -151,6 +151,15 @@
             @endcanany
 
 
+            @canany(['view_unit', 'add_unit', 'edit_unit', 'delete_unit', 'active_unit', 'restore_unit'])
+                <li class="slide">
+                    <a class="side-menu__item" href="{{ route('admin.units.index') }}">
+                        <i class="side-menu__icon fa fa-ruler"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('unit.units') }}</span></a>
+                </li>
+            @endcanany
+
+
 
             <li class="side-item side-item-category">{{ trans('dashboard.activity_logs') }}</li>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminPanelController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -82,6 +83,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('brands/{brand}/active', [BrandController::class, 'active'])->name('brands.active');
     Route::get('trash_brands', [BrandController::class, 'trash'])->name('brands.trash');
     Route::get('brands/{id}/restore', [BrandController::class, 'restore'])->name('brands.restore');
+
+    // Units
+    Route::resource('units', UnitController::class);
+    Route::get('units/{unit}/active', [UnitController::class, 'active'])->name('units.active');
+    Route::get('trash_units', [UnitController::class, 'trash'])->name('units.trash');
+    Route::get('units/{id}/restore', [UnitController::class, 'restore'])->name('units.restore');
 
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

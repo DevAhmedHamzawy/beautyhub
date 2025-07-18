@@ -45,6 +45,13 @@ return [
     'view_brand' => 'View Brand',
     'active_brand' => 'Active Brand',
     'restore_brand' => 'Restore Brand',
+    'Units' => 'Units',
+    'add_unit' => 'Add Unit',
+    'edit_unit' => 'Edit Unit',
+    'delete_unit' => 'Delete Unit',
+    'view_unit' => 'View Unit',
+    'active_unit' => 'Active Unit',
+    'restore_unit' => 'Restore Unit',
     'activity_logs' => 'Activity Logs',
     'view_activity_log' => 'View Activity Log'
 ];

@@ -172,7 +172,7 @@ class TaxController extends Controller
             'message' => trans('tax.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة التصنيف '.Tax::find($id)->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة الضريبة '.Tax::find($id)->name);
 
         return redirect()->back()->with($message);
     }

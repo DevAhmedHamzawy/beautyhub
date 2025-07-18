@@ -105,6 +105,18 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('active_brand');
         Permission::create(['name' => 'restore_brand', 'guard_name' => 'admin', 'group_name' => 'Brand']);
         $role->givePermissionTo('restore_brand');
+        Permission::create(['name' => 'add_unit', 'guard_name' => 'admin', 'group_name' => 'Unit']);
+        $role->givePermissionTo('add_unit');
+        Permission::create(['name' => 'edit_unit', 'guard_name' => 'admin', 'group_name' => 'Unit']);
+        $role->givePermissionTo('edit_unit');
+        Permission::create(['name' => 'delete_unit', 'guard_name' => 'admin', 'group_name' => 'Unit']);
+        $role->givePermissionTo('delete_unit');
+        Permission::create(['name' => 'view_unit', 'guard_name' => 'admin', 'group_name' => 'Unit']);
+        $role->givePermissionTo('view_unit');
+        Permission::create(['name' => 'active_unit', 'guard_name' => 'admin', 'group_name' => 'Unit']);
+        $role->givePermissionTo('active_unit');
+        Permission::create(['name' => 'restore_unit', 'guard_name' => 'admin', 'group_name' => 'Unit']);
+        $role->givePermissionTo('restore_unit');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 
