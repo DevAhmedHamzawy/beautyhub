@@ -1,0 +1,177 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AttributeRequest;
+use App\Models\Attribute;
+use Illuminate\Http\Request;
+
+class SubAttributeController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware(['permission:add_attribute'])->only(['store']);
+        $this->middleware(['permission:edit_attribute'])->only(['update']);
+        $this->middleware(['permission:view_attribute'])->only(['index']);
+        $this->middleware(['permission:delete_attribute'])->only(['delete']);
+        $this->middleware(['permission:active_attribute'])->only(['active']);
+        $this->middleware(['permission:restore_attribute'])->only(['restore']);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Attribute $attribute, Request $request)
+    {
+        if ($request->ajax()) {
+            $subattributes = $attribute->children()->latest()->get();
+
+            return response()->json([
+                'data' => $subattributes->map(function ($subattribute) use($attribute) {
+
+                    $actions = '';
+
+                    if(auth()->user()->can('edit_attribute')) {
+                        $actions .= '<a href="javascript:void(0)" data-id="' . $subattribute->id . '" class="btn btn-warning edit-btn" data-placement="top" data-toggle="tooltip" data-original-title="'. trans("dashboard.edit") .'"><i class="fas fa-edit"></i></a>';
+                    }
+
+                    if(auth()->user()->can('delete_attribute')) {
+                        $route = route('admin.subattributes.destroy', [$attribute->id, $subattribute->id]);
+                        $csrf = csrf_field();
+                        $method = method_field('DELETE');
+
+                        $actions .= '
+                        <form id="delete-form-'. $subattribute->id .'" action="'. $route .'" method="POST" style="display:inline-block;">
+                            '. $csrf .'
+                            '. $method .'
+                            <button type="button" class="btn btn-danger delete-btn"
+                                data-id="'. $subattribute->id .'"
+                                data-placement="top" data-toggle="tooltip"
+                                data-original-title="'. trans('dashboard.delete') .'">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>';
+                    }
+
+                    if(auth()->user()->can('active_attribute')) {
+                        if($subattribute->active == 0){
+                            $actions .= '&nbsp;<a href="'. route("admin.subattributes.active", [$attribute->id, $subattribute->id]) .'" class="btn btn-info" data-placement="top" data-toggle="tooltip" data-original-title="'. trans("dashboard.active") .'"><i class="fas fa-toggle-on"></i></a>';
+                        }else{
+                            $actions .= '&nbsp;<a href="'.  route("admin.subattributes.active", [$attribute->id, $subattribute->id]) .'" class="btn btn-danger" data-placement="top" data-toggle="tooltip" data-original-title="'. trans("dashboard.deactive") .'"><i class="fas fa-toggle-off"></i></a>';
+                        }
+                    }
+
+                    return [
+                        'id' => $subattribute->id,
+                        'name' => $subattribute->name,
+                        'code' => $subattribute->code,
+                        'created_at' => $subattribute->created_at->diffForHumans(),
+                        'actions' => $actions,
+                    ];
+                }),
+                'recordsTotal' => $subattributes->count(),
+                'recordsFiltered' => $subattributes->count(),
+            ]);
+        }
+
+        return view('admin.subattributes.index', ['attribute' => $attribute]);
+    }
+
+    public function trash(Attribute $attribute)
+    {
+        return view('admin.subattributes.trash', ['attribute' => $attribute, 'subattributes' => $attribute->children()->onlyTrashed()->get()]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(AttributeRequest $request, Attribute $attribute)
+    {
+        $subattribute = $attribute->children()->create($request->validated());
+
+        activity()->log('قام '.auth()->user()->name.' باضافة فرع مواصفات جديد '.$subattribute->name);
+
+        $message = [
+            'alert-type' => 'success',
+            'title' =>  trans('subattribute.add_success'),
+            'message' => trans('subattribute.add_success')
+        ];
+
+        return response()->json($message);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $subattribute = Attribute::findOrFail($id);
+        return response()->json($subattribute);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(AttributeRequest $request, Attribute $attribute, Attribute $subattribute)
+    {
+        $subattribute->update($request->validated());
+
+        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل مواصفات'.$subattribute->name);
+
+        $message = [
+            'alert-type' => 'success',
+            'title' =>  trans('subattribute.updated_success'),
+            'message' => trans('subattribute.updated_success')
+        ];
+
+        return redirect()->route('admin.subattributes.index', $attribute)->with($message);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Attribute $attribute, Attribute $subattribute)
+    {
+        $subattribute->delete();
+
+        activity()->log('قام '.auth()->user()->name.'بحذف مواصفات '.$subattribute->name);
+
+        $message = [
+            'alert-type' => 'success',
+            'title' =>  trans('subattribute.deleted_success'),
+            'message' => trans('subattribute.deleted_success')
+        ];
+
+        return redirect()->route('admin.subattributes.index', $attribute)->with($message);
+    }
+
+    public function active(Attribute $attribute, Attribute $subattribute)
+    {
+        $subattribute->active ^= 1;
+        $subattribute->save();
+
+        $message = [
+            'alert-type' => 'success',
+            'title' =>  $subattribute->active ? trans('subattribute.active_success') : trans('subattribute.deactive_success'),
+            'message' => $subattribute->active ? trans('subattribute.active_success') : trans('subattribute.deactive_success'),
+        ];
+
+        return redirect()->back()->with($message);
+    }
+
+    public function restore(Attribute $attribute, $id)
+    {
+        $subattribute = Attribute::withTrashed()->whereId($id)->firstOrFail()->restore();
+
+        $message = [
+            'alert-type' => 'success',
+            'title' =>  trans('subattribute.restored_success'),
+            'message' => trans('subattribute.restored_success')
+        ];
+
+        activity()->log('قام '.auth()->user()->name.'باستعادة المواصفات '.Attribute::find($id)->name);
+
+        return redirect()->back()->with($message);
+    }
+}

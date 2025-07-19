@@ -52,6 +52,13 @@ return [
     'view_unit' => 'عرض وحدة',
     'active_unit' => 'تفعيل وحدة',
     'restore_unit' => 'استعادة وحدة',
+    'Attributes' => 'المواصفات',
+    'add_attribute' => 'إضافة مواصفات',
+    'edit_attribute' => 'تعديل مواصفات',
+    'delete_attribute' => 'حذف مواصفات',
+    'view_attribute' => 'عرض مواصفات',
+    'active_attribute' => 'تفعيل مواصفات',
+    'restore_attribute' => 'استعاده مواصفات',
     'activity_logs' => 'سجل النشاطات',
     'view_activity_log' => 'عرض سجل النشاطات'
 ];

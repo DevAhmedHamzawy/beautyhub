@@ -160,6 +160,16 @@
             @endcanany
 
 
+            @canany(['view_attribute', 'add_attribute', 'edit_attribute', 'delete_attribute', 'active_attribute',
+                'restore_attribute'])
+                <li class="slide">
+                    <a class="side-menu__item" href="{{ route('admin.attributes.index') }}">
+                        <i class="side-menu__icon fa fa-puzzle-piece"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('attribute.attributes') }}</span></a>
+                </li>
+            @endcanany
+
+
 
             <li class="side-item side-item-category">{{ trans('dashboard.activity_logs') }}</li>
 

@@ -3,12 +3,14 @@
 use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminPanelController;
+use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubAttributeController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Auth\AdminLoginController;
@@ -89,6 +91,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('units/{unit}/active', [UnitController::class, 'active'])->name('units.active');
     Route::get('trash_units', [UnitController::class, 'trash'])->name('units.trash');
     Route::get('units/{id}/restore', [UnitController::class, 'restore'])->name('units.restore');
+
+    // Attributes
+    Route::resource('attributes', AttributeController::class);
+    Route::get('attributes/{attribute}/active', [AttributeController::class, 'active'])->name('attributes.active');
+    Route::get('trash_attributes', [AttributeController::class, 'trash'])->name('attributes.trash');
+    Route::get('attributes/{id}/restore', [AttributeController::class, 'restore'])->name('attributes.restore');
+
+    // SubAttributes
+    Route::resource('attributes/{attribute}/subattributes', SubAttributeController::class)->except('show');
+    Route::get('attributes/{attribute}/subattributes/{subattribute}/active', [SubAttributeController::class, 'active'])->name('subattributes.active');
+    Route::get('attributes/{attribute}/trash_subattributes', [SubAttributeController::class, 'trash'])->name('subattributes.trash');
+    Route::get('attributes/{attribute}/subattributes/{id}/restore', [SubAttributeController::class, 'restore'])->name('subattributes.restore');
 
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

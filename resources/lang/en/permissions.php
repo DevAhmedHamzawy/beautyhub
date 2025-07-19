@@ -52,6 +52,13 @@ return [
     'view_unit' => 'View Unit',
     'active_unit' => 'Active Unit',
     'restore_unit' => 'Restore Unit',
+    'Attributes' => 'Attributes',
+    'add_attribute' => 'Add Attribute',
+    'edit_attribute' => 'Edit Attribute',
+    'delete_attribute' => 'Delete Attribute',
+    'view_attribute' => 'View Attribute',
+    'active_attribute' => 'Active Attribute',
+    'restore_attribute' => 'Restore Attribute',
     'activity_logs' => 'Activity Logs',
     'view_activity_log' => 'View Activity Log'
 ];

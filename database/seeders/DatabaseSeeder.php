@@ -117,6 +117,18 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('active_unit');
         Permission::create(['name' => 'restore_unit', 'guard_name' => 'admin', 'group_name' => 'Unit']);
         $role->givePermissionTo('restore_unit');
+        Permission::create(['name' => 'add_attribute', 'guard_name' => 'admin', 'group_name' => 'Attribute']);
+        $role->givePermissionTo('add_attribute');
+        Permission::create(['name' => 'edit_attribute', 'guard_name' => 'admin', 'group_name' => 'Attribute']);
+        $role->givePermissionTo('edit_attribute');
+        Permission::create(['name' => 'delete_attribute', 'guard_name' => 'admin', 'group_name' => 'Attribute']);
+        $role->givePermissionTo('delete_attribute');
+        Permission::create(['name' => 'view_attribute', 'guard_name' => 'admin', 'group_name' => 'Attribute']);
+        $role->givePermissionTo('view_attribute');
+        Permission::create(['name' => 'active_attribute', 'guard_name' => 'admin', 'group_name' => 'Attribute']);
+        $role->givePermissionTo('active_attribute');
+        Permission::create(['name' => 'restore_attribute', 'guard_name' => 'admin', 'group_name' => 'Attribute']);
+        $role->givePermissionTo('restore_attribute');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 
