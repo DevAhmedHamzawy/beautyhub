@@ -141,6 +141,16 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('active_supplier');
         Permission::create(['name' => 'restore_supplier', 'guard_name' => 'admin', 'group_name' => 'Supplier']);
         $role->givePermissionTo('restore_supplier');
+        Permission::create(['name' => 'add_country', 'guard_name' => 'admin', 'group_name' => 'Country']);
+        $role->givePermissionTo('add_country');
+        Permission::create(['name' => 'edit_country', 'guard_name' => 'admin', 'group_name' => 'Country']);
+        $role->givePermissionTo('edit_country');
+        Permission::create(['name' => 'delete_country', 'guard_name' => 'admin', 'group_name' => 'Country']);
+        $role->givePermissionTo('delete_country');
+        Permission::create(['name' => 'view_country', 'guard_name' => 'admin', 'group_name' => 'Country']);
+        $role->givePermissionTo('view_country');
+        Permission::create(['name' => 'restore_country', 'guard_name' => 'admin', 'group_name' => 'Country']);
+        $role->givePermissionTo('restore_country');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 

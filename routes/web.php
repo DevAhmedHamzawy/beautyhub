@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminPanelController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
@@ -111,6 +112,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('suppliers/{supplier}active', [SupplierController::class, 'active'])->name('suppliers.active');
     Route::get('trash_suppliers', [SupplierController::class, 'trash'])->name('suppliers.trash');
     Route::get('suppliers/{id}/restore', [SupplierController::class, 'restore'])->name('suppliers.restore');
+
+    // Countries
+    Route::resource('countries', CountryController::class);
+    Route::get('trash_countries', [CountryController::class, 'trash'])->name('countries.trash');
+    Route::get('countries/{id}/restore', [CountryController::class, 'restore'])->name('countries.restore');
 
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 
