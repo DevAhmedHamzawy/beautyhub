@@ -12,7 +12,9 @@ use App\Http\Controllers\Admin\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubAttributeController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\TaxController;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\LocalizationController;
 use Illuminate\Support\Facades\Artisan;
@@ -104,6 +106,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('attributes/{attribute}/trash_subattributes', [SubAttributeController::class, 'trash'])->name('subattributes.trash');
     Route::get('attributes/{attribute}/subattributes/{id}/restore', [SubAttributeController::class, 'restore'])->name('subattributes.restore');
 
+    // Suppliers
+    Route::resource('suppliers', SupplierController::class)->except('show');
+    Route::get('suppliers/{supplier}active', [SupplierController::class, 'active'])->name('suppliers.active');
+    Route::get('trash_suppliers', [SupplierController::class, 'trash'])->name('suppliers.trash');
+    Route::get('suppliers/{id}/restore', [SupplierController::class, 'restore'])->name('suppliers.restore');
+
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 
 });
@@ -112,6 +120,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('areas', [AreaController::class, 'index'])->name('get_areas');
 
 Route::get('/storage_link', function () {
     Artisan::call('storage:link');

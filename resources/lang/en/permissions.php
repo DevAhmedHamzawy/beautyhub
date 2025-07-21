@@ -59,6 +59,13 @@ return [
     'view_attribute' => 'View Attribute',
     'active_attribute' => 'Active Attribute',
     'restore_attribute' => 'Restore Attribute',
+    'Suppliers' => 'Suppliers',
+    'add_supplier' => 'Add Supplier',
+    'edit_supplier' => 'Edit Supplier',
+    'delete_supplier' => 'Delete Supplier',
+    'view_supplier' => 'View Supplier',
+    'active_supplier' => 'Active Supplier',
+    'restore_supplier' => 'Restore Supplier',
     'activity_logs' => 'Activity Logs',
     'view_activity_log' => 'View Activity Log'
 ];

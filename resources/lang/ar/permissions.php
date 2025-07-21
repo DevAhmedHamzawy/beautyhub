@@ -59,6 +59,13 @@ return [
     'view_attribute' => 'عرض مواصفات',
     'active_attribute' => 'تفعيل مواصفات',
     'restore_attribute' => 'استعاده مواصفات',
+    'Suppliers' => 'الموردين',
+    'add_supplier' => 'اضافة مورد',
+    'edit_supplier' => 'تعديل مورد',
+    'delete_supplier' => 'حذف مورد',
+    'view_supplier' => 'عرض مورد',
+    'active_supplier' => 'تفعيل مورد',
+    'restore_supplier' => 'استعادة مورد',
     'activity_logs' => 'سجل النشاطات',
     'view_activity_log' => 'عرض سجل النشاطات'
 ];

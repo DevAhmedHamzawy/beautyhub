@@ -129,6 +129,18 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('active_attribute');
         Permission::create(['name' => 'restore_attribute', 'guard_name' => 'admin', 'group_name' => 'Attribute']);
         $role->givePermissionTo('restore_attribute');
+        Permission::create(['name' => 'add_supplier', 'guard_name' => 'admin', 'group_name' => 'Supplier']);
+        $role->givePermissionTo('add_supplier');
+        Permission::create(['name' => 'edit_supplier', 'guard_name' => 'admin', 'group_name' => 'Supplier']);
+        $role->givePermissionTo('edit_supplier');
+        Permission::create(['name' => 'delete_supplier', 'guard_name' => 'admin', 'group_name' => 'Supplier']);
+        $role->givePermissionTo('delete_supplier');
+        Permission::create(['name' => 'view_supplier', 'guard_name' => 'admin', 'group_name' => 'Supplier']);
+        $role->givePermissionTo('view_supplier');
+        Permission::create(['name' => 'active_supplier', 'guard_name' => 'admin', 'group_name' => 'Supplier']);
+        $role->givePermissionTo('active_supplier');
+        Permission::create(['name' => 'restore_supplier', 'guard_name' => 'admin', 'group_name' => 'Supplier']);
+        $role->givePermissionTo('restore_supplier');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 

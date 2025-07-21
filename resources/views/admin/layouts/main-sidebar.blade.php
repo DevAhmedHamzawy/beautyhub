@@ -107,6 +107,31 @@
             @endcanany
 
 
+            <li class="side-item side-item-category">{{ trans('supplier.suppliers') }}</li>
+
+            @canany(['view_supplier', 'add_supplier', 'edit_supplier', 'delete_supplier', 'active_supplier',
+                'restore_supplier'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fas fa-truck"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('supplier.suppliers') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_supplier')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.suppliers.index') }}">{{ trans('supplier.show_suppliers') }}</a>
+                            </li>
+                        @endcan
+                        @can('add_supplier')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.suppliers.create') }}">{{ trans('supplier.add_new_supplier') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
+
             <li class="side-item side-item-category">{{ trans('dashboard.categories_and_brands') }}</li>
 
             @canany(['view_category', 'add_category', 'edit_category', 'delete_category', 'active_category',
