@@ -53,6 +53,11 @@ class CountryController extends Controller
                         </form>';
                     }
 
+                    if(auth()->user()->can('view_city')) {
+                        $route = route('admin.cities.index', $country->id);
+                        $actions .= '<a href="' . $route . '" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="' . trans('dashboard.view') . '"><i class="fas fa-eye"></i></a>';
+                    }
+
                     return [
                         'id' => $country->id,
                         'name' => $country->name,

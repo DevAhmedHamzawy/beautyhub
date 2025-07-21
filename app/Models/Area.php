@@ -15,4 +15,9 @@ class Area extends Model
     {
         return self::whereParentId(1)->get();
     }
+
+    public function cities()
+    {
+        return $this->hasMany(Area::class, 'parent_id');
+    }
 }
