@@ -151,6 +151,16 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('view_country');
         Permission::create(['name' => 'restore_country', 'guard_name' => 'admin', 'group_name' => 'Country']);
         $role->givePermissionTo('restore_country');
+        Permission::create(['name' => 'add_governorate', 'guard_name' => 'admin', 'group_name' => 'Governorate']);
+        $role->givePermissionTo('add_governorate');
+        Permission::create(['name' => 'edit_governorate', 'guard_name' => 'admin', 'group_name' => 'Governorate']);
+        $role->givePermissionTo('edit_governorate');
+        Permission::create(['name' => 'delete_governorate', 'guard_name' => 'admin', 'group_name' => 'Governorate']);
+        $role->givePermissionTo('delete_governorate');
+        Permission::create(['name' => 'view_governorate', 'guard_name' => 'admin', 'group_name' => 'Governorate']);
+        $role->givePermissionTo('view_governorate');
+        Permission::create(['name' => 'restore_governorate', 'guard_name' => 'admin', 'group_name' => 'Governorate']);
+        $role->givePermissionTo('restore_governorate');
         Permission::create(['name' => 'add_city', 'guard_name' => 'admin', 'group_name' => 'City']);
         $role->givePermissionTo('add_city');
         Permission::create(['name' => 'edit_city', 'guard_name' => 'admin', 'group_name' => 'City']);

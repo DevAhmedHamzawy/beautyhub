@@ -107,6 +107,30 @@
             @endcanany
 
 
+            <li class="side-item side-item-category">{{ trans('dashboard.country') }}</li>
+
+            @canany(['view_country', 'add_country', 'edit_country', 'delete_country', 'active_country',
+                'restore_country'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fas fa-globe"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('country.countries') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_country')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.countries.index') }}">{{ trans('country.show_countries') }}</a>
+                            </li>
+                        @endcan
+                        @can('add_country')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.countries.create') }}">{{ trans('country.add_new_country') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
             <li class="side-item side-item-category">{{ trans('supplier.suppliers') }}</li>
 
             @canany(['view_supplier', 'add_supplier', 'edit_supplier', 'delete_supplier', 'active_supplier',

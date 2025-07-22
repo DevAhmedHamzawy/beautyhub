@@ -29,4 +29,5 @@ return [
     'activity_logs' => 'سجل النشاطات',
     'categories_and_brands' => 'التصنيفات و العلامات التجارية',
     'product_settings' => 'اعدادات المنتجات',
+    'country' => 'البلدان',
 ];

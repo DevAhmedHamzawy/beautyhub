@@ -21,13 +21,13 @@ class CityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Area $country, Request $request)
+    public function index(Area $country, Area $governorate, Request $request)
     {
         if ($request->ajax()) {
-            $cities = $country->cities;
+            $cities = $governorate->cities;
 
             return response()->json([
-                'data' => $cities->map(function ($city) use ($country) {
+                'data' => $cities->map(function ($city) use ($country, $governorate) {
 
                     $actions = '';
 
@@ -36,7 +36,7 @@ class CityController extends Controller
                     }
 
                     if(auth()->user()->can('delete_city')) {
-                        $route = route('admin.cities.destroy', [$country->id, $city->id]);
+                        $route = route('admin.cities.destroy', [$country->id, $governorate->id, $city->id]);
                         $csrf = csrf_field();
                         $method = method_field('DELETE');
 
@@ -66,21 +66,21 @@ class CityController extends Controller
             ]);
         }
 
-        return view('admin.cities.index', ['country' => $country]);
+        return view('admin.cities.index', ['country' => $country, 'governorate' => $governorate]);
     }
 
-    public function trash(Area $country)
+    public function trash(Area $country, Area $governorate)
     {
-        $cities = $country->cities()->onlyTrashed()->get();
-        return view('admin.cities.trash', ['cities' => $cities, 'country' => $country]);
+        $cities = $governorate->cities()->onlyTrashed()->get();
+        return view('admin.cities.trash', ['cities' => $cities, 'country' => $country, 'governorate' => $governorate]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Area $country, CityRequest $request)
+    public function store(Area $country, Area $governorate, CityRequest $request)
     {
-        $data = array_merge($request->validated(), ['parent_id' => $country->id]);
+        $data = array_merge($request->validated(), ['parent_id' => $governorate->id]);
 
         $city = Area::create($data);
 
@@ -98,7 +98,7 @@ class CityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($country_id, $id)
+    public function edit($country_id, $governorate_id,  $id)
     {
         $city = Area::findOrFail($id);
         return response()->json($city);
@@ -107,7 +107,7 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CityRequest $request, Area $country, Area $city)
+    public function update(CityRequest $request, Area $country, Area $governorate, Area $city)
     {
         $city->update($request->validated());
 
@@ -119,13 +119,13 @@ class CityController extends Controller
             'message' => trans('city.updated_success')
         ];
 
-        return redirect()->route('admin.cities.index', $country->id)->with($message);
+        return redirect()->route('admin.cities.index', [$country->id, $governorate->id])->with($message);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Area $country, Area $city)
+    public function destroy(Area $country, Area $governorate, Area $city)
     {
         $city->delete();
 
@@ -137,10 +137,10 @@ class CityController extends Controller
             'message' => trans('city.deleted_success')
         ];
 
-        return redirect()->route('admin.cities.index', $country->id)->with($message);
+        return redirect()->route('admin.cities.index', [$country->id, $governorate->id])->with($message);
     }
 
-    public function restore(Area $country, $id)
+    public function restore(Area $country, Area $governorate, $id)
     {
         $city = Area::withTrashed()->whereId($id)->firstOrFail()->restore();
 

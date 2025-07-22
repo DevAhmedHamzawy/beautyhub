@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\GovernorateController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
@@ -119,10 +120,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('trash_countries', [CountryController::class, 'trash'])->name('countries.trash');
     Route::get('countries/{id}/restore', [CountryController::class, 'restore'])->name('countries.restore');
 
+    // governorates
+    Route::resource('countries/{country}/governorates', GovernorateController::class);
+    Route::get('countries/{country}/trash_governorates', [GovernorateController::class, 'trash'])->name('governorates.trash');
+    Route::get('countries/{country}/governorates/{id}/restore', [GovernorateController::class, 'restore'])->name('governorates.restore');
+
     // Cities
-    Route::resource('countries/{country}/cities', CityController::class);
-    Route::get('countries/{country}/trash_cities', [CityController::class, 'trash'])->name('cities.trash');
-    Route::get('countries/{country}/cities/{id}/restore', [CityController::class, 'restore'])->name('cities.restore');
+    Route::resource('countries/{country}/governorates/{governorate}/cities', CityController::class);
+    Route::get('countries/{country}/governorates/{governorate}/trash_cities', [CityController::class, 'trash'])->name('cities.trash');
+    Route::get('countries/{country}/governorates/{governorate}/cities/{id}/restore', [CityController::class, 'restore'])->name('cities.restore');
 
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

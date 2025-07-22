@@ -29,4 +29,5 @@ return [
     'activity_logs' => 'Activity Logs',
     'categories_and_brands' => 'Categories And Brands',
     'product_settings' => 'Product Settings',
+    'country' => 'Countries',
 ];

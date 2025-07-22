@@ -9,7 +9,7 @@
 @endsection
 
 @section('title')
-    {{ trans('city.trashed_cities') }}
+    {{ trans('governorate.trashed_governorates') }}
 @endsection
 
 @section('content')
@@ -31,14 +31,7 @@
                         <a
                             href="{{ route('admin.governorates.index', $country) }}">{{ $locale == 'ar' ? $country->name : $country->english }}</a>
                     </li>
-                    <li class="breadcrumb-item">
-                        {{ trans('governorate.governorates') }}
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a
-                            href="{{ route('admin.cities.index', ['country' => $country, 'governorate' => $governorate]) }}">{{ $locale == 'ar' ? $governorate->name : $governorate->english }}</a>
-                    </li>
-                    <li class="breadcrumb-item active">{{ trans('city.trashed_cities') }}</li>
+                    <li class="breadcrumb-item active">{{ trans('governorate.trashed_governorates') }}</li>
                 </ol>
             </nav>
 
@@ -46,11 +39,10 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">{{ trans('city.trashed_cities') }}</h4>
+                        <h4 class="card-title mg-b-0">{{ trans('governorate.trashed_governorates') }}</h4>
 
-                        <a class="btn btn-primary text-white"
-                            href="{{ route('admin.cities.index', ['country' => $country, 'governorate' => $governorate]) }}">
-                            {{ trans('city.cities') }}
+                        <a class="btn btn-primary text-white" href="{{ route('admin.governorates.index', $country->id) }}">
+                            {{ trans('governorate.governorates') }}
                         </a>
                     </div>
                 </div>
@@ -59,26 +51,26 @@
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('city.name') }}</th>
-                                    @canany(['restore_city'])
+                                    <th class="border-bottom-0">{{ trans('governorate.name') }}</th>
+                                    @canany(['restore_governorate'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
                                     <th class="border-bottom-0">{{ trans('dashboard.created') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($cities as $city)
+                                @foreach ($governorates as $governorate)
                                     <tr>
-                                        <td>{{ $city->name }}</td>
-                                        @can('restore_city')
+                                        <td>{{ $governorate->name }}</td>
+                                        @can('restore_governorate')
                                             <td class="row pl-3">
-                                                <a href="{{ route('admin.cities.restore', [$country->id, $governorate->id, $city->id]) }}"
+                                                <a href="{{ route('admin.governorates.restore', [$country->id, $governorate->id]) }}"
                                                     class="btn btn-primary" data-placement="top" data-toggle="tooltip"
                                                     data-original-title="{{ trans('dashboard.restore') }}"><i
                                                         class="fas fa-trash-restore"></i></a>
                                             </td>
                                         @endcan
-                                        <td>{{ $city->deleted_at->diffForHumans() }}</td>
+                                        <td>{{ $governorate->deleted_at->diffForHumans() }}</td>
                                     </tr>
                                 @endforeach
 
