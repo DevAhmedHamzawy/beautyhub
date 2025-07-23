@@ -3,10 +3,19 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\CategoryTranslation;
+use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\ProductTranslation;
+use App\Models\Tax;
+use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Support\Str;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -17,7 +26,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(1)->create();
+        /*User::factory(1)->create();
 
         $admin = Admin::updateOrCreate(['id' => 1], [
             'name' => 'Admin',
@@ -186,6 +195,94 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 
-        $admin->assignRole($role);
+        $admin->assignRole($role);*/
+
+
+        /*for ($i=0; $i < 11 ; $i++) {
+            $category = Category::factory()->create();
+
+            foreach (['en', 'ar'] as $locale) {
+                CategoryTranslation::factory()->create([
+                    'category_id' => $category->id,
+                    'locale' => $locale,
+                ]);
+            }
+        }*/
+
+        //Brand::factory()->count(10)->create();
+        //Tax::factory()->count(10)->create();
+
+        /*$units = [
+            ['name' => 'كيلوجرام', 'code' => 'KG'],
+            ['name' => 'جرام', 'code' => 'G'],
+            ['name' => 'لتر', 'code' => 'L'],
+            ['name' => 'ملليلتر', 'code' => 'ML'],
+            ['name' => 'قطعة', 'code' => 'PCS'],
+            ['name' => 'علبة', 'code' => 'BOX'],
+            ['name' => 'متر', 'code' => 'M'],
+            ['name' => 'سنتيمتر', 'code' => 'CM'],
+        ];
+
+        foreach ($units as $unit) {
+            \App\Models\Unit::create([
+                'name' => $unit['name'],
+                'code' => $unit['code'],
+                'active' => true,
+            ]);
+        }*/
+
+
+         /*   $attributes = [
+                'اللون' => ['أحمر', 'وردي', 'نيود'],
+                'الحجم' => ['50ml', '100ml', '200ml'],
+                'نوع البشرة' => ['دهنية', 'جافة', 'مختلطة'],
+                'نوع المنتج' => ['كريم', 'سيروم', 'ماسك'],
+                'الاستخدام' => ['صباحي', 'مسائي', 'يومي'],
+                'نوع الشعر' => ['عادي', 'دهني', 'جاف'],
+                'التغطية' => ['خفيفة', 'متوسطة', 'كاملة'],
+                'درجة الحماية (SPF)' => ['15', '30', '50'],
+            ];
+
+            foreach ($attributes as $parentName => $children) {
+                $parent = \App\Models\Attribute::create([
+                    'name' => $parentName,
+                    'parent_id' => null,
+                    'active' => true,
+                ]);
+
+                foreach ($children as $childName) {
+                    \App\Models\Attribute::create([
+                        'name' => $childName,
+                        'parent_id' => $parent->id,
+                        'active' => true,
+                    ]);
+                }
+            }*/
+
+
+            DB::transaction(function () {
+                Product::factory()
+                    ->count(1000)
+                    ->create()
+                    ->each(function ($product) {
+                        // ترجمات
+                        ProductTranslation::factory()->create([
+                            'product_id' => $product->id,
+                            'locale' => 'ar',
+                        ]);
+
+                        ProductTranslation::factory()->create([
+                            'product_id' => $product->id,
+                            'locale' => 'en',
+                        ]);
+
+                        // صور
+                        ProductImage::factory()->count(3)->create([
+                            'product_id' => $product->id,
+                        ]);
+                    });
+            });
+
+
     }
 }

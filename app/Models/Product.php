@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use Translatable, SoftDeletes;
+    use HasFactory, Translatable, SoftDeletes;
     public $translatedAttributes = ['name', 'mini_description', 'description'];
 
     protected $guarded = ['name', 'mini_description', 'description' , 'main_image', 'images'];
