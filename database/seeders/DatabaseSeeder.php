@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /*User::factory(1)->create();
+        User::factory(1)->create();
 
         $admin = Admin::updateOrCreate(['id' => 1], [
             'name' => 'Admin',
@@ -195,10 +195,10 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 
-        $admin->assignRole($role);*/
+        $admin->assignRole($role);
 
 
-        /*for ($i=0; $i < 11 ; $i++) {
+        for ($i=0; $i < 11 ; $i++) {
             $category = Category::factory()->create();
 
             foreach (['en', 'ar'] as $locale) {
@@ -207,12 +207,12 @@ class DatabaseSeeder extends Seeder
                     'locale' => $locale,
                 ]);
             }
-        }*/
+        }
 
-        //Brand::factory()->count(10)->create();
-        //Tax::factory()->count(10)->create();
+        Brand::factory()->count(10)->create();
+        Tax::factory()->count(10)->create();
 
-        /*$units = [
+        $units = [
             ['name' => 'كيلوجرام', 'code' => 'KG'],
             ['name' => 'جرام', 'code' => 'G'],
             ['name' => 'لتر', 'code' => 'L'],
@@ -229,10 +229,10 @@ class DatabaseSeeder extends Seeder
                 'code' => $unit['code'],
                 'active' => true,
             ]);
-        }*/
+        }
 
 
-         /*   $attributes = [
+        $attributes = [
                 'اللون' => ['أحمر', 'وردي', 'نيود'],
                 'الحجم' => ['50ml', '100ml', '200ml'],
                 'نوع البشرة' => ['دهنية', 'جافة', 'مختلطة'],
@@ -257,7 +257,7 @@ class DatabaseSeeder extends Seeder
                         'active' => true,
                     ]);
                 }
-            }*/
+            }
 
 
             DB::transaction(function () {
