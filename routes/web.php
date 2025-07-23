@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FlashSaleController;
 use App\Http\Controllers\Admin\SubAttributeController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -139,6 +140,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('products/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
     Route::post('upload_product', [ProductController::class, 'upload'])->name('products.upload');
     Route::post('delete_product', [ProductController::class, 'deleteImage'])->name('products.delete_image');
+
+    // Flash Sales
+    Route::get('flash_sales/show_categories', [FlashSaleController::class, 'chooseCategories'])->name('flash_sales.choose_categories');
+    Route::post('flash_sales/show_products', [FlashSaleController::class, 'showProducts'])->name('flash_sales.show_products');
+    Route::post('flash_sales/create', [FlashSaleController::class, 'create'])->name('flash_sales.create');
+    Route::get('flash_sales/create', [FlashSaleController::class, 'create'])->name('flash_sales.create');
+    Route::post('flash_sales/store', action: [FlashSaleController::class, 'store'])->name('flash_sales.store');
 
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 
