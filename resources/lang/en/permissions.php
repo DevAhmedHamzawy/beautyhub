@@ -86,6 +86,13 @@ return [
     'view_city' => 'View City',
     'active_city' => 'Active City',
     'restore_city' => 'Restore City',
+    'Product' => 'Products',
+    'add_product' => 'Add Product',
+    'edit_product' => 'Edit Product',
+    'delete_product' => 'Delete Product',
+    'view_product' => 'View Product',
+    'active_product' => 'Active Product',
+    'restore_product' => 'Restore Product',
     'activity_logs' => 'Activity Logs',
     'view_activity_log' => 'View Activity Log'
 ];

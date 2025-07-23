@@ -107,6 +107,31 @@
             @endcanany
 
 
+            <li class="side-item side-item-category">{{ trans('product.products') }}</li>
+
+            @canany(['view_product', 'add_product', 'edit_product', 'delete_product', 'active_product',
+                'restore_product'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fas fa-box"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('product.products') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_product')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.products.index') }}">{{ trans('product.show_products') }}</a>
+                            </li>
+                        @endcan
+                        @can('add_product')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.products.create') }}">{{ trans('product.add_new_product') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
+
             <li class="side-item side-item-category">{{ trans('dashboard.country') }}</li>
 
             @canany(['view_country', 'add_country', 'edit_country', 'delete_country', 'active_country',

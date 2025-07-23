@@ -171,6 +171,18 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('view_city');
         Permission::create(['name' => 'restore_city', 'guard_name' => 'admin', 'group_name' => 'City']);
         $role->givePermissionTo('restore_city');
+        Permission::create(['name' => 'add_product', 'guard_name' => 'admin', 'group_name' => 'Product']);
+        $role->givePermissionTo('add_product');
+        Permission::create(['name' => 'edit_product', 'guard_name' => 'admin', 'group_name' => 'Product']);
+        $role->givePermissionTo('edit_product');
+        Permission::create(['name' => 'delete_product', 'guard_name' => 'admin', 'group_name' => 'Product']);
+        $role->givePermissionTo('delete_product');
+        Permission::create(['name' => 'view_product', 'guard_name' => 'admin', 'group_name' => 'Product']);
+        $role->givePermissionTo('view_product');
+        Permission::create(['name' => 'active_product', 'guard_name' => 'admin', 'group_name' => 'Product']);
+        $role->givePermissionTo('active_product');
+        Permission::create(['name' => 'restore_product', 'guard_name' => 'admin', 'group_name' => 'Product']);
+        $role->givePermissionTo('restore_product');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 

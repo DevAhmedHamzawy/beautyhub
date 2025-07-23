@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\GovernorateController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\SubCategoryController as ControllersSubCategoryController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -130,6 +132,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('countries/{country}/governorates/{governorate}/trash_cities', [CityController::class, 'trash'])->name('cities.trash');
     Route::get('countries/{country}/governorates/{governorate}/cities/{id}/restore', [CityController::class, 'restore'])->name('cities.restore');
 
+    // Products
+    Route::resource('products', ProductController::class);
+    Route::get('products/{product}/active', [ProductController::class, 'active'])->name('products.active');
+    Route::get('trash_products', [ProductController::class, 'trash'])->name('products.trash');
+    Route::get('products/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
+    Route::post('upload_product', [ProductController::class, 'upload'])->name('products.upload');
+    Route::post('delete_product', [ProductController::class, 'deleteImage'])->name('products.delete_image');
+
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 
 });
@@ -140,6 +150,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('areas', [AreaController::class, 'index'])->name('get_areas');
+
+Route::get('list_subcategories/{id}', [ControllersSubCategoryController::class, 'list'])->name('list_subcategories');
 
 Route::get('/storage_link', function () {
     Artisan::call('storage:link');

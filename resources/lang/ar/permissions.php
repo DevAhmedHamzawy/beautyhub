@@ -86,6 +86,13 @@ return [
     'view_city' => 'عرض مدينة',
     'active_city' => 'تفعيل مدينة',
     'restore_city' => 'استعادة مدينة',
+    'Product' => 'المنتجات',
+    'add_product' => 'اضافة منتج',
+    'edit_product' => 'تعديل منتج',
+    'delete_product' => 'حذف منتج',
+    'view_product' => 'عرض منتج',
+    'active_product' => 'تفعيل منتج',
+    'restore_product' => 'استعادة منتج',
     'activity_logs' => 'سجل النشاطات',
     'view_activity_log' => 'عرض سجل النشاطات'
 ];
