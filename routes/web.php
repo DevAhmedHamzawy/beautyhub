@@ -147,6 +147,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::post('flash_sales/create', [FlashSaleController::class, 'create'])->name('flash_sales.create');
     Route::get('flash_sales/create', [FlashSaleController::class, 'create'])->name('flash_sales.create');
     Route::post('flash_sales/store', action: [FlashSaleController::class, 'store'])->name('flash_sales.store');
+    Route::get('flash_sales', [FlashSaleController::class, 'index'])->name('flash_sales.index');
+    Route::get('flash_sales/{flash_sale}/active', [FlashSaleController::class, 'active'])->name('flash_sales.active');
+    Route::post('flash_sales/{flash_sale}/delete', [FlashSaleController::class, 'destroy'])->name('flash_sales.destroy');
 
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

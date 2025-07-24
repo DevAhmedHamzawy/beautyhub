@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class FlashSaleController extends Controller
 {
+    public function index()
+    {
+        $flash_sales = FlashSale::all();
+
+        return view('admin.flash_sales.index', compact('flash_sales'));
+    }
+
     public function chooseCategories()
     {
         $categories = Category::whereActive(1)->get();
@@ -50,4 +57,38 @@ class FlashSaleController extends Controller
 
         return redirect()->route('admin.flash_sales.index');
     }
+
+
+    public function destroy(FlashSale $flashSale)
+    {
+        $flashSale->delete();
+
+        activity()->log('قام '.auth()->user()->name.' بحذف العرض'.$flashSale->name);
+
+        $message = [
+            'alert-type' => 'success',
+            'title' =>  trans('flash_sale.deleted_success'),
+            'message' => trans('flash_sale.deleted_success')
+        ];
+
+        return redirect()->route('admin.flash_sales.index')->with($message);
+    }
+
+
+    public function active(FlashSale $flashSale)
+    {
+        $flashSale->active ^= 1;
+        $flashSale->save();
+
+        $message = [
+            'alert-type' => 'success',
+            'title' =>  $flashSale->active ? trans('product.active_success') : trans('product.deactive_success'),
+            'message' => $flashSale->active ? trans('product.active_success') : trans('product.deactive_success'),
+        ];
+
+
+        return redirect()->back()->with($message);
+    }
+
+
 }
