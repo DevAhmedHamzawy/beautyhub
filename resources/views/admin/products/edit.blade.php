@@ -250,21 +250,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12 mg-t-10 mg-md-t-0">
-                                    <div class="form-group">
-                                        <p class="mg-b-10">{{ trans('product.price') }}</p>
-                                        <input class="form-control @error('price') is-invalid @enderror"
-                                            placeholder="{{ trans('product.price') }}" type="text" name="price"
-                                            value="{{ $product->price }}">
-                                        @error('price')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-
                                 <div class="row" id="existing-images">
                                     @foreach ($product->images as $image)
                                         <div class="col-md-3 image-wrapper" data-id="{{ $image->id }}">
