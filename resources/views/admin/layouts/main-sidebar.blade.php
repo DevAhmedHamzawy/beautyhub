@@ -107,7 +107,7 @@
             @endcanany
 
 
-            <li class="side-item side-item-category">{{ trans('product.products') }}</li>
+            <li class="side-item side-item-category">{{ trans('dashboard.products_stocks') }}</li>
 
             @canany(['view_product', 'add_product', 'edit_product', 'delete_product', 'active_product',
                 'restore_product'])
@@ -130,6 +130,44 @@
                     </ul>
                 </li>
             @endcanany
+
+            @canany(['view_purchase', 'add_purchase', 'edit_purchase', 'delete_purchase'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fas fa-shopping-basket"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('purchase.purchases') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_purchase')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.purchases.index') }}">{{ trans('purchase.show_purchases') }}</a>
+                            </li>
+                        @endcan
+                        @can('add_purchase')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.purchases.create') }}">{{ trans('purchase.add_new_purchase') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
+            @canany(['view_stock'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fas fa-warehouse"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('stock.stock') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_stock')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.stocks.index') }}">{{ trans('stock.show_stock') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
 
 
             <li class="side-item side-item-category">{{ trans('dashboard.country') }}</li>

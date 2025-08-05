@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
-            'active' => rand(0, 1),
+            'active' => 1,
             'remember_token' => Str::random(10),
             'deleted_at' => null
         ]);
@@ -192,6 +192,20 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('active_product');
         Permission::create(['name' => 'restore_product', 'guard_name' => 'admin', 'group_name' => 'Product']);
         $role->givePermissionTo('restore_product');
+        Permission::create(['name' => 'add_purchase', 'guard_name' => 'admin', 'group_name' => 'Purchase']);
+        $role->givePermissionTo('add_purchase');
+        Permission::create(['name' => 'edit_purchase', 'guard_name' => 'admin', 'group_name' => 'Purchase']);
+        $role->givePermissionTo('edit_purchase');
+        Permission::create(['name' => 'delete_purchase', 'guard_name' => 'admin', 'group_name' => 'Purchase']);
+        $role->givePermissionTo('delete_purchase');
+        Permission::create(['name' => 'view_purchase', 'guard_name' => 'admin', 'group_name' => 'Purchase']);
+        $role->givePermissionTo('view_purchase');
+        Permission::create(['name' => 'active_purchase', 'guard_name' => 'admin', 'group_name' => 'Purchase']);
+        $role->givePermissionTo('active_purchase');
+        Permission::create(['name' => 'restore_purchase', 'guard_name' => 'admin', 'group_name' => 'Purchase']);
+        $role->givePermissionTo('restore_purchase');
+        Permission::create(['name' => 'view_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
+        $role->givePermissionTo('view_stock');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 

@@ -30,4 +30,5 @@ return [
     'categories_and_brands' => 'Categories And Brands',
     'product_settings' => 'Product Settings',
     'country' => 'Countries',
+    'products_stocks' => 'Products And Stocks',
 ];

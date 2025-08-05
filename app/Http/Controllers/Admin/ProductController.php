@@ -234,4 +234,15 @@ class ProductController extends Controller
 
     }
 
+    public function getData(Request $request)
+    {
+        $qty = $request->qty;
+
+        $product = Product::where('id', $request->product_id)->first();
+
+        $product->price_qty = $product->buying_price * $qty;
+
+        return $product;
+    }
+
 }

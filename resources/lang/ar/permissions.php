@@ -93,6 +93,10 @@ return [
     'view_product' => 'عرض منتج',
     'active_product' => 'تفعيل منتج',
     'restore_product' => 'استعادة منتج',
+    'add_purchase' => 'اضافة عملية شراء',
+    'edit_purchase' => 'تعديل عملية شراء',
+    'delete_purchase' => 'حذف عملية شراء',
+    'view_purchase' => 'عرض عملية شراء',
     'activity_logs' => 'سجل النشاطات',
     'view_activity_log' => 'عرض سجل النشاطات'
 ];

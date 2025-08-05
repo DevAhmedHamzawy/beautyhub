@@ -29,6 +29,8 @@ class ProductFactory extends Factory
             'image' => 'products/default.png',
             'sku' => strtoupper(Str::random(8)),
             'barcode' => $this->faker->ean13,
+            'selling_price' => $this->faker->randomFloat(2, 10, 500),
+            'buying_price' => $this->faker->randomFloat(2, 10, 500),
             'active' => $this->faker->boolean(90),
         ];
     }

@@ -47,6 +47,16 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
+    }
+
+    public function getStockQuantityAttribute()
+    {
+        return $this->stocks()->sum('qty');
+    }
+
     public function getImgPathAttribute()
     {
         return url('storage/public/products/'.$this->image);

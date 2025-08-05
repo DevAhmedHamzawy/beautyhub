@@ -93,6 +93,11 @@ return [
     'view_product' => 'View Product',
     'active_product' => 'Active Product',
     'restore_product' => 'Restore Product',
+    'Purchase' => 'Purchase',
+    'add_purchase' => 'Add Purchase',
+    'edit_purchase' => 'Edit Purchase',
+    'delete_purchase' => 'Delete Purchase',
+    'view_purchase' => 'View Purchase',
     'activity_logs' => 'Activity Logs',
     'view_activity_log' => 'View Activity Log'
 ];

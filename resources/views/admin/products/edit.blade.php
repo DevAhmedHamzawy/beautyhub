@@ -250,6 +250,36 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-12 mg-t-10 mg-md-t-0">
+                                    <div class="form-group">
+                                        <p class="mg-b-10">{{ trans('product.selling_price') }}</p>
+                                        <input class="form-control @error('selling_price') is-invalid @enderror"
+                                            placeholder="{{ trans('product.selling_price') }}" type="text"
+                                            name="selling_price" value="{{ $product->selling_price }}">
+                                        @error('selling_price')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12 mg-t-10 mg-md-t-0">
+                                    <div class="form-group">
+                                        <p class="mg-b-10">{{ trans('product.buying_price') }}</p>
+                                        <input class="form-control @error('buying_price') is-invalid @enderror"
+                                            placeholder="{{ trans('product.buying_price') }}" type="text"
+                                            name="buying_price" value="{{ $product->buying_price }}">
+                                        @error('buying_price')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
                                 <div class="row" id="existing-images">
                                     @foreach ($product->images as $image)
                                         <div class="col-md-3 image-wrapper" data-id="{{ $image->id }}">

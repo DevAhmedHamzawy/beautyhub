@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\GovernorateController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminForgotPasswordController;
@@ -140,6 +142,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('products/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
     Route::post('upload_product', [ProductController::class, 'upload'])->name('products.upload');
     Route::post('delete_product', [ProductController::class, 'deleteImage'])->name('products.delete_image');
+
+    // Get Product Data
+    Route::get('get_product', [ProductController::class, 'getData'])->name('get_product');
+
+    // Purchases
+    Route::resource('purchases', PurchaseController::class);
+
+    // Stock
+    Route::get('stocks', [StockController::class, 'index'])->name('stocks.index');
+    Route::get('stocks/{product_id}', [StockController::class, 'show'])->name('stocks.show');
 
     // Flash Sales
     Route::get('flash_sales/show_categories', [FlashSaleController::class, 'chooseCategories'])->name('flash_sales.choose_categories');

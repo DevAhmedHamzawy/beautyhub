@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('image');
             $table->string('sku');
             $table->string('barcode');
+            $table->decimal('selling_price', 8, 2);
+            $table->decimal('buying_price', 8, 2);
             $table->boolean('active');
             $table->softDeletes();
             $table->timestamps();
