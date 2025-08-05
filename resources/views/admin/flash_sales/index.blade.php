@@ -49,7 +49,7 @@
                                     <th class="border-bottom-0">{{ trans('flash_sale.start_time') }}</th>
                                     <th class="border-bottom-0">{{ trans('flash_sale.end_time') }}</th>
                                     <th class="border-bottom-0">{{ trans('flash_sale.discount') }}</th>
-                                    @canany(['view_flash_sale', 'delete_flash_sale', 'active_flash_sale'])
+                                    @canany(['view_flash_sale', 'delete_flash_sale'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
                                     <th class="border-bottom-0">{{ trans('dashboard.created') }}</th>
@@ -58,28 +58,12 @@
                             <tbody>
                                 @foreach ($flash_sales as $flash_sale)
                                     <tr>
-                                        <td><img width="50" height="50" src="{{ $flash_sale->img_path }}"
-                                                alt="" srcset=""></td>
                                         <td>{{ $flash_sale->name }}</td>
                                         <td>{{ $flash_sale->start_time }}</td>
                                         <td>{{ $flash_sale->end_time }}</td>
                                         <td>{{ $flash_sale->discount }}</td>
-                                        @canany(['view_flash_sale', 'delete_flash_sale', 'active_flash_sale'])
+                                        @canany(['view_flash_sale', 'delete_flash_sale'])
                                             <td class="row pl-3">
-                                                @can('active_flash_sale')
-                                                    @if ($flash_sale->active == 1)
-                                                        <a href="{{ route('admin.flash_sales.active', $flash_sale->id) }}"
-                                                            class="btn btn-danger" data-placement="top" data-toggle="tooltip"
-                                                            data-original-title="{{ trans('dashboard.deactive') }}"><i
-                                                                class="fas fa-toggle-off"></i></a>
-                                                    @else
-                                                        <a href="{{ route('admin.flash_sales.active', $flash_sale->id) }}"
-                                                            class="btn btn-info" data-placement="top" data-toggle="tooltip"
-                                                            data-original-title="{{ trans('dashboard.active') }}"><i
-                                                                class="fas fa-toggle-on"></i></a>
-                                                    @endif
-                                                @endcan
-                                                &nbsp;&nbsp;
                                                 @can('delete_flash_sale')
                                                     <form id="delete-form-{{ $flash_sale->id }}"
                                                         action="{{ route('admin.flash_sales.destroy', $flash_sale->id) }}"

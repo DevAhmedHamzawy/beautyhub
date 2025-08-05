@@ -14,7 +14,7 @@
 @endsection
 
 @section('title')
-    {{ trans('user.add_new_user') }}
+    {{ trans('flash_sale.add_new_flash_sale') }}
 @endsection
 
 @section('content')
@@ -28,16 +28,16 @@
                         <a href="{{ route('admin.dashboard') }}">{{ trans('dashboard.dashboard') }}</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.users.index') }}">{{ trans('user.users') }}</a>
+                        <a href="{{ route('admin.flash_sales.index') }}">{{ trans('flash_sale.flash_sales') }}</a>
                     </li>
-                    <li class="breadcrumb-item active">{{ trans('user.add_new_user') }}</li>
+                    <li class="breadcrumb-item active">{{ trans('flash_sale.add_new_flash_sale') }}</li>
                 </ol>
             </nav>
 
             <div class="card">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-                        {{ trans('user.add_new_user') }}
+                        {{ trans('flash_sale.add_new_flash_sale') }}
                     </div>
                     <form action="{{ route('admin.flash_sales.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -55,9 +55,9 @@
 
                                 <div class="col-md-12 mg-t-10 mg-md-t-0">
                                     <div class="form-group">
-                                        <p class="mg-b-10">{{ trans('user.name') }}</p>
+                                        <p class="mg-b-10">{{ trans('flash_sale.name') }}</p>
                                         <input class="form-control @error('name') is-invalid @enderror"
-                                            placeholder="{{ trans('user.name') }}" type="text" name="name"
+                                            placeholder="{{ trans('flash_sale.name') }}" type="text" name="name"
                                             value="{{ old('name') }}">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
@@ -69,10 +69,10 @@
 
                                 <div class="col-md-12 mg-t-10 mg-md-t-0">
                                     <div class="form-group">
-                                        <p class="mg-b-10">{{ trans('user.start_time') }}</p>
+                                        <p class="mg-b-10">{{ trans('flash_sale.start_time') }}</p>
                                         <input class="form-control @error('start_time') is-invalid @enderror"
-                                            placeholder="{{ trans('user.start_time') }}" type="text" id="datetimepicker"
-                                            name="start_time" value="{{ old('start_time') }}">
+                                            placeholder="{{ trans('flash_sale.start_time') }}" type="text"
+                                            id="datetimepicker" name="start_time" value="{{ old('start_time') }}">
                                         @error('start_time')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -83,10 +83,10 @@
 
                                 <div class="col-md-12 mg-t-10 mg-md-t-0">
                                     <div class="form-group">
-                                        <p class="mg-b-10">{{ trans('user.end_time') }}</p>
+                                        <p class="mg-b-10">{{ trans('flash_sale.end_time') }}</p>
                                         <input class="form-control @error('end_time') is-invalid @enderror"
-                                            placeholder="{{ trans('user.end_time') }}" type="text" id="datetimepicker2"
-                                            name="end_time" value="{{ old('end_time') }}">
+                                            placeholder="{{ trans('flash_sale.end_time') }}" type="text"
+                                            id="datetimepicker2" name="end_time" value="{{ old('end_time') }}">
                                         @error('end_time')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -97,9 +97,9 @@
 
                                 <div class="col-md-12 mg-t-10 mg-md-t-0">
                                     <div class="form-group">
-                                        <p class="mg-b-10">{{ trans('user.discount') }}</p>
+                                        <p class="mg-b-10">{{ trans('flash_sale.discount') }}</p>
                                         <input class="form-control @error('discount') is-invalid @enderror"
-                                            placeholder="{{ trans('user.discount') }}" type="text" name="discount"
+                                            placeholder="{{ trans('flash_sale.discount') }}" type="text" name="discount"
                                             value="{{ old('discount') }}">
                                         @error('discount')
                                             <span class="invalid-feedback" role="alert">

@@ -169,6 +169,30 @@
             @endcanany
 
 
+            <li class="side-item side-item-category">{{ trans('dashboard.flash_sales_coupons') }}</li>
+
+            @canany(['view_flash_sale', 'add_flash_sale', 'edit_flash_sale', 'delete_flash_sale'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fas fa-gift"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('flash_sale.flash_sales') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_flash_sale')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.flash_sales.index') }}">{{ trans('flash_sale.show_flash_sales') }}</a>
+                            </li>
+                        @endcan
+                        @can('add_flash_sale')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.flash_sales.create') }}">{{ trans('flash_sale.add_new_flash_sale') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
+
 
             <li class="side-item side-item-category">{{ trans('dashboard.country') }}</li>
 

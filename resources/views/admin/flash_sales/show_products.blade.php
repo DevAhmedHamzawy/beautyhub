@@ -9,7 +9,7 @@
 @endsection
 
 @section('title')
-    {{ trans('user.add_new_user') }}
+    {{ trans('flash_sale.add_new_flash_sale') }}
 @endsection
 
 @section('content')
@@ -23,29 +23,39 @@
                         <a href="{{ route('admin.dashboard') }}">{{ trans('dashboard.dashboard') }}</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.users.index') }}">{{ trans('user.users') }}</a>
+                        <a href="{{ route('admin.flash_sales.index') }}">{{ trans('flash_sale.flash_sales') }}</a>
                     </li>
-                    <li class="breadcrumb-item active">{{ trans('user.add_new_user') }}</li>
+                    <li class="breadcrumb-item active">{{ trans('flash_sale.add_new_flash_sale') }}</li>
                 </ol>
             </nav>
 
             <div class="card">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-                        {{ trans('user.add_new_user') }}
+                        {{ trans('flash_sale.add_new_flash_sale') }}
                     </div>
                     <form action="{{ route('admin.flash_sales.create') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="pd-30 pd-sm-40 bg-gray-200">
                             <div class="row row-xs">
 
+                                <div class="mb-3">
+                                    <button type="button" id="selectAll"
+                                        class="btn btn-sm btn-success">{{ trans('flash_sale.select_all') }}</button>
+                                    <button type="button" id="unselectAll"
+                                        class="btn btn-sm btn-danger">{{ trans('flash_sale.unselect_all') }}</button>
+                                </div>
+
                                 <div class="col-sm-12 col-md-12 mb-2">
-                                    <div class="form-group">
+                                    <div class="row form-group">
                                         @foreach ($products as $product)
-                                            <label>
-                                                <input type="checkbox" name="product_ids[]" value="{{ $product->id }}">
-                                                {{ $product->name }}
-                                            </label>
+                                            <div class="col-md-3">
+                                                <label>
+                                                    <input type="checkbox" name="product_ids[]" class="product-checkbox"
+                                                        value="{{ $product->id }}">
+                                                    {{ $product->name }}
+                                                </label>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -73,4 +83,16 @@
     <!--Internal Fileuploads js-->
     <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#selectAll').on('click', function() {
+                $('.product-checkbox').prop('checked', true);
+            });
+
+            $('#unselectAll').on('click', function() {
+                $('.product-checkbox').prop('checked', false);
+            });
+        });
+    </script>
 @endsection

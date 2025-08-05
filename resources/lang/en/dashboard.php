@@ -31,4 +31,5 @@ return [
     'product_settings' => 'Product Settings',
     'country' => 'Countries',
     'products_stocks' => 'Products And Stocks',
+    'flash_sales_coupons' => 'Flash Sales And Coupons',
 ];

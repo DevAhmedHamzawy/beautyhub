@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 
 class FlashSaleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:add_flash_sale'])->only(['create', 'store']);
+        $this->middleware(['permission:view_flash_sale'])->only(['index']);
+        $this->middleware(['permission:delete_flash_sale'])->only(['delete']);
+    }
     public function index()
     {
         $flash_sales = FlashSale::all();

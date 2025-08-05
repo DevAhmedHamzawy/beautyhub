@@ -9,7 +9,7 @@
 @endsection
 
 @section('title')
-    {{ trans('user.add_new_user') }}
+    {{ trans('flash_sale.add_new_flash_sale') }}
 @endsection
 
 @section('content')
@@ -23,16 +23,16 @@
                         <a href="{{ route('admin.dashboard') }}">{{ trans('dashboard.dashboard') }}</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.users.index') }}">{{ trans('user.users') }}</a>
+                        <a href="{{ route('admin.flash_sales.index') }}">{{ trans('flash_sale.flash_sales') }}</a>
                     </li>
-                    <li class="breadcrumb-item active">{{ trans('user.add_new_user') }}</li>
+                    <li class="breadcrumb-item active">{{ trans('flash_sale.add_new_flash_sale') }}</li>
                 </ol>
             </nav>
 
             <div class="card">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-                        {{ trans('user.add_new_user') }}
+                        {{ trans('flash_sale.add_new_flash_sale') }}
                     </div>
                     <form action="{{ route('admin.flash_sales.show_products') }}" method="post"
                         enctype="multipart/form-data">
@@ -43,10 +43,10 @@
                                 <div class="col-sm-12 col-md-12 mb-2">
                                     <div class="form-group">
                                         <div class="mb-3">
-                                            <button type="button" id="selectAll" class="btn btn-sm btn-success">تحديد
-                                                الكل</button>
-                                            <button type="button" id="unselectAll" class="btn btn-sm btn-danger">إلغاء
-                                                التحديد</button>
+                                            <button type="button" id="selectAll"
+                                                class="btn btn-sm btn-success">{{ trans('flash_sale.select_all') }}</button>
+                                            <button type="button" id="unselectAll"
+                                                class="btn btn-sm btn-danger">{{ trans('flash_sale.unselect_all') }}</button>
                                         </div>
 
                                         <div id="categoriesWrapper">
@@ -60,7 +60,8 @@
                                                     </label>
 
                                                     @if ($category->children->count())
-                                                        <div class="ml-4 pl-3 border-left">
+                                                        <div
+                                                            class="ml-4  {{ $locale == 'ar' ? 'pr-3 border-right' : 'pl-3 border-left' }}">
                                                             @foreach ($category->children as $child)
                                                                 <label class="d-block">
                                                                     <input type="checkbox" class="category-checkbox child"

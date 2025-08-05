@@ -206,6 +206,12 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('restore_purchase');
         Permission::create(['name' => 'view_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
         $role->givePermissionTo('view_stock');
+        Permission::create(['name' => 'add_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
+        $role->givePermissionTo('add_flash_sale');
+        Permission::create(['name' => 'delete_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
+        $role->givePermissionTo('delete_flash_sale');
+        Permission::create(['name' => 'view_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
+        $role->givePermissionTo('view_flash_sale');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 
