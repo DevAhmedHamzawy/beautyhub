@@ -14,7 +14,7 @@
 
         if (price > 0 && product_id > 0) {
             let total = price * qty;
-            let discount_sort = $('#discount_sort').val();
+            let discount_sort = Number($('#discount_sort').val());
             let discount_amount = Number($('#discount_amount').val()) || 0;
 
             $('#price').val(total);
