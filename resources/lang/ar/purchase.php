@@ -2,6 +2,7 @@
 
 return [
     'purchases'   => 'طلبات الشراء',
+    'purchase'   => 'طلب الشراء',
     'show_purchases' => 'عرض طلبات الشراء',
     'trashed_purchases' => 'طلبات الشراء المحذوفة',
     'add_new_purchase' => 'اضافة طلب شراء جديد',
@@ -24,6 +25,8 @@ return [
     'price' => 'السعر',
     'discount' => 'الخصم',
     'discount_sort' => 'نوع الخصم',
+    'percentage' => 'نسبة',
+    'amount' => 'قيمة',
     'discount_amount' => 'قيمة الخصم',
     'price_after_discount' => 'السعر بعد الخصم',
     'subtotal_before_vat' => 'الاجمالي قبل الضريبة',

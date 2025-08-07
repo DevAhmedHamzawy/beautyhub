@@ -244,8 +244,7 @@
                                 <div class="col-lg-4">
                                     <div class="bg-gray-200">
                                         <div class="form-group">
-                                            <select name="discount_sort" onchange="getDiscountPercentage()"
-                                                class="form-control" id="discount_sort">
+                                            <select name="discount_sort" class="form-control" id="discount_sort">
                                                 <option value="-1" selected disabled>
                                                     {{ trans('purchase.discount_sort') }}</option>
                                                 <option value="0">{{ trans('purchase.percentage') }}</option>
@@ -295,7 +294,7 @@
                                     {{ trans('dashboard.add') }}</div>
                             </div>
 
-                            <table class="table mt-4 mx-auto">
+                            <table class="table mt-4 mx-auto" id="table">
                                 <thead style="background-color: #0099ff;color: #fff;">
                                     <tr>
                                         <th>#</th>
@@ -313,13 +312,16 @@
                                     @foreach ($purchase->items as $item)
                                         @php $n = rand(0,333)  @endphp
                                         <tr id="r{{ $n }}">
+                                            @php $parentLoop = $loop; @endphp
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->product->name }}</td>
                                             <td>
-                                                @foreach ($item->attributes as $index => $attr)
-                                                    <input type="hidden" name="attribute_ids[{{ $index }}][]"
+                                                @foreach ($item->attributes as $attr)
+                                                    <input type="hidden"
+                                                        name="attribute_ids[{{ $parentLoop->index }}][]"
                                                         value="{{ $attr->attributeValue->id }}">
-                                                    <input type="hidden" name="attribute_parents[{{ $index }}][]"
+                                                    <input type="hidden"
+                                                        name="attribute_parents[{{ $parentLoop->index }}][]"
                                                         value="{{ $attr->parent->id }}">
                                                     <strong>{{ $attr->parent->name }}</strong>:
                                                     {{ $attr->attributeValue->name }} <br>
@@ -329,7 +331,7 @@
                                             <td>{{ $item->unit_cost }}</td>
                                             <td>{{ $item->qty }}</td>
 
-                                            @php $item->discount_sort == 'نسبة' ? $specialChar = "%" : $specialChar = "ر.س" @endphp
+                                            @php $item->discount_sort == 'percentage' ? $specialChar = "%" : $specialChar = "ج.م" @endphp
                                             <td>{{ $item->discount }}{{ $specialChar }}</td>
 
 

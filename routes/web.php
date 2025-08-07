@@ -151,7 +151,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
 
     // Stock
     Route::get('stocks', [StockController::class, 'index'])->name('stocks.index');
-    Route::get('stocks/{product_id}', [StockController::class, 'show'])->name('stocks.show');
+    Route::get('stocks/{id}', [StockController::class, 'show'])->name('stocks.show');
 
     // Flash Sales
     Route::get('flash_sales/show_categories', [FlashSaleController::class, 'chooseCategories'])->name('flash_sales.choose_categories');
@@ -160,8 +160,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::get('flash_sales/create', [FlashSaleController::class, 'create'])->name('flash_sales.create');
     Route::post('flash_sales/store', action: [FlashSaleController::class, 'store'])->name('flash_sales.store');
     Route::get('flash_sales', [FlashSaleController::class, 'index'])->name('flash_sales.index');
-    Route::get('flash_sales/{flash_sale}/active', [FlashSaleController::class, 'active'])->name('flash_sales.active');
-    Route::post('flash_sales/{flash_sale}/delete', [FlashSaleController::class, 'destroy'])->name('flash_sales.destroy');
+    Route::delete('flash_sales/{flash_sale}/delete', [FlashSaleController::class, 'destroy'])->name('flash_sales.destroy');
 
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

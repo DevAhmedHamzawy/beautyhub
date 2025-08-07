@@ -56,11 +56,18 @@ class PurchaseController extends Controller
 
     }
 
+    public function show(Purchase $purchase)
+    {
+        $purchase->load('items', 'items.attributes');
+        return view('admin.purchases.show', ['purchase' => $purchase,
+         'products' => Product::all(), 'suppliers' => Supplier::all(), 'attributes' => Attribute::whereNull('parent_id')->whereActive(1)->get(), 'taxes' => Tax::all(), 'edit' => true]);
+    }
+
     public function edit(Purchase $purchase)
     {
         $purchase->load('items', 'items.attributes');
         return view('admin.purchases.edit', ['purchase' => $purchase,
-         'products' => Product::all(), 'suppliers' => Supplier::all(), 'attributes' => Attribute::whereNull('parent_id')->whereActive(1)->get(), 'taxes' => Tax::all()]);
+         'products' => Product::all(), 'suppliers' => Supplier::all(), 'attributes' => Attribute::whereNull('parent_id')->whereActive(1)->get(), 'taxes' => Tax::all(), 'edit' => true]);
     }
 
     public function update(PurchaseRequest $request, Purchase $purchase)

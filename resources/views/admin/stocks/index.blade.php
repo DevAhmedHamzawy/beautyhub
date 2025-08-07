@@ -51,25 +51,20 @@
                             <tbody>
                                 @foreach ($stocks as $stock)
                                     <tr>
-                                        <td>{{ $stock->product->name }}</td>
-                                        <td>
-                                            @foreach ($stock->attributes as $attribute)
-                                                <strong>{{ $attribute->attribute->name }} :</strong>
-                                                {{ $attribute->attributeValue->name }}
-                                            @endforeach
-                                        </td>
-                                        <td>{{ $stock->product->stockQuantity }}</td>
+                                        <td>{{ $stock['product_name'] }}</td>
+                                        <td>{{ $stock['attributes'] }}</td>
+                                        <td>{{ $stock['qty'] }}</td>
                                         @canany(['view_stock'])
                                             <td class="row pl-3">
                                                 @can('view_stock')
-                                                    <a href="{{ route('admin.stocks.show', $stock->product_id) }}"
+                                                    <a href="{{ route('admin.stocks.show', $stock['id']) }}"
                                                         class="btn btn-warning" data-placement="top" data-toggle="tooltip"
                                                         data-original-title="{{ trans('dashboard.show') }}"><i
                                                             class="fas fa-eye"></i></a>
                                                 @endcan
                                             </td>
                                         @endcanany
-                                        <td>{{ $stock->created_at->diffForHumans() }}</td>
+                                        <td>{{ $stock['created_at']->diffForHumans() }}</td>
                                     </tr>
                                 @endforeach
 

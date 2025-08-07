@@ -14,7 +14,7 @@
 
         if (price > 0 && product_id > 0) {
             let total = price * qty;
-            let discount_sort = Number($('#discount_sort').val());
+            let discount_sort = $('#discount_sort').val();
             let discount_amount = Number($('#discount_amount').val()) || 0;
 
             $('#price').val(total);
@@ -51,6 +51,25 @@
     }
 
 
+    function resetAttributeIndexes() {
+        let newIndex = 0;
+
+        $('#table tbody tr').each(function() {
+            // داخل كل صف منتج
+            $(this).find('input[name^="attribute_ids["], input[name^="attribute_parents["]').each(function() {
+                let name = $(this).attr('name');
+
+                // ريّح دماغنا واستبدل الرقم اللي بين القوسين بأي رقم
+                name = name.replace(/\[\d+\]/, `[${newIndex}]`);
+
+                $(this).attr('name', name);
+            });
+
+            newIndex++;
+        });
+
+    }
+
     var index = 0;
 
     function addItem() {
@@ -80,12 +99,26 @@
             if (attributeValueId != '{{ trans('purchase.choose') }}') {
                 // لو المستخدم اختار قيمة
                 attributesHTML += `<strong>${attributeName}:</strong> ${attributeValueText}<br>`;
-                hiddenInputs +=
-                    ` <input type="hidden" name="attribute_ids[${index}][]" value="${attributeValueId}">
+
+                @if (isset($edit))
+                    window.currentRowIndex = $('#table tbody tr:not(.total_data)').length;
+
+                    hiddenInputs +=
+                        ` <input type="hidden" name="attribute_ids[${window.currentRowIndex}][]" value="${attributeValueId}">
+                      <input type="hidden" name="attribute_parents[${window.currentRowIndex}][]" value="${attributeParentId}">`;
+                @else
+                    hiddenInputs +=
+                        ` <input type="hidden" name="attribute_ids[${index}][]" value="${attributeValueId}">
                       <input type="hidden" name="attribute_parents[${index}][]" value="${attributeParentId}">`;
+                @endif
+
             }
 
         });
+
+        @if (isset($edit))
+            resetAttributeIndexes();
+        @endif
 
         if (attributesHTML === '') {
             alert('{{ trans('purchase.choose_attributes') }}');
@@ -96,7 +129,7 @@
 
         let unit_price = $('#unit_price').val();
 
-        let discount_sort_text = $('#discount_sort :selected').text();
+        let discount_sort = $('#discount_sort :selected').val();
         let discount_amount = $('#discount_amount').val();
         let price_after_discount = $('#price_after_discount').val() || $('#price').val();
         let vat = $('#vat').val();
@@ -104,13 +137,13 @@
 
         if ($('#discount_amount').val() == 0) discount_amount = 0;
 
-        discount_sort_text == '{{ trans('purchase.percentage') }}' ? discount_amount += "%" : discount_amount +=
-            "ر.س";
+        discount_sort == 0 ? discount_amount += "%" : discount_amount +=
+            "ج.م";
 
         // Hidden inputs
         $('.table tbody').append(`
             <input type="hidden" name="unit_prices[]" id="unit_price_${index}" value="${unit_price}">
-            <input type="hidden" name="discount_sorts[]" id="discount_sort_${index}" value="${discount_sort_text}">
+            <input type="hidden" name="discount_sorts[]" id="discount_sort_${index}" value="${discount_sort}">
             <input type="hidden" name="discount_amounts[]" id="discount_amount_${index}" value="${discount_amount}">
             <input type="hidden" name="prices_after_discount[]" id="price_after_discount_${index}" value="${price_after_discount}">
             <input type="hidden" name="qtys[]" id="qty_${index}" value="${qty}">
@@ -175,6 +208,10 @@
         $('#qty, #price, #unit_price, #price_after_discount').val('');
         $('#discount_sort').val(-1);
         $('#discount_amount').val('');
+        $('#vat').val(-1);
+        $('.attribute-select').each(function() {
+            $(this).val('{{ trans('purchase.choose') }}');
+        });
     }
 
     function delete_item(item) {
@@ -195,6 +232,10 @@
         $(`#r${item}, #unit_price_${item}, #discount_sort_${item}, #discount_amount_${item},
            #price_after_discount_${item}, #qty_${item}, #product_id_${item},
            #vat_to_pay_${item}, #total_price_${item}`).remove();
+
+        @if (isset($edit))
+            resetAttributeIndexes();
+        @endif
     }
 
     function getPricesAfterDiscount() {

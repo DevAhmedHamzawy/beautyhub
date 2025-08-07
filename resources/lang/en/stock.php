@@ -6,4 +6,7 @@ return [
     'product_name' => 'Product Name',
     'attributes' => 'Attributes',
     'qty' => 'Qty',
+    'sort' => 'Sort',
+    'add' => 'Add',
+    'withdraw' => 'Withdraw',
 ];

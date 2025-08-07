@@ -6,4 +6,7 @@ return [
     'product_name' => 'اسم المنتج',
     'attributes' => 'الخصائص',
     'qty' => 'الكمية',
+    'sort' => 'النوع',
+    'add' => 'اضافة',
+    'withdraw' => 'سحب',
 ];

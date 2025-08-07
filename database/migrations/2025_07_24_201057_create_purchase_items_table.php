@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->decimal('unit_cost', 10, 2);
             $table->decimal('qty', 10, 2);
-            $table->enum('discount_sort', ['percent' , 'amount'])->nullable();
+            $table->enum('discount_sort', ['percentage' , 'amount'])->nullable();
             $table->integer('discount');
             $table->decimal('sub_total', 9 , 3);
             $table->decimal('vat', 9 , 3);

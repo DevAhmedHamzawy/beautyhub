@@ -26,7 +26,7 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.stocks.index') }}">{{ trans('stock.stock') }}</a>
                     </li>
-                    <li class="breadcrumb-item active">{{ $stocks[0]->product->name }}</li>
+                    <li class="breadcrumb-item active">{{ $stocks->first()->product->name }}</li>
                 </ol>
             </nav>
 
@@ -45,6 +45,8 @@
                                     <th class="border-bottom-0">{{ trans('stock.product_name') }}</th>
                                     <th class="border-bottom-0">{{ trans('stock.attributes') }}</th>
                                     <th class="border-bottom-0">{{ trans('stock.qty') }}</th>
+                                    <th class="border-bottom-0">{{ trans('stock.sort') }}</th>
+                                    <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     <th class="border-bottom-0">{{ trans('dashboard.created') }}</th>
                                 </tr>
                             </thead>
@@ -59,6 +61,23 @@
                                             @endforeach
                                         </td>
                                         <td>{{ $stock->qty }}</td>
+                                        <td>{{ $stock->qty > 0 ? trans('stock.add') : trans('stock.withdraw') }}</td>
+                                        <td>
+                                            @if ($stock->stockable instanceof \App\Models\Purchase)
+                                                <a target="_blank"
+                                                    href="{{ route('admin.purchases.show', $stock->stockable_id) }}"
+                                                    class="btn btn-primary" data-placement="top" data-toggle="tooltip"
+                                                    data-original-title="{{ trans('dashboard.show') }}"><i
+                                                        class="fas fa-eye"></i></a>
+                                            @elseif($stock->stockable instanceof \App\Models\Order)
+                                                <a target="_blank"
+                                                    href="{{ route('admin.orders.show', $stock->stockable_id) }}"
+                                                    class="btn btn-primary" data-placement="top" data-toggle="tooltip"
+                                                    data-original-title="{{ trans('dashboard.show') }}"><i
+                                                        class="fas fa-eye"></i></a>
+                                            @endif
+
+                                        </td>
                                         <td>{{ $stock->created_at->diffForHumans() }}</td>
                                     </tr>
                                 @endforeach

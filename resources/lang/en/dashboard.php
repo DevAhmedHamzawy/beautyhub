@@ -3,6 +3,7 @@
 return [
     'welcome'   => 'Hi, welcome back!',
     'dashboard' => 'Admin Dashboard',
+    'id' => 'ID',
     'users' => 'users',
     'admins' => 'admins',
     'main' => 'main',
@@ -18,6 +19,7 @@ return [
     'restore' => 'Restore',
     'close' => 'Close',
     'add' => 'Add',
+    'show' => 'Show',
     'admin' => 'Administration',
     'sign_out' => 'Sign Out',
     'english' => 'English',

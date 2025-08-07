@@ -44,6 +44,8 @@
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
+                                    <th class="border-bottom-0">{{ trans('dashboard.image') }}</th>
+                                    <th class="border-bottom-0">{{ trans('dashboard.id') }}</th>
                                     <th class="border-bottom-0">{{ trans('purchase.reference_number') }}</th>
                                     @canany(['view_purchase', 'edit_purchase', 'delete_purchase'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
@@ -54,6 +56,9 @@
                             <tbody>
                                 @foreach ($purchases as $purchase)
                                     <tr>
+                                        <td><img width="50" height="50" src="{{ $purchase->img_path }}"
+                                                alt="" srcset=""></td>
+                                        <td>{{ $purchase->id }}</td>
                                         <td>{{ $purchase->reference_number }}</td>
                                         @canany(['view_purchase', 'edit_purchase', 'delete_purchase'])
                                             <td class="row pl-3">

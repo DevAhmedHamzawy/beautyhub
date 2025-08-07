@@ -2,6 +2,7 @@
 
 return [
     'purchases'   => 'Purchases',
+    'purchase'   => 'Purchase',
     'show_purchases' => 'Show Purchases',
     'trashed_purchases' => 'Trashed Purchases',
     'add_new_purchase' => 'Add New Purchase',
@@ -25,6 +26,8 @@ return [
     'price' => 'Price',
     'discount' => 'Discount',
     'discount_sort' => 'Discount Sort',
+    'percentage' => 'Percentage',
+    'amount' => 'Amount',
     'discount_amount' => 'Discount Amount',
     'price_after_discount' => 'Price After Discount',
     'subtotal_before_vat' => 'Subtotal Before VAT',

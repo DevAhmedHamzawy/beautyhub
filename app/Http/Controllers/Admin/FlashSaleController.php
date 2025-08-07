@@ -13,7 +13,7 @@ class FlashSaleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['permission:add_flash_sale'])->only(['create', 'store']);
+        $this->middleware(['permission:add_flash_sale'])->only(['create', 'store', 'choose_categories', 'show_products']);
         $this->middleware(['permission:view_flash_sale'])->only(['index']);
         $this->middleware(['permission:delete_flash_sale'])->only(['delete']);
     }
@@ -33,7 +33,7 @@ class FlashSaleController extends Controller
 
     public function showProducts(Request $request)
     {
-        $products = Product::whereIn('category_id', $request->input('category_ids'))->get();
+        $products = Product::whereIn('category_id', $request->input('category_ids'))->whereRelation('stocks', 'qty', '>', 0)->get();
 
         return view('admin.flash_sales.show_products', compact('products'));
     }
@@ -61,7 +61,14 @@ class FlashSaleController extends Controller
             $flash_sale->products()->create(['product_id' => $product_id]);
         }
 
-        return redirect()->route('admin.flash_sales.index');
+
+        $message = [
+            'alert-type' => 'success',
+            'title' =>  trans('flash_sale.add_success'),
+            'message' => trans('flash_sale.add_success')
+        ];
+
+        return redirect()->route('admin.flash_sales.index')->with($message);
     }
 
 
@@ -79,22 +86,5 @@ class FlashSaleController extends Controller
 
         return redirect()->route('admin.flash_sales.index')->with($message);
     }
-
-
-    public function active(FlashSale $flashSale)
-    {
-        $flashSale->active ^= 1;
-        $flashSale->save();
-
-        $message = [
-            'alert-type' => 'success',
-            'title' =>  $flashSale->active ? trans('product.active_success') : trans('product.deactive_success'),
-            'message' => $flashSale->active ? trans('product.active_success') : trans('product.deactive_success'),
-        ];
-
-
-        return redirect()->back()->with($message);
-    }
-
 
 }

@@ -23,4 +23,8 @@ class Purchase extends Model
         return $this->belongsTo(Supplier::class);
     }
 
+    public function getImgPathAttribute()
+    {
+        return url('storage/public/purchases/'.$this->image);
+    }
 }
