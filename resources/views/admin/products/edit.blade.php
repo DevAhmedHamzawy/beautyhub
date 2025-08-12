@@ -36,7 +36,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-                        {{ trans('product.update_product') }} {{ $product->name }}
+                        {{ trans('product.update_product') }} {{ $product->translate($locale)->name }}
                     </div>
                     <form action="{{ route('admin.products.update', $product->id) }}" method="post"
                         enctype="multipart/form-data">

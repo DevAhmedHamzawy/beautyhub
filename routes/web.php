@@ -16,7 +16,10 @@ use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FlashSaleController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubAttributeController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -161,6 +164,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
     Route::post('flash_sales/store', action: [FlashSaleController::class, 'store'])->name('flash_sales.store');
     Route::get('flash_sales', [FlashSaleController::class, 'index'])->name('flash_sales.index');
     Route::delete('flash_sales/{flash_sale}/delete', [FlashSaleController::class, 'destroy'])->name('flash_sales.destroy');
+
+    // Slider
+    Route::resource('sliders', SliderController::class);
+    Route::get('sliders/{slider}/active', [SliderController::class, 'active'])->name('sliders.active');
+
+    // Coupons
+    Route::resource('coupons', CouponController::class);
+    Route::get('coupons/{coupon}/active', [CouponController::class, 'active'])->name('coupons.active');
+
+    // Pages
+    Route::resource('pages', PageController::class);
+    Route::get('pages/{page}/active', [PageController::class, 'active'])->name('pages.active');
+    Route::get('trash_pages', [PageController::class, 'trash'])->name('pages.trash');
+    Route::get('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');
 
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 
