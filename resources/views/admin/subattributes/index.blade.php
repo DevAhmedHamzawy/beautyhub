@@ -27,7 +27,8 @@
                         <a href="{{ route('admin.attributes.index') }}">{{ trans('attribute.attributes') }}</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.subattributes.index', $attribute) }}">{{ $attribute->name }}</a>
+                        <a
+                            href="{{ route('admin.subattributes.index', $attribute) }}">{{ $attribute->translate($locale)->name }}</a>
                     </li>
                     <li class="breadcrumb-item active">{{ trans('attribute.subattributes') }}</li>
                 </ol>
@@ -38,7 +39,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="card-title mg-b-0">{{ trans('attribute.subattributes') }} {{ trans('attribute.of') }}
-                            {{ $attribute->name }}</h4>
+                            {{ $attribute->translate($locale)->name }}</h4>
                         <div class="d-flex">
                             <a class="btn btn-primary text-white" data-toggle="modal" data-target="#addAttributeModal">
                                 {{ trans('attribute.add_new_subattribute') }}
@@ -56,7 +57,8 @@
                         <table id="example-ajax" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('attribute.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('attribute.ar.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('attribute.en.name') }}</th>
                                     @canany(['view_attribute', 'edit_attribute', 'delete_attribute', 'active_attribute',
                                         'restore_attribute'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
@@ -110,8 +112,12 @@
             processing: true,
             ajax: subAttributesUrl,
             columns: [{
-                    data: 'name',
-                    name: 'name'
+                    data: 'translate.ar.name',
+                    name: 'translate.ar.name'
+                },
+                {
+                    data: 'translate.en.name',
+                    name: 'translate.en.name'
                 },
                 {
                     data: 'actions',
@@ -195,7 +201,7 @@
                     Object.keys(errors).forEach(function(key) {
                         let message = errors[key][0];
 
-                        $('.error-' + key).text(message);
+                        $('.error-' + key.replace(/\./g, '-')).text(message);
                     });
                 }
             });
@@ -206,7 +212,13 @@
             const id = $(this).data('id');
             $.get('/admin/attributes/' + id + '/edit', function(data) {
                 $('#editAttributeForm').find('input[name="id"]').val(data.id);
-                $('#editAttributeForm').find('input[name="name"]').val(data.name);
+
+                $.each(data.translations, function(index, translation) {
+                    $('#editAttributeForm')
+                        .find(`input[name="translations[${translation.locale}][name]"]`)
+                        .val(translation.name);
+                });
+
                 $('#editAttributeModal').modal('show');
             });
         });
@@ -238,7 +250,7 @@
                     let errors = err.responseJSON.errors;
 
                     Object.keys(errors).forEach(function(key) {
-                        $('.error-' + key + '-edit').text(errors[key][0]);
+                        $('.error-' + key.replace(/\./g, '-') + '-edit').text(errors[key][0]);
                     });
                 }
             });

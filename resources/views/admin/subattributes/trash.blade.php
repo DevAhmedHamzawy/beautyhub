@@ -28,7 +28,8 @@
                         <a href="{{ route('admin.attributes.index') }}">{{ trans('attribute.attributes') }}</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.subattributes.index', $attribute) }}">{{ $attribute->name }}</a>
+                        <a
+                            href="{{ route('admin.subattributes.index', $attribute) }}">{{ $attribute->translate($locale)->name }}</a>
                     </li>
                     <li class="breadcrumb-item active">{{ trans('attribute.trashed_subattributes') }}</li>
                 </ol>
@@ -49,7 +50,8 @@
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('attribute.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('attribute.ar.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('attribute.en.name') }}</th>
                                     @canany(['restore_attribute'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
@@ -59,7 +61,8 @@
                             <tbody>
                                 @foreach ($subattributes as $subattribute)
                                     <tr>
-                                        <td>{{ $subattribute->name }}</td>
+                                        <td>{{ $subattribute->translate('ar')->name }}</td>
+                                        <td>{{ $subattribute->translate('en')->name }}</td>
                                         @can('restore_attribute')
                                             <td class="row pl-3">
                                                 <a href="{{ route('admin.subattributes.restore', [$attribute->id, $subattribute->id]) }}"

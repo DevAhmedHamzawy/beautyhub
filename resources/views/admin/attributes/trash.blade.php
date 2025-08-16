@@ -47,7 +47,8 @@
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('attribute.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('attribute.ar.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('attribute.en.name') }}</th>
                                     @canany(['restore_attribute'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
@@ -57,7 +58,8 @@
                             <tbody>
                                 @foreach ($attributes as $attribute)
                                     <tr>
-                                        <td>{{ $attribute->name }}</td>
+                                        <td>{{ $attribute->translate('ar')->name }}</td>
+                                        <td>{{ $attribute->translate('en')->name }}</td>
                                         @can('restore_attribute')
                                             <td class="row pl-3">
                                                 <a href="{{ route('admin.attributes.restore', $attribute->id) }}"

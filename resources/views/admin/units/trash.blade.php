@@ -47,8 +47,8 @@
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('unit.name') }}</th>
-                                    <th class="border-bottom-0">{{ trans('unit.code') }}</th>
+                                    <th class="border-bottom-0">{{ trans('unit.ar.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('unit.en.name') }}</th>
                                     @canany(['restore_unit'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
@@ -58,7 +58,8 @@
                             <tbody>
                                 @foreach ($units as $unit)
                                     <tr>
-                                        <td>{{ $unit->name }}</td>
+                                        <td>{{ $unit->translate('ar')->name }}</td>
+                                        <td>{{ $unit->translate('en')->name }}</td>
                                         <td>{{ $unit->code }}</td>
                                         @can('restore_unit')
                                             <td class="row pl-3">

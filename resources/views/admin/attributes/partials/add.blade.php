@@ -11,11 +11,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>{{ trans('attribute.name') }}</label>
-                        <input type="text" name="name" class="form-control" />
-                        <span class="text-danger error-name"></span>
-                    </div>
+                    @foreach (['ar', 'en'] as $locale)
+                        <div class="form-group">
+                            <label>{{ trans('attribute.' . $locale . '.name') }}</label>
+                            <input type="text" name="translations[{{ $locale }}][name]" class="form-control" />
+                            <span class="text-danger error-translations-{{ $locale }}-name"></span>
+                        </div>
+                    @endforeach
                     <div class="form-group">
                         <label>{{ trans('dashboard.active') }}</label>
                         <div class="main-toggle main-toggle-success" id="activeToggle">

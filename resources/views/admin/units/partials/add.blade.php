@@ -11,11 +11,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>{{ trans('unit.name') }}</label>
-                        <input type="text" name="name" class="form-control" />
-                        <span class="text-danger error-name"></span>
-                    </div>
+                    @foreach (['ar', 'en'] as $locale)
+                        <div class="form-group">
+                            <label>{{ trans('unit.' . $locale . '.name') }}</label>
+                            <input type="text" name="translations[{{ $locale }}][name]" class="form-control" />
+                            <span class="text-danger error-translations-{{ $locale }}-name"></span>
+                        </div>
+                    @endforeach
                     <div class="form-group">
                         <label>{{ trans('unit.code') }}</label>
                         <input type="text" name="code" class="form-control" />

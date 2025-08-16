@@ -250,7 +250,7 @@ class DatabaseSeeder extends Seeder
         $admin->assignRole($role);
 
 
-        for ($i=0; $i < 11 ; $i++) {
+        /*for ($i=0; $i < 11 ; $i++) {
             $category = Category::factory()->create();
 
             foreach (['en', 'ar'] as $locale) {
@@ -334,6 +334,7 @@ class DatabaseSeeder extends Seeder
                         ]);
                     });
             });
+            */
 
 
     }

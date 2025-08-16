@@ -25,7 +25,7 @@ class AttributeController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $attributes = Attribute::all();
+            $attributes = Attribute::whereNull('parent_id')->with('translations')->latest()->get();
 
             return response()->json([
                 'data' => $attributes->map(function ($attribute) {
@@ -40,7 +40,7 @@ class AttributeController extends Controller
                     }
 
                     if(auth()->user()->can('edit_attribute')) {
-                        $actions .= '<a href="javascript:void(0)" data-id="' . $attribute->id . '" class="btn btn-warning edit-btn" data-placement="top" data-toggle="tooltip" data-original-title="'. trans("dashboard.edit") .'"><i class="fas fa-edit"></i></a>';
+                        $actions .= '&nbsp;<a href="javascript:void(0)" data-id="' . $attribute->id . '" class="btn btn-warning edit-btn" data-placement="top" data-toggle="tooltip" data-original-title="'. trans("dashboard.edit") .'"><i class="fas fa-edit"></i></a>';
                     }
 
                     if(auth()->user()->can('delete_attribute')) {
@@ -71,8 +71,14 @@ class AttributeController extends Controller
 
                     return [
                         'id' => $attribute->id,
-                        'name' => $attribute->name,
-                        'code' => $attribute->code,
+                        'translate' => [
+                            'ar' => [
+                                'name' => $attribute->translate('ar')->name ?? ''
+                            ],
+                            'en' => [
+                                'name' => $attribute->translate('en')->name ?? ''
+                            ]
+                        ],
                         'created_at' => $attribute->created_at->diffForHumans(),
                         'actions' => $actions,
                     ];
@@ -87,7 +93,7 @@ class AttributeController extends Controller
 
       public function trash()
     {
-        $attributes = Attribute::whereNull('parent_id')->onlyTrashed()->get();
+        $attributes = Attribute::whereNull('parent_id')->onlyTrashed()->with('translations')->get();
         return view('admin.attributes.trash', ['attributes' => $attributes]);
     }
 
@@ -97,6 +103,10 @@ class AttributeController extends Controller
     public function store(AttributeRequest $request)
     {
         $attribute = Attribute::create($request->validated());
+
+        foreach ($request->translations as $locale => $translation) {
+            $attribute->translateOrNew($locale)->fill($translation)->save();
+        }
 
         activity()->log('قام '.auth()->user()->name.' باضافة وحده جديدة'.$attribute->name);
 
@@ -114,7 +124,7 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        $attribute = Attribute::findOrFail($id);
+        $attribute = Attribute::whereId($id)->with('translations')->firstOrFail();
         return response()->json($attribute);
     }
 
@@ -124,6 +134,10 @@ class AttributeController extends Controller
     public function update(AttributeRequest $request, Attribute $attribute)
     {
         $attribute->update($request->validated());
+
+         foreach ($request->translations as $locale => $translation) {
+            $attribute->translateOrNew($locale)->fill($translation)->save();
+        }
 
         activity()->log(description: 'قام '.auth()->user()->name.' بتعديل وحده'.$attribute->name);
 

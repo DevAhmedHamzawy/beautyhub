@@ -22,7 +22,7 @@ class AttributeRequest extends FormRequest
     public function rules(): array
     {
         return[
-            'name' => 'required',
+            'translations.*.name' => 'required',
             'active' => 'sometimes|boolean',
         ];
     }

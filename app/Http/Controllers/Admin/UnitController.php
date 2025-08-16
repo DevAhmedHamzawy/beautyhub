@@ -25,7 +25,7 @@ class UnitController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $units = Unit::all();
+            $units = Unit::with('translations')->get();
 
             return response()->json([
                 'data' => $units->map(function ($unit) {
@@ -64,7 +64,14 @@ class UnitController extends Controller
 
                     return [
                         'id' => $unit->id,
-                        'name' => $unit->name,
+                         'translate' => [
+                            'ar' => [
+                                'name' => $unit->translate('ar')->name ?? ''
+                            ],
+                            'en' => [
+                                'name' => $unit->translate('en')->name ?? ''
+                            ]
+                        ],
                         'code' => $unit->code,
                         'created_at' => $unit->created_at->diffForHumans(),
                         'actions' => $actions,
@@ -80,7 +87,7 @@ class UnitController extends Controller
 
       public function trash()
     {
-        $units = Unit::onlyTrashed()->get();
+        $units = Unit::onlyTrashed()->with('translations')->get();
         return view('admin.units.trash', ['units' => $units]);
     }
 
@@ -90,6 +97,10 @@ class UnitController extends Controller
     public function store(UnitRequest $request)
     {
         $unit = Unit::create($request->validated());
+
+        foreach ($request->translations as $locale => $translation) {
+            $unit->translateOrNew($locale)->fill($translation)->save();
+        }
 
         activity()->log('قام '.auth()->user()->name.' باضافة وحده جديدة'.$unit->name);
 
@@ -107,7 +118,7 @@ class UnitController extends Controller
      */
     public function edit($id)
     {
-        $unit = Unit::findOrFail($id);
+        $unit = Unit::with('translations')->findOrFail($id);
         return response()->json($unit);
     }
 
@@ -117,6 +128,10 @@ class UnitController extends Controller
     public function update(UnitRequest $request, Unit $unit)
     {
         $unit->update($request->validated());
+
+        foreach ($request->translations as $locale => $translation) {
+            $unit->translateOrNew($locale)->fill($translation)->save();
+        }
 
         activity()->log(description: 'قام '.auth()->user()->name.' بتعديل وحده'.$unit->name);
 

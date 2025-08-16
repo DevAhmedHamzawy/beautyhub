@@ -64,8 +64,16 @@ class SubAttributeController extends Controller
 
                     return [
                         'id' => $subattribute->id,
-                        'name' => $subattribute->name,
-                        'code' => $subattribute->code,
+
+                        'translate' => [
+                            'ar' => [
+                                'name' => $subattribute->translate('ar')->name ?? ''
+                            ],
+                            'en' => [
+                                'name' => $subattribute->translate('en')->name ?? ''
+                            ]
+                        ],
+
                         'created_at' => $subattribute->created_at->diffForHumans(),
                         'actions' => $actions,
                     ];
@@ -80,7 +88,7 @@ class SubAttributeController extends Controller
 
     public function trash(Attribute $attribute)
     {
-        return view('admin.subattributes.trash', ['attribute' => $attribute, 'subattributes' => $attribute->children()->onlyTrashed()->get()]);
+        return view('admin.subattributes.trash', ['attribute' => $attribute, 'subattributes' => $attribute->children()->onlyTrashed()->with('translations')->get()]);
     }
 
     /**
@@ -90,12 +98,17 @@ class SubAttributeController extends Controller
     {
         $subattribute = $attribute->children()->create($request->validated());
 
-        activity()->log('قام '.auth()->user()->name.' باضافة فرع مواصفات جديد '.$subattribute->name);
+
+        foreach ($request->translations as $locale => $translation) {
+            $subattribute->translateOrNew($locale)->fill($translation)->save();
+        }
+
+        activity()->log('قام '.auth()->user()->name.' باضافة فرع مواصفات جديد '.$subattribute->translate('ar')->name);
 
         $message = [
             'alert-type' => 'success',
-            'title' =>  trans('subattribute.add_success'),
-            'message' => trans('subattribute.add_success')
+            'title' =>  trans('attribute.add_success'),
+            'message' => trans('attribute.add_success')
         ];
 
         return response()->json($message);
@@ -106,7 +119,7 @@ class SubAttributeController extends Controller
      */
     public function edit($id)
     {
-        $subattribute = Attribute::findOrFail($id);
+        $subattribute = Attribute::whereId($id)->with('translations')->firstOrFail();
         return response()->json($subattribute);
     }
 
@@ -117,12 +130,16 @@ class SubAttributeController extends Controller
     {
         $subattribute->update($request->validated());
 
-        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل مواصفات'.$subattribute->name);
+        foreach ($request->translations as $locale => $translation) {
+            $subattribute->translateOrNew($locale)->fill($translation)->save();
+        }
+
+        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل مواصفات'.$subattribute->translate('ar')->name);
 
         $message = [
             'alert-type' => 'success',
-            'title' =>  trans('subattribute.updated_success'),
-            'message' => trans('subattribute.updated_success')
+            'title' =>  trans('attribute.updated_success'),
+            'message' => trans('attribute.updated_success')
         ];
 
         return redirect()->route('admin.subattributes.index', $attribute)->with($message);
@@ -139,8 +156,8 @@ class SubAttributeController extends Controller
 
         $message = [
             'alert-type' => 'success',
-            'title' =>  trans('subattribute.deleted_success'),
-            'message' => trans('subattribute.deleted_success')
+            'title' =>  trans('attribute.deleted_success'),
+            'message' => trans('attribute.deleted_success')
         ];
 
         return redirect()->route('admin.subattributes.index', $attribute)->with($message);
@@ -153,8 +170,8 @@ class SubAttributeController extends Controller
 
         $message = [
             'alert-type' => 'success',
-            'title' =>  $subattribute->active ? trans('subattribute.active_success') : trans('subattribute.deactive_success'),
-            'message' => $subattribute->active ? trans('subattribute.active_success') : trans('subattribute.deactive_success'),
+            'title' =>  $subattribute->active ? trans('attribute.active_success') : trans('attribute.deactive_success'),
+            'message' => $subattribute->active ? trans('attribute.active_success') : trans('attribute.deactive_success'),
         ];
 
         return redirect()->back()->with($message);
@@ -166,8 +183,8 @@ class SubAttributeController extends Controller
 
         $message = [
             'alert-type' => 'success',
-            'title' =>  trans('subattribute.restored_success'),
-            'message' => trans('subattribute.restored_success')
+            'title' =>  trans('attribute.restored_success'),
+            'message' => trans('attribute.restored_success')
         ];
 
         activity()->log('قام '.auth()->user()->name.'باستعادة المواصفات '.Attribute::find($id)->name);

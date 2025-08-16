@@ -13,11 +13,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>{{ trans('attribute.name') }}</label>
-                        <input type="text" name="name" class="form-control" />
-                        <span class="text-danger error-name-edit"></span>
-                    </div>
+                    @foreach (['ar', 'en'] as $locale)
+                        <div class="form-group">
+                            <label>{{ trans('attribute.' . $locale . '.name') }}</label>
+                            <input type="text" name="translations[{{ $locale }}][name]" class="form-control" />
+                            <span class="text-danger error-translations-{{ $locale }}-name-edit"></span>
+                        </div>
+                    @endforeach
                     <!-- لا تعرض active في التعديل -->
                 </div>
                 <div class="modal-footer px-3 py-2">

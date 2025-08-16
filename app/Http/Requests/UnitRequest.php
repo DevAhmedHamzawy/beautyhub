@@ -22,7 +22,7 @@ class UnitRequest extends FormRequest
     public function rules(): array
     {
         return[
-            'name' => 'required',
+            'translations.*.name' => 'required',
             'code' => 'required',
             'active' => 'sometimes|boolean',
         ];

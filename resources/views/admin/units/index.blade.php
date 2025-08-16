@@ -48,7 +48,8 @@
                         <table id="example-ajax" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('unit.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('unit.ar.name') }}</th>
+                                    <th class="border-bottom-0">{{ trans('unit.en.name') }}</th>
                                     <th class="border-bottom-0">{{ trans('unit.code') }}</th>
                                     @canany(['view_unit', 'edit_unit', 'delete_unit', 'active_unit', 'restore_unit'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
@@ -98,8 +99,12 @@
             processing: true,
             ajax: '{{ route('admin.units.index') }}',
             columns: [{
-                    data: 'name',
-                    name: 'name'
+                    data: 'translate.ar.name',
+                    name: 'translate.ar.name'
+                },
+                {
+                    data: 'translate.en.name',
+                    name: 'translate.en.name'
                 },
                 {
                     data: 'code',
@@ -187,7 +192,7 @@
                     Object.keys(errors).forEach(function(key) {
                         let message = errors[key][0];
 
-                        $('.error-' + key).text(message);
+                        $('.error-' + key.replace(/\./g, '-')).text(message);
                     });
                 }
             });
@@ -198,7 +203,13 @@
             const id = $(this).data('id');
             $.get('/admin/units/' + id + '/edit', function(data) {
                 $('#editUnitForm').find('input[name="id"]').val(data.id);
-                $('#editUnitForm').find('input[name="name"]').val(data.name);
+
+                $.each(data.translations, function(index, translation) {
+                    $('#editUnitForm')
+                        .find(`input[name="translations[${translation.locale}][name]"]`)
+                        .val(translation.name);
+                });
+
                 $('#editUnitForm').find('input[name="code"]').val(data.code);
                 $('#editUnitModal').modal('show');
             });
@@ -231,7 +242,7 @@
                     let errors = err.responseJSON.errors;
 
                     Object.keys(errors).forEach(function(key) {
-                        $('.error-' + key + '-edit').text(errors[key][0]);
+                        $('.error-' + key.replace(/\./g, '-') + '-edit').text(errors[key][0]);
                     });
                 }
             });
