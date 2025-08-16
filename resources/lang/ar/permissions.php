@@ -99,6 +99,7 @@ return [
     'view_purchase' => 'عرض عملية شراء',
     'Stock' => 'المخزون',
     'view_stock' => 'عرض المخزون',
+    'update_stock' => 'تحديث المخزون',
     'Flash Sale' => 'العروض',
     'add_flash_sale' => 'اضافة عرض',
     'delete_flash_sale' => 'حذف عرض',

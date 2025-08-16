@@ -32,4 +32,22 @@ class StockController extends Controller
 
         return view('admin.stocks.show', ['stocks' => $stocks]);
     }
+
+    public function updatePrice(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:stocks,id',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        $stock = Stock::findOrFail($request->id);
+        $stock->selling_price = $request->price;
+        $stock->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => trans('stock.price_updated'),
+            'price' => $stock->selling_price,
+        ]);
+    }
 }

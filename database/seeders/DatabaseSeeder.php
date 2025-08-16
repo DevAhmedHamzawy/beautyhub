@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
         $role = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'admin', 'active' => 1]);
 
-        Permission::create(['name' => 'add_admin', 'guard_name' => 'admin', 'group_name' => 'Admins']);
+        /*Permission::create(['name' => 'add_admin', 'guard_name' => 'admin', 'group_name' => 'Admins']);
         $role->givePermissionTo('add_admin');
         Permission::create(['name' => 'edit_admin', 'guard_name' => 'admin', 'group_name' => 'Admins']);
         $role->givePermissionTo('edit_admin');
@@ -205,8 +205,10 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'restore_purchase', 'guard_name' => 'admin', 'group_name' => 'Purchase']);
         $role->givePermissionTo('restore_purchase');
         Permission::create(['name' => 'view_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
-        $role->givePermissionTo('view_stock');
-        Permission::create(['name' => 'add_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
+        $role->givePermissionTo('view_stock');*/
+        Permission::create(['name' => 'update_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
+        $role->givePermissionTo('update_stock');
+        /*Permission::create(['name' => 'add_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
         $role->givePermissionTo('add_flash_sale');
         Permission::create(['name' => 'delete_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
         $role->givePermissionTo('delete_flash_sale');
@@ -246,7 +248,7 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('restore_page');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
-
+        */
         $admin->assignRole($role);
 
 
@@ -263,55 +265,101 @@ class DatabaseSeeder extends Seeder
 
         Brand::factory()->count(10)->create();
         Tax::factory()->count(10)->create();
-
-        $units = [
-            ['name' => 'كيلوجرام', 'code' => 'KG'],
-            ['name' => 'جرام', 'code' => 'G'],
-            ['name' => 'لتر', 'code' => 'L'],
-            ['name' => 'ملليلتر', 'code' => 'ML'],
-            ['name' => 'قطعة', 'code' => 'PCS'],
-            ['name' => 'علبة', 'code' => 'BOX'],
-            ['name' => 'متر', 'code' => 'M'],
-            ['name' => 'سنتيمتر', 'code' => 'CM'],
+*/
+        /*$units = [
+            ['en' => 'Kilogram', 'ar' => 'كيلوجرام', 'code' => 'KG'],
+            ['en' => 'Gram', 'ar' => 'جرام', 'code' => 'G'],
+            ['en' => 'Liter', 'ar' => 'لتر', 'code' => 'L'],
+            ['en' => 'Milliliter', 'ar' => 'ملليلتر', 'code' => 'ML'],
+            ['en' => 'Piece', 'ar' => 'قطعة', 'code' => 'PCS'],
+            ['en' => 'Box', 'ar' => 'علبة', 'code' => 'BOX'],
+            ['en' => 'Meter', 'ar' => 'متر', 'code' => 'M'],
+            ['en' => 'Centimeter', 'ar' => 'سنتيمتر', 'code' => 'CM'],
         ];
 
-        foreach ($units as $unit) {
-            \App\Models\Unit::create([
-                'name' => $unit['name'],
-                'code' => $unit['code'],
-                'active' => true,
-            ]);
+        foreach ($units as $u) {
+            $unit = \App\Models\Unit::firstOrCreate(
+                ['code' => $u['code']],
+                ['active' => true]
+            );
+
+            $unit->translateOrNew('ar')->name = $u['ar'];
+            $unit->translateOrNew('en')->name = $u['en'];
+            $unit->save();
         }
 
-
-        $attributes = [
-                'اللون' => ['أحمر', 'وردي', 'نيود'],
-                'الحجم' => ['50ml', '100ml', '200ml'],
-                'نوع البشرة' => ['دهنية', 'جافة', 'مختلطة'],
-                'نوع المنتج' => ['كريم', 'سيروم', 'ماسك'],
-                'الاستخدام' => ['صباحي', 'مسائي', 'يومي'],
-                'نوع الشعر' => ['عادي', 'دهني', 'جاف'],
-                'التغطية' => ['خفيفة', 'متوسطة', 'كاملة'],
-                'درجة الحماية (SPF)' => ['15', '30', '50'],
+        */
+        /*$attributes = [
+                'اللون' => [
+                    'ar' => ['أحمر', 'وردي', 'نيود'],
+                    'en' => ['Red', 'Pink', 'Nude'],
+                ],
+                'الحجم' => [
+                    'ar' => ['50ml', '100ml', '200ml'],
+                    'en' => ['50ml', '100ml', '200ml'], // نفس الشكل بس عادي
+                ],
+                'نوع البشرة' => [
+                    'ar' => ['دهنية', 'جافة', 'مختلطة'],
+                    'en' => ['Oily', 'Dry', 'Combination'],
+                ],
+                'نوع المنتج' => [
+                    'ar' => ['كريم', 'سيروم', 'ماسك'],
+                    'en' => ['Cream', 'Serum', 'Mask'],
+                ],
+                'الاستخدام' => [
+                    'ar' => ['صباحي', 'مسائي', 'يومي'],
+                    'en' => ['Morning', 'Night', 'Daily'],
+                ],
+                'نوع الشعر' => [
+                    'ar' => ['عادي', 'دهني', 'جاف'],
+                    'en' => ['Normal', 'Oily', 'Dry'],
+                ],
+                'التغطية' => [
+                    'ar' => ['خفيفة', 'متوسطة', 'كاملة'],
+                    'en' => ['Light', 'Medium', 'Full'],
+                ],
+                'درجة الحماية (SPF)' => [
+                    'ar' => ['15', '30', '50'],
+                    'en' => ['15', '30', '50'],
+                ],
             ];
 
-            foreach ($attributes as $parentName => $children) {
-                $parent = \App\Models\Attribute::create([
-                    'name' => $parentName,
+            $translations = [
+                'اللون' => 'Color',
+                'الحجم' => 'Size',
+                'نوع البشرة' => 'Skin Type',
+                'نوع المنتج' => 'Product Type',
+                'الاستخدام' => 'Usage',
+                'نوع الشعر' => 'Hair Type',
+                'التغطية' => 'Coverage',
+                'درجة الحماية (SPF)' => 'SPF',
+            ];
+
+            foreach ($attributes as $parentAr => $children) {
+                // Parent
+                $parent = \App\Models\Attribute::Create([
                     'parent_id' => null,
-                    'active' => true,
+                    'active' => true
                 ]);
 
-                foreach ($children as $childName) {
-                    \App\Models\Attribute::create([
-                        'name' => $childName,
-                        'parent_id' => $parent->id,
-                        'active' => true,
-                    ]);
+                $parent->translateOrNew('ar')->name = $parentAr;
+                $parent->translateOrNew('en')->name = $translations[$parentAr] ?? $parentAr;
+                $parent->save();
+
+                // Children
+                foreach ($children['ar'] as $index => $childAr) {
+                    $childEn = $children['en'][$index] ?? $childAr;
+
+                    $child = \App\Models\Attribute::Create(
+                        ['parent_id' => $parent->id, 'active' => true]
+                    );
+
+                    $child->translateOrNew('ar')->name = $childAr;
+                    $child->translateOrNew('en')->name = $childEn;
+                    $child->save();
                 }
             }
-
-
+/*
             DB::transaction(function () {
                 Product::factory()
                     ->count(1000)
@@ -334,7 +382,7 @@ class DatabaseSeeder extends Seeder
                         ]);
                     });
             });
-            */
+*/
 
 
     }

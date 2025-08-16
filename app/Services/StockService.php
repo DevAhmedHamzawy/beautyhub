@@ -19,6 +19,7 @@ class StockService
             return [
                 'id' => $first->id,
                 'product_name' => $first->product->name ?? 'N/A',
+                'product_price' => $first->selling_price ?? $first->product->selling_price ?? 'N/A',
                 'product_id' => $first->product_id,
                 'attributes' => $first->attributes->map(function ($attr) {
                     return $attr->attribute->name . ': ' . $attr->attributeValue->name;

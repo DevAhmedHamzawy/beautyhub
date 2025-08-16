@@ -42,6 +42,7 @@
                                     <th class="border-bottom-0">{{ trans('stock.product_name') }}</th>
                                     <th class="border-bottom-0">{{ trans('stock.attributes') }}</th>
                                     <th class="border-bottom-0">{{ trans('stock.qty') }}</th>
+                                    <th class="border-bottom-0">{{ trans('stock.price') }}</th>
                                     @canany(['view_stock'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
@@ -54,7 +55,8 @@
                                         <td>{{ $stock['product_name'] }}</td>
                                         <td>{{ $stock['attributes'] }}</td>
                                         <td>{{ $stock['qty'] }}</td>
-                                        @canany(['view_stock'])
+                                        <td>{{ $stock['product_price'] }}</td>
+                                        @canany(['view_stock', 'update_stock'])
                                             <td class="row pl-3">
                                                 @can('view_stock')
                                                     <a href="{{ route('admin.stocks.show', $stock['id']) }}"
@@ -62,8 +64,16 @@
                                                         data-original-title="{{ trans('dashboard.show') }}"><i
                                                             class="fas fa-eye"></i></a>
                                                 @endcan
+                                                @can('update_stock')
+                                                    <button class="btn btn-primary edit-price-btn" data-id="{{ $stock['id'] }}"
+                                                        data-price="{{ $stock['product_price'] }}" data-toggle="modal"
+                                                        data-target="#editPriceModal">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                @endcan
                                             </td>
                                         @endcanany
+
                                         <td>{{ $stock['created_at']->diffForHumans() }}</td>
                                     </tr>
                                 @endforeach
@@ -76,6 +86,8 @@
         </div>
         <!--/div-->
     </div>
+
+    @include('admin.stocks.partials.edit')
 @endsection
 
 @section('js')
@@ -98,4 +110,50 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+
+    <script>
+        // عند الضغط على زر التعديل يفتح المودال ويملى البيانات
+        $(document).on('click', '.edit-price-btn', function() {
+            var id = $(this).data('id');
+            var price = $(this).data('price');
+            $('#stock_id').val(id);
+            $('#stock_price').val(price);
+        });
+
+        // Ajax update
+        $('#savePriceBtn').on('click', function() {
+            var id = $('#stock_id').val();
+            var price = $('#stock_price').val();
+
+            $.ajax({
+                url: "{{ route('admin.stocks.updatePrice') }}",
+                type: "PUT",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id,
+                    price: price
+                },
+                success: function(response) {
+                    if (response.status) {
+                        // عدل السعر في الجدول مباشرة
+                        let row = $('button[data-id="' + id + '"]').closest('tr');
+                        row.find('td:nth-child(4)').text(response.price);
+
+                        // قفل المودال
+                        $('#editPriceModal').modal('hide');
+
+                        // رسالة نجاح
+                        swal({
+                            type: 'success',
+                            title: '{{ trans('stock.updated_success') }}',
+                            showConfirmButton: true
+                        })
+                    }
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
 @endsection

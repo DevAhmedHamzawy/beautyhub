@@ -193,6 +193,28 @@
             @endcanany
 
 
+            @canany(['view_coupon', 'add_coupon', 'edit_coupon', 'delete_coupon'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fas fa-tags"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('coupon.coupons') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_coupon')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.coupons.index') }}">{{ trans('coupon.show_coupons') }}</a>
+                            </li>
+                        @endcan
+                        @can('add_coupon')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.coupons.create') }}">{{ trans('coupon.add_new_coupon') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
+
 
             <li class="side-item side-item-category">{{ trans('dashboard.country') }}</li>
 
@@ -302,6 +324,53 @@
                     <a class="side-menu__item" href="{{ route('admin.attributes.index') }}">
                         <i class="side-menu__icon fa fa-puzzle-piece"></i>
                         &nbsp;&nbsp;<span class="side-menu__label">{{ trans('attribute.attributes') }}</span></a>
+                </li>
+            @endcanany
+
+
+            <li class="side-item side-item-category">{{ trans('dashboard.site_settings') }}</li>
+
+            @canany(['view_slider', 'add_slider', 'edit_slider', 'delete_slider', 'active_slider', 'restore_slider',
+                'add_home_slider'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fe fe-image"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('slider.sliders') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_slider')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.sliders.index') }}">{{ trans('slider.show_sliders') }}</a>
+                            </li>
+                        @endcan
+                        @can('add_slider')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.sliders.create') }}">{{ trans('slider.add_new_slider') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
+            @canany(['view_page', 'add_page', 'edit_page', 'delete_page', 'active_page', 'restore_page',
+                'add_home_page'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fe fe-file"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('page.pages') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_page')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.pages.index') }}">{{ trans('page.show_pages') }}</a>
+                            </li>
+                        @endcan
+                        @can('add_page')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.pages.create') }}">{{ trans('page.add_new_page') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
                 </li>
             @endcanany
 

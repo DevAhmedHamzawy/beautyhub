@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->morphs('stockable');
             $table->integer('qty');
+            $table->decimal('selling_price', 8, 2)->nullable();
             $table->timestamps();
         });
     }

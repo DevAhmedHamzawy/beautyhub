@@ -154,6 +154,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'assign.guar
 
     // Stock
     Route::get('stocks', [StockController::class, 'index'])->name('stocks.index');
+    Route::put('stocks/update-price', [StockController::class, 'updatePrice'])->name('stocks.updatePrice');
     Route::get('stocks/{id}', [StockController::class, 'show'])->name('stocks.show');
 
     // Flash Sales

@@ -100,6 +100,7 @@ return [
     'view_purchase' => 'View Purchase',
     'Stock' => 'Stock',
     'view_stock' => 'View Stock',
+    'update_stock' => 'Update Stock',
     'Flash Sale' => 'Flash Sale',
     'add_flash_sale' => 'Add Flash Sale',
     'delete_flash_sale' => 'Delete Flash Sale',
