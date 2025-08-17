@@ -84,7 +84,7 @@ class CityController extends Controller
 
         $city = Area::create($data);
 
-        activity()->log('قام '.auth()->user()->name.' باضافة بلد جديدة'.$city->name);
+        activity()->log('قام '.auth()->user()->name.' باضافة مدينة جديدة'.$city->name);
 
         $message = [
             'alert-type' => 'success',
@@ -111,7 +111,7 @@ class CityController extends Controller
     {
         $city->update($request->validated());
 
-        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل بلد'.$city->name);
+        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل مدينة'.$city->name);
 
         $message = [
             'alert-type' => 'success',
@@ -129,7 +129,7 @@ class CityController extends Controller
     {
         $city->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف بلد '.$city->name);
+        activity()->log('قام '.auth()->user()->name.'بحذف مدينة '.$city->name);
 
         $message = [
             'alert-type' => 'success',
@@ -150,7 +150,7 @@ class CityController extends Controller
             'message' => trans('city.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة البلد '.Area::find($id)->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة المدينة '.Area::find($id)->name);
 
         return redirect()->back()->with($message);
     }

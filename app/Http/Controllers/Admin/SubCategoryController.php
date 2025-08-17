@@ -165,7 +165,7 @@ class SubCategoryController extends Controller
             'message' => $subcategory->appear_home ? trans('category.appeared_in_home_success') : trans('category.disappeared_in_home_success'),
         ];
 
-        $subcategory->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل التصنيف '.$subcategory->name) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل التصنيف '.$subcategory->name);
+        $subcategory->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل فرع التصنيف '.$subcategory->name) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل فرع التصنيف '.$subcategory->name);
 
         return redirect()->back()->with($message);
     }
@@ -180,7 +180,7 @@ class SubCategoryController extends Controller
             'message' => trans('category.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة التصنيف '.Category::find($category->id)->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة فرع التصنيف '.Category::find($category->id)->name);
 
         return redirect()->back()->with($message);
     }

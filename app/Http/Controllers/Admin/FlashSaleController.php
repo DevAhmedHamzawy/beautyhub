@@ -68,6 +68,8 @@ class FlashSaleController extends Controller
             'message' => trans('flash_sale.add_success')
         ];
 
+        activity()->log('قام '.auth()->user()->name.' باضافة عرض جديد'.$flash_sale->name);
+
         return redirect()->route('admin.flash_sales.index')->with($message);
     }
 

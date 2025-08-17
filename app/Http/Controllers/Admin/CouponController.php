@@ -98,7 +98,7 @@ class CouponController extends Controller
 
         $coupon = Coupon::create($data);
 
-        activity()->log('قام '.auth()->user()->name.' باضافة كوبون جديدة'.$coupon->name);
+        activity()->log('قام '.auth()->user()->name.' باضافة كوبون جديد'.$coupon->name);
 
         $message = [
             'alert-type' => 'success',
@@ -170,6 +170,8 @@ class CouponController extends Controller
             'title' =>  $coupon->active ? trans('coupon.active_success') : trans('coupon.deactive_success'),
             'message' => $coupon->active ? trans('coupon.active_success') : trans('coupon.deactive_success'),
         ];
+
+        $coupon->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل كوبون '.$coupon->code) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل كوبون '.$coupon->code);
 
         return redirect()->back()->with($message);
     }

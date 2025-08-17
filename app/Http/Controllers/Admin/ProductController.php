@@ -79,7 +79,7 @@ class ProductController extends Controller
             }
         }
 
-        activity()->log('قام '.auth()->user()->name.'باضافة تصنيف جديد'.$request->translations['ar']['name']);
+        activity()->log('قام '.auth()->user()->name.' باضافة منتج جديد'.$request->translations['ar']['name']);
 
         $message = [
             'alert-type' => 'success',
@@ -140,7 +140,7 @@ class ProductController extends Controller
             $product->translateOrNew($locale)->fill($translation)->save();
         }
 
-        activity()->log('قام '.auth()->user()->name.'بتعديل التصنيف'.$request->translations['ar']['name']);
+        activity()->log('قام '.auth()->user()->name.' بتعديل المنتج'.$request->translations['ar']['name']);
 
         $message = [
             'alert-type' => 'success',
@@ -161,7 +161,7 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف التصنيف'.$product->translations[1]['name']);
+        activity()->log('قام '.auth()->user()->name.'بحذف المنتج '.$product->translations[1]['name']);
 
         $message = [
             'alert-type' => 'success',
@@ -183,6 +183,7 @@ class ProductController extends Controller
             'message' => $product->active ? trans('product.active_success') : trans('product.deactive_success'),
         ];
 
+        $product->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل منتج '.$product->id) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل منتج '.$product->id);
 
         return redirect()->back()->with($message);
     }
@@ -197,7 +198,7 @@ class ProductController extends Controller
             'message' => trans('product.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة التصنيف '.Product::whereSlug($slug)->first()->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة المنتج '.Product::whereSlug($slug)->first()->name);
 
         return redirect()->back()->with($message);
     }

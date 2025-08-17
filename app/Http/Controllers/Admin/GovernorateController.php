@@ -89,7 +89,7 @@ class GovernorateController extends Controller
 
         $governorate = Area::create($data);
 
-        activity()->log('قام '.auth()->user()->name.' باضافة بلد جديدة'.$governorate->name);
+        activity()->log('قام '.auth()->user()->name.' باضافة محافظة / ولاية جديدة'.$governorate->name);
 
         $message = [
             'alert-type' => 'success',
@@ -116,7 +116,7 @@ class GovernorateController extends Controller
     {
         $governorate->update($request->validated());
 
-        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل بلد'.$governorate->name);
+        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل محافظة / ولاية'.$governorate->name);
 
         $message = [
             'alert-type' => 'success',
@@ -134,7 +134,7 @@ class GovernorateController extends Controller
     {
         $governorate->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف بلد '.$governorate->name);
+        activity()->log('قام '.auth()->user()->name.'بحذف محافظة / ولاية '.$governorate->name);
 
         $message = [
             'alert-type' => 'success',
@@ -155,7 +155,7 @@ class GovernorateController extends Controller
             'message' => trans('governorate.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة البلد '.Area::find($id)->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة المحافظة / ولاية '.Area::find($id)->name);
 
         return redirect()->back()->with($message);
     }

@@ -44,6 +44,8 @@ class StockController extends Controller
         $stock->selling_price = $request->price;
         $stock->save();
 
+        activity()->log('قام '.auth()->user()->name.'بتعديل سعر المخزون' . $stock->product->name);
+
         return response()->json([
             'status' => true,
             'message' => trans('stock.price_updated'),

@@ -159,6 +159,8 @@ class TaxController extends Controller
             'message' => $tax->active ? trans('tax.active_success') : trans('tax.deactive_success'),
         ];
 
+        $tax->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل الضريبة '.$tax->name) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل الضريبة '.$tax->name);
+
         return redirect()->back()->with($message);
     }
 

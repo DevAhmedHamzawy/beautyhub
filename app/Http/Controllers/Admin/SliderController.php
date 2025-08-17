@@ -178,6 +178,8 @@ class SliderController extends Controller
             'message' => $slider->active ? trans('slider.active_success') : trans('slider.deactive_success'),
         ];
 
+        $slider->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل سلايدر '.$slider->id) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل سلايدر '.$slider->id);
+
         return redirect()->back()->with($message);
     }
 }

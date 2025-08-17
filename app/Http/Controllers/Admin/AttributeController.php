@@ -108,7 +108,7 @@ class AttributeController extends Controller
             $attribute->translateOrNew($locale)->fill($translation)->save();
         }
 
-        activity()->log('قام '.auth()->user()->name.' باضافة وحده جديدة'.$attribute->name);
+        activity()->log('قام '.auth()->user()->name.' باضافة مواصفات جديدة'.$attribute->translate('ar')->name);
 
         $message = [
             'alert-type' => 'success',
@@ -139,7 +139,7 @@ class AttributeController extends Controller
             $attribute->translateOrNew($locale)->fill($translation)->save();
         }
 
-        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل وحده'.$attribute->name);
+        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل مواصفات'.$attribute->translate('ar')->name);
 
         $message = [
             'alert-type' => 'success',
@@ -157,7 +157,7 @@ class AttributeController extends Controller
     {
         $attribute->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف وحده '.$attribute->name);
+        activity()->log('قام '.auth()->user()->name.'بحذف مواصفات '.$attribute->translate('ar')->name);
 
         $message = [
             'alert-type' => 'success',
@@ -179,6 +179,8 @@ class AttributeController extends Controller
             'message' => $attribute->active ? trans('attribute.active_success') : trans('attribute.deactive_success'),
         ];
 
+        $attribute->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل سلايدر '.$attribute->translate('ar')->name) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل سلايدر '.$attribute->translate('ar')->name);
+
         return redirect()->back()->with($message);
     }
 
@@ -192,7 +194,7 @@ class AttributeController extends Controller
             'message' => trans('attribute.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة الوحده '.Attribute::find($id)->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة المواصفات '.Attribute::find($id)->translate('ar')->name);
 
         return redirect()->back()->with($message);
     }

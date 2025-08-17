@@ -183,6 +183,8 @@ class BrandController extends Controller
             'message' => $brand->active ? trans('brand.active_success') : trans('brand.deactive_success'),
         ];
 
+        $brand->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل العلامة التجارية '.$brand->name) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل العلامة التجارية '.$brand->name);
+
         return redirect()->back()->with($message);
     }
 

@@ -151,7 +151,7 @@ class UnitController extends Controller
     {
         $unit->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف وحده '.$unit->name);
+        activity()->log('قام '.auth()->user()->name.'بحذف وحده '.$unit->translate('ar')->name);
 
         $message = [
             'alert-type' => 'success',
@@ -173,6 +173,8 @@ class UnitController extends Controller
             'message' => $unit->active ? trans('unit.active_success') : trans('unit.deactive_success'),
         ];
 
+        $unit->active ? activity()->log('قام '.auth()->user()->name.'بتفعيل الوحده '.$unit->translate('ar')->name) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل الوحده '.$unit->translate('ar')->name);
+
         return redirect()->back()->with($message);
     }
 
@@ -186,7 +188,7 @@ class UnitController extends Controller
             'message' => trans('unit.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة الوحده '.Unit::find($id)->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة الوحده '.Unit::find($id)->translate('ar')->name);
 
         return redirect()->back()->with($message);
     }

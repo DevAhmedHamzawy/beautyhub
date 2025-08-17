@@ -134,7 +134,7 @@ class SubAttributeController extends Controller
             $subattribute->translateOrNew($locale)->fill($translation)->save();
         }
 
-        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل مواصفات'.$subattribute->translate('ar')->name);
+        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل فرغ المواصفات'.$subattribute->translate('ar')->name);
 
         $message = [
             'alert-type' => 'success',
@@ -152,7 +152,7 @@ class SubAttributeController extends Controller
     {
         $subattribute->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف مواصفات '.$subattribute->name);
+        activity()->log('قام '.auth()->user()->name.'بحذف فرع المواصفات '.$subattribute->translate('ar')->name);
 
         $message = [
             'alert-type' => 'success',
@@ -174,6 +174,8 @@ class SubAttributeController extends Controller
             'message' => $subattribute->active ? trans('attribute.active_success') : trans('attribute.deactive_success'),
         ];
 
+        $subattribute->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل فرع المواصفات '.$subattribute->translate('ar')->name) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل فرع المواصفات '.$subattribute->translate('ar')->name);
+
         return redirect()->back()->with($message);
     }
 
@@ -187,7 +189,7 @@ class SubAttributeController extends Controller
             'message' => trans('attribute.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة المواصفات '.Attribute::find($id)->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة فرع المواصفات '.Attribute::find($id)->translate('ar')->name);
 
         return redirect()->back()->with($message);
     }

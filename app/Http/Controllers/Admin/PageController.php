@@ -65,7 +65,7 @@ class PageController extends Controller
             $page->translateOrNew($locale)->fill($translation)->save();
         }
 
-        activity()->log('قام '.auth()->user()->name.'باضافة تصنيف جديد'.$request->translations['ar']['title']);
+        activity()->log('قام '.auth()->user()->name.'باضافة صفحة جديد'.$request->translations['ar']['title']);
 
         $message = [
             'alert-type' => 'success',
@@ -104,7 +104,7 @@ class PageController extends Controller
             $page->translateOrNew($locale)->fill($translation)->save();
         }
 
-        activity()->log('قام '.auth()->user()->name.'بتعديل التصنيف'.$request->translations['ar']['title']);
+        activity()->log('قام '.auth()->user()->name.'بتعديل الصفحة'.$request->translations['ar']['title']);
 
         $message = [
             'alert-type' => 'success',
@@ -125,7 +125,7 @@ class PageController extends Controller
     {
         $page->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف التصنيف'.$page->translations[1]['name']);
+        activity()->log('قام '.auth()->user()->name.'بحذف الصفحة'.$page->translations['ar']['title']);
 
         $message = [
             'alert-type' => 'success',
@@ -147,6 +147,7 @@ class PageController extends Controller
             'message' => $page->active ? trans('page.active_success') : trans('page.deactive_success'),
         ];
 
+        $page->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل الصفحة '.$page->translations['ar']['title']) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل الصفحة '.$page->translations['ar']['title']);
 
         return redirect()->back()->with($message);
     }
@@ -161,7 +162,7 @@ class PageController extends Controller
             'message' => trans('page.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة التصنيف '.Page::whereSlug($slug)->first()->name);
+        activity()->log('قام '.auth()->user()->name.'باستعادة الصفحة '.Page::whereSlug($slug)->first()->translations['ar']['title']);
 
         return redirect()->back()->with($message);
     }

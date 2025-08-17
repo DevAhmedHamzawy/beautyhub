@@ -52,6 +52,8 @@ class PurchaseController extends Controller
             'message' => trans('purchase.add_success')
         ];
 
+        activity()->log('قام '.auth()->user()->name.' باضافة طلب شراء جديد'.$request->reference_number);
+
         return redirect()->route('admin.purchases.index')->with($message);
 
     }
@@ -82,6 +84,8 @@ class PurchaseController extends Controller
             'message' => trans('purchase.updated_success')
         ];
 
+        activity()->log('قام '.auth()->user()->name.' بتعديل طلب شراء'.$request->reference_number);
+
         return redirect()->route('admin.purchases.index')->with($message);
 
     }
@@ -97,6 +101,8 @@ class PurchaseController extends Controller
             'title' =>  trans('purchase.deleted_success'),
             'message' => trans('purchase.deleted_success')
         ];
+
+        activity()->log('قام '.auth()->user()->name.' بحذف طلب شراء'.$purchase->reference_number);
 
         return redirect()->route('admin.purchases.index')->with($message);
     }
