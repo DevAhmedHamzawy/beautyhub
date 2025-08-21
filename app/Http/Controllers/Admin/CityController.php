@@ -58,6 +58,7 @@ class CityController extends Controller
                         'id' => $city->id,
                         'name' => $city->name,
                         'english' => $city->english,
+                        'shipping_cost' => $city->shipping_cost,
                         'actions' => $actions,
                     ];
                 }),

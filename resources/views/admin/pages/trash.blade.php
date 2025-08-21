@@ -9,7 +9,7 @@
 @endsection
 
 @section('title')
-    {{ trans('product.trashed_products') }}
+    {{ trans('page.trashed_pages') }}
 @endsection
 
 @section('content')
@@ -25,9 +25,9 @@
                         <a href="{{ route('admin.dashboard') }}">{{ trans('dashboard.dashboard') }}</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.products.index') }}">{{ trans('product.products') }}</a>
+                        <a href="{{ route('admin.pages.index') }}">{{ trans('page.pages') }}</a>
                     </li>
-                    <li class="breadcrumb-item active">{{ trans('product.trashed_products') }}</li>
+                    <li class="breadcrumb-item active">{{ trans('page.trashed_pages') }}</li>
                 </ol>
             </nav>
 
@@ -35,10 +35,10 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">{{ trans('product.trashed_products') }}</h4>
+                        <h4 class="card-title mg-b-0">{{ trans('page.trashed_pages') }}</h4>
 
-                        <a class="btn btn-primary text-white" href="{{ route('admin.products.index') }}">
-                            {{ trans('product.products') }}
+                        <a class="btn btn-primary text-white" href="{{ route('admin.pages.index') }}">
+                            {{ trans('page.pages') }}
                         </a>
                     </div>
                 </div>
@@ -47,31 +47,28 @@
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('dashboard.image') }}</th>
-                                    <th class="border-bottom-0">{{ trans('product.ar.name') }}</th>
-                                    <th class="border-bottom-0">{{ trans('product.en.name') }}</th>
-                                    @canany(['restore_product'])
+                                    <th class="border-bottom-0">{{ trans('page.ar.title') }}</th>
+                                    <th class="border-bottom-0">{{ trans('page.en.title') }}</th>
+                                    @canany(['restore_page'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
                                     <th class="border-bottom-0">{{ trans('dashboard.created') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach ($pages as $page)
                                     <tr>
-                                        <td><img width="50" height="50" src="{{ $product->img_path }}"
-                                                alt="" srcset=""></td>
-                                        <td>{{ $product->translate('ar')->name }}</td>
-                                        <td>{{ $product->translate('en')->name }}</td>
-                                        @can('restore_product')
+                                        <td>{{ $page->translate('ar')->title }}</td>
+                                        <td>{{ $page->translate('en')->title }}</td>
+                                        @can('restore_page')
                                             <td class="row pl-3">
-                                                <a href="{{ route('admin.products.restore', $product->slug) }}"
+                                                <a href="{{ route('admin.pages.restore', $page->slug) }}"
                                                     class="btn btn-primary" data-placement="top" data-toggle="tooltip"
                                                     data-original-title="{{ trans('dashboard.restore') }}"><i
                                                         class="fas fa-trash-restore"></i></a>
                                             </td>
                                         @endcan
-                                        <td>{{ $product->created_at->diffForHumans() }}</td>
+                                        <td>{{ $page->created_at->diffForHumans() }}</td>
                                     </tr>
                                 @endforeach
 

@@ -19,7 +19,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"
                     data-dismiss="modal">{{ trans('dashboard.close') }}</button>
-                <button type="button" class="btn btn-success" id="savePriceBtn">{{ trans('dashboard.save') }}</button>
+                <button type="button" class="btn btn-success" id="savePriceBtn">{{ trans('dashboard.add') }}</button>
             </div>
         </div>
     </div>

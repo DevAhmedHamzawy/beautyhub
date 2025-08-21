@@ -9,4 +9,6 @@ return [
     'sort' => 'Sort',
     'add' => 'Add',
     'withdraw' => 'Withdraw',
+    'price' => 'Price',
+    'edit_price' => 'Edit Price',
 ];

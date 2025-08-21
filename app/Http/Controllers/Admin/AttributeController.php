@@ -36,7 +36,7 @@ class AttributeController extends Controller
 
                         $route = route('admin.subattributes.index', $attribute->id);
 
-                        $actions .= '<a href="'. $route .'" class="btn btn-info view-btn" data-placement="top" data-toggle="tooltip" data-original-title="'. trans("dashboard.view") .'"><i class="fas fa-eye"></i></a>';
+                        $actions .= '<a href="'. $route .'" class="btn btn-info view-btn" data-placement="top" data-toggle="tooltip" data-original-title="'. trans("dashboard.show") .'"><i class="fas fa-eye"></i></a>';
                     }
 
                     if(auth()->user()->can('edit_attribute')) {

@@ -26,6 +26,13 @@
                         <span class="text-danger error-english-edit"></span>
                     </div>
                 </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>{{ trans('city.shipping_cost') }}</label>
+                        <input type="text" name="shipping_cost" class="form-control" />
+                        <span class="text-danger error-shipping_cost-edit"></span>
+                    </div>
+                </div>
                 <div class="modal-footer px-3 py-2">
                     <button type="submit" class="btn btn-primary w-50 me-2 rounded-0">
                         {{ trans('dashboard.edit') }}

@@ -55,7 +55,7 @@ class CountryController extends Controller
 
                     if(auth()->user()->can('view_city')) {
                         $route = route('admin.governorates.index', $country->id);
-                        $actions .= ' <a href="' . $route . '" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="' . trans('dashboard.view') . '"><i class="fas fa-eye"></i></a>';
+                        $actions .= ' <a href="' . $route . '" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="' . trans('dashboard.show') . '"><i class="fas fa-eye"></i></a>';
                     }
 
                     return [

@@ -65,6 +65,7 @@
                                 <tr>
                                     <th class="border-bottom-0">{{ trans('city.name') }}</th>
                                     <th class="border-bottom-0">{{ trans('city.english') }}</th>
+                                    <th class="border-bottom-0">{{ trans('city.shipping_cost') }}</th>
                                     @canany(['view_city', 'edit_city', 'delete_city', 'active_city', 'restore_city'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
@@ -118,6 +119,10 @@
                 {
                     data: 'english',
                     name: 'english'
+                },
+                {
+                    data: 'shipping_cost',
+                    name: 'shipping_cost'
                 },
                 {
                     data: 'actions',
@@ -213,6 +218,7 @@
                     $('#editUnitForm').find('input[name="id"]').val(data.id);
                     $('#editUnitForm').find('input[name="name"]').val(data.name);
                     $('#editUnitForm').find('input[name="english"]').val(data.english);
+                    $('#editUnitForm').find('input[name="shipping_cost"]').val(data.shipping_cost);
                     $('#editUnitModal').modal('show');
                 });
         });

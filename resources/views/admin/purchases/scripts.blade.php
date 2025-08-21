@@ -3,7 +3,7 @@
         getProduct();
     });
 
-    $(document).on('keyup change', '#qty, #discount_amount', function() {
+    $(document).on('keyup change', '#qty, #discount_amount, #discount_sort', function() {
         calculateTotalPrice();
     });
 
@@ -184,7 +184,7 @@
                         <td class="vat_values" id="vat_value_${index}">${vatToPay}</td>
                         <td class="total_prices" id="total_price_${index}">
                             ${totalPrice}
-                            <div class="btn btn-danger" onclick="delete_item(${index})">حذف</div>
+                            <div class="btn btn-danger" onclick="delete_item(${index})">{{ trans('dashboard.delete') }}</div>
                         </td>
                     </tr>
                 `);

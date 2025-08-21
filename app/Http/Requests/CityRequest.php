@@ -24,6 +24,7 @@ class CityRequest extends FormRequest
        return [
             'name' => 'required',
             'english' => 'required',
+            'shipping_cost' => 'required|numeric|min:0|between:0,999999.99',
         ];
     }
 }

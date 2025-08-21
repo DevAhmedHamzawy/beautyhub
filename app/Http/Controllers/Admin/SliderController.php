@@ -96,7 +96,7 @@ class SliderController extends Controller
 
         $slider = Slider::create($data);
 
-        activity()->log('قام '.auth()->user()->name.' باضافة سلايدر جديدة'.$slider->name);
+        activity()->log('قام '.auth()->user()->name.' باضافة سلايدر جديدة'.$slider->id);
 
         $message = [
             'alert-type' => 'success',
@@ -136,7 +136,7 @@ class SliderController extends Controller
         // تحديث البراند
         $slider->update($data);
 
-        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل سلايدر'.$slider->name);
+        activity()->log(description: 'قام '.auth()->user()->name.' بتعديل سلايدر'.$slider->id);
 
         $message = [
             'alert-type' => 'success',
@@ -156,7 +156,7 @@ class SliderController extends Controller
 
         $slider->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف سلايدر '.$slider->name);
+        activity()->log('قام '.auth()->user()->name.'بحذف سلايدر '.$slider->id);
 
         $message = [
             'alert-type' => 'success',

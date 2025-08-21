@@ -17,4 +17,5 @@ return [
     'deactive_error' => 'Unable To Deactivate This City',
     'name' => 'Name',
     'english' => 'English',
+    'shipping_cost' => 'Shipping Cost',
 ];

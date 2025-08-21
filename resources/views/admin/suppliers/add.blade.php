@@ -215,9 +215,15 @@
                             `<option value="">اختر المدينة</option>`
                         )
                         response.forEach(function(governorate) {
-                            $('#governorate_id').append(
-                                `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}">${governorate.name}</option>`
-                            );
+                            @if ($locale == 'ar')
+                                $('#governorate_id').append(
+                                    `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}">${governorate.name}</option>`
+                                );
+                            @else
+                                $('#governorate_id').append(
+                                    `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}">${governorate.english}</option>`
+                                );
+                            @endif
                         });
                     } else {
                         $('#area_id').empty();
@@ -225,9 +231,16 @@
                             `<option value="">اختر المدينة</option>`
                         )
                         response.forEach(function(city) {
-                            $('#area_id').append(
-                                `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.name}</option>`
-                            );
+                            @if ($locale == 'ar')
+                                $('#area_id').append(
+                                    `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.name}</option>`
+                                );
+                            @else
+                                $('#area_id').append(
+                                    `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.english}</option>`
+                                );
+                            @endif
+
                         });
                     }
 

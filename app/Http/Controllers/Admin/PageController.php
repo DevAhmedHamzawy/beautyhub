@@ -125,7 +125,7 @@ class PageController extends Controller
     {
         $page->delete();
 
-        activity()->log('قام '.auth()->user()->name.'بحذف الصفحة'.$page->translations['ar']['title']);
+        activity()->log('قام '.auth()->user()->name.'بحذف الصفحة'.$page->translate('ar')->title);
 
         $message = [
             'alert-type' => 'success',
@@ -147,7 +147,7 @@ class PageController extends Controller
             'message' => $page->active ? trans('page.active_success') : trans('page.deactive_success'),
         ];
 
-        $page->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل الصفحة '.$page->translations['ar']['title']) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل الصفحة '.$page->translations['ar']['title']);
+        $page->active ?  activity()->log('قام '.auth()->user()->name.'بتفعيل الصفحة '.$page->translate('ar')->title) : activity()->log('قام '.auth()->user()->name.'بالغاء تفعيل الصفحة '.$page->translate('ar')->title);
 
         return redirect()->back()->with($message);
     }
@@ -162,7 +162,7 @@ class PageController extends Controller
             'message' => trans('page.restored_success')
         ];
 
-        activity()->log('قام '.auth()->user()->name.'باستعادة الصفحة '.Page::whereSlug($slug)->first()->translations['ar']['title']);
+        activity()->log('قام '.auth()->user()->name.'باستعادة الصفحة '.Page::whereSlug($slug)->first()->translate('ar')->title);
 
         return redirect()->back()->with($message);
     }

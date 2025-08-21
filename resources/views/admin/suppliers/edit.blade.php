@@ -228,13 +228,25 @@
                         )
                         response.forEach(function(governorate) {
                             if (governorate.id == {!! $theGovernorate->id !!}) {
-                                $('#governorate_id').append(
-                                    `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}" selected>${governorate.name}</option>`
-                                );
+                                @if ($locale == 'ar')
+                                    $('#governorate_id').append(
+                                        `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}" selected>${governorate.name}</option>`
+                                    );
+                                @else
+                                    $('#governorate_id').append(
+                                        `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}" selected>${governorate.english}</option>`
+                                    );
+                                @endif
                             } else {
-                                $('#governorate_id').append(
-                                    `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}">${governorate.name}</option>`
-                                );
+                                @if ($locale == 'ar')
+                                    $('#governorate_id').append(
+                                        `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}">${governorate.name}</option>`
+                                    );
+                                @else
+                                    $('#governorate_id').append(
+                                        `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}">${governorate.english}</option>`
+                                    );
+                                @endif
                             }
                         });
                     } else {
@@ -244,13 +256,26 @@
                         )
                         response.forEach(function(city) {
                             if (city.id == {!! $theCity->id !!}) {
-                                $('#area_id').append(
-                                    `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.name}</option>`
-                                );
+                                @if ($locale == 'ar')
+                                    $('#area_id').append(
+                                        `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.name}</option>`
+                                    );
+                                @else
+                                    $('#area_id').append(
+                                        `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.english}</option>`
+                                    );
+                                @endif
+
                             } else {
-                                $('#area_id').append(
-                                    `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.name}</option>`
-                                );
+                                @if ($locale == 'ar')
+                                    $('#area_id').append(
+                                        `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.name}</option>`
+                                    );
+                                @else
+                                    $('#area_id').append(
+                                        `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.english}</option>`
+                                    );
+                                @endif
                             }
 
                         });

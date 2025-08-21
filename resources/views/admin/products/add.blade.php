@@ -132,7 +132,7 @@
                                                 @foreach ($taxes as $tax)
                                                     <option value="{{ $tax->id }}"
                                                         {{ old('tax_id') == $tax->id ? 'selected' : '' }}>
-                                                        {{ $tax->name }}
+                                                        {{ $tax->code }} - {{ $tax->rate }}
                                                     </option>
                                                 @endforeach
                                             </select>

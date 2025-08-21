@@ -352,7 +352,7 @@
 
                             <div class="form-group row mb-0">
                                 <button type="submit" class="btn btn-primary col-md-12">
-                                    إضافة طلب جديد
+                                    {{ trans('dashboard.add') }}
                                 </button>
                             </div>
 

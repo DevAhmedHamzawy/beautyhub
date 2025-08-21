@@ -185,7 +185,7 @@
                         @endcan
                         @can('add_flash_sale')
                             <li><a class="slide-item"
-                                    href="{{ route('admin.flash_sales.create') }}">{{ trans('flash_sale.add_new_flash_sale') }}</a>
+                                    href="{{ route('admin.flash_sales.choose_categories') }}">{{ trans('flash_sale.add_new_flash_sale') }}</a>
                             </li>
                         @endcan
                     </ul>
@@ -203,11 +203,6 @@
                         @can('view_coupon')
                             <li><a class="slide-item"
                                     href="{{ route('admin.coupons.index') }}">{{ trans('coupon.show_coupons') }}</a>
-                            </li>
-                        @endcan
-                        @can('add_coupon')
-                            <li><a class="slide-item"
-                                    href="{{ route('admin.coupons.create') }}">{{ trans('coupon.add_new_coupon') }}</a>
                             </li>
                         @endcan
                     </ul>
@@ -341,11 +336,6 @@
                         @can('view_slider')
                             <li><a class="slide-item"
                                     href="{{ route('admin.sliders.index') }}">{{ trans('slider.show_sliders') }}</a>
-                            </li>
-                        @endcan
-                        @can('add_slider')
-                            <li><a class="slide-item"
-                                    href="{{ route('admin.sliders.create') }}">{{ trans('slider.add_new_slider') }}</a>
                             </li>
                         @endcan
                     </ul>

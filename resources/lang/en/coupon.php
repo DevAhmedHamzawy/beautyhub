@@ -24,4 +24,6 @@ return [
     'end_date' => 'End Date',
     'used_count' => 'Used Count',
     'active' => 'Active',
+    'type_percent' => 'Percent',
+    'type_fixed' => 'Fixed',
 ];

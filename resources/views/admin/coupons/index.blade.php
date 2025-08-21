@@ -56,7 +56,6 @@
                                         'restore_coupon'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
                                     @endcanany
-                                    <th class="border-bottom-0">{{ trans('dashboard.created') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -138,10 +137,6 @@
                     orderable: false,
                     searchable: false
                 },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                }
             ],
             "language": {
                 "search": "",

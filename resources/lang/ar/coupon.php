@@ -24,4 +24,6 @@ return [
     'end_date' => 'تاريخ الانتهاء',
     'used_count' => 'عدد المستخدمين',
     'active' => 'مفعل',
+    'type_percent' => 'نسبة',
+    'type_fixed' => 'ثابت',
 ];
