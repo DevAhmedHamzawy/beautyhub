@@ -5,12 +5,11 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\SubCategoryController as ControllersSubCategoryController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // DON'T Put it inside the '/admin' Prefix , Otherwise you'll never get the page due to assign.guard that will redirect you too many times
 Route::get('admin/login', [AdminLoginController::class, 'showLoginForm']);
