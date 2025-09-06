@@ -52,8 +52,6 @@ class FlashSaleController extends Controller
             return redirect()->route('admin.flash_sales.index');
         }
 
-        $request->merge(['active' => 0]);
-
         $flash_sale = FlashSale::create($request->only('name', 'discount', 'start_time', 'end_time', 'active'));
 
 

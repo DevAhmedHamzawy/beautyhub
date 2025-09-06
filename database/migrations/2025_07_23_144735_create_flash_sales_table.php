@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('discount');
             $table->timestamp('start_time');
             $table->timestamp('end_time');
-            $table->boolean('active');
             $table->timestamps();
         });
     }

@@ -234,6 +234,10 @@
  <script src="{{ asset('site/assets/js/swiper10-bundle.min.js') }}"></script>
 
  <script src="{{ asset('site/assets/js/shopus.js') }}"></script>
+
+
+ @yield('footer')
+
  </body>
 
  <!-- Mirrored from quomodothemes.website/html/shopus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Nov 2023 07:47:15 GMT -->
