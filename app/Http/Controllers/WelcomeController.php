@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\FlashSaleHelper;
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\FlashSale;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -22,9 +22,7 @@ class WelcomeController extends Controller
             return Product::orderBy('created_at', 'desc')->take(8)->get();
         });
 
-        $flash_sale = Cache::remember('flash_sales', now()->addMinutes(30), function () {
-            return FlashSale::where('start_time', '<=', now())->where('end_time', '>=', now())->with('products')->first();
-        });
+        $flash_sale = FlashSaleHelper::getActiveFlashSale();
 
         return view('site.welcome.welcome', compact('sliders', 'categories', 'brands', 'new_arrivals', 'flash_sale'));
     }

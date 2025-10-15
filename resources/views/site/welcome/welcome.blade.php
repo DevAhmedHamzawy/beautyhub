@@ -1,5 +1,6 @@
 @extends('site.layouts.app')
 
+@section('title', 'beauty hub')
 
 @section('content')
     @include('site.welcome.partials.slider')

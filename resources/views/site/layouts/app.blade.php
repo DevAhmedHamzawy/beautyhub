@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="assets/images/homepage-one/icon.png" />
 
-    <title>Shopus: Your One-Stop Destination for Fashion and Style</title>
+    <title>@yield('title')</title>
 
     <link rel="stylesheet" href="{{ asset('site/css/swiper10-bundle.min.css') }}" />
 
@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('site/css/aos-3.0.0.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('site/css/style.css') }}" />
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @yield('header')
 </head>

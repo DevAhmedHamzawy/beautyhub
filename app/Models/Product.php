@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\FlashSaleHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
@@ -52,8 +53,47 @@ class Product extends Model
         return $this->hasMany(Stock::class);
     }
 
+    public function defaultStock()
+    {
+        return $this->hasOne(Stock::class)->oldestOfMany();
+    }
+
     public function getImgPathAttribute()
     {
         return url('storage/public/products/'.$this->image);
+    }
+
+    public function getTheDiscountAttribute()
+    {
+        $flash_sale = FlashSaleHelper::getActiveFlashSale();
+
+        if ($flash_sale && $flash_sale->products->contains($this->id)) {
+            return $flash_sale->discount;
+        }
+
+        return null;
+    }
+
+    public function getThePriceAttribute()
+    {
+        $stock = $this->defaultStock;
+
+        if (!$stock) {
+            return null;
+        }
+
+        $flash_sale = FlashSaleHelper::getActiveFlashSale();
+
+        if ($flash_sale && $flash_sale->products->contains($this->id)) {
+            return [
+                'original' => $stock->selling_price,
+                'discounted' => $stock->selling_price - ($stock->selling_price * $flash_sale->discount / 100),
+            ];
+        }
+
+        return [
+            'original' => $stock->selling_price,
+            'discounted' => null,
+        ];
     }
 }

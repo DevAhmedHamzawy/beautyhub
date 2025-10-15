@@ -56,26 +56,6 @@ var swiper2 = new Swiper(".product-top", {
     },
     thumbs: { swiper: swiper },
 });
-let pdSize = document.querySelector(".product-size");
-if (pdSize) {
-    (pdBtn = pdSize.querySelector(".size-section")),
-        (pdOption = pdSize.querySelectorAll(".option")),
-        (pdBtn_Text = pdSize.querySelector(".size-text")),
-        (pdBtn_Text2 = pdSize.querySelector(".toggle-btn2"));
-    pdOption.forEach((option) => {
-        pdBtn.addEventListener("click", () =>
-            pdSize.classList.toggle("active")
-        );
-        option.addEventListener("click", () => {
-            let selectedOption = option.querySelector(".option-text").innerText;
-            let selectedOption2 =
-                option.querySelector(".option-measure").innerText;
-            pdBtn_Text.innerHTML = selectedOption;
-            pdBtn_Text2.innerHTML = selectedOption2;
-            pdSize.classList.remove("active");
-        });
-    });
-}
 var priceslider = function () {
     if ($("#slider-tooltips").length > 0) {
         var tooltipSlider = document.getElementById("slider-tooltips");
