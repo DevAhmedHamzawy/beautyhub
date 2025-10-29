@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminForgotPasswordController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController as ControllersSubCategoryController;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::post('/products/{product}/price', [ProductController::class, 'getPrice'])->name('products.getPrice');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 
 // DON'T Put it inside the '/admin' Prefix , Otherwise you'll never get the page due to assign.guard that will redirect you too many times
 Route::get('admin/login', [AdminLoginController::class, 'showLoginForm']);

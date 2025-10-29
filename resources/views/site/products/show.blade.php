@@ -100,8 +100,62 @@
                     } else {
                         priceBox.innerHTML = `<span class="new-price">${data.original}</span>`;
                     }
+
+                    $('.shop-btn').attr('data-stock', data.stock_id);
+
                 });
         }
+
+        $(document).on('click', '.shop-btn', function(e) {
+            e.preventDefault();
+
+            let product_id = $(this).data('product');
+            let stock_id = $(this).data('stock');
+            let quantity = 1;
+
+            // نجمع كل الـ attributes اللي المستخدم اختارها
+            let selectedAttributes = {};
+
+            $('.product-size').each(function() {
+                let attribute_id = $(this).data('attribute-id');
+                let selectedOption = $(this).find('.option.selected');
+                let value_id = selectedOption.data('value');
+
+                if (attribute_id && value_id) {
+                    selectedAttributes[attribute_id] = value_id;
+                }
+            });
+
+            console.log("Selected Attributes:", selectedAttributes);
+
+            $.ajax({
+                url: '/cart/add',
+                type: 'POST',
+                data: {
+                    product_id: product_id,
+                    stock_id: stock_id,
+                    attributes: selectedAttributes,
+                    quantity: quantity,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function() {
+                    $('.add-to-cart-btn').prop('disabled', true).text('Adding...');
+                },
+                success: function(response) {
+                    toastr.success(response.message || 'Added to cart successfully!');
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        toastr.error('Please select all options.');
+                    } else {
+                        toastr.error('Something went wrong.');
+                    }
+                },
+                complete: function() {
+                    $('.add-to-cart-btn').prop('disabled', false).text('Add to Cart');
+                }
+            });
+        });
     </script>
 
 @endsection

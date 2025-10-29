@@ -56,7 +56,7 @@ class ProductController extends Controller
             })
             ->values();
 
-        return view('site.products.show', ['product' => $product, 'attributes' => $attributes]);
+        return view('site.products.show', ['product' => $product, 'attributes' => $attributes, 'defaultStockId' => $defaultStock->id]);
 
     }
 
@@ -91,6 +91,7 @@ class ProductController extends Controller
         return response()->json([
             'original' => $price,
             'discounted' => $discounted,
+            'stock_id' => $stock ? $stock->id : null
         ]);
     }
 }

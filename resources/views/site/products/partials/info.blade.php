@@ -100,9 +100,8 @@
 
                                   <ul class="size-option">
                                       @foreach ($attribute['values'] as $value)
-                                          <li class="option"
-                                              {{ $attribute['selected'] && $attribute['selected'] == $value['id'] ? 'data-default="true"' : '' }}
-                                              data-attr="{{ $attribute['id'] }}" data-value="{{ $value['id'] }}">
+                                          <li class="option" {!! $attribute['selected'] && $attribute['selected'] == $value['id'] ? 'data-default="true"' : '' !!} data-attr="{{ $attribute['id'] }}"
+                                              data-value="{{ $value['id'] }}">
                                               <span class="option-text">{{ $value['name'] }}</span>
                                           </li>
                                       @endforeach
@@ -129,7 +128,8 @@
                                       </span>
                                   </div>
                               </div>
-                              <a href="#" class="shop-btn">
+                              <a href="#" class="shop-btn" data-product="{{ $product->id }}"
+                                  data-stock="{{ $defaultStockId }}">
                                   <span>
                                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                           xmlns="http://www.w3.org/2000/svg">
