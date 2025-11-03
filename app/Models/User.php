@@ -53,4 +53,14 @@ class User extends Authenticatable
     {
         return $this->image != null ? url('storage/public/users/'.$this->image) :  url('assets/img/user_default.png');
     }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
 }

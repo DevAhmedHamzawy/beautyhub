@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminForgotPasswordController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ProductController;
@@ -35,7 +36,10 @@ Route::prefix('admin')->group(function () {
 Route::get('lang/{lang}', [LocalizationController::class, 'index'])->name('language');
 
 
+
 Auth::routes();
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
