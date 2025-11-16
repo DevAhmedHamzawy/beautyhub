@@ -10,6 +10,7 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController as ControllersSubCategoryController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,13 @@ Route::post('/products/{product}/price', [ProductController::class, 'getPrice'])
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
-Route::post('/save_order', [OrderController::class, 'save'])->name('save_order');
+
+Route::middleware('auth')->group(function () {
+
+    Route::post('/save_order', [OrderController::class, 'save'])->name('save_order');
+    Route::get('/profile', [UserController::class, 'show'])->name('profile');
+
+});
 
 
 
