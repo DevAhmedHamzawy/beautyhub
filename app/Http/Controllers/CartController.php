@@ -15,7 +15,7 @@ class CartController extends Controller
 
         if(auth()->check()) {
 
-            $cartItem = Cart::where('user_id', auth()->user()->id)->whereProductId($request->product_id)->whereStockId($request->stock_id)->get();
+            $cartItem = Cart::where('user_id', auth()->user()->id)->whereProductId($request->product_id)->whereStockId($request->stock_id)->first();
 
             if ($cartItem) {
                 // المنتج موجود بالفعل → نزود الكمية
@@ -56,7 +56,7 @@ class CartController extends Controller
         $locale = app()->getLocale();
 
         if(auth()->check()) {
-            $cart = auth()->user()->cart()->get();
+            $cart = auth()->user()->cart()->get()->keyBy('stock_id');
         }else{
             $cart = collect(session('cart', []));
         }
@@ -75,6 +75,7 @@ class CartController extends Controller
 
         // ندمج بيانات الـ session مع بيانات قاعدة البيانات
         $cartItems = $stocks->map(function ($stock) use ($cart, $locale) {
+
             $item = $cart->get($stock->id);
 
             return [

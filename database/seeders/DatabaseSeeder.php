@@ -9,6 +9,7 @@ use App\Models\CategoryTranslation;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTranslation;
+use App\Models\Status;
 use App\Models\Tax;
 use App\Models\Unit;
 use App\Models\User;
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(1)->create();
+        /*User::factory(1)->create();
 
         $admin = Admin::updateOrCreate(['id' => 1], [
             'name' => 'Admin',
@@ -40,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         $role = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'admin', 'active' => 1]);
 
-        /*Permission::create(['name' => 'add_admin', 'guard_name' => 'admin', 'group_name' => 'Admins']);
+        Permission::create(['name' => 'add_admin', 'guard_name' => 'admin', 'group_name' => 'Admins']);
         $role->givePermissionTo('add_admin');
         Permission::create(['name' => 'edit_admin', 'guard_name' => 'admin', 'group_name' => 'Admins']);
         $role->givePermissionTo('edit_admin');
@@ -206,8 +207,8 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('restore_purchase');
         Permission::create(['name' => 'view_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
         $role->givePermissionTo('view_stock');*/
-        Permission::create(['name' => 'update_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
-        $role->givePermissionTo('update_stock');
+        //Permission::create(['name' => 'update_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
+        //$role->givePermissionTo('update_stock');
         /*Permission::create(['name' => 'add_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
         $role->givePermissionTo('add_flash_sale');
         Permission::create(['name' => 'delete_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
@@ -249,7 +250,7 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
         */
-        $admin->assignRole($role);
+        //$admin->assignRole($role);
 
 
         /*for ($i=0; $i < 11 ; $i++) {
@@ -383,6 +384,24 @@ class DatabaseSeeder extends Seeder
                     });
             });
 */
+
+
+        $statuses = [
+            'تم الطلب' => 'Ordered',
+            'قيد التجهيز' => 'Pending',
+            'تم التجهيز' => 'Prepared',
+            'تم الشحن' => 'Shipped',
+            'تم التوصيل' => 'Delivered',
+        ];
+
+        foreach ($statuses as $ar => $en) {
+
+            $status = Status::create(['active' => true]);
+            $status->translateOrNew('ar')->name = $ar;
+            $status->translateOrNew('en')->name = $en;
+            $status->save();
+
+        }
 
 
     }

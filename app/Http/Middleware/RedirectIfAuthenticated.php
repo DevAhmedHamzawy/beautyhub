@@ -18,6 +18,18 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, $guard = null): Response
     {
         if (Auth::guard($guard)->check()) {
+
+            $redirect = session('redirect_after_auth');
+
+            if ($redirect === 'checkout') {
+                session()->forget('redirect_after_auth');
+                return redirect()->route('checkout');
+            }
+
+            if (session()->has('url.intended')) {
+                return redirect()->intended();
+            }
+
             return $guard == 'admin' ? redirect('admin/dashboard') : redirect('/home');
         }
 

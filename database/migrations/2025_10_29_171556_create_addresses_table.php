@@ -15,17 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('area_id')->constrained()->onDelete('cascade');
-            $table->string('street')->nullable();
-            $table->string('building')->nullable();
-            $table->string('floor')->nullable();
-            $table->string('apartment')->nullable();
-            $table->string('postal_code')->nullable();
-
-
-            $table->string('phone')->nullable();
-            $table->string('additional_phone')->nullable();
-
-
+            $table->text('address');
+            $table->string('street');
+            $table->string('building');
+            $table->string('floor');
+            $table->string('apartment');
+            $table->string('postal_code');
+            $table->string('phone');
+            $table->string('additional_phone');
             $table->boolean('is_default')->default(false);
             $table->timestamps();
         });

@@ -63,6 +63,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'area_id' => ['required', 'exists:areas,id'],
+            'address' => ['required'],
             'street' => ['required', 'string', 'max:255'],
             'building' => ['required', 'string', 'max:255'],
             'floor' => ['required', 'string', 'max:255'],
@@ -96,6 +97,7 @@ class RegisterController extends Controller
 
         $user->addresses()->create([
             'area_id' => $data['area_id'],
+            'address' => $data['address'],
             'street' => $data['street'],
             'building' => $data['building'],
             'floor' => $data['floor'],
@@ -103,6 +105,7 @@ class RegisterController extends Controller
             'postal_code' => $data['postal_code'],
             'phone' => $data['phone'],
             'additional_phone' => $data['additional_phone'],
+            'is_default' => 1
         ]);
 
         return $user;

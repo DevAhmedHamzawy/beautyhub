@@ -43,7 +43,7 @@
                         </div>
                         <div class="login-btn text-center">
                             <button type="submit" class="shop-btn">Log In</button>
-                            <span class="shop-account">Dont't have an account ?<a href="create-account.html">Sign Up
+                            <span class="shop-account">Dont't have an account ?<a href="{{ route('register') }}">Sign Up
                                     Free</a></span>
                         </div>
                     </form>

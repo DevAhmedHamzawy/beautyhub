@@ -152,6 +152,16 @@
 
 
                                             <div class="review-form-name">
+                                                <label for="address" class="form-label">Address*</label>
+                                                <textarea id="address" name="address" class="form-control @error('address') is-invalid @enderror"
+                                                    placeholder="Address"></textarea>
+                                                @error('address')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="review-form-name">
                                                 <label for="street" class="form-label">Street*</label>
                                                 <input type="text" id="street" name="street"
                                                     class="form-control @error('street') is-invalid @enderror"

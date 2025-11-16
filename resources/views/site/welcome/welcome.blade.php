@@ -13,7 +13,7 @@
 
     @include('site.welcome.partials.new_arrivals')
 
-    @if ($flash_sale->count() > 0)
+    @if ($flash_sale && $flash_sale->count() > 0)
         @include('site.welcome.partials.flash_sale')
     @endif
 @endsection

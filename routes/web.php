@@ -5,7 +5,9 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController as ControllersSubCategoryController;
 use App\Http\Controllers\WelcomeController;
@@ -17,6 +19,10 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 Route::post('/products/{product}/price', [ProductController::class, 'getPrice'])->name('products.getPrice');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
+Route::post('/save_order', [OrderController::class, 'save'])->name('save_order');
+
+
 
 // DON'T Put it inside the '/admin' Prefix , Otherwise you'll never get the page due to assign.guard that will redirect you too many times
 Route::get('admin/login', [AdminLoginController::class, 'showLoginForm']);
