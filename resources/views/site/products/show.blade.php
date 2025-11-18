@@ -4,11 +4,11 @@
 
 @section('content')
 
-    @include('site.products.partials.info')
+    @include('site.products.partials.show.info')
 
-    @include('site.products.partials.description')
+    @include('site.products.partials.show.description')
 
-    @include('site.products.partials.best_week_sell')
+    @include('site.products.partials.show.best_week_sell')
 
 @endsection
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SubCategoryController as ControllersSubCategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -21,6 +22,8 @@ Route::post('/products/{product}/price', [ProductController::class, 'getPrice'])
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
+Route::get('search', [SearchController::class, 'index'])->name('search');
+Route::get('/search/filter', [SearchController::class, 'getFilters'])->name('search.filter');
 
 Route::middleware('auth')->group(function () {
 

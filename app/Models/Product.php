@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Filters\BaseFilter;
 use App\Helper\FlashSaleHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
@@ -95,5 +97,10 @@ class Product extends Model
             'original' => $stock->selling_price,
             'discounted' => null,
         ];
+    }
+
+    public static function scopeFilter(Builder $builder, $filters)
+    {
+        return (new BaseFilter(request()))->apply($builder, $filters);
     }
 }
