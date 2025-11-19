@@ -60,6 +60,10 @@ class Product extends Model
         return $this->hasOne(Stock::class)->oldestOfMany();
     }
 
+    public function wishlistedBy() {
+        return $this->belongsToMany(User::class, 'wish_lists');
+    }
+
     public function getImgPathAttribute()
     {
         return url('storage/public/products/'.$this->image);

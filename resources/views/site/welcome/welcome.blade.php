@@ -66,4 +66,65 @@
         }
         CountDown("{{ $flash_sale->end_time ?? '' }}");
     </script>
+
+    <script>
+        document.querySelectorAll(".favourite").forEach(function(element) {
+            element.addEventListener("click", function(e) {
+                e.preventDefault(); // منع الرابط الافتراضي
+
+                const productSlug = this.dataset.slug;
+
+                fetch(`/wishlist/${productSlug}`, {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": '{{ csrf_token() }}',
+                            "Accept": "application/json"
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+
+                        if (data.status === 'guest') {
+                            alert('Please login to add products to your wishlist!');
+                            return;
+                        }
+
+                        const svgPath = this.querySelector('svg path'); // path داخل svg
+                        if (data.status === 'added') {
+                            svgPath.setAttribute('fill', '#FF0000'); // لون أيقونة بعد الإضافة
+                        } else {
+                            svgPath.setAttribute('fill', '#000'); // لون أيقونة بعد الإزالة
+                        }
+                    })
+                    .catch(error => console.log(error));
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll(".compaire").forEach(function(element) {
+            element.addEventListener("click", function(e) {
+                e.preventDefault(); // منع الرابط الافتراضي
+
+                productSlug = this.dataset.slug;
+
+                fetch(`/compare/toggle/${productSlug}`, {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": '{{ csrf_token() }}',
+                            "Accept": "application/json"
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'full') {
+                            alert('compare full');
+                            return;
+                        }
+                    })
+                    .catch(error => console.log(error));
+            });
+        })
+    </script>
+
 @endsection
