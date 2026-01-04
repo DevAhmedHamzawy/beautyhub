@@ -24,12 +24,20 @@ class CompareController extends Controller
             session()->put('compare', $compare);
 
             return response()->json([
+                'type' => 'success',
+                'title' => 'Removed',
+                'message' => 'Compare Removed Successfully',
                 'status' => 'removed',
+                'active' => 0,
+                "compare_count" => count($compare)
             ]);
         }
 
-        if(count($compare) >= 4){
+        if(count($compare) >= 3){
             return response()->json([
+                'type' => 'warning',
+                'title' => 'Full',
+                'message' => 'Cannot add more than 3 products',
                 'status' => 'full',
             ]);
         }
@@ -40,7 +48,12 @@ class CompareController extends Controller
         session()->put('compare', $compare);
 
         return response()->json([
+            'type' => 'success',
+            'title' => 'Added',
+            'message' => 'Compare Added Successfully',
             'status' => 'added',
+            'active' => 1,
+            "compare_count" => count($compare)
         ]);
 
     }

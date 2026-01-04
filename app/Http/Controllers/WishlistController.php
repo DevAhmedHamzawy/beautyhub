@@ -16,7 +16,11 @@ class WishlistController extends Controller
     {
 
         if (!auth()->check()) {
-            return response()->json(['status' => 'guest']);
+            return response()->json([
+                'type' => 'warning',
+                'title' => 'Warning',
+                'status' => 'guest'
+            ]);
         }
 
         $user = auth()->user();
@@ -25,14 +29,24 @@ class WishlistController extends Controller
             $user->wishlist()->detach($product->id);
 
             return response()->json([
-                'status' => 'added',
+                'type' => 'success',
+                'title' => 'Removed',
+                'message' => 'Wishlist Removed Successfully',
+                'status' => 'removed',
+                'active' => 0,
+                "wishlist_count" => $user->wishlist()->count()
             ]);
 
         } else {
             $user->wishlist()->attach($product->id);
 
             return response()->json([
-                'status' => 'removed',
+                'type' => 'success',
+                'title' => 'Added',
+                'message' => 'Wishlist Added Successfully',
+                'status' => 'added',
+                'active' => 1,
+                "wishlist_count" => $user->wishlist()->count()
             ]);
         }
     }

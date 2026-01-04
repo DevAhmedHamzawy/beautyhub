@@ -1,38 +1,20 @@
- <section class="product flash-sale">
+ <section class="product top-selling">
      <div class="container">
          <div class="section-title">
-             <h5>Flash Sale</h5>
-             <div class="countdown-section">
-                 <div class="countdown-items">
-                     <span id="day" class="number" style="color: red">0</span>
-                     <span class="text">Days</span>
-                 </div>
-                 <div class="countdown-items">
-                     <span id="hour" class="number" style="color: skyblue">0</span>
-                     <span class="text">Hours</span>
-                 </div>
-                 <div class="countdown-items">
-                     <span id="minute" class="number" style="color: green">0</span>
-                     <span class="text">Minutes</span>
-                 </div>
-                 <div class="countdown-items">
-                     <span id="second" class="number" style="color: red">0</span>
-                     <span class="text">seconds</span>
-                 </div>
-             </div>
-             <a href="flash-sale.html" class="view">View All</a>
+             <h5>Top Selling Prodcuts</h5>
+             <a href="product-sidebar.html" class="view">View All</a>
          </div>
-         <div class="flash-sale-section">
+         <div class="top-selling-section">
              <div class="row g-5">
 
-                 @foreach ($flash_sale->products as $flash_sale_product)
-                     <div class="col-lg-3 col-md-6">
-                         <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
+                 @foreach ($top_selling as $product)
+                     <div class="col-lg-4 col-md-6">
+                         <div class="product-wrapper" data-aos="fade-right">
                              <div class="product-img">
-                                 <img src="{{ $flash_sale_product->product->img_path }}" alt="product-img" />
+                                 <img src="{{ $product->img_path }}" alt="product-img" />
                                  <div class="product-cart-items">
                                      <a href="javascript:void(0)" class="cart cart-item"
-                                         onclick="openProductModal(`{{ $flash_sale_product->product->slug }}`)">
+                                         onclick="openProductModal(`{{ $product->slug }}`)">
                                          <span>
                                              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -64,8 +46,8 @@
                                              </svg>
                                          </span>
                                      </a>
-                                     <a href="javascript:void(0)" data-slug="{{ $flash_sale_product->product->slug }}"
-                                         data-in-wishlist="{{ auth()->user()?->wishlist->contains($flash_sale_product->product->id) ? '1' : '0' }}"
+                                     <a href="javascript:void(0)" data-slug="{{ $product->slug }}"
+                                         data-in-wishlist="{{ auth()->user()?->wishlist->contains($product->id) ? '1' : '0' }}"
                                          class="favourite cart-item">
 
                                          <span>
@@ -78,8 +60,8 @@
                                              </svg>
                                          </span>
                                      </a>
-                                     <a href="javascript:void(0);" data-slug="{{ $flash_sale_product->product->slug }}"
-                                         data-in-compare="{{ in_array($flash_sale_product->product->id, $compare) ? '1' : '0' }}"
+                                     <a href="javascript:void(0);" data-slug="{{ $product->slug }}"
+                                         data-in-compare="{{ in_array($product->id, $compare) ? '1' : '0' }}"
                                          class="compaire cart-item">
                                          <span>
                                              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -127,25 +109,21 @@
                                  </div>
                                  <div class="product-description">
                                      <a href="product-info.html"
-                                         class="product-details">{{ $flash_sale_product->product->translate($locale)->name }}
+                                         class="product-details">{{ $product->translate($locale)->name }}
                                      </a>
                                      <div class="price">
-                                         @if ($flash_sale_product->product->the_price['discounted'] == null)
-                                             <span
-                                                 class="new-price">{{ $flash_sale_product->product->the_price['original'] }}</span>
+                                         @if ($product->the_price['discounted'] == null)
+                                             <span class="new-price">{{ $product->the_price['original'] }}</span>
                                          @else
-                                             <span
-                                                 class="price-cut">{{ $flash_sale_product->product->the_price['original'] }}</span>
-                                             <span
-                                                 class="new-price">{{ $flash_sale_product->product->the_price['discounted'] }}</span>
+                                             <span class="price-cut">{{ $product->the_price['original'] }}</span>
+                                             <span class="new-price">{{ $product->the_price['discounted'] }}</span>
                                          @endif
                                      </div>
                                  </div>
                              </div>
                              <div class="product-cart-btn">
                                  <a href="javascript:void(0)" class="product-btn"
-                                     onclick="openProductModal(`{{ $flash_sale_product->product->slug }}`)">Add To
-                                     Cart</a>
+                                     onclick="openProductModal(`{{ $product->slug }}`)">Add To Cart</a>
                              </div>
                          </div>
                      </div>
@@ -165,6 +143,7 @@
                          </div>
                      </div>
                  </div>
+
              </div>
          </div>
      </div>

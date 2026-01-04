@@ -30,7 +30,7 @@ class CheckoutController extends Controller
             ->map(function ($item) use($locale) {
                 return [
                     'product_name' => $item->stock->product->name,
-                    'price'        => $item->stock->selling_price,
+                    'price'        => $item->stock->selling_price ?? $item->stock->product->selling_price,
                     'quantity'     => $item->quantity,
                     'attributes'   => $item->stock->attributes->mapWithKeys(function ($attr) use ($locale) {
                                     $attrName = $attr->attribute
@@ -43,7 +43,7 @@ class CheckoutController extends Controller
 
                                     return [$attrName => $valueName];
                                     }),
-                    'subtotal'     => $item->quantity * $item->stock->selling_price,
+                    'subtotal'     => $item->quantity * ($item->stock->selling_price ?? $item->stock->product->selling_price),
                 ];
             });
 

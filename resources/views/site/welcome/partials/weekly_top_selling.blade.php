@@ -1,38 +1,19 @@
- <section class="product flash-sale">
+ <section class="product weekly-sale">
      <div class="container">
          <div class="section-title">
-             <h5>Flash Sale</h5>
-             <div class="countdown-section">
-                 <div class="countdown-items">
-                     <span id="day" class="number" style="color: red">0</span>
-                     <span class="text">Days</span>
-                 </div>
-                 <div class="countdown-items">
-                     <span id="hour" class="number" style="color: skyblue">0</span>
-                     <span class="text">Hours</span>
-                 </div>
-                 <div class="countdown-items">
-                     <span id="minute" class="number" style="color: green">0</span>
-                     <span class="text">Minutes</span>
-                 </div>
-                 <div class="countdown-items">
-                     <span id="second" class="number" style="color: red">0</span>
-                     <span class="text">seconds</span>
-                 </div>
-             </div>
-             <a href="flash-sale.html" class="view">View All</a>
+             <h5>Best Sell in this Week</h5>
+             <a href="product-sidebar.html" class="view">View All</a>
          </div>
-         <div class="flash-sale-section">
+         <div class="weekly-sale-section">
              <div class="row g-5">
-
-                 @foreach ($flash_sale->products as $flash_sale_product)
+                 @foreach ($weekly_top_selling as $product)
                      <div class="col-lg-3 col-md-6">
-                         <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
+                         <div class="product-wrapper" data-aos="fade-up">
                              <div class="product-img">
-                                 <img src="{{ $flash_sale_product->product->img_path }}" alt="product-img" />
+                                 <img src="{{ $product->img_path }}" alt="product-img" />
                                  <div class="product-cart-items">
                                      <a href="javascript:void(0)" class="cart cart-item"
-                                         onclick="openProductModal(`{{ $flash_sale_product->product->slug }}`)">
+                                         onclick="openProductModal(`{{ $product->slug }}`)">
                                          <span>
                                              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -64,8 +45,8 @@
                                              </svg>
                                          </span>
                                      </a>
-                                     <a href="javascript:void(0)" data-slug="{{ $flash_sale_product->product->slug }}"
-                                         data-in-wishlist="{{ auth()->user()?->wishlist->contains($flash_sale_product->product->id) ? '1' : '0' }}"
+                                     <a href="javascript:void(0)" data-slug="{{ $product->slug }}"
+                                         data-in-wishlist="{{ auth()->user()?->wishlist->contains($product->id) ? '1' : '0' }}"
                                          class="favourite cart-item">
 
                                          <span>
@@ -78,8 +59,8 @@
                                              </svg>
                                          </span>
                                      </a>
-                                     <a href="javascript:void(0);" data-slug="{{ $flash_sale_product->product->slug }}"
-                                         data-in-compare="{{ in_array($flash_sale_product->product->id, $compare) ? '1' : '0' }}"
+                                     <a href="javascript:void(0);" data-slug="{{ $product->slug }}"
+                                         data-in-compare="{{ in_array($product->id, $compare) ? '1' : '0' }}"
                                          class="compaire cart-item">
                                          <span>
                                              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -127,41 +108,73 @@
                                  </div>
                                  <div class="product-description">
                                      <a href="product-info.html"
-                                         class="product-details">{{ $flash_sale_product->product->translate($locale)->name }}
+                                         class="product-details">{{ $product->translate($locale)->name }}
                                      </a>
                                      <div class="price">
-                                         @if ($flash_sale_product->product->the_price['discounted'] == null)
-                                             <span
-                                                 class="new-price">{{ $flash_sale_product->product->the_price['original'] }}</span>
+                                         @if ($product->the_price['discounted'] == null)
+                                             <span class="new-price">{{ $product->the_price['original'] }}</span>
                                          @else
-                                             <span
-                                                 class="price-cut">{{ $flash_sale_product->product->the_price['original'] }}</span>
-                                             <span
-                                                 class="new-price">{{ $flash_sale_product->product->the_price['discounted'] }}</span>
+                                             <span class="price-cut">{{ $product->the_price['original'] }}</span>
+                                             <span class="new-price">{{ $product->the_price['discounted'] }}</span>
                                          @endif
                                      </div>
                                  </div>
                              </div>
                              <div class="product-cart-btn">
                                  <a href="javascript:void(0)" class="product-btn"
-                                     onclick="openProductModal(`{{ $flash_sale_product->product->slug }}`)">Add To
-                                     Cart</a>
+                                     onclick="openProductModal(`{{ $product->slug }}`)">Add To Cart</a>
                              </div>
                          </div>
                      </div>
                  @endforeach
 
-                 <!-- Bootstrap Modal -->
-                 <div class="modal fade" id="productModal" tabindex="-1">
-                     <div class="modal-dialog modal-dialog-centered modal-xl">
-                         <div class="modal-content">
-                             <div class="modal-header">
-                                 <h5 class="modal-title">تفاصيل المنتج</h5>
-                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                             </div>
-                             <div class="modal-body" id="modalContent">
-                                 <!-- سيتم إضافة المحتوى هنا من Controller -->
-                             </div>
+
+             </div>
+         </div>
+         <div class="style-section">
+             <div class="row gy-4 gx-5 gy-lg-0">
+                 <div class="col-lg-6">
+                     <div class="product-wrapper wrapper-one" data-aos="fade-right">
+                         <div class="wrapper-info">
+                             <span class="wrapper-subtitle">NEW STYLE</span>
+                             <h4 class="wrapper-details">
+                                 Get 65% Offer
+                                 <span class="wrapper-inner-title">& Make New</span> Fusion.
+                             </h4>
+                             <a href="product-sidebar.html" class="shop-btn">Shop Now
+                                 <span>
+                                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                         <rect x="1.45312" y="0.914062" width="9.25346" height="2.05632"
+                                             transform="rotate(45 1.45312 0.914062)" />
+                                         <rect x="8" y="7.45703" width="9.25346" height="2.05632"
+                                             transform="rotate(135 8 7.45703)" />
+                                     </svg>
+                                 </span>
+                             </a>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-lg-6">
+                     <div class="product-wrapper wrapper-two" data-aos="fade-up">
+                         <div class="wrapper-info">
+                             <span class="wrapper-subtitle">Mega OFFER</span>
+                             <h4 class="wrapper-details">
+                                 Make your New
+                                 <span class="wrapper-inner-title">Styles with Our</span>
+                                 Products
+                             </h4>
+                             <a href="product-sidebar.html" class="shop-btn">Shop Now
+                                 <span>
+                                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                         <rect x="1.45312" y="0.914062" width="9.25346" height="2.05632"
+                                             transform="rotate(45 1.45312 0.914062)" />
+                                         <rect x="8" y="7.45703" width="9.25346" height="2.05632"
+                                             transform="rotate(135 8 7.45703)" />
+                                     </svg>
+                                 </span>
+                             </a>
                          </div>
                      </div>
                  </div>

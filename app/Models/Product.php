@@ -82,23 +82,26 @@ class Product extends Model
 
     public function getThePriceAttribute()
     {
-        $stock = $this->defaultStock;
+       $stock = $this->defaultStock;
 
         if (!$stock) {
             return null;
         }
 
+        $price = $stock->selling_price ?? $stock->product->selling_price;
+
         $flash_sale = FlashSaleHelper::getActiveFlashSale();
 
-        if ($flash_sale && $flash_sale->products->contains($this->id)) {
+        if ($flash_sale && $flash_sale->products->contains('product_id', $this->id)) {
+
             return [
-                'original' => $stock->selling_price,
-                'discounted' => $stock->selling_price - ($stock->selling_price * $flash_sale->discount / 100),
+                'original'   => $price,
+                'discounted' => round($price - ($price * $flash_sale->discount / 100), 2),
             ];
         }
 
         return [
-            'original' => $stock->selling_price,
+            'original'   => $price,
             'discounted' => null,
         ];
     }

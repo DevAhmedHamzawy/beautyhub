@@ -1,33 +1,14 @@
- <section class="product flash-sale">
+ <section class="product best-product">
      <div class="container">
          <div class="section-title">
              <h5>Flash Sale</h5>
-             <div class="countdown-section">
-                 <div class="countdown-items">
-                     <span id="day" class="number" style="color: red">0</span>
-                     <span class="text">Days</span>
-                 </div>
-                 <div class="countdown-items">
-                     <span id="hour" class="number" style="color: skyblue">0</span>
-                     <span class="text">Hours</span>
-                 </div>
-                 <div class="countdown-items">
-                     <span id="minute" class="number" style="color: green">0</span>
-                     <span class="text">Minutes</span>
-                 </div>
-                 <div class="countdown-items">
-                     <span id="second" class="number" style="color: red">0</span>
-                     <span class="text">seconds</span>
-                 </div>
-             </div>
              <a href="flash-sale.html" class="view">View All</a>
          </div>
-         <div class="flash-sale-section">
-             <div class="row g-5">
-
+         <div class="best-product-section">
+             <div class="row g-4">
                  @foreach ($flash_sale->products as $flash_sale_product)
-                     <div class="col-lg-3 col-md-6">
-                         <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
+                     <div class="col-xl-2 col-md-4">
+                         <div class="product-wrapper" data-aos="fade-up">
                              <div class="product-img">
                                  <img src="{{ $flash_sale_product->product->img_path }}" alt="product-img" />
                                  <div class="product-cart-items">
@@ -126,8 +107,8 @@
                                      </span>
                                  </div>
                                  <div class="product-description">
-                                     <a href="product-info.html"
-                                         class="product-details">{{ $flash_sale_product->product->translate($locale)->name }}
+                                     <a href="product-info.html" class="product-details">
+                                         {{ $flash_sale_product->product->translate($locale)->name }}
                                      </a>
                                      <div class="price">
                                          @if ($flash_sale_product->product->the_price['discounted'] == null)
@@ -141,11 +122,6 @@
                                          @endif
                                      </div>
                                  </div>
-                             </div>
-                             <div class="product-cart-btn">
-                                 <a href="javascript:void(0)" class="product-btn"
-                                     onclick="openProductModal(`{{ $flash_sale_product->product->slug }}`)">Add To
-                                     Cart</a>
                              </div>
                          </div>
                      </div>
@@ -165,6 +141,7 @@
                          </div>
                      </div>
                  </div>
+
              </div>
          </div>
      </div>

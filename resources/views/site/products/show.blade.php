@@ -92,21 +92,57 @@
                 .then(res => res.json())
                 .then(data => {
                     let priceBox = document.querySelector("#product-price");
+                    let availability = document.getElementById("availability-text");
+                    let addToCartBtns = document.querySelectorAll('.add_to_cart');
+
+                    let discountBox = document.getElementById("product-discount-box");
+                    let discountValue = document.getElementById("product-discount-value");
+
                     if (!priceBox) return;
 
                     if (data.discounted) {
                         priceBox.innerHTML =
                             `<span class="price-cut">${data.original}</span> <span class="new-price">${data.discounted}</span>`;
+
+                        // ===== اظهار الخصم =====
+                        if (discountBox && discountValue) {
+                            discountValue.innerText = `- ${data.discount}%`;
+                            discountBox.classList.remove("d-none");
+                        }
                     } else {
                         priceBox.innerHTML = `<span class="new-price">${data.original}</span>`;
+
+                        // ===== اخفاء الخصم =====
+                        if (discountBox) {
+                            discountBox.classList.add("d-none");
+                        }
                     }
 
-                    $('.shop-btn').attr('data-stock', data.stock_id);
+                    if (data.out_of_stock) {
+                        availability.innerText = "Out of stock";
+                        availability.classList.add("text-danger");
+
+                        addToCartBtns.forEach(btn => {
+                            btn.classList.add("disabled");
+                            btn.setAttribute("disabled", true);
+                            btn.removeAttribute("data-stock");
+                        });
+
+                    } else {
+                        availability.innerText = "In Stock";
+                        availability.classList.remove("text-danger");
+
+                        addToCartBtns.forEach(btn => {
+                            btn.classList.remove("disabled");
+                            btn.removeAttribute("disabled");
+                            btn.setAttribute("data-stock", data.stock_id);
+                        });
+                    }
 
                 });
         }
 
-        $(document).on('click', '.shop-btn', function(e) {
+        $(document).on('click', '.add_to_cart', function(e) {
             e.preventDefault();
 
             let product_id = $(this).data('product');

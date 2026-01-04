@@ -21,6 +21,10 @@
 
     <link rel="stylesheet" href="{{ asset('site/css/style.css') }}" />
 
+    <link href="{{ URL::asset('assets/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @yield('header')

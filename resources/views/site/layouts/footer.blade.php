@@ -235,6 +235,14 @@
 
  <script src="{{ asset('site/assets/js/shopus.js') }}"></script>
 
+ <script src="{{ URL::asset('assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
+
+ @if (!request()->routeIs('products.show'))
+     @include('site.layouts.inline-scripts')
+ @endif
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 
  @yield('footer')
 

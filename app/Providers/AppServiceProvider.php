@@ -29,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view)
         {
             $view->with('locale', \Session::get('locale') );
+            $view->with('compare', session()->get('compare', []));
+            $view->with('wishlists', auth()->guard('web')->user()?->wishlist()->get());
+            $view->with('cart', auth()->guard('web')->user()?->cart()->get() ?? session()->get('cart', []));
         });
 
         Event::listen(

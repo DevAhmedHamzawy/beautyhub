@@ -31,7 +31,7 @@ class OrderController extends Controller
         }
 
         // Calculate totals
-        $subtotal = $cartItems->sum(fn($item) => $item->quantity * $item->stock->selling_price);
+        $subtotal = $cartItems->sum(fn($item) => $item->quantity * ($item->stock->selling_price ?? $item->stock->product->selling_price));
         $shipping_cost = $user->defaultAddress->area->shipping_cost;
         $total = $subtotal + $shipping_cost;
 
@@ -71,7 +71,7 @@ class OrderController extends Controller
                     'order_id' => $order->id,
                     'stock_id' => $item->stock_id,
                     'qty'      => $item->quantity,
-                    'price'    => $item->stock->selling_price,
+                    'price'    => $item->stock->selling_price ?? $item->stock->product->selling_price,
                     'vat_rate' => 0,
                     'vat'      => 0,
                     'discount' => 0,

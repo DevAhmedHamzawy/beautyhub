@@ -85,8 +85,8 @@ class CartController extends Controller
                 'product_tax'  => $stock->product->tax->value,
                 'stock_id'     => $stock->id,
                 'quantity'     => $item['quantity'],
-                'unit_price'   => $stock->selling_price, // أو $stock->price لو موجود
-                'total'        => $stock->selling_price * $item['quantity'],
+                'unit_price'   => $stock->selling_price ?? $stock->product->selling_price, // أو $stock->price لو موجود
+                'total'        => $stock->selling_price ?? $stock->product->selling_price * $item['quantity'],
                 'attributes'   =>  $stock->attributes->mapWithKeys(function ($attr) use ($locale) {
                                     $attrName = $attr->attribute
                                         ? ($attr->attribute->translate($locale)->name ?? $attr->attribute->name)

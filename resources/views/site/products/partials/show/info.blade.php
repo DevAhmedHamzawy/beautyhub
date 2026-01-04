@@ -12,11 +12,10 @@
                   <div class="col-md-6">
                       <div class="product-info-img" data-aos="fade-right">
                           <div class="swiper product-top">
-                              @if ($product->the_discount)
-                                  <div class="product-discount-content">
-                                      <h4>- {{ $product->the_discount }}</h4>
-                                  </div>
-                              @endif
+                              <div id="product-discount-box" class="product-discount-content d-none"
+                                  style="z-index: 9999999999">
+                                  <h4 id="product-discount-value"></h4>
+                              </div>
                               <div class="swiper-wrapper">
                                   <div class="swiper-slide slider-top-img">
                                       <img src="{{ $product->img_path }}" alt="img" />
@@ -75,7 +74,7 @@
                           <hr />
                           <div class="product-availability">
                               <span>Availabillity : </span>
-                              <span class="inner-text">132 Products Available</span>
+                              <span class="inner-text" id="availability-text">132 Products Available</span>
                           </div>
                           @foreach ($attributes as $attribute)
                               @php
@@ -128,7 +127,7 @@
                                       </span>
                                   </div>
                               </div>
-                              <a href="#" class="shop-btn" data-product="{{ $product->id }}"
+                              <a href="#" class="shop-btn add_to_cart" data-product="{{ $product->id }}"
                                   data-stock="{{ $defaultStockId }}">
                                   <span>
                                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -138,7 +137,7 @@
                                               fill="white" />
                                       </svg>
                                   </span>
-                                  <span>Add to Cart</span>
+                                  <span class="add_to_cart">Add to Cart</span>
                               </a>
                           </div>
                           <hr />

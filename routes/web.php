@@ -30,6 +30,8 @@ Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.ind
 Route::post('wishlist/{product}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 Route::get('compare', [CompareController::class, 'index'])->name('compare.index');
 Route::post('compare/toggle/{product}', [CompareController::class, 'toggle'])->name('compare.toggle');
+Route::get('/product/details/{product}', [ProductController::class, 'getDetails'])->name('products.getDetails');
+
 
 Route::middleware('auth')->group(function () {
 
