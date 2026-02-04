@@ -1,11 +1,21 @@
 <div class="col-lg-6">
     <div class="checkout-wrapper">
-        <a href="#" class="shop-btn">Enter Coupon Code</a>
+        <a href="#" class="shop-btn show-coupon">Enter Coupon Code</a>
+
+        <div class="coupon-box" style="display: none; margin-top: 10px;">
+            <input type="text" class="form-control" name="couponCode" id="couponCode" style="font-size: 20px;"
+                placeholder="Enter your coupon code">
+            <button type="button" class="shop-btn" id="applyCoupon">Apply</button>
+            <p class="coupon-message" style="color: red; margin-top: 5px;"></p>
+        </div>
         <div class="account-section billing-section">
             <h5 class="wrapper-heading">Order Summary</h5>
             <div class="order-summery">
                 <div class="subtotal product-total">
                     <h5 class="wrapper-heading">PRODUCT</h5>
+                    <h5 class="wrapper-heading">PRICE</h5>
+                    <h5 class="wrapper-heading">TAX</h5>
+                    <h5 class="wrapper-heading">QUANTITY</h5>
                     <h5 class="wrapper-heading">TOTAL</h5>
                 </div>
                 <hr />
@@ -24,6 +34,9 @@
                                 </div>
                                 <div class="price">
                                     <h5 class="wrapper-heading">${{ $item['price'] }}</h5>
+                                </div>
+                                <div class="tax">
+                                    <h5 class="wrapper-heading">${{ $item['tax'] }}</h5>
                                 </div>
                                 <div class="quantity">
                                     <h5 class="wrapper-heading">x{{ $item['quantity'] }}</h5>
@@ -48,7 +61,7 @@
                                 <p class="paragraph">SHIPPING</p>
                             </div>
                             <div class="price">
-                                <h5 class="wrapper-heading">+{{ $shipping_cost }}</h5>
+                                <h5 class="wrapper-heading shipping_cost">+{{ $shipping_cost }}</h5>
                             </div>
                         </li>
                     </ul>
@@ -56,7 +69,7 @@
                 <hr />
                 <div class="subtotal total">
                     <h5 class="wrapper-heading">TOTAL</h5>
-                    <h5 class="wrapper-heading price">{{ $subtotal + $shipping_cost }}</h5>
+                    <h5 class="wrapper-heading price total_price">{{ $subtotal + $shipping_cost }}</h5>
                 </div>
                 <div class="subtotal payment-type">
                     {{-- <div class="checkbox-item">

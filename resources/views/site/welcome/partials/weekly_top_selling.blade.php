@@ -128,6 +128,21 @@
                      </div>
                  @endforeach
 
+                 <!-- Bootstrap Modal -->
+                 <div class="modal fade" id="productModal" tabindex="-1">
+                     <div class="modal-dialog modal-dialog-centered modal-xl">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h5 class="modal-title">تفاصيل المنتج</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                             </div>
+                             <div class="modal-body" id="modalContent">
+                                 <!-- سيتم إضافة المحتوى هنا من Controller -->
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
 
              </div>
          </div>

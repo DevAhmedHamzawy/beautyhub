@@ -142,12 +142,27 @@
                 });
         }
 
+        $(document).on('click', '.quantity .plus', function() {
+            let $number = $(this).siblings('.number');
+            let current = parseInt($number.text());
+            $number.text(current + 1);
+        });
+
+        // نقص الكمية
+        $(document).on('click', '.quantity .minus', function() {
+            let $number = $(this).siblings('.number');
+            let current = parseInt($number.text());
+            if (current > 1) { // عشان ما ينقصش عن 1
+                $number.text(current - 1);
+            }
+        });
+
         $(document).on('click', '.add_to_cart', function(e) {
             e.preventDefault();
 
             let product_id = $(this).data('product');
             let stock_id = $(this).data('stock');
-            let quantity = 1;
+            let quantity = parseInt($(this).closest('.product').find('.quantity .number').text());
 
             // نجمع كل الـ attributes اللي المستخدم اختارها
             let selectedAttributes = {};
@@ -179,6 +194,35 @@
                 },
                 success: function(response) {
                     toastr.success(response.message || 'Added to cart successfully!');
+
+                    $('#cart-count').text(response.cart.count);
+
+                    let itemsHtml = '';
+
+                    response.cart.items.forEach(item => {
+                        itemsHtml += `
+                            <div class="wrapper">
+                                <div class="wrapper-item">
+                                    <div class="wrapper-img">
+                                        <img src="${item.image}" alt="${item.name}" />
+                                    </div>
+                                    <div class="wrapper-content">
+                                        <h5 class="wrapper-title">${item.name}</h5>
+                                        <div class="price">
+                                            <p class="new-price">$${item.price}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="close-btn remove-item" data-id="${item.id}" data-stock="${item.stock.id}">
+                                    ✕
+                                </span>
+                            </div>
+                        `;
+                    });
+
+                    $('#cart-items').html(itemsHtml);
+
+                    $('.wrapper-subtotal .wrapper-title-sub').text(`$${response.cart.subtotal}`);
                 },
                 error: function(xhr) {
                     if (xhr.status === 422) {
@@ -189,6 +233,44 @@
                 },
                 complete: function() {
                     $('.add-to-cart-btn').prop('disabled', false).text('Add to Cart');
+                }
+            });
+        });
+
+        $(document).on('click', '.remove-item', function() {
+
+            let btn = $(this);
+            let stockId = btn.data('stock');
+            let wrapper = btn.closest('.wrapper');
+
+            $.ajax({
+                url: '/cart/remove',
+                type: 'DELETE',
+                data: {
+                    stock_id: stockId,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(res) {
+
+                    // شيل العنصر من القائمة
+                    wrapper.slideUp(300, function() {
+                        $(this).remove();
+
+                        // لو الكارت فاضي
+                        if ($('#cart-items .wrapper').length === 0) {
+                            $('#cart-items').html(
+                                '<p class="text-center">Your cart is empty</p>'
+                            );
+                        }
+                    });
+
+                    $('.wrapper-subtotal .wrapper-title-sub').text(`$${res.subtotal}`);
+
+                    // تحديث العداد
+                    document.getElementById('cart-count').textContent = res.count;
+
+                    toastr.success('Removed from cart successfully!');
+
                 }
             });
         });

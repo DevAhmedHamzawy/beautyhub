@@ -116,110 +116,51 @@
                                          d="M22.509 25.2393C22.5193 26.4842 21.5393 27.4971 20.3064 27.5155C19.048 27.5342 18.0272 26.525 18.0277 25.2622C18.0279 24.0208 19.0214 23.0161 20.2572 23.0074C21.4877 22.9984 22.4988 24.0006 22.509 25.2393Z"
                                          fill="#6E6D79" />
                                      <circle cx="26.9523" cy="8" r="8" fill="#AE1C9A" />
-                                     <text x="25.9322" y="11.5" text-anchor="middle" font-size="10" fill="white"
-                                         font-weight="bold">
-                                         {{ count($cart) }}
+                                     <text id="cart-count" x="25.9322" y="11.5" text-anchor="middle" font-size="10"
+                                         fill="white" font-weight="bold">
+                                         {{ $cart->sum('quantity') }}
                                      </text>
                                  </svg>
                              </span>
                              <span class="cart-text"> Cart </span>
                          </a>
                          <div class="cart-submenu">
-                             <div class="cart-wrapper-item">
-                                 <div class="wrapper">
-                                     <div class="wrapper-item">
-                                         <div class="wrapper-img">
-                                             <img src="assets/images/homepage-one/product-img/product-img-1.webp"
-                                                 alt="img" />
-                                         </div>
-                                         <div class="wrapper-content">
-                                             <h5 class="wrapper-title">Classic Design Skart</h5>
-                                             <div class="price">
-                                                 <p class="new-price">$20.00</p>
+                             <div class="cart-wrapper-item" id="cart-items">
+                                 @forelse ($cart as $item)
+                                     <div class="wrapper">
+                                         <div class="wrapper-item">
+                                             <div class="wrapper-img">
+                                                 <img src="{{ $item->product->img_path }}"
+                                                     alt="{{ $item->product->name }}">
+                                             </div>
+                                             <div class="wrapper-content">
+                                                 <h5 class="wrapper-title">{{ $item->product->name }}</h5>
+                                                 <div class="price">
+                                                     <p class="new-price">
+                                                         ${{ number_format($item->product->the_price['discounted'] ?? $item->product->the_price['original'], 2) }}
+                                                     </p>
+                                                 </div>
                                              </div>
                                          </div>
+                                         <span class="close-btn remove-item" data-stock="{{ $item->stock->id }}">
+                                             ✕
+                                         </span>
                                      </div>
-                                     <span class="close-btn">
-                                         <svg viewBox="0 0 10 10" fill="none" class="fill-current"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                             <path
-                                                 d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z">
-                                             </path>
-                                         </svg>
-                                     </span>
-                                 </div>
-                                 <div class="wrapper">
-                                     <div class="wrapper-item">
-                                         <div class="wrapper-img">
-                                             <img src="assets/images/homepage-one/product-img/product-img-2.webp"
-                                                 alt="img" />
-                                         </div>
-                                         <div class="wrapper-content">
-                                             <h5 class="wrapper-title">Black Suit</h5>
-                                             <div class="price">
-                                                 <p class="new-price">$10.00</p>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <span class="close-btn">
-                                         <svg viewBox="0 0 10 10" fill="none" class="fill-current"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                             <path
-                                                 d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z">
-                                             </path>
-                                         </svg>
-                                     </span>
-                                 </div>
-                                 <div class="wrapper">
-                                     <div class="wrapper-item">
-                                         <div class="wrapper-img">
-                                             <img src="assets/images/homepage-one/product-img/product-img-3.webp"
-                                                 alt="img" />
-                                         </div>
-                                         <div class="wrapper-content">
-                                             <h5 class="wrapper-title">Blue Party Dress</h5>
-                                             <div class="price">
-                                                 <p class="new-price">$15.00</p>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <span class="close-btn">
-                                         <svg viewBox="0 0 10 10" fill="none" class="fill-current"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                             <path
-                                                 d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z">
-                                             </path>
-                                         </svg>
-                                     </span>
-                                 </div>
-                                 <div class="wrapper">
-                                     <div class="wrapper-item">
-                                         <div class="wrapper-img">
-                                             <img src="assets/images/homepage-one/product-img/product-img-4.webp"
-                                                 alt="img" />
-                                         </div>
-                                         <div class="wrapper-content">
-                                             <h5 class="wrapper-title">Classic Red Dress</h5>
-                                             <div class="price">
-                                                 <p class="new-price">$18.00</p>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <span class="close-btn">
-                                         <svg viewBox="0 0 10 10" fill="none" class="fill-current"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                             <path
-                                                 d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z">
-                                             </path>
-                                         </svg>
-                                     </span>
-                                 </div>
+                                 @empty
+                                     <p class="text-center">Your cart is empty</p>
+                                 @endforelse
                              </div>
                              <div class="cart-wrapper-section">
                                  <div class="wrapper-line"></div>
                                  <div class="wrapper-subtotal">
                                      <h5 class="wrapper-title">Subtotal</h5>
-                                     <h5 class="wrapper-title">$60</h5>
+                                     <h5 class="wrapper-title-sub">
+
+                                         @php
+                                             $subtotal = $cart->sum(fn($item) => $item->unit_price * $item->quantity);
+                                         @endphp
+                                         ${{ number_format($subtotal, 2) }}
+                                     </h5>
                                  </div>
                                  <div class="cart-btn">
                                      <a href="cart.html" class="shop-btn view-btn">View Cart</a>

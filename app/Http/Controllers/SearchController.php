@@ -28,7 +28,7 @@ class SearchController extends Controller
 
     public function getFilters()
     {
-        $products = Product::filter($this->filters())->latest()->get();
+        $products = Product::filter($this->filters())->whereRelation('stocks', 'qty', '>', 0)->latest()->get();
 
         $html = view('site.products.partials.search.result', compact('products'))->render();
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderAttribute;
 use App\Models\OrderItem;
@@ -31,9 +32,51 @@ class OrderController extends Controller
         }
 
         // Calculate totals
-        $subtotal = $cartItems->sum(fn($item) => $item->quantity * ($item->stock->selling_price ?? $item->stock->product->selling_price));
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->quantity * $item->stock->product->final_price;
+        });
+        $vat = $cartItems->sum(function ($item) {
+            return $item->quantity * $item->stock->product->tax_amount;
+        });
+
+        $user->defaultAddress()->update($request->except('first_name', 'last_name', 'email', 'payment_method', '_token', 'couponCode'));
+
         $shipping_cost = $user->defaultAddress->area->shipping_cost;
-        $total = $subtotal + $shipping_cost;
+
+        $discount = 0;
+
+        // Apply coupon if provided
+        if ($request->filled('couponCode')) {
+            $coupon = Coupon::where('code', $request->couponCode)
+                ->where('active', 1)
+                ->where(function($q) {
+                    $q->whereNull('start_date')->orWhere('start_date', '<=', now());
+                })
+                ->where(function($q) {
+                    $q->whereNull('end_date')->orWhere('end_date', '>=', now());
+                })
+                ->first();
+
+            if ($coupon) {
+                // Check min_order
+                if (!$coupon->min_order || $subtotal >= $coupon->min_order) {
+                    // Check max usage
+                    if (!$coupon->max_usage || $coupon->used_count < $coupon->max_usage) {
+                        // Calculate discount
+                        if ($coupon->type === 'fixed') {
+                            $discount = $coupon->value;
+                        } else { // percent
+                            $discount = ($coupon->value / 100) * ($subtotal + $vat);
+                        }
+
+                        // Update used count
+                        $coupon->increment('used_count');
+                    }
+                }
+            }
+        }
+
+        $total = max(0, ($subtotal + $vat - $discount) + $shipping_cost);
 
         DB::beginTransaction();
 
@@ -49,16 +92,16 @@ class OrderController extends Controller
                 'email'          => $request->email,
                 'order_number'   => 'ORD-' . time(),
                 'status_id'      => $pendingStatus->id,
-                'vat_rate'       => 0,
-                'vat'            => 0,
+                'vat_rate'       => $cartItems->sum(fn($item) => $item->product->tax->rate ?? 0),
+                'vat'            => $vat,
                 'sub_total'       => $subtotal,
                 'shipping_cost'  => $shipping_cost,
-                'discount'       => 0,
+                'discount'       => $discount,
+                'discount_type'  => $coupon ? $coupon->type : null,
                 'total'          => $total,
                 'payment_method' => $request->payment_method,
             ]);
 
-            $user->defaultAddress()->update($request->except('first_name', 'last_name', 'email', 'payment_method', '_token'));
 
             $order->address()->create([
                 'address_id' => $user->defaultAddress->id
@@ -71,11 +114,11 @@ class OrderController extends Controller
                     'order_id' => $order->id,
                     'stock_id' => $item->stock_id,
                     'qty'      => $item->quantity,
-                    'price'    => $item->stock->selling_price ?? $item->stock->product->selling_price,
-                    'vat_rate' => 0,
-                    'vat'      => 0,
-                    'discount' => 0,
-                    'sub_total' => $item->quantity * $item->stock->selling_price,
+                    'price'    => $item->product->the_price['discounted'] ?? $item->product->the_price['original'],
+                    'vat_rate' => $item->product->tax->rate ?? 0,
+                    'vat'      => $item->product->tax_amount * $item->quantity,
+                    'discount' => $item->product->the_discount ?? 0,
+                    'sub_total' => $item->quantity * $item->product->price_with_tax,
                 ]);
 
                 // Snapshot attributes

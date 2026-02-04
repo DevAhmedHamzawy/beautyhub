@@ -45,6 +45,8 @@
 
 @section('footer')
     <script>
+        let subtotal = {{ $subtotal }};
+
         $(document).ready(function() {
             let item = {
                 value: '{!! $theCountry->id !!}',
@@ -112,31 +114,82 @@
                             if (city.id == {!! $theCity->id !!}) {
                                 @if ($locale == 'ar')
                                     $('#area_id').append(
-                                        `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.name}</option>`
+                                        `<option value="${city.id}" data-shipping="${city.shipping_cost}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.name}</option>`
                                     );
                                 @else
                                     $('#area_id').append(
-                                        `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.english}</option>`
+                                        `<option value="${city.id}" data-shipping="${city.shipping_cost}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.english}</option>`
                                     );
                                 @endif
 
                             } else {
                                 @if ($locale == 'ar')
                                     $('#area_id').append(
-                                        `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.name}</option>`
+                                        `<option value="${city.id}" data-shipping="${city.shipping_cost}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.name}</option>`
                                     );
                                 @else
                                     $('#area_id').append(
-                                        `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.english}</option>`
+                                        `<option value="${city.id}" data-shipping="${city.shipping_cost}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.english}</option>`
                                     );
                                 @endif
                             }
-
                         });
                     }
 
                 }
             })
         }
+
+        $(document).on('change', '#area_id', function() {
+
+            let shipping = parseFloat(
+                $(this).find(':selected').data('shipping')
+            ) || 0;
+
+            $('.shipping_cost').text('+' + shipping.toFixed(2));
+
+            let total = subtotal + shipping;
+            $('.total_price').text(total.toFixed(2));
+
+        });
+
+        $('.show-coupon').on('click', function(e) {
+            e.preventDefault();
+            $('.coupon-box').slideToggle();
+        });
+
+        $('#applyCoupon').on('click', function() {
+            var code = $('#couponCode').val();
+            var totalElem = $('.total_price');
+
+            if (!code) {
+                $('.coupon-message').text('Please enter a coupon code.');
+                return;
+            }
+
+            $.ajax({
+                url: "{{ route('applyCoupon') }}", // هننشئ الراوت دي
+                method: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    code: code
+                },
+                success: function(res) {
+
+                    let shipping = parseFloat($('#area_id').find(':selected').data('shipping')) || 0;
+
+                    if (res.status === 'success') {
+                        $('.coupon-message').css('color', 'green').text(res.message);
+                        totalElem.text((parseFloat(res.new_total) + shipping).toFixed(2));
+                    } else {
+                        $('.coupon-message').css('color', 'red').text(res.message);
+                        totalElem.text((parseFloat(res.original_total) + shipping).toFixed(2));
+                    }
+                },
+                error: function() {
+                    $('.coupon-message').text('Something went wrong. Please try again.');
+                }
+            });
+        });
     </script>
 @endsection

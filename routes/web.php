@@ -31,6 +31,9 @@ Route::post('wishlist/{product}', [WishlistController::class, 'toggle'])->name('
 Route::get('compare', [CompareController::class, 'index'])->name('compare.index');
 Route::post('compare/toggle/{product}', [CompareController::class, 'toggle'])->name('compare.toggle');
 Route::get('/product/details/{product}', [ProductController::class, 'getDetails'])->name('products.getDetails');
+Route::post('/cart/update', [CartController::class, 'update']);
+Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('applyCoupon');
 
 
 Route::middleware('auth')->group(function () {

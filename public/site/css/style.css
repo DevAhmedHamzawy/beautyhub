@@ -4825,6 +4825,11 @@ table .ticket-row:hover {
     .close-btn {
     cursor: pointer;
 }
+.close-btn {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
 .user-dashboard .nav-content .modal-wrapper.active {
     display: flex;
 }

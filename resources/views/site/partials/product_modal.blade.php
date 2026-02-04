@@ -61,7 +61,7 @@
                   <hr />
                   <div class="product-availability">
                       <span>Availabillity : </span>
-                      <span class="inner-text" id="availability-text">132 Products Available</span>
+                      <span class="inner-text" id="availability-text"></span>
                   </div>
 
 

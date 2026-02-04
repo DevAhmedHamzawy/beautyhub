@@ -73,7 +73,7 @@ class Product extends Model
     {
         $flash_sale = FlashSaleHelper::getActiveFlashSale();
 
-        if ($flash_sale && $flash_sale->products->contains($this->id)) {
+        if ($flash_sale && $flash_sale->products->contains('product_id', $this->id)) {
             return $flash_sale->discount;
         }
 
@@ -104,6 +104,35 @@ class Product extends Model
             'original'   => $price,
             'discounted' => null,
         ];
+    }
+
+    public function getFinalPriceAttribute()
+    {
+        $priceData = $this->the_price;
+
+        return $priceData['discounted'] ?? $priceData['original'];
+    }
+
+    public function getTaxAmountAttribute()
+    {
+        if (!$this->tax) {
+            return 0;
+        }
+
+        // السعر بعد الخصم
+        $price = $this->final_price;
+
+        // نسبة مئوية
+        if ($this->tax->rate) {
+            return round($price * ($this->tax->rate / 100), 2);
+        }
+
+        return 0;
+    }
+
+    public function getPriceWithTaxAttribute()
+    {
+        return round($this->final_price + $this->tax_amount, 2);
     }
 
     public static function scopeFilter(Builder $builder, $filters)
