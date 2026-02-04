@@ -66,7 +66,14 @@
                             </td>
 
                             <td>{{ $item->qty }}</td>
-                            <td>{{ number_format($item->price, 2) }}</td>
+                            <td>{{ number_format($item->price, 2) }}
+                                @if ($item->discount > 0)
+                                    <br>
+                                    <small class="discount">
+                                        Discount: -{{ number_format($item->discount, 2) }}
+                                    </small>
+                                @endif
+                            </td>
                             <td>{{ number_format($item->vat, 2) }}</td>
                             <td class="bold">
                                 {{ number_format($item->sub_total, 2) }}
