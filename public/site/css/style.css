@@ -1086,7 +1086,8 @@ button {
     pointer-events: auto;
     transition: all 0.5s ease-in-out;
     border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 6px -1px,
+    box-shadow:
+        rgba(0, 0, 0, 0.1) 0 4px 6px -1px,
         rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
     padding: 2rem;
 }
@@ -1876,7 +1877,9 @@ button {
 }
 .footer {
     background: url(../assets/images/homepage-one/footer-bg.webp);
-    font-family: league spartan, sans-serif;
+    font-family:
+        league spartan,
+        sans-serif;
 }
 .footer-padding {
     padding-bottom: 12rem !important;
@@ -3927,7 +3930,9 @@ table .ticket-row:hover {
     }
 }
 .about-details {
-    font-family: league spartan, sans-serif;
+    font-family:
+        league spartan,
+        sans-serif;
     font-size: 2.6rem;
     line-height: 3rem;
     margin-bottom: 1rem;
@@ -4028,7 +4033,9 @@ table .ticket-row:hover {
         display: inline;
     }
     .about-feedback .swiper-slide .testimonial-info .testimonial-name {
-        font-family: league spartan, sans-serif;
+        font-family:
+            league spartan,
+            sans-serif;
         font-size: 1.8rem;
     }
 }
@@ -4078,7 +4085,9 @@ table .ticket-row:hover {
     gap: 1rem;
 }
 .testimonial-wrapper .testimonial-info .testimonial-name {
-    font-family: league spartan, sans-serif;
+    font-family:
+        league spartan,
+        sans-serif;
     font-size: 2.2rem;
 }
 .testimonial-wrapper .testimonial-info .title-inner {
@@ -4872,4 +4881,112 @@ table .ticket-row:hover {
 
 .swal-btn-later:hover {
     background-color: #777;
+}
+
+.order-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 15px;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+/* Header */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.order-header h2 {
+    margin: 0;
+}
+
+.order-date {
+    font-size: 14px;
+    color: #777;
+}
+
+.order-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.status-pending {
+    background: #f39c12;
+}
+.status-completed {
+    background: #27ae60;
+}
+.status-cancelled {
+    background: #e74c3c;
+}
+
+/* Cards */
+.order-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Table */
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table thead {
+    background: #f8f8f8;
+}
+
+.order-table th,
+.order-table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.product-name {
+    font-weight: 600;
+}
+
+.attributes span {
+    display: block;
+    font-size: 13px;
+    color: #555;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/* Summary */
+.order-summary {
+    background: #fafafa;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    margin-left: auto;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.summary-row.total {
+    font-size: 18px;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.summary-row.discount {
+    color: #e74c3c;
 }

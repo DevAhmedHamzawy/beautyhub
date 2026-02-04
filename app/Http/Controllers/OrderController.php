@@ -147,4 +147,37 @@ class OrderController extends Controller
         }
 
         }
+
+        public function show(Order $order)
+        {
+            // تأمين: المستخدم يشوف أوردره بس
+            abort_if($order->user_id !== auth()->id(), 403);
+
+            $order->load([
+                'items.stock.product.tax',
+                'items.attributes',
+                'address.address.area.parent.parent', // area -> governorate -> country
+                'status'
+            ]);
+
+            return view('site.orders.show', compact('order'));
+        }
+
+        public function invoice(Order $order)
+        {
+            // تأمين: المستخدم يشوف أوردره بس
+            abort_if($order->user_id !== auth()->id(), 403);
+
+            $order->load([
+                'items.stock.product.tax',
+                'items.attributes',
+                'address.address.area.parent.parent', // area -> governorate -> country
+                'status'
+            ]);
+
+            return view('site.orders.invoice', compact('order'));
+        }
+
 }
+
+

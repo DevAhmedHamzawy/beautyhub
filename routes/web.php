@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/save_order', [OrderController::class, 'save'])->name('save_order');
     Route::get('/profile', [UserController::class, 'show'])->name('profile');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('/orders/{order}/invoice', [OrderController::class, 'invoice'])->name('orders.invoice');
 
 });
 
