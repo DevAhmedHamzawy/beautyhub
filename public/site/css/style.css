@@ -4990,3 +4990,21 @@ table .ticket-row:hover {
 .summary-row.discount {
     color: #e74c3c;
 }
+
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #2c3e50;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.btn-icon:hover {
+    background: #000;
+}

@@ -17,6 +17,12 @@
             <span class="order-status status-{{ strtolower($order->status->name) }}">
                 {{ $order->status->name }}
             </span>
+
+            <div class="order-header-actions">
+                <a href="{{ route('orders.invoice', $order->id) }}" class="btn-icon" target="_blank" title="View Invoice">
+                    🧾
+                </a>
+            </div>
         </div>
 
         {{-- Address --}}

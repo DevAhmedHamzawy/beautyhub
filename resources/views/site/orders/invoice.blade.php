@@ -12,6 +12,11 @@
     <div class="invoice-container">
 
         {{-- Header --}}
+        <div class="invoice-actions">
+            <button onclick="window.print()" class="btn-print" title="Print Invoice">
+                🖨️ Print
+            </button>
+        </div>
         <div class="invoice-header">
             <div class="logo">
                 <h1>YOUR STORE</h1>
