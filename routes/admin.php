@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FlashSaleController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubAttributeController;
@@ -151,6 +152,10 @@ Route::resource('pages', PageController::class);
 Route::get('pages/{page}/active', [PageController::class, 'active'])->name('pages.active');
 Route::get('trash_pages', [PageController::class, 'trash'])->name('pages.trash');
 Route::get('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');
+
+// Order
+Route::resource('orders', OrderController::class);
+Route::get('orders/{order}/invoice', [OrderController::class, 'invoice'])->name('orders.invoice');
 
 Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

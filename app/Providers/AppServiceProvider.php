@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('wishlists', auth()->guard('web')->user()?->wishlist()->get());
 
 
-            if (auth()->check()) {
+            if (auth('web')->check()) {
 
                 $cart = auth()->guard('web')->user()
                     ->cart()

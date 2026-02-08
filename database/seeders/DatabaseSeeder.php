@@ -247,6 +247,8 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('active_page');
         Permission::create(['name' => 'restore_page', 'guard_name' => 'admin', 'group_name' => 'Page']);
         $role->givePermissionTo('restore_page');
+        Permission::create(['name' => 'view_order', 'guard_name' => 'admin', 'group_name' => 'orders']);
+        $role->givePermissionTo('view_order');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
         */
@@ -386,7 +388,7 @@ class DatabaseSeeder extends Seeder
 */
 
 
-        $statuses = [
+        /*$statuses = [
             'تم الطلب' => 'Ordered',
             'قيد التجهيز' => 'Pending',
             'تم التجهيز' => 'Prepared',
@@ -401,8 +403,6 @@ class DatabaseSeeder extends Seeder
             $status->translateOrNew('en')->name = $en;
             $status->save();
 
-        }
-
-
+        }*/
     }
 }

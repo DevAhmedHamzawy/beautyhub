@@ -9,7 +9,7 @@
 @endsection
 
 @section('title')
-    {{ trans('stock.stock') }}
+    {{ trans('order.orders') }}
 @endsection
 
 @section('content')
@@ -23,61 +23,57 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">{{ trans('dashboard.dashboard') }}</a>
                     </li>
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('admin.stocks.index') }}">{{ trans('stock.stock') }}</a>
-                    </li>
-                    <li class="breadcrumb-item active">{{ $stocks->first()->product->name }}</li>
+                    <li class="breadcrumb-item active">{{ trans('order.orders') }}</li>
                 </ol>
             </nav>
 
 
             <div class="card mg-b-20">
-                <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mg-b-0">{{ trans('stock.stock') }}</h4>
-                    </div>
-                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">{{ trans('stock.product_name') }}</th>
-                                    <th class="border-bottom-0">{{ trans('stock.attributes') }}</th>
-                                    <th class="border-bottom-0">{{ trans('stock.qty') }}</th>
-                                    <th class="border-bottom-0">{{ trans('stock.sort') }}</th>
-                                    <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
+                                    <th class="border-bottom-0">{{ trans('order.order_number') }}</th>
+                                    <th class="border-bottom-0">{{ trans('order.email') }}</th>
+                                    <th class="border-bottom-0">{{ trans('order.subtotal') }}</th>
+                                    <th class="border-bottom-0">{{ trans('order.shipping_cost') }}</th>
+                                    <th class="border-bottom-0">{{ trans('order.discount') }}</th>
+                                    <th class="border-bottom-0">{{ trans('order.discount_type') }}</th>
+                                    <th class="border-bottom-0">{{ trans('order.total') }}</th>
+                                    @canany(['view_order'])
+                                        <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
+                                    @endcanany
                                     <th class="border-bottom-0">{{ trans('dashboard.created') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($stocks as $stock)
+                                @foreach ($orders as $order)
                                     <tr>
-                                        <td>{{ $stock->product->name }}</td>
-                                        <td>
-                                            @foreach ($stock->attributes as $attribute)
-                                                <strong>{{ $attribute->attribute->name }} :</strong>
-                                                {{ $attribute->attributeValue->name }}
-                                            @endforeach
-                                        </td>
-                                        <td>{{ $stock->qty }}</td>
-                                        <td>{{ $stock->qty > 0 ? trans('stock.add') : trans('stock.withdraw') }}</td>
-                                        <td>
-                                            @if ($stock->stockable instanceof \App\Models\Purchase)
-                                                <a target="_blank"
-                                                    href="{{ route('admin.purchases.show', $stock->stockable_id) }}"
-                                                    class="btn btn-primary" data-placement="top" data-toggle="tooltip"
-                                                    data-original-title="{{ trans('dashboard.show') }}"><i
-                                                        class="fas fa-eye"></i></a>
-                                            @elseif($stock->stockable instanceof \App\Models\Order)
-                                                <a target="_blank" href="{{-- route('admin.orders.show', $stock->stockable_id) --}}" class="btn btn-primary"
-                                                    data-placement="top" data-toggle="tooltip"
-                                                    data-original-title="{{ trans('dashboard.show') }}"><i
-                                                        class="fas fa-eye"></i></a>
-                                            @endif
+                                        <td>{{ $order->order_number }}</td>
+                                        <td>{{ $order->email }}</td>
+                                        <td>{{ $order->sub_total }}</td>
+                                        <td>{{ $order->shipping_cost }}</td>
+                                        <td>{{ $order->discount }}</td>
+                                        <td>{{ $order->discount_type }}</td>
+                                        <td>{{ $order->total }}</td>
+                                        @canany(['view_order'])
+                                            <td class="row pl-3">
+                                                @can('view_order')
+                                                    <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-warning"
+                                                        data-placement="top" data-toggle="tooltip"
+                                                        data-original-title="{{ trans('dashboard.show') }}"><i
+                                                            class="fas fa-eye"></i></a>
+                                                    &nbsp;&nbsp;
+                                                    <a href="{{ route('admin.orders.invoice', $order->id) }}"
+                                                        class="btn btn-warning" data-placement="top" data-toggle="tooltip"
+                                                        data-original-title="{{ trans('dashboard.invoice') }}"><i
+                                                            class="fas fa-file"></i></a>
+                                                @endcan
 
-                                        </td>
-                                        <td>{{ $stock->created_at->diffForHumans() }}</td>
+                                            </td>
+                                        @endcanany
+                                        <td>{{ $order->created_at->diffForHumans() }}</td>
                                     </tr>
                                 @endforeach
 

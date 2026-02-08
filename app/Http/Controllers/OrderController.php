@@ -8,6 +8,8 @@ use App\Models\Order;
 use App\Models\OrderAttribute;
 use App\Models\OrderItem;
 use App\Models\Status;
+use App\Models\Stock;
+use App\Models\StockAttribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -97,7 +99,7 @@ class OrderController extends Controller
                 'sub_total'       => $subtotal,
                 'shipping_cost'  => $shipping_cost,
                 'discount'       => $discount,
-                'discount_type'  => $coupon ? $coupon->type : null,
+                'discount_type'  => isset($coupon) ? $coupon->type : null,
                 'total'          => $total,
                 'payment_method' => $request->payment_method,
             ]);
@@ -121,12 +123,26 @@ class OrderController extends Controller
                     'sub_total' => $item->quantity * $item->product->price_with_tax,
                 ]);
 
+                $orderStock = Stock::create([
+                    'product_id'     => $item->stock->product_id,
+                    'stockable_type' => Order::class,
+                    'stockable_id'   => $order->id,
+                    'qty'            => -1 * $item->quantity, // 👈 السالب
+                    'selling_price' => null, // أو السعر وقت البيع لو حابب
+                ]);
+
                 // Snapshot attributes
                 foreach ($item->stock->attributes as $attr) {
                     OrderAttribute::create([
                         'order_item_id' => $orderItem->id,
                         'name'          => $attr->attribute->name,
                         'value'         => $attr->attributeValue->name,
+                    ]);
+
+                    StockAttribute::create([
+                        'stock_id'           => $orderStock->id,
+                        'attribute_id'       => $attr->attribute_id,
+                        'attribute_value_id' => $attr->attribute_value_id,
                     ]);
                 }
             }
