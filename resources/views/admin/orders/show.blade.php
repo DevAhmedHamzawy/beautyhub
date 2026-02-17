@@ -75,7 +75,7 @@
 
                                             <td class="tx-12">
                                                 @foreach ($item->attributes as $attr)
-                                                    {{ $attr->name }}: {{ $attr->value }}<br>
+                                                    {{ $attr->translated_name }}: {{ $attr->translated_value }}<br>
                                                 @endforeach
                                             </td>
 

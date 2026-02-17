@@ -106,6 +106,24 @@
                 </li>
             @endcanany
 
+            <li class="side-item side-item-category">{{ trans('order.orders') }}</li>
+
+            @canany(['view_order'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fas fa-shopping-basket"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('order.orders') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_order')
+                            <li><a class="slide-item" href="{{ route('admin.orders.index') }}">{{ trans('order.orders') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
+
 
             <li class="side-item side-item-category">{{ trans('dashboard.products_stocks') }}</li>
 
