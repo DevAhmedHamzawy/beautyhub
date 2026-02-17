@@ -70,8 +70,9 @@
                                                     data-original-title="{{ trans('dashboard.show') }}"><i
                                                         class="fas fa-eye"></i></a>
                                             @elseif($stock->stockable instanceof \App\Models\Order)
-                                                <a target="_blank" href="{{-- route('admin.orders.show', $stock->stockable_id) --}}" class="btn btn-primary"
-                                                    data-placement="top" data-toggle="tooltip"
+                                                <a target="_blank"
+                                                    href="{{ route('admin.orders.show', $stock->stockable_id) }}"
+                                                    class="btn btn-primary" data-placement="top" data-toggle="tooltip"
                                                     data-original-title="{{ trans('dashboard.show') }}"><i
                                                         class="fas fa-eye"></i></a>
                                             @endif

@@ -1,3 +1,30 @@
+body.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+body.rtl .invoice-header,
+body.rtl .invoice-address,
+body.rtl .invoice-summary {
+    flex-direction: row-reverse;
+}
+
+body.rtl .invoice-table th,
+body.rtl .invoice-table td {
+    text-align: right;
+}
+
+body.rtl .invoice-actions {
+    text-align: left; /* زر الطباعة يظل على اليسار */
+}
+
+body.rtl .logo h1,
+body.rtl .logo p,
+body.rtl .invoice-info p,
+body.rtl .invoice-address p {
+    text-align: right;
+}
+
 body {
     background: #f4f6f8;
     font-family: Arial, Helvetica, sans-serif;

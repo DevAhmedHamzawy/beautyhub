@@ -20,6 +20,7 @@ return [
     'close' => 'Close',
     'add' => 'Add',
     'show' => 'Show',
+    'invoice' => 'Invoice',
     'admin' => 'Administration',
     'sign_out' => 'Sign Out',
     'english' => 'English',

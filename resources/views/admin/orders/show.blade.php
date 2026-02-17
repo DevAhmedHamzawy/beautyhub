@@ -20,7 +20,7 @@
                 <div class="card card-invoice">
                     <div class="card-body">
                         <div class="invoice-header">
-                            <h1 class="invoice-title">Invoice</h1>
+                            <h1 class="invoice-title">{{ trans('order.invoice') }}</h1>
                             <div class="billed-from">
                                 <h6>BootstrapDash, Inc.</h6>
                                 <p>201 Something St., Something Town, YT 242, Country 6546<br>
@@ -30,28 +30,29 @@
                         </div><!-- invoice-header -->
                         <div class="row mg-t-20">
                             <div class="col-md">
-                                <label class="tx-gray-600">Billed To</label>
+                                <label class="tx-gray-600">{{ trans('order.billed_to') }}</label>
                                 <div class="billed-to">
                                     <h6>{{ $order->first_name }} {{ $order->last_name }}</h6>
                                     <p>
                                         @foreach ($order->address->formatted_address as $line)
                                             {{ $line }}<br>
                                         @endforeach
-                                        Email: {{ $order->email }}
+                                        {{ trans('order.email') }}: {{ $order->email }}
                                     </p>
                                 </div>
                             </div>
                             <div class="col-md">
-                                <label class="tx-gray-600">Invoice Information</label>
-                                <p class="invoice-info-row"><span>Invoice No</span> <span>{{ $order->order_number }}</span>
+                                <label class="tx-gray-600">{{ trans('order.invoice_information') }}</label>
+                                <p class="invoice-info-row"><span>{{ trans('order.invoice_no') }}</span>
+                                    <span>{{ $order->order_number }}</span>
                                 </p>
                                 <p class="invoice-info-row">
-                                    <span>Status</span>
+                                    <span>{{ trans('order.status') }}</span>
                                     <span>{{ $order->status->name }}</span>
                                 </p>
 
                                 <p class="invoice-info-row">
-                                    <span>Issue Date</span>
+                                    <span>{{ trans('order.issue_date') }}</span>
                                     <span>{{ $order->created_at->format('d M Y') }}</span>
                                 </p>
                             </div>
@@ -60,11 +61,11 @@
                             <table class="table table-invoice border text-md-nowrap mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="wd-20p">Type</th>
-                                        <th class="wd-40p">Description</th>
-                                        <th class="tx-center">QNTY</th>
-                                        <th class="tx-right">Unit Price</th>
-                                        <th class="tx-right">Amount</th>
+                                        <th class="wd-20p">{{ trans('order.type') }}</th>
+                                        <th class="wd-40p">{{ trans('order.description') }}</th>
+                                        <th class="tx-center">{{ trans('order.qty') }}</th>
+                                        <th class="tx-right">{{ trans('order.unit_price') }}</th>
+                                        <th class="tx-right">{{ trans('order.amount') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -105,24 +106,25 @@
                                                     explicabo.</p>
                                             </div><!-- invoice-notes -->
                                         </td>
-                                        <td class="tx-right">Sub-Total</td>
+                                        <td class="tx-right">{{ trans('order.sub_total') }}</td>
                                         <td class="tx-right" colspan="2">{{ number_format($order->sub_total, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tx-right">VAT</td>
+                                        <td class="tx-right">{{ trans('order.vat') }}</td>
                                         <td class="tx-right" colspan="2">{{ number_format($order->vat, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tx-right">Shipping Cost</td>
+                                        <td class="tx-right">{{ trans('order.shipping_cost') }}</td>
                                         <td class="tx-right" colspan="2">{{ number_format($order->shipping_cost, 2) }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tx-right">Discount</td>
+                                        <td class="tx-right">{{ trans('order.discount') }}</td>
                                         <td class="tx-right" colspan="2">-{{ number_format($order->discount, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tx-right tx-uppercase tx-bold tx-inverse">Total Due</td>
+                                        <td class="tx-right tx-uppercase tx-bold tx-inverse">{{ trans('order.total_due') }}
+                                        </td>
                                         <td class="tx-right" colspan="4">
                                             <h4 class="tx-primary tx-bold">{{ number_format($order->total, 2) }}</h4>
                                         </td>

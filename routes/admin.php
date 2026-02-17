@@ -154,8 +154,10 @@ Route::get('trash_pages', [PageController::class, 'trash'])->name('pages.trash')
 Route::get('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');
 
 // Order
-Route::resource('orders', OrderController::class);
+Route::resource('orders', OrderController::class)->except('update');
 Route::get('orders/{order}/invoice', [OrderController::class, 'invoice'])->name('orders.invoice');
+
+Route::put('orders/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
 Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

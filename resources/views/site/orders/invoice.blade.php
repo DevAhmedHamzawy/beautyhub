@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('site/css/invoice.css') }}">
 </head>
 
-<body>
+<body class="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 
     <div class="invoice-container">
 
