@@ -24,16 +24,16 @@
             </div>
 
             <div class="invoice-info">
-                <p><strong>Invoice #:</strong> {{ $order->order_number }}</p>
-                <p><strong>Date:</strong> {{ $order->created_at->format('d M Y') }}</p>
-                <p><strong>Status:</strong> {{ $order->status->name }}</p>
+                <p><strong>{{ trans('order.invoice') }} #:</strong> {{ $order->order_number }}</p>
+                <p><strong>{{ trans('order.issue_date') }}:</strong> {{ $order->created_at->format('d M Y') }}</p>
+                <p><strong>{{ trans('order.status') }}:</strong> {{ $order->status->name }}</p>
             </div>
         </div>
 
         {{-- Billing --}}
         <div class="invoice-address">
             <div>
-                <h4>Billed To</h4>
+                <h4>{{ trans('order.billed_to') }}</h4>
                 <p>
                     {{ $order->first_name }} {{ $order->last_name }} <br>
                     {{ $order->email }}
@@ -41,7 +41,7 @@
             </div>
 
             <div>
-                <h4>Shipping Address</h4>
+                <h4>{{ trans('order.shipping_address') }}</h4>
                 <p>
                     @if ($order->address && $order->address->formatted_address)
                         <p>
@@ -58,12 +58,12 @@
         <table class="invoice-table">
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Attributes</th>
-                    <th>Qty</th>
-                    <th>Unit Price</th>
-                    <th>VAT</th>
-                    <th>Total</th>
+                    <th>{{ trans('order.type') }}</th>
+                    <th>{{ trans('order.description') }}</th>
+                    <th>{{ trans('order.qty') }}</th>
+                    <th>{{ trans('order.unit_price') }}</th>
+                    <th>{{ trans('order.vat') }}</th>
+                    <th>{{ trans('order.total') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,7 +73,7 @@
 
                         <td class="muted">
                             @foreach ($item->attributes as $attr)
-                                {{ $attr->name }}: {{ $attr->value }}<br>
+                                {{ $attr->translated_name }}: {{ $attr->translated_value }}<br>
                             @endforeach
                         </td>
 
@@ -99,27 +99,27 @@
         <div class="invoice-summary">
             <table>
                 <tr>
-                    <td>Subtotal</td>
+                    <td>{{ trans('order.subtotal') }}</td>
                     <td>{{ number_format($order->sub_total, 2) }}</td>
                 </tr>
                 <tr>
-                    <td>VAT</td>
+                    <td>{{ trans('order.vat') }}</td>
                     <td>{{ number_format($order->vat, 2) }}</td>
                 </tr>
                 <tr>
-                    <td>Shipping</td>
+                    <td>{{ trans('order.shipping_cost') }}</td>
                     <td>{{ number_format($order->shipping_cost, 2) }}</td>
                 </tr>
 
                 @if ($order->discount > 0)
                     <tr class="discount">
-                        <td>Discount</td>
+                        <td>{{ trans('order.discount') }}</td>
                         <td>-{{ number_format($order->discount, 2) }}</td>
                     </tr>
                 @endif
 
                 <tr class="total">
-                    <td>Total</td>
+                    <td>{{ trans('order.total') }}</td>
                     <td>{{ number_format($order->total, 2) }}</td>
                 </tr>
             </table>

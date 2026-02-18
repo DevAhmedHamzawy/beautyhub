@@ -16,6 +16,7 @@ return [
     'invoice_information'=> 'Invoice Information',
     'issue_date'         => 'Issue Date',
     'status'             => 'Status',
+    'shipping_address'   => 'Shipping Address',
 
     // Company / Billing
     'billed_to'          => 'Billed To',

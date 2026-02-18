@@ -17,6 +17,7 @@ return [
     'invoice_information'=> 'معلومات الفاتورة',
     'issue_date'        => 'تاريخ الإصدار',
     'status'            => 'الحالة',
+    'shipping_address'  => 'عنوان الشحن',
 
     // Company / Billing
     'billed_to'         => 'تم الفوترة إلى',
