@@ -247,6 +247,18 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('active_page');
         Permission::create(['name' => 'restore_page', 'guard_name' => 'admin', 'group_name' => 'Page']);
         $role->givePermissionTo('restore_page');
+        Permission::create(['name' => 'add_faq', 'guard_name' => 'admin', 'group_name' => 'Faq']);
+        $role->givePermissionTo('add_faq');
+        Permission::create(['name' => 'edit_faq', 'guard_name' => 'admin', 'group_name' => 'Faq']);
+        $role->givePermissionTo('edit_faq');
+        Permission::create(['name' => 'delete_faq', 'guard_name' => 'admin', 'group_name' => 'Faq']);
+        $role->givePermissionTo('delete_faq');
+        Permission::create(['name' => 'view_faq', 'guard_name' => 'admin', 'group_name' => 'Faq']);
+        $role->givePermissionTo('view_faq');
+        Permission::create(['name' => 'restore_faq', 'guard_name' => 'admin', 'group_name' => 'Faq']);
+        $role->givePermissionTo('restore_faq');
+        Permission::create(['name' => 'reply_contact', 'guard_name' => 'admin', 'group_name' => 'Contact']);
+        $role->givePermissionTo('reply_contact');
         Permission::create(['name' => 'view_order', 'guard_name' => 'admin', 'group_name' => 'orders']);
         $role->givePermissionTo('view_order');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);

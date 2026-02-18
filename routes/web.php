@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CompareController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -34,7 +36,8 @@ Route::get('/product/details/{product}', [ProductController::class, 'getDetails'
 Route::post('/cart/update', [CartController::class, 'update']);
 Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('applyCoupon');
-
+Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
+Route::post('/contact/save', [ContactController::class, 'save'])->name('contact.save');
 
 Route::middleware('auth')->group(function () {
 

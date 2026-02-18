@@ -360,6 +360,39 @@
                 </li>
             @endcanany
 
+
+            @canany(['reply_contact'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fe fe-mail"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('contact.contacts') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('reply_contact')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.contacts.index') }}">{{ trans('contact.contacts') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
+            @canany(['view_faq', 'add_faq', 'edit_faq', 'delete_faq', 'active_faq', 'restore_faq', 'add_home_faq'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fe fe-help-circle"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('faq.faqs') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_faq')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.faqs.index') }}">{{ trans('faq.show_faqs') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
             @canany(['view_page', 'add_page', 'edit_page', 'delete_page', 'active_page', 'restore_page',
                 'add_home_page'])
                 <li class="slide">

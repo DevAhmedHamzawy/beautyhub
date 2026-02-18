@@ -15,7 +15,9 @@ use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FlashSaleController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PageController;
@@ -152,6 +154,15 @@ Route::resource('pages', PageController::class);
 Route::get('pages/{page}/active', [PageController::class, 'active'])->name('pages.active');
 Route::get('trash_pages', [PageController::class, 'trash'])->name('pages.trash');
 Route::get('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');
+
+// Pages
+Route::resource('faqs', FaqController::class);
+Route::get('trash_faqs', [FaqController::class, 'trash'])->name('faqs.trash');
+Route::get('faqs/{id}/restore', [FaqController::class, 'restore'])->name('faqs.restore');
+
+Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
+Route::post('/contacts/reply', [ContactController::class, 'reply'])->name('contacts.reply');
+
 
 // Order
 Route::resource('orders', OrderController::class)->except('update');

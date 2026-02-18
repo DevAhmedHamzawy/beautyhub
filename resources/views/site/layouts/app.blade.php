@@ -11,15 +11,21 @@
 
     <title>@yield('title')</title>
 
+    @if ($locale == 'ar')
+        <link rel="stylesheet" href="{{ asset('site/css/bootstrap.rtl.min.css') }}" />
+
+        <link rel="stylesheet" href="{{ asset('site/css/style_ar.css') }}" />
+    @else
+        <link rel="stylesheet" href="{{ asset('site/css/bootstrap-5.3.2.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('site/css/style.css') }}" />
+    @endif
     <link rel="stylesheet" href="{{ asset('site/css/swiper10-bundle.min.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('site/css/bootstrap-5.3.2.min.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('site/css/nouislider.min.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('site/css/aos-3.0.0.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('site/css/style.css') }}" />
 
     <link href="{{ URL::asset('assets/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet">
 
