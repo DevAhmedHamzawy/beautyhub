@@ -38,6 +38,7 @@ Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.rem
 Route::post('/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('applyCoupon');
 Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
 Route::post('/contact/save', [ContactController::class, 'save'])->name('contact.save');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::middleware('auth')->group(function () {
 

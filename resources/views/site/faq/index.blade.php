@@ -68,6 +68,9 @@
                                  <form action="{{ route('contact.save') }}" method="post">
                                      @csrf
 
+                                     <input type="hidden" name="sort" value="faq">
+
+
                                      <div class="review-form-name">
                                          <label for="fname" class="form-label">Name*</label>
                                          <input type="text" name="name" id="fname" class="form-control"
