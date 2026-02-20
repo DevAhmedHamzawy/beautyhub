@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\GovernorateController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
@@ -163,6 +164,8 @@ Route::get('faqs/{id}/restore', [FaqController::class, 'restore'])->name('faqs.r
 Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
 Route::post('/contacts/reply', [ContactController::class, 'reply'])->name('contacts.reply');
 
+Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
+Route::patch('settings/update', [SettingsController::class, 'update'])->name('settings.update');
 
 // Order
 Route::resource('orders', OrderController::class)->except('update');

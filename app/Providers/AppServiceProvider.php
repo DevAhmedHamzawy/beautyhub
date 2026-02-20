@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('locale', \Session::get('locale') );
             $view->with('compare', session()->get('compare', []));
             $view->with('wishlists', auth()->guard('web')->user()?->wishlist()->get());
-
+            $view->with('settings', \App\Models\Settings::first());
 
             if (auth('web')->check()) {
 
