@@ -8,7 +8,7 @@
 
     @include('site.products.partials.show.description')
 
-    @include('site.products.partials.show.best_week_sell')
+    @include('site.products.partials.show.related_products')
 
 @endsection
 

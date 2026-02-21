@@ -11,54 +11,12 @@
                          type="button" role="tab" aria-controls="nav-review" aria-selected="false">
                          Reviews
                      </button>
-                     <button class="nav-link" id="nav-seller-tab" data-bs-toggle="tab" data-bs-target="#nav-seller"
-                         type="button" role="tab" aria-controls="nav-seller" aria-selected="false">
-                         Seller Info
-                     </button>
                  </div>
              </nav>
              <div class="tab-content tab-item" id="nav-tabContent">
                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
                      tabindex="0" data-aos="fade-up">
-                     <div class="product-intro-section">
-                         <h5 class="intro-heading">Introduction</h5>
-                         <p class="product-details">
-                             Lorem Ipsum is simply dummy text of the printing and
-                             typesetting industry. Lorem Ipsum has been the industry's
-                             standard dummy text ever since the 1500s, when an unknown
-                             printer took a galley of type and scrambled it to make a type
-                             specimen book. It has survived not only five centuries but
-                             also the on leap into electronic typesetting, remaining
-                             essentially unchanged. It wasn’t popularised in the 1960s with
-                             the release of Letraset sheets containing Lorem Ipsum
-                             passages, andei more recently with desktop publishing software
-                             like Aldus PageMaker including versions of Lorem Ipsum to make
-                             a type specimen book.
-                         </p>
-                     </div>
-                     <div class="product-feature">
-                         <h5 class="intro-heading">Features :</h5>
-                         <ul>
-                             <li>
-                                 <p>slim body with metal cover</p>
-                             </li>
-                             <li>
-                                 <p>
-                                     latest Intel Core i5-1135G7 processor (4 cores / 8
-                                     threads)
-                                 </p>
-                             </li>
-                             <li>
-                                 <p>8GB DDR4 RAM and fast 512GB PCIe SSD</p>
-                             </li>
-                             <li>
-                                 <p>
-                                     NVIDIA GeForce MX350 2GB GDDR5 graphics card backlit
-                                     keyboard, touchpad with gesture support
-                                 </p>
-                             </li>
-                         </ul>
-                     </div>
+                     {{ $product->description }}
                  </div>
                  <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab"
                      tabindex="0">
@@ -92,12 +50,12 @@
                                      <div class="wrapper-aurthor">
                                          <div class="wrapper-info">
                                              <div class="aurthor-img">
-                                                 <img src="{{ $rating->user->image ?? asset('assets/images/default-user.png') }}"
+                                                 <img src="{{ $rating->user->img_path }}" width="50"
                                                      alt="author-img" />
                                              </div>
                                              <div class="author-details">
                                                  <h5>{{ $rating->user->name }}</h5>
-                                                 <p>{{ $rating->user->country ?? 'Unknown' }}</p>
+                                                 <p>{{ $rating->user->defaultAddress?->full_location ?? 'Unknown' }}</p>
                                              </div>
                                          </div>
 

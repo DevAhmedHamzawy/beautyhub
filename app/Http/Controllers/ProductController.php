@@ -59,7 +59,10 @@ class ProductController extends Controller
             })
             ->values();
 
-        return view('site.products.show', ['product' => $product, 'attributes' => $attributes, 'defaultStockId' => $defaultStock->id]);
+        $relatedProducts = Product::where('category_id', $product->category_id)->where('id', '!=', $product->id)
+        ->whereRelation('stocks', 'qty', '>', 0)->limit(4)->get();
+
+        return view('site.products.show', ['product' => $product, 'attributes' => $attributes, 'defaultStockId' => $defaultStock->id, 'relatedProducts' => $relatedProducts]);
 
     }
 
