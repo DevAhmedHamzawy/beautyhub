@@ -135,6 +135,16 @@ class Product extends Model
         return round($this->final_price + $this->tax_amount, 2);
     }
 
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->ratings()->avg('rating') ?? 0;
+    }
+
     public static function scopeFilter(Builder $builder, $filters)
     {
         return (new BaseFilter(request()))->apply($builder, $filters);

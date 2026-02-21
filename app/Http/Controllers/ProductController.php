@@ -17,7 +17,10 @@ class ProductController extends Controller
         'stocks.attributes.attribute', // العلاقة للـ attribute
         'stocks.attributes.attributeValue', // العلاقة لقيمة الـ attribute لو موجودة
         // تأكد إن Attribute لديها علاقة children أو attributeValues
-        'stocks.attributes.attribute.children');
+        'stocks.attributes.attribute.children',
+        'ratings.user')
+        ->loadCount('ratings')
+        ->loadAvg('ratings', 'rating');
 
         // 1) حدد defaultStock: لو عندك علاقة defaultStock استخدمها، وإلا خليك على أول stock كـ fallback
         $defaultStock = $product->defaultStock ?? $product->stocks->first();
