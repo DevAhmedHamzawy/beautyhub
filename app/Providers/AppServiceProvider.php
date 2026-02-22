@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Listeners\SyncSessionCartWithDatabase;
+use App\Models\Category;
+use App\Models\Page;
 use App\Models\Product;
 use App\Models\Stock;
 use Closure;
@@ -35,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('compare', session()->get('compare', []));
             $view->with('wishlists', auth()->guard('web')->user()?->wishlist()->get());
             $view->with('settings', \App\Models\Settings::first());
+            $view->with('categories', Category::whereActive(1)->whereNull('parent_id')->get());
+            $view->with('pages', Page::all());
 
             if (auth('web')->check()) {
 

@@ -5030,3 +5030,12 @@ table .ticket-row:hover {
 .rating-input label:hover ~ label {
     color: #ffa800;
 }
+
+.header-top .dropdown-toggle {
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+}
+.header-top img {
+    border-radius: 3px;
+}
