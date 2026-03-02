@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminPanelController;
@@ -161,11 +162,17 @@ Route::resource('faqs', FaqController::class);
 Route::get('trash_faqs', [FaqController::class, 'trash'])->name('faqs.trash');
 Route::get('faqs/{id}/restore', [FaqController::class, 'restore'])->name('faqs.restore');
 
+// Contact
 Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
 Route::post('/contacts/reply', [ContactController::class, 'reply'])->name('contacts.reply');
 
+// Settings
 Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
 Route::patch('settings/update', [SettingsController::class, 'update'])->name('settings.update');
+
+// About
+Route::get('about', [AboutController::class, 'edit'])->name('about.edit');
+Route::patch('about', [AboutController::class, 'update'])->name('about.update');
 
 // Order
 Route::resource('orders', OrderController::class)->except('update');
