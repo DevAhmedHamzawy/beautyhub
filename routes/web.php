@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AdminForgotPasswordController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\Auth\AdminLoginController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\SubCategoryController as ControllersSubCategoryControll
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WishlistController;
+use App\Models\About;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +42,8 @@ Route::post('/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('
 Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
 Route::post('/contact/save', [ContactController::class, 'save'])->name('contact.save');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
 
 Route::middleware('auth')->group(function () {
 

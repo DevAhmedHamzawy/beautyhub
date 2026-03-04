@@ -5039,3 +5039,18 @@ table .ticket-row:hover {
 .header-top img {
     border-radius: 3px;
 }
+
+.icon-circle {
+    width: 104px;
+    height: 104px;
+    background-color: #ae1c9a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-circle i {
+    color: #fff;
+    font-size: 40px;
+}

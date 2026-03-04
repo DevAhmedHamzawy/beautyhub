@@ -64,7 +64,7 @@
                             <hr class="my-4">
 
                             {{-- ================= ABOUT LISTS ================= --}}
-                            <h4 class="mb-3">{{ trans("about.$locale.list") }}</h4>
+                            <h4 class="mb-3">{{ trans('about.list') }}</h4>
 
                             <div id="lists-wrapper">
 
