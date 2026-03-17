@@ -39,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
             $view->with('settings', \App\Models\Settings::first());
             $view->with('categories', Category::whereActive(1)->whereNull('parent_id')->get());
             $view->with('pages', Page::all());
+            $view->with('pagesColumn1', Page::wherePlace('column1')->get());
+            $view->with('pagesColumn2', Page::wherePlace('column2')->get());
+            $view->with('settings', \App\Models\Settings::first());
 
             if (auth('web')->check()) {
 

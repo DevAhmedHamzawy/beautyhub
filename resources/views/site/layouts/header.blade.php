@@ -436,24 +436,25 @@
                              </a>
                              <ul class="header-sub-menu">
                                  @foreach ($pages as $page)
-                                     <li><a href="product-info.html">{{ $page->title }}</a></li>
+                                     <li><a href="{{ route('pages.show', $page->slug) }}">{{ $page->title }}</a>
+                                     </li>
                                  @endforeach
 
                              </ul>
                          </li>
                          <li>
-                             <a href="about.html">
+                             <a href="{{ route('about') }}">
                                  <span class="list-text">About</span>
                              </a>
                          </li>
 
                          <li>
-                             <a href="user-profile.html">
+                             <a href="{{ route('profile') }}">
                                  <span class="list-text">User Dashboard</span>
                              </a>
                          </li>
                          <li>
-                             <a href="contact-us.html">
+                             <a href="{{ route('contact') }}">
                                  <span class="list-text">Contact</span>
                              </a>
                          </li>

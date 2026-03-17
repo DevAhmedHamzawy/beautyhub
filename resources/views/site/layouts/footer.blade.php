@@ -132,10 +132,10 @@
                          <h4 class="footer-heading footer-title">About Us</h4>
                          <div class="footer-link about-link">
                              <ul>
-                                 <li><a href="about.html">Rave’s Story</a></li>
-                                 <li><a href="about.html">Work With Us</a></li>
-                                 <li><a href="about.html">Coporate News</a></li>
-                                 <li><a href="about.html">Investors</a></li>
+                                 @foreach ($pagesColumn1 as $page)
+                                     <li><a href="{{ route('pages.show', $page->slug) }}">{{ $page->title }}</a>
+                                     </li>
+                                 @endforeach
                              </ul>
                          </div>
                      </div>
@@ -145,12 +145,10 @@
                          <h4 class="footer-heading footer-title">Useful Links</h4>
                          <div class="footer-link useful-link">
                              <ul>
-                                 <li><a href="about.html">Secure Payment</a></li>
-                                 <li><a href="privacy.html">Privacy Policy</a></li>
-                                 <li><a href="terms.html">Terms of Use</a></li>
-                                 <li>
-                                     <a href="product-sidebar.html">Archived Products</a>
-                                 </li>
+                                 @foreach ($pagesColumn2 as $page)
+                                     <li><a href="{{ route('pages.show', $page->slug) }}">{{ $page->title }}</a>
+                                     </li>
+                                 @endforeach
                              </ul>
                          </div>
                      </div>
@@ -185,7 +183,7 @@
                                  </div>
                                  <div class="details">
                                      <h4 class="footer-heading">Address:</h4>
-                                     <p>4517 Washington Ave. Manchester, Kentucky 39495</p>
+                                     <p>{{ $settings->address }}</p>
                                  </div>
                              </div>
                              <div class="phone address">
@@ -211,7 +209,7 @@
                                  </div>
                                  <div class="details">
                                      <h4 class="footer-heading">Phone:</h4>
-                                     <p>+880171889547</p>
+                                     <p>{{ $settings->phone }}</p>
                                  </div>
                              </div>
                          </div>

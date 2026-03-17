@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\SearchController;
@@ -43,7 +44,7 @@ Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
 Route::post('/contact/save', [ContactController::class, 'save'])->name('contact.save');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
-
+Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
 
 Route::middleware('auth')->group(function () {
 

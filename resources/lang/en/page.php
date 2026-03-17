@@ -19,4 +19,8 @@ return [
     'ar.content' => 'Arabic Content',
     'en.title' => 'English Title',
     'en.content' => 'English Content',
+    'place' => 'Place',
+    'choose' => 'Choose',
+    'column1' => 'Column 1',
+    'column2' => 'Column 2',
 ];

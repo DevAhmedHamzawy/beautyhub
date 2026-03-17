@@ -74,6 +74,29 @@
                                     </div>
                                 @endforeach
 
+                                <div class="col-md-12 mg-t-10 mg-md-t-0">
+                                    <div class="form-group">
+                                        <p class="mg-b-10">{{ trans('page.place') }}</p>
+
+                                        <select name="place" class="form-control @error('place') is-invalid @enderror">
+                                            <option value="">{{ trans('page.choose') }}</option>
+
+                                            <option value="column1" {{ old('place') == 'column1' ? 'selected' : '' }}>
+                                                {{ trans('page.column1') }}
+                                            </option>
+
+                                            <option value="column2" {{ old('place') == 'column2' ? 'selected' : '' }}>
+                                                {{ trans('page.column2') }}
+                                            </option>
+                                        </select>
+
+                                        @error('place')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 <div class="col-md-12 mg-t-10 mg-md-t-0">
                                     <div class="form-group">
