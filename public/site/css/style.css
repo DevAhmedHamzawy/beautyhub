@@ -5054,3 +5054,46 @@ table .ticket-row:hover {
     color: #fff;
     font-size: 40px;
 }
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    border: 2px solid #8e44ad;
+    border-radius: 40px;
+    overflow: hidden;
+    width: 600px;
+    background: #fff;
+}
+
+/* input */
+.search-wrapper input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+}
+
+/* select */
+.category-select {
+    border: none;
+    border-left: 1px solid #ddd;
+    padding: 12px;
+    outline: none;
+    background: #f9f9f9;
+    cursor: pointer;
+}
+
+/* button */
+.search-btn {
+    background: #8e44ad;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* عشان الشكل يكون ناعم */
+.search-btn:hover {
+    background: #732d91;
+}

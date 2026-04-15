@@ -8,7 +8,8 @@
                         <ul class="sidebar-list">
                             @foreach ($categories as $category)
                                 <li>
-                                    <input type="checkbox" name="category_id[]" value="{{ $category->id }}" />
+                                    <input type="checkbox" name="category_id[]" value="{{ $category->id }}"
+                                        {{ in_array($category->id, (array) request('category_id')) ? 'checked' : '' }} />
                                     <label for="mobile">{{ $category->name }}</label>
                                 </li>
                             @endforeach

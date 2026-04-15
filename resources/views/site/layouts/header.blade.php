@@ -4,9 +4,8 @@
              <div class="header-top d-flex justify-content-between align-items-center">
 
                  <div class="header-profile">
-                     <a href="#"><span>Account</span></a>
-                     <a href="#"><span>Track Order</span></a>
-                     <a href="#"><span>Support</span></a>
+                     <a href="{{ route('profile') }}"><span>{{ trans('main.account') }}</span></a>
+                     <a href="{{ route('contact') }}"><span>{{ trans('main.support') }}</span></a>
                  </div>
 
                  <div class="d-flex align-items-center gap-3">
@@ -20,10 +19,10 @@
 
                              @if ($locale == 'ar')
                                  <img src="{{ asset('assets/img/flags/egypt_flag.jpg') }}" width="22">
-                                 <span class="ms-2">AR</span>
+                                 <span class="ms-2">{{ trans('main.ar') }}</span>
                              @else
                                  <img src="{{ asset('assets/img/flags/us_flag.jpg') }}" width="22">
-                                 <span class="ms-2">EN</span>
+                                 <span class="ms-2">{{ trans('main.en') }}</span>
                              @endif
                          </a>
 
@@ -31,13 +30,13 @@
                              <li>
                                  <a class="dropdown-item" href="{{ route('language', 'en') }}">
                                      <img src="{{ asset('assets/img/flags/us_flag.jpg') }}" width="18">
-                                     English
+                                     {{ trans('main.en') }}
                                  </a>
                              </li>
                              <li>
                                  <a class="dropdown-item" href="{{ route('language', 'ar') }}">
                                      <img src="{{ asset('assets/img/flags/egypt_flag.jpg') }}" width="18">
-                                     العربية
+                                     {{ trans('main.ar') }}
                                  </a>
                              </li>
                          </ul>
@@ -46,8 +45,8 @@
                      <!-- Contact -->
                      <div class="header-contact d-none d-lg-block">
                          <a href="#">
-                             <span>Need help? Call us:</span>
-                             <span class="contact-number">+ 00645 4568</span>
+                             <span>{{ trans('main.help_call') }}</span>
+                             <span class="contact-number">{{ $settings->phone }}</span>
                          </a>
                      </div>
 
@@ -88,14 +87,19 @@
                                          </svg>
                                      </span>
                                  </div>
-                                 <div class="wrapper-main">
-                                     <div class="search-section">
-                                         <input type="text" placeholder="Search Products........." />
-                                         <div class="divider"></div>
-                                         <button type="button">All Categories</button>
-                                         <a href="#" class="shop-btn">Search</a>
-                                     </div>
-                                 </div>
+                                 <form class="search-wrapper" action="{{ route('search.filter') }}">
+                                     <input type="text" name="name" placeholder="Search Products.........">
+
+                                     <select class="category-select" name="category_id[]">
+                                         <option value="" disabled selected>All Categories</option>
+                                         @foreach ($categories as $category)
+                                             <option value="{{ $category->id }}">
+                                                 {{ $category->translate($locale)->name }}</option>
+                                         @endforeach
+                                     </select>
+
+                                     <button class="search-btn">Search</button>
+                                 </form>
                              </div>
                          </div>
                      </div>
@@ -120,7 +124,7 @@
                                      </text>
                                  </svg>
                              </span>
-                             <span class="cart-text"> Compaire </span>
+                             <span class="cart-text"> {{ trans('main.compare') }} </span>
                          </a>
                      </div>
                      <div class="header-favourite">
@@ -138,7 +142,7 @@
                                      </text>
                                  </svg>
                              </span>
-                             <span class="cart-text"> Wishlist </span>
+                             <span class="cart-text"> {{ trans('main.wishlist') }} </span>
                          </a>
                      </div>
                      <div class="header-cart">
@@ -162,7 +166,7 @@
                                      </text>
                                  </svg>
                              </span>
-                             <span class="cart-text"> Cart </span>
+                             <span class="cart-text"> {{ trans('main.cart') }} </span>
                          </a>
                          <div class="cart-submenu">
                              <div class="cart-wrapper-item" id="cart-items">
@@ -187,13 +191,13 @@
                                          </span>
                                      </div>
                                  @empty
-                                     <p class="text-center">Your cart is empty</p>
+                                     <p class="text-center">{{ trans('main.cart_empty') }}</p>
                                  @endforelse
                              </div>
                              <div class="cart-wrapper-section">
                                  <div class="wrapper-line"></div>
                                  <div class="wrapper-subtotal">
-                                     <h5 class="wrapper-title">Subtotal</h5>
+                                     <h5 class="wrapper-title">{{ trans('main.subtotal') }}</h5>
                                      <h5 class="wrapper-title-sub">
 
                                          @php
@@ -203,8 +207,10 @@
                                      </h5>
                                  </div>
                                  <div class="cart-btn">
-                                     <a href="{{ route('cart.show') }}" class="shop-btn view-btn">View Cart</a>
-                                     <a href="{{ route('checkout') }}" class="shop-btn checkout-btn">Checkout Now</a>
+                                     <a href="{{ route('cart.show') }}"
+                                         class="shop-btn view-btn">{{ trans('main.view_cart') }}</a>
+                                     <a href="{{ route('checkout') }}"
+                                         class="shop-btn checkout-btn">{{ trans('main.checkout_now') }}</a>
                                  </div>
                              </div>
                          </div>
@@ -372,7 +378,7 @@
                                  <rect y="4" width="10" height="1" />
                              </svg>
                          </span>
-                         <span class="list-text"> All Categories </span>
+                         <span class="list-text"> {{ trans('main.all_categories') }} </span>
                      </button>
                      <div class="category-dropdown position-absolute" id="subMenu">
                          <ul class="category-list">
@@ -411,13 +417,13 @@
                      <ul class="menu-list">
                          <li>
                              <a href="index-2.html">
-                                 <span class="list-text">Home</span>
+                                 <span class="list-text">{{ trans('main.home') }}</span>
                              </a>
                          </li>
 
                          <li>
                              <a href="#">
-                                 <span class="list-text">Pages</span>
+                                 <span class="list-text">{{ trans('main.pages') }}</span>
                                  <span>
                                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -444,18 +450,18 @@
                          </li>
                          <li>
                              <a href="{{ route('about') }}">
-                                 <span class="list-text">About</span>
+                                 <span class="list-text">{{ trans('main.about') }}</span>
                              </a>
                          </li>
 
                          <li>
                              <a href="{{ route('profile') }}">
-                                 <span class="list-text">User Dashboard</span>
+                                 <span class="list-text">{{ trans('main.user_dashboard') }}</span>
                              </a>
                          </li>
                          <li>
                              <a href="{{ route('contact') }}">
-                                 <span class="list-text">Contact</span>
+                                 <span class="list-text">{{ trans('main.contact') }}</span>
                              </a>
                          </li>
                      </ul>

@@ -32,7 +32,15 @@ class SearchController extends Controller
 
         $html = view('site.products.partials.search.result', compact('products'))->render();
 
-        return response()->json(compact('html'));
+        if(request()->wantsJson()) {
+            return response()->json(compact('html'));
+        }
+
+        $categories = Category::whereActive(1)->whereNull('parent_id')->get();
+        $brands = Brand::whereActive(1)->get();
+        $attributes = Attribute::whereActive(1)->whereNull('parent_id')->with('children')->get();
+
+        return view('site.products.search', compact('categories', 'brands', 'attributes', 'products'));
 
     }
 

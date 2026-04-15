@@ -54,9 +54,17 @@
         $(document).on('change', '#filterForm input', function() {
             let query = $('#filterForm').serialize();
 
+            let newUrl = "{{ route('search.filter') }}" + "?" + query;
+            window.history.pushState({
+                path: newUrl
+            }, '', newUrl);
+
             $.ajax({
                 url: "{{ route('search.filter') }}?" + query,
                 type: "GET",
+                headers: {
+                    'Accept': 'application/json'
+                },
                 success: function(response) {
                     $('#the_result').html(response.html);
                 }
