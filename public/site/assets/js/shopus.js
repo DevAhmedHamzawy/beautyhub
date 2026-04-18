@@ -56,37 +56,7 @@ var swiper2 = new Swiper(".product-top", {
     },
     thumbs: { swiper: swiper },
 });
-var priceslider = function () {
-    if ($("#slider-tooltips").length > 0) {
-        var tooltipSlider = document.getElementById("slider-tooltips");
-        var formatForSlider = {
-            from: function (formattedValue) {
-                return Number(formattedValue);
-            },
-            to: function (numericValue) {
-                return Math.round(numericValue);
-            },
-        };
-        noUiSlider.create(tooltipSlider, {
-            start: [40, 346],
-            connect: true,
-            format: formatForSlider,
-            range: { min: 0, max: 400 },
-        });
-        var formatValues = [
-            document.getElementById("slider-margin-value-min"),
-            document.getElementById("slider-margin-value-max"),
-        ];
-        tooltipSlider.noUiSlider.on(
-            "update",
-            function (values, handle, unencoded) {
-                formatValues[0].innerHTML = "Price: " + "$" + values[0];
-                formatValues[1].innerHTML = "$" + values[1];
-            }
-        );
-    }
-};
-priceslider();
+
 function switchDashboard() {
     const toggleBtn = document.querySelector(".switch-icon");
     toggleBtn.classList.toggle("active");

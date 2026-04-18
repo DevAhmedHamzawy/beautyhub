@@ -11,7 +11,6 @@ class BrandFilter implements Filter
         if (!empty($value)) {
             return $builder->whereIn('brand_id', $value);
         }
-
         return $builder;
     }
 }
