@@ -123,6 +123,18 @@ return [
     'view_page' => 'عرض صفحة',
     'active_page' => 'تفعيل صفحة',
     'restore_page' => 'استعادة صفحة',
+    'orders' => 'الطلبات',
+    'view_order' => 'عرض الطلبات',
+    'Faq' => 'الاسئلة الشائعة',
+    'add_faq' => 'اضافة سؤال',
+    'edit_faq' => 'تعديل سؤال',
+    'delete_faq' => 'حذف سؤال',
+    'view_faq' => 'عرض سؤال',
+    'restore_faq' => 'استعادة سؤال',
+    'Contact' => 'التواصل',
+    'reply_contact' => 'رد التواصل',
+    'settings' => 'الاعدادات',
+    'edit_settings' => 'تعديل الاعدادات',
     'activity_logs' => 'سجل النشاطات',
     'view_activity_log' => 'عرض سجل النشاطات'
 ];

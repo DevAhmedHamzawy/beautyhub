@@ -120,12 +120,7 @@
 
     @if ($loop->iteration % 6 == 0)
         <div class="col-lg-12">
-            <div class="product-deal-section" data-aos="fade-up">
-                <h5 class="wrapper-heading">
-                    Get the best deal for Headphones
-                </h5>
-                <a href="seller-sidebar.html" class="shop-btn">Shop Now</a>
-            </div>
+            <img src="{{ $settings->banner_six_path }}" alt="" srcset="">
         </div>
     @endif
 @endforeach

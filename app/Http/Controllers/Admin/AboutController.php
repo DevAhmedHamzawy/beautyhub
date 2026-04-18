@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class AboutController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:edit_settings'])->only(['update']);
+    }
     public function edit()
     {
         $about = About::with([
@@ -46,18 +50,9 @@ class AboutController extends Controller
                 );
             }
 
-            // ===============================
-            // 2️⃣ Track Existing Lists (for delete detection)
-            // ===============================
-            $existingIds = AboutList::where('about_id', $about->id)->pluck('id')->toArray();
-            $submittedIds = array_keys($request->lists ?? []);
-
-            // lists that were removed from UI
-            $deletedIds = array_diff($existingIds, $submittedIds);
-
-            if (!empty($deletedIds)) {
-                AboutListTranslation::whereIn('about_list_id', $deletedIds)->delete();
-                AboutList::whereIn('id', $deletedIds)->delete();
+           if ($request->deleted_lists) {
+                AboutListTranslation::whereIn('about_list_id', $request->deleted_lists)->delete();
+                AboutList::whereIn('id', $request->deleted_lists)->delete();
             }
 
             // ===============================
@@ -112,6 +107,12 @@ class AboutController extends Controller
             }
         });
 
-        return back()->with('success', 'تم تحديث صفحة من نحن بنجاح');
+        $message = [
+            'alert-type' => 'success',
+            'title' =>  trans('about.updated_success'),
+            'message' => trans('about.updated_success')
+        ];
+
+        return redirect()->route('admin.about.edit')->with($message);
     }
 }

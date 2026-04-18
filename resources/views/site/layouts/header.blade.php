@@ -59,8 +59,8 @@
          <div class="container">
              <div class="header-center">
                  <div class="logo">
-                     <a href="index-2.html">
-                         <img src="assets/images/logos/logo.webp" alt="logo" />
+                     <a href="{{ url('/') }}">
+                         <img src="{{ $settings->logo_path }}" alt="logo" />
                      </a>
                  </div>
                  <div class="header-cart-items">
@@ -245,8 +245,8 @@
                      </svg>
                  </span>
              </button>
-             <a href="index-2.html" class="mobile-header-logo">
-                 <img src="assets/images/logos/logo.webp" alt="logo" />
+             <a href="{{ url('/') }}" class="mobile-header-logo">
+                 <img src="{{ $settings->logo_path }}" alt="logo" />
              </a>
              <a href="{{ route('cart.show') }}" class="header-cart cart-item">
                  <span>

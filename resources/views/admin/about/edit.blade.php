@@ -18,6 +18,16 @@
                 </ol>
             </nav>
 
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-body">
 
@@ -69,10 +79,12 @@
                             <div id="lists-wrapper">
 
                                 @foreach ($about->lists as $list)
+                                    <input type="hidden" name="lists[{{ $list->id }}][place]"
+                                        value="{{ $list->place }}">
                                     <div class="list-item border p-3 mb-3" data-id="{{ $list->id }}">
 
                                         <div class="d-flex justify-content-between mb-2">
-                                            <strong>{{ ucfirst($list->place) }}</strong>
+                                            <strong>{{ trans('about.' . $list->place) }}</strong>
                                             <button type="button" class="btn btn-sm btn-danger remove-list">X</button>
                                         </div>
 
@@ -156,6 +168,12 @@
 
 @section('js')
     <script>
+        const translations = {
+            list: "{{ trans('about.list') }}",
+            column: "{{ trans('about.column') }}",
+            remove: "{{ trans('about.remove') }}"
+        };
+
         let tempId = 1000;
 
         // GENERATOR FUNCTION
@@ -194,7 +212,7 @@
             return `
     <div class="list-item border p-3 mb-3">
         <div class="d-flex justify-content-between mb-2">
-            <strong>${label}</strong>
+            <strong>${type === 'column' ? translations.column : translations.list}</strong>
             <button type="button" class="btn btn-sm btn-danger remove-list">X</button>
         </div>
 
@@ -232,9 +250,17 @@
             $('#lists-wrapper').append(generateItem('column', 'Column'));
         });
 
-        // REMOVE
         $(document).on('click', '.remove-list', function() {
-            $(this).closest('.list-item').remove();
+            let item = $(this).closest('.list-item');
+
+            let id = item.data('id');
+
+            if (id) {
+                item.append(`<input type="hidden" name="deleted_lists[]" value="${id}">`);
+                item.hide();
+            } else {
+                item.remove();
+            }
         });
     </script>
 @endsection

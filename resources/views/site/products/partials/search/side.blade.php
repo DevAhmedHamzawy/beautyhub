@@ -68,11 +68,6 @@
                 @endforeach
             </div>
     </form>
-    <div class="sidebar-shop-section">
-        <span class="wrapper-subtitle">TRENDY</span>
-        <h5 class="wrapper-heading">Best wireless Shoes</h5>
-        <a href="seller-sidebar.html" class="shop-btn deal-btn">Shop Now
-        </a>
-    </div>
+    <img src="{{ $settings->banner_five_path }}" alt="" srcset="">
 </div>
 </div>

@@ -46,7 +46,7 @@
                         {{-- Email --}}
                         <div class="col-md-12 mg-t-10">
                             <div class="form-group">
-                                <p class="mg-b-10">Email</p>
+                                <p class="mg-b-10">{{ trans('settings.email') }}</p>
                                 <input type="email" name="email"
                                     class="form-control @error('email') is-invalid @enderror"
                                     value="{{ old('email', $settings->email ?? '') }}">
@@ -59,7 +59,7 @@
                         {{-- Phone --}}
                         <div class="col-md-12 mg-t-10">
                             <div class="form-group">
-                                <p class="mg-b-10">Phone</p>
+                                <p class="mg-b-10">{{ trans('settings.phone') }}</p>
                                 <input type="text" name="phone"
                                     class="form-control @error('phone') is-invalid @enderror"
                                     value="{{ old('phone', $settings->phone ?? '') }}">
@@ -72,7 +72,7 @@
                         {{-- Address --}}
                         <div class="col-md-12 mg-t-10">
                             <div class="form-group">
-                                <p class="mg-b-10">Address</p>
+                                <p class="mg-b-10">{{ trans('settings.address') }}</p>
                                 <input type="text" name="address"
                                     class="form-control @error('address') is-invalid @enderror"
                                     value="{{ old('address', $settings->address ?? '') }}">
@@ -84,7 +84,7 @@
 
                         <div class="col-md-12 mg-t-10">
                             <div class="form-group">
-                                <p class="mg-b-10">حدد الموقع على الخريطة</p>
+                                <p class="mg-b-10">{{ trans('settings.location') }}</p>
 
                                 <div id="map" style="height: 400px; border-radius: 10px;"></div>
 
@@ -95,6 +95,78 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.logo') }}</p>
+                                <img src="{{ $settings->logo_path }}" alt="banner" width="20%" />
+                                <input type="file" name="logo_img" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.favicon') }}</p>
+                                <img src="{{ $settings->favicon_path }}" alt="banner" width="20%" />
+                                <input type="file" name="favicon_img" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.footer_logo') }}</p>
+                                <img src="{{ $settings->footer_logo_path }}" alt="banner" width="20%" />
+                                <input type="file" name="footer_logo_img" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.banner_one') }}</p>
+                                <img src="{{ $settings->banner_one_path }}" alt="banner" width="20%" />
+                                <input type="file" name="banner_one_img" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.banner_two') }}</p>
+                                <img src="{{ $settings->banner_two_path }}" alt="banner" width="20%" />
+                                <input type="file" name="banner_two_img" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.banner_three') }}</p>
+                                <img src="{{ $settings->banner_three_path }}" alt="banner" width="20%" />
+                                <input type="file" name="banner_three_img" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.banner_four') }}</p>
+                                <img src="{{ $settings->banner_four_path }}" alt="banner" width="20%" />
+                                <input type="file" name="banner_four_img" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.banner_five') }}</p>
+                                <img src="{{ $settings->banner_five_path }}" alt="banner" width="20%" />
+                                <input type="file" name="banner_five_img" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.banner_six') }}</p>
+                                <img src="{{ $settings->banner_six_path }}" alt="banner" width="20%" />
+                                <input type="file" name="banner_six_img" />
+                            </div>
+                        </div>
 
                         <div class="col-md mt-4 mt-xl-0">
                             <button class="btn btn-main-primary btn-block">{{ trans('dashboard.edit') }}</button>

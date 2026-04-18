@@ -261,10 +261,14 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('reply_contact');
         Permission::create(['name' => 'view_order', 'guard_name' => 'admin', 'group_name' => 'orders']);
         $role->givePermissionTo('view_order');
+        Permission::create(['name' => 'edit_settings', 'guard_name' => 'admin', 'group_name' => 'settings']);
+        $role->givePermissionTo('edit_settings');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
         */
         //$admin->assignRole($role);
+
+
 
 
         /*for ($i=0; $i < 11 ; $i++) {

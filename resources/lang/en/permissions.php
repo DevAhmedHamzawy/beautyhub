@@ -124,6 +124,18 @@ return [
     'view_page' => 'View Page',
     'active_page' => 'Active Page',
     'restore_page' => 'Restore Page',
+    'orders' => 'Orders',
+    'view_order' => 'View Order',
+    'Faq' => 'Faq',
+    'add_faq' => 'Add Faq',
+    'edit_faq' => 'Edit Faq',
+    'delete_faq' => 'Delete Faq',
+    'view_faq' => 'View Faq',
+    'restore_faq' => 'Restore Faq',
+    'Contact' => 'Contact',
+    'reply_contact' => 'Reply Contact',
+    'settings' => 'Settings',
+    'edit_settings' => 'Edit Settings',
     'activity_logs' => 'Activity Logs',
     'view_activity_log' => 'View Activity Log'
 ];

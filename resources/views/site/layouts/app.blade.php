@@ -7,7 +7,7 @@
     <meta name="keywords"
         content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="assets/images/homepage-one/icon.png" />
+    <link rel="icon" href="{{ $settings->favicon_path }}" />
 
     <title>@yield('title')</title>
 

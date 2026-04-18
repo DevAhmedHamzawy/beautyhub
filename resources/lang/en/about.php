@@ -1,6 +1,6 @@
 <?php
 return [
-    'abouts'        => 'About Pages',
+    'abouts'        => 'About Page',
     'update_about'  => 'Update About Page',
     'ar.title'         => 'Title In Arabic',
     'ar.content'       => 'Content In Arabic',
@@ -10,4 +10,5 @@ return [
     'column'        => 'Column',
     'add_list'      => 'Add List',
     'add_column'    => 'Add Column',
+    'updated_success' => 'About Page Updated Successfully',
 ];
