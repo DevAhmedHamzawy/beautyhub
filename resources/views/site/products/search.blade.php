@@ -94,6 +94,7 @@
 
             $('#loadMoreWrapper').hide();
 
+            page = 1;
 
             $('#preloader').show();
 
