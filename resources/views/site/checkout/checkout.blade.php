@@ -111,25 +111,28 @@
                             `<option value="">اختر المدينة</option>`
                         )
                         response.forEach(function(city) {
+
+                            let shippingCost = subtotal > 500 ? 0 : city.shipping_cost;
+
                             if (city.id == {!! $theCity->id !!}) {
                                 @if ($locale == 'ar')
                                     $('#area_id').append(
-                                        `<option value="${city.id}" data-shipping="${city.shipping_cost}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.name}</option>`
+                                        `<option value="${city.id}" data-shipping="${shippingCost}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.name}</option>`
                                     );
                                 @else
                                     $('#area_id').append(
-                                        `<option value="${city.id}" data-shipping="${city.shipping_cost}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.english}</option>`
+                                        `<option value="${city.id}" data-shipping="${shippingCost}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.english}</option>`
                                     );
                                 @endif
 
                             } else {
                                 @if ($locale == 'ar')
                                     $('#area_id').append(
-                                        `<option value="${city.id}" data-shipping="${city.shipping_cost}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.name}</option>`
+                                        `<option value="${city.id}" data-shipping="${shippingCost}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.name}</option>`
                                     );
                                 @else
                                     $('#area_id').append(
-                                        `<option value="${city.id}" data-shipping="${city.shipping_cost}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.english}</option>`
+                                        `<option value="${city.id}" data-shipping="${shippingCost}" data-lat="${city.latitude}" data-lng="${city.longitude}">${city.english}</option>`
                                     );
                                 @endif
                             }

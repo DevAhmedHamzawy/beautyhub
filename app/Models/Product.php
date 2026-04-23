@@ -145,6 +145,11 @@ class Product extends Model
         return $this->ratings()->avg('rating') ?? 0;
     }
 
+    public function ratingCount()
+    {
+        return $this->ratings()->count();
+    }
+
     public static function scopeFilter(Builder $builder, $filters)
     {
         return (new BaseFilter(request()))->apply($builder, $filters);

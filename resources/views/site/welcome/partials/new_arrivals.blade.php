@@ -1,8 +1,8 @@
   <section class="product arrival">
       <div class="container">
           <div class="section-title">
-              <h5>NEW ARRIVALS</h5>
-              <a href="product-sidebar.html" class="view">View All</a>
+              <h5>{{ trans('main.new_arrivals') }}</h5>
+              <a href="{{ route('new_arrivals') }}" class="view">{{ trans('main.view_all') }}</a>
           </div>
           <div class="arrival-section">
               <div class="row g-5">
@@ -119,8 +119,7 @@
                               </div>
                               <div class="product-cart-btn">
                                   <a href="javaScript:void(0);" onclick="openProductModal(`{{ $new_arrival->slug }}`)"
-                                      class="product-btn">Add To
-                                      Cart</a>
+                                      class="product-btn">{{ trans('main.add_to_cart') }}</a>
                               </div>
                           </div>
                       </div>
@@ -130,7 +129,7 @@
                       <div class="modal-dialog modal-dialog-centered modal-xl">
                           <div class="modal-content">
                               <div class="modal-header">
-                                  <h5 class="modal-title">تفاصيل المنتج</h5>
+                                  <h5 class="modal-title">{{ trans('main.product_details') }}</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                               </div>
                               <div class="modal-body" id="modalContent">

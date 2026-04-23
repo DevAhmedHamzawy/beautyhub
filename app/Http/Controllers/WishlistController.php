@@ -9,7 +9,12 @@ class WishlistController extends Controller
 {
 
     public function index() {
-        $wishlists = auth()->user()->wishlist()->get();
+        $wishlists = auth()->user()?->wishlist()->get();
+
+        if(!$wishlists) {
+            return view('site.wishlist_empty');
+        }
+
         return view('site.wishlist.index', compact('wishlists'));
     }
     public function toggle(Product $product)

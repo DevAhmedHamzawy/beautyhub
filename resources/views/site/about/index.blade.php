@@ -8,12 +8,12 @@
     <section class="blog about-blog">
         <div class="container">
             <div class="blog-bradcrum">
-                <span><a href="index-2.html">Home</a></span>
+                <span><a href="index-2.html">{{ trans('main.home') }}</a></span>
                 <span class="devider">/</span>
-                <span><a href="#">About Us</a></span>
+                <span><a href="#">{{ trans('main.about') }}</a></span>
             </div>
             <div class="blog-heading about-heading">
-                <h1 class="heading">About Us</h1>
+                <h1 class="heading">{{ trans('main.about') }}</h1>
             </div>
         </div>
     </section>
@@ -54,7 +54,7 @@
                                 </ul>
                             </div>
                             <a href="{{ route('contact') }}" class="shop-btn">
-                                Contact us
+                                {{ trans('main.contact') }}
                                 <span>
                                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

@@ -43,7 +43,15 @@
                                             <div class="wrapper-content">
                                                 <h5 class="wrapper-details">{{ $product->name }}</h5>
                                                 <div class="price">
-                                                    <span class="new-price">$6.99</span>
+                                                    @php
+                                                        $price = $product->the_price ?? [];
+                                                    @endphp
+
+                                                    @if (!empty($price) && $price['discounted'] != null)
+                                                        <span class="new-price">{{ $price['discounted'] }}</span>
+                                                    @else
+                                                        <span class="new-price">{{ $price['original'] ?? 'N/A' }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -65,35 +73,31 @@
                                     <div class="wrapper-data">
                                         <div class="ratings">
                                             <span>
-                                                <svg width="90" height="18" viewBox="0 0 90 18" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
-                                                        fill="#FFA800" />
-                                                    <path
-                                                        d="M27 0L29.0206 6.21885H35.5595L30.2694 10.0623L32.2901 16.2812L27 12.4377L21.7099 16.2812L23.7306 10.0623L18.4405 6.21885H24.9794L27 0Z"
-                                                        fill="#FFA800" />
-                                                    <path
-                                                        d="M45 0L47.0206 6.21885H53.5595L48.2694 10.0623L50.2901 16.2812L45 12.4377L39.7099 16.2812L41.7306 10.0623L36.4405 6.21885H42.9794L45 0Z"
-                                                        fill="#FFA800" />
-                                                    <path
-                                                        d="M63 0L65.0206 6.21885H71.5595L66.2694 10.0623L68.2901 16.2812L63 12.4377L57.7099 16.2812L59.7306 10.0623L54.4405 6.21885H60.9794L63 0Z"
-                                                        fill="#FFA800" />
-                                                    <path
-                                                        d="M81 0L83.0206 6.21885H89.5595L84.2694 10.0623L86.2901 16.2812L81 12.4377L75.7099 16.2812L77.7306 10.0623L72.4405 6.21885H78.9794L81 0Z"
-                                                        fill="#FFA800" />
-                                                </svg>
+                                                @php
+                                                    $rating = round($product->averageRating());
+                                                @endphp
+
+                                                <div class="stars">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $rating)
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                        @else
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                        @endif
+                                                    @endfor
+                                                </div>
                                             </span>
                                         </div>
                                     </div>
-                                </td>
-                            @endforeach
-
-
-                        </tr>
-                    </tbody>
-                </table>
             </div>
+            </td>
+            @endforeach
+
+
+            </tr>
+            </tbody>
+            </table>
+        </div>
         </div>
     </section>
 

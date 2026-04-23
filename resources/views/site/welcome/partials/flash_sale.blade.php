@@ -1,26 +1,25 @@
  <section class="product flash-sale">
      <div class="container">
          <div class="section-title">
-             <h5>Flash Sale</h5>
+             <h5>{{ trans('main.flash_sales') }}</h5>
              <div class="countdown-section">
                  <div class="countdown-items">
                      <span id="day" class="number" style="color: red">0</span>
-                     <span class="text">Days</span>
+                     <span class="text">{{ trans('main.days') }}</span>
                  </div>
                  <div class="countdown-items">
                      <span id="hour" class="number" style="color: skyblue">0</span>
-                     <span class="text">Hours</span>
+                     <span class="text">{{ trans('main.hours') }}</span>
                  </div>
                  <div class="countdown-items">
                      <span id="minute" class="number" style="color: green">0</span>
-                     <span class="text">Minutes</span>
+                     <span class="text">{{ trans('main.minutes') }}</span>
                  </div>
                  <div class="countdown-items">
                      <span id="second" class="number" style="color: red">0</span>
-                     <span class="text">seconds</span>
+                     <span class="text">{{ trans('main.seconds') }}</span>
                  </div>
              </div>
-             <a href="flash-sale.html" class="view">View All</a>
          </div>
          <div class="flash-sale-section">
              <div class="row g-5">
@@ -139,8 +138,7 @@
                              </div>
                              <div class="product-cart-btn">
                                  <a href="javascript:void(0)" class="product-btn"
-                                     onclick="openProductModal(`{{ $flash_sale_product->product->slug }}`)">Add To
-                                     Cart</a>
+                                     onclick="openProductModal(`{{ $flash_sale_product->product->slug }}`)">{{ trans('main.add_to_cart') }}</a>
                              </div>
                          </div>
                      </div>
@@ -151,7 +149,7 @@
                      <div class="modal-dialog modal-dialog-centered modal-xl">
                          <div class="modal-content">
                              <div class="modal-header">
-                                 <h5 class="modal-title">تفاصيل المنتج</h5>
+                                 <h5 class="modal-title">{{ trans('main.product_details') }}</h5>
                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                              </div>
                              <div class="modal-body" id="modalContent">

@@ -25,6 +25,13 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('categories', [WelcomeController::class, 'categories'])->name('categories');
+Route::get('brands', [WelcomeController::class, 'brands'])->name('brands');
+Route::get('new_arrivals', [WelcomeController::class, 'new_arrivals'])->name('new_arrivals');
+Route::get('top_selling', [WelcomeController::class, 'top_selling'])->name('top_selling');
+Route::get('weekly_top_selling', [WelcomeController::class, 'weekly_top_selling'])->name('weekly_top_selling');
+
+
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::post('/products/{product}/price', [ProductController::class, 'getPrice'])->name('products.getPrice');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');

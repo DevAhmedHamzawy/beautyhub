@@ -106,9 +106,8 @@
             </div>
             <div class="product-cart-btn">
 
-                <a href="javascript:void(0)" class="product-btn" onclick="openProductModal(`{{ $product->slug }}`)">Add
-                    To
-                    Cart</a>
+                <a href="javascript:void(0)" class="product-btn"
+                    onclick="openProductModal(`{{ $product->slug }}`)">{{ trans('main.add_to_cart') }}</a>
             </div>
         </div>
     </div>
@@ -125,7 +124,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">تفاصيل المنتج</h5>
+                <h5 class="modal-title">{{ trans('main.product_details') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body" id="modalContent">

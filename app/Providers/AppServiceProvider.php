@@ -4,9 +4,12 @@ namespace App\Providers;
 
 use App\Listeners\SyncSessionCartWithDatabase;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\Stock;
+use App\Observers\OrderObserver;
+use App\Observers\ProductObserver;
 use Closure;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
@@ -100,5 +103,9 @@ class AppServiceProvider extends ServiceProvider
     Registered::class,
   SyncSessionCartWithDatabase::class,
         );
+
+        Product::observe(ProductObserver::class);
+        Order::observe(OrderObserver::class);
+
     }
 }

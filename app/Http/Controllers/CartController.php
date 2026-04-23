@@ -82,7 +82,7 @@ class CartController extends Controller
         }
 
         return response()->json([
-            'message' => 'Added to cart successfully!',
+            'message' => trans('main.added_to_cart'),
             'cart' => [
                 'count'    => collect($cartItems)->sum('quantity'),
                 'subtotal' => number_format($subtotal, 2),
@@ -123,7 +123,7 @@ class CartController extends Controller
         }
 
         if ($cart->isEmpty()) {
-            return view('cart.index', ['cartItems' => collect()]);
+            return view('site.cart_empty', ['cartItems' => collect()]);
         }
 
         // نجيب كل الـ stock_ids

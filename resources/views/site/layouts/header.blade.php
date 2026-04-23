@@ -88,17 +88,19 @@
                                      </span>
                                  </div>
                                  <form class="search-wrapper" action="{{ route('search.filter') }}">
-                                     <input type="text" name="name" placeholder="Search Products.........">
+                                     <input type="text" name="name"
+                                         placeholder="{{ trans('main.search_products') }}">
 
                                      <select class="category-select" name="category_id[]">
-                                         <option value="" disabled selected>All Categories</option>
+                                         <option value="" disabled selected>{{ trans('main.all_categories') }}
+                                         </option>
                                          @foreach ($categories as $category)
                                              <option value="{{ $category->id }}">
                                                  {{ $category->translate($locale)->name }}</option>
                                          @endforeach
                                      </select>
 
-                                     <button class="search-btn">Search</button>
+                                     <button class="search-btn">{{ trans('main.search') }}</button>
                                  </form>
                              </div>
                          </div>
@@ -462,6 +464,11 @@
                          <li>
                              <a href="{{ route('contact') }}">
                                  <span class="list-text">{{ trans('main.contact') }}</span>
+                             </a>
+                         </li>
+                         <li>
+                             <a href="{{ route('faqs') }}">
+                                 <span class="list-text">{{ trans('main.faq') }}</span>
                              </a>
                          </li>
                      </ul>

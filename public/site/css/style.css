@@ -5165,3 +5165,54 @@ table .ticket-row:hover {
         background-position: -100% 0;
     }
 }
+
+.pagination {
+    justify-content: center;
+    margin-top: 40px;
+    gap: 10px;
+}
+
+/* الشكل العام */
+.page-item .page-link {
+    border: none;
+    background: #f3f3f3;
+    color: #333;
+    border-radius: 10px;
+    padding: 10px 14px;
+    min-width: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+/* hover خفيف */
+.page-item .page-link:hover {
+    background: #e0e0e0;
+}
+
+/* active (المهم) */
+.page-item.active .page-link {
+    background: #8a4ba6;
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(138, 75, 166, 0.4);
+}
+
+/* disabled */
+.page-item.disabled .page-link {
+    background: #eee;
+    color: #bbb;
+}
+
+/* arrows fix */
+.page-link[rel="prev"],
+.page-link[rel="next"] {
+    padding: 10px 12px; /* نفس padding بتاع الأرقام */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* إزالة outline المزعج */
+.page-link:focus {
+    box-shadow: none;
+}

@@ -11,7 +11,7 @@
              <div class="row gy-5">
                  <div class="col-lg-6">
                      <div class="faq-accordion accordion accordion-flush" id="accordionFlushExample" data-aos="fade-right">
-                         <h5>Frequently Asked Questions</h5>
+                         <h5>{{ trans('main.the_faq') }}</h5>
 
                          @foreach ($faqs as $faq)
                              <div class="faq-item accordion-item">
@@ -57,7 +57,7 @@
                  <div class="col-lg-6">
                      <div class="question-section login-section" data-aos="fade-left">
                          <div class="review-form">
-                             <h5 class="comment-title">Have Any Question</h5>
+                             <h5 class="comment-title">{{ trans('main.have_any_questions') }}</h5>
                              <div class="account-inner-form">
 
                                  @if (session('success'))
@@ -72,29 +72,29 @@
 
 
                                      <div class="review-form-name">
-                                         <label for="fname" class="form-label">Name*</label>
+                                         <label for="fname" class="form-label">{{ trans('main.name') }}*</label>
                                          <input type="text" name="name" id="fname" class="form-control"
                                              placeholder="Name" />
                                      </div>
                                      <div class="review-form-name">
-                                         <label for="email" class="form-label">Email*</label>
+                                         <label for="email" class="form-label">{{ trans('main.email') }}*</label>
                                          <input type="email" name="email" id="email" class="form-control"
                                              placeholder="user@gmail.com" />
                                      </div>
                                      <div class="review-form-name">
-                                         <label for="subject" class="form-label">Subject*</label>
+                                         <label for="subject" class="form-label">{{ trans('main.subject') }}*</label>
                                          <input type="text" name="subject" id="subject" class="form-control"
-                                             placeholder="Subject" />
+                                             placeholder="{{ trans('main.subject') }}" />
                                      </div>
                              </div>
                              <div class="review-textarea">
-                                 <label for="floatingTextarea">Massage*</label>
-                                 <textarea class="form-control" name="message" placeholder="Write Massage..........." id="floatingTextarea"
+                                 <label for="floatingTextarea">{{ trans('main.message') }}*</label>
+                                 <textarea class="form-control" name="message" placeholder="{{ trans('main.write_message') }}" id="floatingTextarea"
                                      rows="3"></textarea>
                              </div>
                              <div class="login-btn">
-                                 <a href="#" class="shop-btn"><button type="submit" style="color: #fff;">Send
-                                         Now</button></a>
+                                 <a href="#" class="shop-btn"><button type="submit"
+                                         style="color: #fff;">{{ trans('main.send_now') }}</button></a>
                              </div>
 
                              </form>

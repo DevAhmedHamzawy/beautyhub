@@ -11,10 +11,9 @@
                     <div class="col-lg-6">
                         <div class="contact-info-section">
                             <div class="contact-information">
-                                <h5 class="wrapper-heading">Contact Information</h5>
+                                <h5 class="wrapper-heading">{{ trans('main.contact_information') }}</h5>
                                 <p class="paragraph">
-                                    Fill the form below or write us .We will help you as soon as
-                                    possible.
+                                    {{ trans('main.contact_message') }}
                                 </p>
                                 <div class="contact-wrapper">
                                     <div class="row gy-5">
@@ -39,7 +38,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="wrapper-content">
-                                                    <h5 class="wrapper-heading">Phone</h5>
+                                                    <h5 class="wrapper-heading">{{ trans('main.phone') }}</h5>
                                                     <p class="paragraph">{{ $settings->phone }}</p>
                                                 </div>
                                             </div>
@@ -69,7 +68,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="wrapper-content">
-                                                    <h5 class="wrapper-heading">Email</h5>
+                                                    <h5 class="wrapper-heading">{{ trans('main.phone') }}</h5>
                                                     <p class="paragraph">
                                                         <a href="https://quomodothemes.website/cdn-cgi/l/email-protection"
                                                             class="__cf_email__"
@@ -94,7 +93,7 @@
                                                         </span>
                                                     </div>
                                                     <div class="address-content">
-                                                        <h5 class="wrapper-heading">Address</h5>
+                                                        <h5 class="wrapper-heading">{{ trans('main.address') }}</h5>
                                                         <p class="paragraph">
                                                             {{ $settings->address }}
                                                         </p>
@@ -117,7 +116,7 @@
                     <div class="col-lg-6">
                         <div class="question-section login-section">
                             <div class="review-form">
-                                <h5 class="comment-title">Get In Touch</h5>
+                                <h5 class="comment-title">{{ trans('main.get_in_touch') }}</h5>
                                 <div class="account-inner-form">
 
                                     @if (session('success'))
@@ -131,29 +130,29 @@
                                         <input type="hidden" name="sort" value="contact">
 
                                         <div class="review-form-name">
-                                            <label for="fname" class="form-label">Name*</label>
+                                            <label for="fname" class="form-label">{{ trans('main.name') }}*</label>
                                             <input type="text" name="name" id="fname" class="form-control"
-                                                placeholder="Name" />
+                                                placeholder="{{ trans('main.name') }}" />
                                         </div>
                                         <div class="review-form-name">
-                                            <label for="email" class="form-label">Email*</label>
+                                            <label for="email" class="form-label">{{ trans('main.email') }}*</label>
                                             <input type="email" name="email" id="email" class="form-control"
                                                 placeholder="user@gmail.com" />
                                         </div>
                                         <div class="review-form-name">
-                                            <label for="subject" class="form-label">Subject*</label>
+                                            <label for="subject" class="form-label">{{ trans('main.subject') }}*</label>
                                             <input type="text" name="subject" id="subject" class="form-control"
-                                                placeholder="Subject" />
+                                                placeholder="{{ trans('main.subject') }}" />
                                         </div>
                                 </div>
                                 <div class="review-textarea">
-                                    <label for="floatingTextarea">Massage*</label>
-                                    <textarea class="form-control" name="message" placeholder="Write Massage..........." id="floatingTextarea"
+                                    <label for="floatingTextarea">{{ trans('main.message') }}*</label>
+                                    <textarea class="form-control" name="message" placeholder="{{ trans('main.write_message') }}" id="floatingTextarea"
                                         rows="3"></textarea>
                                 </div>
                                 <div class="login-btn">
-                                    <a href="#" class="shop-btn"><button type="submit" style="color: #fff;">Send
-                                            Now</button></a>
+                                    <a href="#" class="shop-btn"><button type="submit"
+                                            style="color: #fff;">{{ trans('main.send_now') }}</button></a>
                                 </div>
                                 </form>
                             </div>

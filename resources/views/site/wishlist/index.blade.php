@@ -43,8 +43,7 @@
                                 <td class="table-wrapper wrapper-product">
                                     <div class="wrapper">
                                         <div class="wrapper-img">
-                                            <img src="assets/images/homepage-one/product-img/product-img-1.webp"
-                                                alt="img" />
+                                            <img src="{{ $product->img_path }}" alt="img" />
                                         </div>
                                         <div class="wrapper-content">
                                             <h5 class="heading">{{ $product->name }}</h5>
@@ -53,7 +52,17 @@
                                 </td>
                                 <td class="table-wrapper">
                                     <div class="table-wrapper-center">
-                                        <h5 class="heading">$20.00</h5>
+                                        <h5 class="heading">
+                                            @php
+                                                $price = $product->the_price ?? [];
+                                            @endphp
+
+                                            @if (!empty($price) && $price['discounted'] != null)
+                                                <span class="new-price">{{ $price['discounted'] }}</span>
+                                            @else
+                                                <span class="new-price">{{ $price['original'] ?? 'N/A' }}</span>
+                                            @endif
+                                        </h5>
                                     </div>
                                 </td>
                                 <td class="table-wrapper">

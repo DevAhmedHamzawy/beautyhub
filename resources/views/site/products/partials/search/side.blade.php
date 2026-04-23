@@ -3,7 +3,7 @@
         <div class="sidebar" data-aos="fade-right">
             <div class="sidebar-section">
                 <div class="sidebar-wrapper">
-                    <h5 class="wrapper-heading">Product Categories</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.product_categories') }}</h5>
                     <div class="sidebar-item">
                         <ul class="sidebar-list">
                             @foreach ($categories as $category)
@@ -19,7 +19,7 @@
                 </div>
                 <hr />
                 <div class="sidebar-wrapper sidebar-range">
-                    <h5 class="wrapper-heading">Price Range</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.price_range') }}</h5>
 
                     <div id="slider-tooltips" class="slider-range mb-3"></div>
 
@@ -32,7 +32,7 @@
                 </div>
                 <hr />
                 <div class="sidebar-wrapper">
-                    <h5 class="wrapper-heading">Brands</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.brands') }}</h5>
                     <div class="sidebar-item">
                         <ul class="sidebar-list">
                             @foreach ($brands as $brand)

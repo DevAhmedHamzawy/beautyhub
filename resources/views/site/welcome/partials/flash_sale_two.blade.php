@@ -1,8 +1,7 @@
  <section class="product best-product">
      <div class="container">
          <div class="section-title">
-             <h5>Flash Sale</h5>
-             <a href="flash-sale.html" class="view">View All</a>
+             <h5>{{ trans('main.flash_sales') }}</h5>
          </div>
          <div class="best-product-section">
              <div class="row g-4">
@@ -127,7 +126,7 @@
                      <div class="modal-dialog modal-dialog-centered modal-xl">
                          <div class="modal-content">
                              <div class="modal-header">
-                                 <h5 class="modal-title">تفاصيل المنتج</h5>
+                                 <h5 class="modal-title">{{ trans('main.product_details') }}</h5>
                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                              </div>
                              <div class="modal-body" id="modalContent">

@@ -17,18 +17,19 @@
                             <div class="col-lg-12">
                                 <div class="product-sorting-section">
                                     <div class="result">
-                                        <p>Showing <span>
-                                                <span id="resultsCount">{{ $products->count() }}</span> of
+                                        <p>{{ trans('main.showing') }} <span>
+                                                <span id="resultsCount">{{ $products->count() }}</span>
+                                                {{ trans('main.of') }}
                                                 <span id="resultsTotal">{{ $products->total() }}</span>
-                                                results
+                                                {{ trans('main.results') }}
                                             </span></p>
                                     </div>
                                     <div class="product-sorting dropdown">
-                                        <span class="product-sort">Sort by:</span>
+                                        <span class="product-sort">{{ trans('main.sort_by') }} :</span>
 
                                         <div class="product-list dropdown-toggle" data-bs-toggle="dropdown"
                                             aria-expanded="false">
-                                            <span class="selected-sort">Default</span>
+                                            <span class="selected-sort">{{ trans('main.default') }}</span>
 
                                             <span>
                                                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none"
@@ -39,12 +40,14 @@
                                         </div>
 
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item sort-option" data-value="default">Default</a></li>
-                                            <li><a class="dropdown-item sort-option" data-value="price_asc">Price: Low to
-                                                    High</a></li>
-                                            <li><a class="dropdown-item sort-option" data-value="price_desc">Price: High to
-                                                    Low</a></li>
-                                            <li><a class="dropdown-item sort-option" data-value="newest">Newest</a></li>
+                                            <li><a class="dropdown-item sort-option"
+                                                    data-value="default">{{ trans('main.default') }}</a></li>
+                                            <li><a class="dropdown-item sort-option"
+                                                    data-value="price_asc">{{ trans('main.price_low_to_high') }}</a></li>
+                                            <li><a class="dropdown-item sort-option"
+                                                    data-value="price_desc">{{ trans('main.price_high_to_low') }}</a></li>
+                                            <li><a class="dropdown-item sort-option"
+                                                    data-value="newest">{{ trans('main.newest_first') }}</a></li>
                                         </ul>
 
                                         <!-- مهم عشان يدخل في serialize -->
@@ -70,7 +73,7 @@
                             </div>
 
                             <div id="loadMoreWrapper">
-                                <button id="loadMoreBtn" class="col-lg-12">Load More</button>
+                                <button id="loadMoreBtn" class="col-lg-12">{{ trans('main.load_more') }}</button>
                             </div>
 
                         </div>

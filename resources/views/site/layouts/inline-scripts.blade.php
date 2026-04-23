@@ -289,22 +289,29 @@
                 }
 
                 if (data.out_of_stock) {
-                    availability.innerText = "Out of stock";
+                    availability.innerText = "{!! trans('main.out_of_stock') !!}";
                     availability.classList.add("text-danger");
 
                     addToCartBtns.forEach(btn => {
                         btn.classList.add("disabled");
-                        btn.setAttribute("disabled", true);
-                        btn.removeAttribute("data-stock");
+                        btn.dataset.disabled = "1";
+                        btn.style.pointerEvents = "none";
+                        btn.style.opacity = "0.5";
+                        btn.style.cursor = "not-allowed";
                     });
 
                 } else {
-                    availability.innerText = "In Stock";
+                    availability.innerText = "{!! trans('main.in_stock') !!}";
                     availability.classList.remove("text-danger");
 
                     addToCartBtns.forEach(btn => {
-                        btn.classList.remove("disabled");
                         btn.removeAttribute("disabled");
+                        btn.classList.remove("disabled");
+                        btn.dataset.disabled = "0";
+                        btn.style.pointerEvents = "";
+                        btn.style.opacity = "";
+                        btn.style.cursor = "";
+
                         btn.setAttribute("data-stock", data.stock_id);
                     });
                 }
@@ -330,50 +337,57 @@
     // ===============================
     // زر "Add to Cart"
     // ===============================
-    $(document).on('click', '.add_to_cart', function(e) {
-        e.preventDefault();
+    let isRequesting = false;
 
-        let product_id = $(this).data('product');
-        let stock_id = $(this).data('stock');
-        let quantity = parseInt($(this).closest('.product').find('.quantity .number').text());
+    $(document).off('click.addToCart')
+        .on('click.addToCart', '.add_to_cart', function(e) {
+            e.preventDefault();
 
-        let selectedAttributes = {};
+            if (isRequesting) return;
 
-        // جمع كل الصفات المختارة
-        $('.product-size').each(function() {
-            let attribute_id = $(this).data('attribute-id');
-            let selectedOption = $(this).find('.option.selected');
-            let value_id = selectedOption.data('value');
+            isRequesting = true;
 
-            if (attribute_id && value_id) {
-                selectedAttributes[attribute_id] = value_id;
-            }
-        });
+            let product_id = $(this).data('product');
+            let stock_id = $(this).data('stock');
+            let quantity = parseInt($(this).closest('.product').find('.quantity .number').text());
 
-        console.log("Selected Attributes:", selectedAttributes);
+            let selectedAttributes = {};
 
-        $.ajax({
-            url: '/cart/add',
-            type: 'POST',
-            data: {
-                product_id: product_id,
-                stock_id: stock_id,
-                attributes: selectedAttributes,
-                quantity: quantity,
-                _token: $('meta[name="csrf-token"]').attr('content')
-            },
-            beforeSend: function() {
-                $('.add-to-cart-btn').prop('disabled', true).text('Adding...');
-            },
-            success: function(response) {
-                toastr.success(response.message || 'Added to cart successfully!');
+            // جمع كل الصفات المختارة
+            $('.product-size').each(function() {
+                let attribute_id = $(this).data('attribute-id');
+                let selectedOption = $(this).find('.option.selected');
+                let value_id = selectedOption.data('value');
 
-                $('#cart-count').text(response.cart.count);
+                if (attribute_id && value_id) {
+                    selectedAttributes[attribute_id] = value_id;
+                }
+            });
 
-                let itemsHtml = '';
+            console.log("Selected Attributes:", selectedAttributes);
 
-                response.cart.items.forEach(item => {
-                    itemsHtml += `
+            $.ajax({
+                url: '/cart/add',
+                type: 'POST',
+                data: {
+                    product_id: product_id,
+                    stock_id: stock_id,
+                    attributes: selectedAttributes,
+                    quantity: quantity,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function() {
+                    $('.add-to-cart-btn').prop('disabled', true).text('Adding...');
+                },
+                success: function(response) {
+                    toastr.success(response.message || 'Added to cart successfully!');
+
+                    $('#cart-count').text(response.cart.count);
+
+                    let itemsHtml = '';
+
+                    response.cart.items.forEach(item => {
+                        itemsHtml += `
                             <div class="wrapper">
                                 <div class="wrapper-item">
                                     <div class="wrapper-img">
@@ -391,26 +405,27 @@
                                 </span>
                             </div>
                         `;
-                });
+                    });
 
-                $('#cart-items').html(itemsHtml);
+                    $('#cart-items').html(itemsHtml);
 
-                $('.wrapper-subtotal .wrapper-title-sub').text(`$${response.cart.subtotal}`);
+                    $('.wrapper-subtotal .wrapper-title-sub').text(`$${response.cart.subtotal}`);
 
 
-            },
-            error: function(xhr) {
-                if (xhr.status === 422) {
-                    toastr.error('Please select all options.');
-                } else {
-                    toastr.error('Something went wrong.');
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        toastr.error("{!! trans('main.select_all_options') !!}");
+                    } else {
+                        toastr.error("{!! trans('main.something_went_wrong') !!}");
+                    }
+                },
+                complete: function() {
+                    isRequesting = false;
+                    $('.add-to-cart-btn').prop('disabled', false).text('Add to Cart');
                 }
-            },
-            complete: function() {
-                $('.add-to-cart-btn').prop('disabled', false).text('Add to Cart');
-            }
+            });
         });
-    });
 
     let modalSwiper = null;
     let modalThumbs = null;
