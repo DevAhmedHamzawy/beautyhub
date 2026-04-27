@@ -37,7 +37,9 @@
                                     <span class="address"> Remember Me</span>
                                 </div>
                                 <div class="forget-pass">
-                                    <p>Forgot password?</p>
+                                    <a href="{{ route('password.request') }}">
+                                        <p>Forgot password?</p>
+                                    </a>
                                 </div>
                             </div>
                         </div>

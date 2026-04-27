@@ -218,17 +218,47 @@
                          </div>
                      </div>
                      <div class="header-user">
-                         <a href="user-profile.html">
-                             <span>
-                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                     height="24" class="fill-current">
-                                     <path fill="none" d="M0 0h24v24H0z"></path>
-                                     <path
-                                         d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
-                                     </path>
-                                 </svg>
-                             </span>
-                         </a>
+                         @auth
+                             <div class="dropdown">
+                                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                     <span>
+                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                             height="24" class="fill-current">
+                                             <path fill="none" d="M0 0h24v24H0z"></path>
+                                             <path
+                                                 d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
+                                             </path>
+                                         </svg>
+                                     </span>
+                                 </a>
+
+                                 <ul class="dropdown-menu">
+                                     {{-- لوحة التحكم --}}
+                                     <li>
+                                         <a class="dropdown-item" href="{{ route('profile') }}">
+                                             لوحة التحكم
+                                         </a>
+                                     </li>
+
+                                     {{-- تسجيل الخروج --}}
+                                     <li>
+                                         <form method="POST" action="{{ route('logout') }}">
+                                             @csrf
+                                             <button type="submit" class="dropdown-item">
+                                                 تسجيل الخروج
+                                             </button>
+                                         </form>
+                                     </li>
+                                 </ul>
+                             </div>
+                         @endauth
+
+                         @guest
+                             <a href="{{ route('login') }}">{{ trans('main.login') }}</a>
+                             &nbsp;&nbsp;
+                             <a href="{{ route('register') }}">{{ trans('main.register') }}</a>
+                         @endguest
+
                      </div>
                  </div>
              </div>

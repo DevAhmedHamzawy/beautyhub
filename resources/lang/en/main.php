@@ -68,4 +68,6 @@ return [
     'send_now' => 'Send Now',
     'the_faq' => 'Frequently Asked Questions',
     'have_any_questions' => 'Have any questions?',
+    'login' => 'Login',
+    'register' => 'Register',
     ];
