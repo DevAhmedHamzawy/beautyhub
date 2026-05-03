@@ -21,10 +21,11 @@ class SearchController extends Controller
         $categories = Category::whereActive(1)->whereNull('parent_id')->get();
         $brands = Brand::whereActive(1)->get();
         $attributes = Attribute::whereActive(1)->whereNull('parent_id')->with('children')->get();
+        $min = null;
+        $max = null;
+        $products = Product::whereRelation('stocks', 'qty', '>', 0)->paginate(12);
 
-        $products = Product::whereRelation('stocks', 'qty', '>', 0)->get();
-
-        return view('site.products.search', compact('categories', 'brands', 'attributes', 'products'));
+        return view('site.products.search', compact('categories', 'brands', 'attributes', 'products', 'min', 'max'));
     }
 
 

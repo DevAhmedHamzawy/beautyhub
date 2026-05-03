@@ -11,7 +11,7 @@ class WishlistController extends Controller
     public function index() {
         $wishlists = auth()->user()?->wishlist()->get();
 
-        if(!$wishlists) {
+        if($wishlists->isEmpty()) {
             return view('site.wishlist_empty');
         }
 

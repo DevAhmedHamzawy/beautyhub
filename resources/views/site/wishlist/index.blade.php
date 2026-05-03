@@ -7,12 +7,12 @@
     <section class="blog about-blog">
         <div class="container">
             <div class="blog-bradcrum">
-                <span><a href="index-2.html">Home</a></span>
+                <span><a href="{{ url('/') }}">{{ trans('main.home') }}</a></span>
                 <span class="devider">/</span>
-                <span><a href="#">Wishlist</a></span>
+                <span><a href="#">{{ trans('main.wishlist') }}</a></span>
             </div>
             <div class="blog-heading about-heading">
-                <h1 class="heading">Wishlist</h1>
+                <h1 class="heading">{{ trans('main.wishlist') }}</h1>
             </div>
         </div>
     </section>
@@ -24,16 +24,16 @@
                     <tbody>
                         <tr class="table-row table-top-row">
                             <td class="table-wrapper wrapper-product">
-                                <h5 class="table-heading">PRODUCT</h5>
+                                <h5 class="table-heading">{{ trans('main.product') }}</h5>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">PRICE</h5>
+                                    <h5 class="table-heading">{{ trans('main.price') }}</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">ACTION</h5>
+                                    <h5 class="table-heading">{{ trans('main.action') }}</h5>
                                 </div>
                             </td>
                         </tr>
@@ -51,16 +51,20 @@
                                     </div>
                                 </td>
                                 <td class="table-wrapper">
-                                    <div class="table-wrapper-center">
+                                    <div class="table-wrapper-center price">
                                         <h5 class="heading">
                                             @php
                                                 $price = $product->the_price ?? [];
                                             @endphp
 
-                                            @if (!empty($price) && $price['discounted'] != null)
-                                                <span class="new-price">{{ $price['discounted'] }}</span>
+                                            @if ($product->the_price['discounted'] == null)
+                                                <span class="new-price">{{ $product->the_price['original'] }} <span
+                                                        style="font-family: 'Arshid';">$</span></span>
                                             @else
-                                                <span class="new-price">{{ $price['original'] ?? 'N/A' }}</span>
+                                                <span class="price-cut">{{ $product->the_price['original'] }} <span
+                                                        style="font-family: 'Arshid';">$</span></span>
+                                                <span class="new-price">{{ $product->the_price['discounted'] }} <span
+                                                        style="font-family: 'Arshid';">$</span></span>
                                             @endif
                                         </h5>
                                     </div>
@@ -79,10 +83,6 @@
 
                     </tbody>
                 </table>
-            </div>
-            <div class="wishlist-btn">
-                <a href="empty-wishlist.html" class="clean-btn">Clean Wishlist</a>
-                <a href="#" class="shop-btn">View Cards</a>
             </div>
         </div>
     </section>

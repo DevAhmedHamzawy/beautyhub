@@ -126,12 +126,15 @@
                                      <div class="price">
                                          @if ($flash_sale_product->product->the_price['discounted'] == null)
                                              <span
-                                                 class="new-price">{{ $flash_sale_product->product->the_price['original'] }}</span>
+                                                 class="new-price">{{ $flash_sale_product->product->the_price['original'] }}
+                                                 <span style="font-family: 'Arshid';">$</span></span>
                                          @else
                                              <span
-                                                 class="price-cut">{{ $flash_sale_product->product->the_price['original'] }}</span>
+                                                 class="price-cut">{{ $flash_sale_product->product->the_price['original'] }}
+                                                 <span style="font-family: 'Arshid';">$</span></span>
                                              <span
-                                                 class="new-price">{{ $flash_sale_product->product->the_price['discounted'] }}</span>
+                                                 class="new-price">{{ $flash_sale_product->product->the_price['discounted'] }}
+                                                 <span style="font-family: 'Arshid';">$</span></span>
                                          @endif
                                      </div>
                                  </div>

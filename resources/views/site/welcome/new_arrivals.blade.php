@@ -115,10 +115,13 @@
                                          </a>
                                          <div class="price">
                                              @if ($new_arrival->the_price['discounted'] == null)
-                                                 <span class="new-price">{{ $new_arrival->the_price['original'] }}</span>
+                                                 <span class="new-price">{{ $new_arrival->the_price['original'] }} <span
+                                                         style="font-family: 'Arshid';">$</span></span>
                                              @else
-                                                 <span class="price-cut">{{ $new_arrival->the_price['original'] }}</span>
-                                                 <span class="new-price">{{ $new_arrival->the_price['discounted'] }}</span>
+                                                 <span class="price-cut">{{ $new_arrival->the_price['original'] }} <span
+                                                         style="font-family: 'Arshid';">$</span></span>
+                                                 <span class="new-price">{{ $new_arrival->the_price['discounted'] }} <span
+                                                         style="font-family: 'Arshid';">$</span></span>
                                              @endif
                                          </div>
                                      </div>

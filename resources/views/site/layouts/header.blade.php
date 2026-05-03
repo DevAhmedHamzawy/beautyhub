@@ -183,7 +183,8 @@
                                                  <h5 class="wrapper-title">{{ $item->product->name }}</h5>
                                                  <div class="price">
                                                      <p class="new-price">
-                                                         ${{ number_format($item->product->the_price['discounted'] ?? $item->product->the_price['original'], 2) }}
+                                                         {{ number_format($item->product->the_price['discounted'] ?? $item->product->the_price['original'], 2) }}
+                                                         <span style="font-family: 'Arshid';">$</span>
                                                      </p>
                                                  </div>
                                              </div>
@@ -205,7 +206,8 @@
                                          @php
                                              $subtotal = $cart->sum(fn($item) => $item->unit_price * $item->quantity);
                                          @endphp
-                                         ${{ number_format($subtotal, 2) }}
+                                         {{ number_format($subtotal, 2) }} <span
+                                             style="font-family: 'Arshid';">$</span>
                                      </h5>
                                  </div>
                                  <div class="cart-btn">

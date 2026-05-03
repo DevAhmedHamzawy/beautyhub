@@ -7,12 +7,12 @@
     <section class="blog about-blog">
         <div class="container">
             <div class="blog-bradcrum">
-                <span><a href="index-2.html">Home</a></span>
+                <span><a href="{{ url('/') }}">{{ trans('main.home') }}</a></span>
                 <span class="devider">/</span>
-                <span><a href="#">Compaire</a></span>
+                <span><a href="#">{{ trans('main.compare') }}</a></span>
             </div>
             <div class="blog-heading">
-                <h1 class="heading">Product Comparison</h1>
+                <h1 class="heading">{{ trans('main.product_comparison') }}</h1>
             </div>
         </div>
     </section>
@@ -25,10 +25,9 @@
                         <tr class="cart-top">
                             <td class="cart-item cart-grey-bg vertical-cart">
                                 <div class="wrapper-title">
-                                    <h5 class="comment-title">Product Comparison</h5>
+                                    <h5 class="comment-title">{{ trans('main.product_comparison') }}</h5>
                                     <p class="paragraph">
-                                        Select products to see the differences and similarities
-                                        between them
+                                        {{ trans('main.product_comparison_text') }}
                                     </p>
                                 </div>
                             </td>
@@ -55,11 +54,19 @@
                                                     @endphp
 
                                                     @if (!empty($price) && $price['discounted'] != null)
-                                                        <span class="new-price">{{ $price['discounted'] }}</span>
+                                                        <span class="price-cut">{{ $product->the_price['original'] }} <span
+                                                                style="font-family: 'Arshid';">$</span></span>
+                                                        <span class="new-price">{{ $product->the_price['discounted'] }}
+                                                            <span style="font-family: 'Arshid';">$</span></span>
                                                     @else
-                                                        <span class="new-price">{{ $price['original'] ?? 'N/A' }}</span>
+                                                        <span
+                                                            class="new-price">{{ $product->the_price['original'] ?? 'N/A' }}
+                                                            <span style="font-family: 'Arshid';">$</span></span>
                                                     @endif
                                                 </div>
+
+
+
                                             </div>
 
                                         </div>
@@ -72,7 +79,7 @@
                         <tr class="cart-top cart-bottom">
                             <td class="cart-item cart-grey-bg">
                                 <div class="wrapper-title">
-                                    <h5 class="comment-title">Star Rating</h5>
+                                    <h5 class="comment-title">{{ trans('main.star_rating') }}</h5>
                                 </div>
                             </td>
 

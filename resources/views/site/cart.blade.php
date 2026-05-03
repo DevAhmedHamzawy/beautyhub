@@ -7,12 +7,12 @@
     <section class="blog about-blog">
         <div class="container">
             <div class="blog-bradcrum">
-                <span><a href="index-2.html">Home</a></span>
+                <span><a href="{{ url('/') }}">{{ trans('main.home') }}</a></span>
                 <span class="devider">/</span>
-                <span><a href="#">Cart</a></span>
+                <span><a href="#">{{ trans('main.cart') }}</a></span>
             </div>
             <div class="blog-heading about-heading">
-                <h1 class="heading">Cart</h1>
+                <h1 class="heading">{{ trans('main.cart') }}</h1>
             </div>
         </div>
     </section>
@@ -24,36 +24,36 @@
                     <tbody>
                         <tr class="table-row table-top-row">
                             <td class="table-wrapper wrapper-product">
-                                <h5 class="table-heading">PRODUCT</h5>
+                                <h5 class="table-heading">{{ trans('main.product') }}</h5>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">PRICE</h5>
+                                    <h5 class="table-heading">{{ trans('main.price') }}</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">QUANTITY</h5>
+                                    <h5 class="table-heading">{{ trans('main.quantity') }}</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">Tax Rate</h5>
+                                    <h5 class="table-heading">{{ trans('main.tax_rate') }}</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">Tax</h5>
+                                    <h5 class="table-heading">{{ trans('main.tax') }}</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper wrapper-total">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">TOTAL</h5>
+                                    <h5 class="table-heading">{{ trans('main.total') }}</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">ACTION</h5>
+                                    <h5 class="table-heading">{{ trans('main.action') }}</h5>
                                 </div>
                             </td>
                         </tr>
@@ -77,7 +77,8 @@
                                 </td>
                                 <td class="table-wrapper">
                                     <div class="table-wrapper-center">
-                                        <h5 class="heading">{{ $item['unit_price'] }}</h5>
+                                        <h5 class="heading">{{ $item['unit_price'] }} <span
+                                                style="font-family: 'Arshid';">$</span></h5>
                                     </div>
                                 </td>
                                 <td class="table-wrapper">
@@ -94,17 +95,20 @@
                                 </td>
                                 <td class="table-wrapper">
                                     <div class="table-wrapper-center">
-                                        <h5 class="heading">{{ $item['tax_rate'] }}</h5>
+                                        <h5 class="heading">{{ $item['tax_rate'] }} <span
+                                                style="font-family: 'Arshid';">$</span></h5>
                                     </div>
                                 </td>
                                 <td class="table-wrapper">
                                     <div class="table-wrapper-center">
-                                        <h5 class="heading total-tax">{{ $item['tax'] }}</h5>
+                                        <h5 class="heading total-tax">{{ $item['tax'] }} <span
+                                                style="font-family: 'Arshid';">$</span></h5>
                                     </div>
                                 </td>
                                 <td class="table-wrapper wrapper-total">
                                     <div class="table-wrapper-center">
-                                        <h5 class="heading line-total">{{ number_format($item['total'], 2) }} EGP</h5>
+                                        <h5 class="heading line-total">{{ number_format($item['total'], 2) }} <span
+                                                style="font-family: 'Arshid';">$</span></h5>
                                     </div>
                                 </td>
                                 <td class="table-wrapper">
@@ -126,7 +130,8 @@
                             </td>
                             <td class="table-wrapper wrapper-total">
                                 <div class="table-wrapper-center">
-                                    <h5 class="heading" id="cart-subtotal">{{ number_format($subtotal, 2) }} EGP</h5>
+                                    <h5 class="heading" id="cart-subtotal">{{ number_format($subtotal, 2) }} <span
+                                            style="font-family: 'Arshid';">$</span></h5>
                                 </div>
                             </td>
                             <td></td>
@@ -136,9 +141,7 @@
                 </table>
             </div>
             <div class="wishlist-btn cart-btn">
-                <a href="empty-cart.html" class="clean-btn">Clear Cart</a>
-                <a href="#" class="shop-btn update-btn">Update Cart</a>
-                <a href="{{ route('checkout') }}" class="shop-btn">Proceed to Checkout</a>
+                <a href="{{ route('checkout') }}" class="shop-btn">{{ trans('main.proceed_to_checkout') }}</a>
             </div>
         </div>
     </section>

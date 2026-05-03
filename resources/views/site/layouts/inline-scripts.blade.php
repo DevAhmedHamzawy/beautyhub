@@ -277,8 +277,10 @@
 
                 if (data.discounted) {
                     priceBox.innerHTML =
-                        `<span class="price-cut">${data.original}</span>
-                     <span class="new-price">${data.discounted}</span>`;
+                        `<span class="price-cut">${data.original}  <span
+                                                      style="font-family: 'Arshid';">$</span></span>
+                     <span class="new-price">${data.discounted}  <span
+                                                      style="font-family: 'Arshid';">$</span></span>`;
 
                     // ===== اظهار الخصم =====
                     if (discountBox && discountValue) {
@@ -286,7 +288,8 @@
                         discountBox.classList.remove("d-none");
                     }
                 } else {
-                    priceBox.innerHTML = `<span class="new-price">${data.original}</span>`;
+                    priceBox.innerHTML = `<span class="new-price">${data.original}  <span
+                                                      style="font-family: 'Arshid';">$</span></span>`;
 
                     // ===== اخفاء الخصم =====
                     if (discountBox) {
@@ -524,7 +527,7 @@
                     // لو الكارت فاضي
                     if ($('#cart-items .wrapper').length === 0) {
                         $('#cart-items').html(
-                            '<p class="text-center">Your cart is empty</p>'
+                            '<p class="text-center">{{ trans('main.cart_empty') }}</p>'
                         );
                     }
                 });
@@ -561,7 +564,7 @@
                     // لو الجدول فاضي
                     if ($('tbody tr.ticket-row').length === 0) {
                         $('tbody').html(
-                            '<tr><td colspan="3" class="text-center">Your wishlist is empty</td></tr>'
+                            '<tr><td colspan="3" class="text-center">{{ trans('main.wishlist_empty') }}</td></tr>'
                         );
                     }
                 });
@@ -602,7 +605,7 @@
                 setTimeout(() => {
                     if ($('tr.cart-top td.cart-center').length === 0) {
                         $('tbody').html(
-                            '<tr><td colspan="3" class="text-center">Your compare is empty</td></tr>'
+                            '<tr><td colspan="3" class="text-center">{{ trans('main.compare_empty') }}</td></tr>'
                         );
                     }
                 }, 350);
