@@ -5,15 +5,16 @@
         <div class="container">
             <div class="login-section">
                 <div class="review-form">
-                    <h5 class="comment-title">Log In</h5>
+                    <h5 class="comment-title">{{ trans('auth.login') }}</h5>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="review-inner-form">
                             <div class="review-form-name">
-                                <label for="email" class="form-label">Email Address**</label>
+                                <label for="email" class="form-label">{{ trans('auth.email') }}*</label>
                                 <input type="email" id="email" name="email"
-                                    class="form-control @error('email') is-invalid @enderror" placeholder="Email" />
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="{{ trans('auth.email') }}" />
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -21,9 +22,10 @@
                                 @enderror
                             </div>
                             <div class="review-form-name">
-                                <label for="password" class="form-label">Password*</label>
+                                <label for="password" class="form-label">{{ trans('auth.the_password') }}*</label>
                                 <input type="password" id="password" name="password"
-                                    class="form-control @error('password') is-invalid @enderror" placeholder="password" />
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="{{ trans('auth.the_password') }}" />
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -34,19 +36,20 @@
                                 <div class="checkbox-item">
                                     <input type="checkbox" name="remember" id="remember"
                                         {{ old('remember') ? 'checked' : '' }} />
-                                    <span class="address"> Remember Me</span>
+                                    <span class="address">{{ trans('auth.remember') }}</span>
                                 </div>
                                 <div class="forget-pass">
                                     <a href="{{ route('password.request') }}">
-                                        <p>Forgot password?</p>
+                                        <p>{{ trans('auth.forgot_your_password') }}</p>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="login-btn text-center">
-                            <button type="submit" class="shop-btn">Log In</button>
-                            <span class="shop-account">Dont't have an account ?<a href="{{ route('register') }}">Sign Up
-                                    Free</a></span>
+                            <button type="submit" class="shop-btn">{{ trans('auth.login') }}</button>
+                            <span class="shop-account">{{ trans('auth.dont_have_an_account') }}<a
+                                    href="{{ route('register') }}">
+                                    {{ trans('auth.register_free') }}</a></span>
                         </div>
                     </form>
                 </div>

@@ -35,8 +35,8 @@ class WishlistController extends Controller
 
             return response()->json([
                 'type' => 'success',
-                'title' => 'Removed',
-                'message' => 'Wishlist Removed Successfully',
+                'title' => trans('main.removed'),
+                'message' => trans('main.wishlist_removed_successfully'),
                 'status' => 'removed',
                 'active' => 0,
                 "wishlist_count" => $user->wishlist()->count()
@@ -47,12 +47,26 @@ class WishlistController extends Controller
 
             return response()->json([
                 'type' => 'success',
-                'title' => 'Added',
-                'message' => 'Wishlist Added Successfully',
+                'title' => trans('main.added'),
+                'message' => trans('main.wishlist_added_successfully'),
                 'status' => 'added',
                 'active' => 1,
                 "wishlist_count" => $user->wishlist()->count()
             ]);
         }
+    }
+
+    public function remove(Request $request) {
+        $user = auth()->user();
+        $user->wishlist()->detach($request->product_id);
+
+        return response()->json([
+            'type' => 'success',
+            'title' => trans('main.removed'),
+            'message' => trans('main.wishlist_removed_successfully'),
+            'status' => 'removed',
+            'active' => 0,
+            "count" => $user->wishlist()->count()
+        ]);
     }
 }

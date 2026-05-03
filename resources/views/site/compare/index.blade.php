@@ -37,11 +37,18 @@
                                     <div class="wrapper-data">
 
                                         <div class="wrapper">
+
+                                            <a href="#" class="remove-product" data-id="{{ $product->id }}">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </a>
+
                                             <div class="wrapper-img">
                                                 <img src="{{ $product->img_path }}" alt />
                                             </div>
+
                                             <div class="wrapper-content">
                                                 <h5 class="wrapper-details">{{ $product->name }}</h5>
+
                                                 <div class="price">
                                                     @php
                                                         $price = $product->the_price ?? [];
@@ -54,6 +61,7 @@
                                                     @endif
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </td>

@@ -11,11 +11,6 @@ class CheckoutController extends Controller
 {
     public function show()
     {
-        if (!auth()->check()) {
-            session(['redirect_after_auth' => 'checkout']);
-            return redirect()->route('login');
-        }
-
         $locale = app()->getLocale();
 
         $areas = Area::getMainAreas();

@@ -5,7 +5,7 @@
         <div class="container">
             <div class="login-section">
                 <div class="review-form">
-                    <h5 class="comment-title">{{ __('Reset Password') }}</h5>
+                    <h5 class="comment-title">{{ __('auth.reset_password') }}</h5>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('password.update') }}">
@@ -30,7 +30,7 @@
 
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        placeholder="password" required autocomplete="new-password">
+                                        placeholder="{{ trans('auth.the_password') }}" required autocomplete="new-password">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -41,14 +41,14 @@
 
                                 <div class="review-form-name">
                                     <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" placeholder="password_confirmation" required
-                                        autocomplete="new-password">
+                                        name="password_confirmation" placeholder="{{ trans('auth.password_confirmation') }}"
+                                        required autocomplete="new-password">
                                 </div>
 
                                 <div class="login-btn text-center">
 
                                     <button type="submit" class="shop-btn">
-                                        {{ __('Reset Password') }}
+                                        {{ __('auth.reset_password') }}
                                     </button>
                                 </div>
                         </form>

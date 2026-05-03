@@ -8,24 +8,30 @@
                     <div class="col-lg-7">
                         <div class="row gy-5">
                             <div class="col-lg-12">
+                                @foreach ($errors->all() as $error)
+                                    <div class="alert alert-danger">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
                                 <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="seller-information" data-aos="fade-right">
-                                        <h5 class="comment-title">Seller Information</h5>
+                                        <h5 class="comment-title">{{ trans('auth.user_info') }}</h5>
                                         <p class="paragraph">
-                                            Fill the form below or write us We will help you as soon
-                                            as possible
+                                            {{ trans('auth.fill_form') }}
                                         </p>
                                         <div class="review-form">
                                             <div class="review-inner-form">
 
 
                                                 <div class="review-form-name">
-                                                    <label for="email" class="form-label">Name*</label>
+                                                    <label for="email"
+                                                        class="form-label">{{ trans('main.name') }}*</label>
                                                     <input id="name" type="text"
                                                         class="form-control @error('name') is-invalid @enderror"
-                                                        name="name" value="{{ old('name') }}" placeholder="Name"
-                                                        required autocomplete="name" autofocus>
+                                                        name="name" value="{{ old('name') }}"
+                                                        placeholder="{{ trans('main.name') }}" required autocomplete="name"
+                                                        autofocus>
 
                                                     @error('name')
                                                         <span class="invalid-feedback" role="alert">
@@ -35,11 +41,13 @@
                                                 </div>
 
                                                 <div class="review-form-name">
-                                                    <label for="email" class="form-label">Email Address*</label>
+                                                    <label for="email"
+                                                        class="form-label">{{ trans('auth.email') }}*</label>
                                                     <input id="email" type="email"
                                                         class="form-control @error('email') is-invalid @enderror"
-                                                        name="email" value="{{ old('email') }}" placeholder="email"
-                                                        required autocomplete="email">
+                                                        name="email" value="{{ old('email') }}"
+                                                        placeholder="{{ trans('auth.email') }}" required
+                                                        autocomplete="email">
 
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
@@ -48,10 +56,11 @@
                                                     @enderror
                                                 </div>
                                                 <div class="review-form-name">
-                                                    <label for="phone" class="form-label">password*</label>
+                                                    <label for="phone"
+                                                        class="form-label">{{ trans('main.password') }}*</label>
                                                     <input id="password" type="password"
                                                         class="form-control @error('password') is-invalid @enderror"
-                                                        name="password" placeholder="password" required
+                                                        name="password" placeholder="{{ trans('main.password') }}" required
                                                         autocomplete="new-password">
                                                     @error('password')
                                                         <span class="invalid-feedback" role="alert">
@@ -61,7 +70,8 @@
                                                 </div>
 
                                                 <div class="review-form-name">
-                                                    <label for="phone" class="form-label">Confirm Password*</label>
+                                                    <label for="phone"
+                                                        class="form-label">{{ trans('auth.password_confirmation') }}*</label>
                                                     <input id="password-confirm" type="password" class="form-control"
                                                         name="password_confirmation" required autocomplete="new-password">
                                                 </div>
@@ -73,11 +83,6 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="seller-information" data-aos="fade-right">
-                                    <h5 class="comment-title">Shop Information</h5>
-                                    <p class="paragraph">
-                                        Fill the form below or write us We will help you as soon
-                                        as possible
-                                    </p>
                                     <div class="review-form">
                                         <div class="review-inner-form">
 
@@ -152,9 +157,10 @@
 
 
                                             <div class="review-form-name">
-                                                <label for="address" class="form-label">Address*</label>
+                                                <label for="address"
+                                                    class="form-label">{{ trans('main.address') }}*</label>
                                                 <textarea id="address" name="address" class="form-control @error('address') is-invalid @enderror"
-                                                    placeholder="Address"></textarea>
+                                                    placeholder="{{ trans('main.address') }}">{{ old('address') }}</textarea>
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -162,10 +168,12 @@
                                                 @enderror
                                             </div>
                                             <div class="review-form-name">
-                                                <label for="street" class="form-label">Street*</label>
+                                                <label for="street"
+                                                    class="form-label">{{ trans('auth.street') }}*</label>
                                                 <input type="text" id="street" name="street"
                                                     class="form-control @error('street') is-invalid @enderror"
-                                                    placeholder="Street" />
+                                                    value="{{ old('street') }}"
+                                                    placeholder="{{ trans('auth.street') }}" />
                                                 @error('street')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -173,10 +181,12 @@
                                                 @enderror
                                             </div>
                                             <div class="review-form-name">
-                                                <label for="building" class="form-label">Building*</label>
+                                                <label for="building"
+                                                    class="form-label">{{ trans('auth.building') }}*</label>
                                                 <input type="text" id="building" name="building"
                                                     class="form-control @error('building') is-invalid @enderror"
-                                                    placeholder="Building" />
+                                                    value="{{ old('building') }}"
+                                                    placeholder="{{ trans('auth.building') }}" />
                                                 @error('building')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -184,10 +194,12 @@
                                                 @enderror
                                             </div>
                                             <div class="review-form-name">
-                                                <label for="floor" class="form-label">Floor*</label>
+                                                <label for="floor"
+                                                    class="form-label">{{ trans('auth.floor') }}*</label>
                                                 <input type="text" id="floor" name="floor"
                                                     class="form-control @error('floor') is-invalid @enderror"
-                                                    placeholder="Floor" />
+                                                    value="{{ old('floor') }}"
+                                                    placeholder="{{ trans('auth.floor') }}" />
                                                 @error('floor')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -195,10 +207,12 @@
                                                 @enderror
                                             </div>
                                             <div class="review-form-name">
-                                                <label for="apartment" class="form-label">Apartment*</label>
+                                                <label for="apartment"
+                                                    class="form-label">{{ trans('auth.apartment') }}*</label>
                                                 <input type="text" id="apartment" name="apartment"
                                                     class="form-control @error('apartment') is-invalid  @enderror"
-                                                    placeholder="Apartment" />
+                                                    value="{{ old('apartment') }}"
+                                                    placeholder="{{ trans('auth.apartment') }}" />
                                                 @error('apartment')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -206,10 +220,12 @@
                                                 @enderror
                                             </div>
                                             <div class="review-form-name">
-                                                <label for="postal_code" class="form-label">Postal Code*</label>
+                                                <label for="postal_code"
+                                                    class="form-label">{{ trans('main.zip') }}*</label>
                                                 <input type="text" id="postal_code" name="postal_code"
                                                     class="form-control @error('postal_code') is-invalid @enderror"
-                                                    placeholder="Postal Code" />
+                                                    value="{{ old('postal_code') }}"
+                                                    placeholder="{{ trans('main.zip') }}" />
                                                 @error('postal_code')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -217,10 +233,12 @@
                                                 @enderror
                                             </div>
                                             <div class="review-form-name">
-                                                <label for="phone" class="form-label">Phone*</label>
+                                                <label for="phone"
+                                                    class="form-label">{{ trans('main.phone') }}*</label>
                                                 <input type="text" id="phone" name="phone"
                                                     class="form-control @error('phone') is-invalid @enderror"
-                                                    placeholder="Phone" />
+                                                    value="{{ old('phone') }}"
+                                                    placeholder="{{ trans('main.phone') }}" />
                                                 @error('phone')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -228,10 +246,12 @@
                                                 @enderror
                                             </div>
                                             <div class="review-form-name">
-                                                <label for="additional_phone" class="form-label">additional Phone*</label>
+                                                <label for="additional_phone"
+                                                    class="form-label">{{ trans('main.additional_phone') }}*</label>
                                                 <input type="text" id="additional_phone" name="additional_phone"
                                                     class="form-control @error('additional_phone') is-invalid @enderror"
-                                                    placeholder="Additional Phone" />
+                                                    value="{{ old('additional_phone') }}"
+                                                    placeholder="{{ trans('main.additional_phone') }}" />
                                                 @error('additional_phone')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -242,8 +262,9 @@
 
                                             <div class="review-form-name checkbox">
                                                 <input type="checkbox" name="agree" />
-                                                <label for="address" class="form-label">
-                                                    I agree all terms and condition in ShopUs</label>
+                                                <label for="address"
+                                                    class="form-label @error('agree') is-invalid @enderror">
+                                                    {{ trans('auth.terms') }}</label>
                                                 @error('agree')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -251,10 +272,10 @@
                                                 @enderror
                                             </div>
                                             <div class="form-btn">
-                                                <button type="submit" class="shop-btn">Create Seller Account</button>
-                                                <span class="shop-account">Already have an Account?<a
-                                                        href="login.html">Log
-                                                        in</a></span>
+                                                <button type="submit"
+                                                    class="shop-btn">{{ trans('main.register') }}</button>
+                                                <span class="shop-account">{{ trans('auth.already_have_an_account') }}?<a
+                                                        href="login.html">{{ trans('auth.login') }}</a></span>
                                             </div>
                                         </div>
                                     </div>
@@ -267,10 +288,8 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="logo-wrapper">
-                                        <h5 class="comment-title">Update Logo</h5>
-                                        <p class="paragraph">
-                                            Profile of at least Size300x300. Gifs work too.Max 5mb.
-                                        </p>
+                                        <h5 class="comment-title">{{ trans('main.update_logo') }}</h5>
+
                                         <div class="logo-upload">
                                             <img src="assets/images/homepage-one/sallers-cover.png" alt="upload"
                                                 class="upload-img" id="upload-img" />

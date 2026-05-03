@@ -36,24 +36,28 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 Route::post('/products/{product}/price', [ProductController::class, 'getPrice'])->name('products.getPrice');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
 Route::get('search', [SearchController::class, 'index'])->name('search');
 Route::get('/search/filter', [SearchController::class, 'getFilters'])->name('search.filter');
 Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::post('wishlist/{product}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+Route::delete('/wishlist/remove', [WishlistController::class, 'remove'])->name('wishlist.remove');
+Route::delete('/compare/remove', [CompareController::class, 'remove'])->name('compare.remove');
 Route::get('compare', [CompareController::class, 'index'])->name('compare.index');
 Route::post('compare/toggle/{product}', [CompareController::class, 'toggle'])->name('compare.toggle');
 Route::get('/product/details/{product}', [ProductController::class, 'getDetails'])->name('products.getDetails');
 Route::post('/cart/update', [CartController::class, 'update']);
 Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-Route::post('/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('applyCoupon');
 Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
 Route::post('/contact/save', [ContactController::class, 'save'])->name('contact.save');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('verified')->group(function () {
+
+    Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
+    Route::post('/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('applyCoupon');
+
 
     Route::post('/save_order', [OrderController::class, 'save'])->name('save_order');
     Route::get('/profile', [UserController::class, 'show'])->name('profile');
@@ -61,6 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders/{order}/invoice', [OrderController::class, 'invoice'])->name('orders.invoice');
 
     Route::post('/products/{product}/rate', [RatingController::class, 'store'])->name('products.rate');
+    Route::post('address/update', [UserController::class, 'updateAddress'])->name('address.update');
+    Route::post('/change-password', [UserController::class, 'updatePassword'])->name('change.password');
 
 });
 
@@ -85,7 +91,7 @@ Route::get('lang/{lang}', [LocalizationController::class, 'index'])->name('langu
 
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 
 

@@ -23,15 +23,21 @@
                             type: data.type, // success, error, info...
                             html: true,
                             text: `
-                                <h5>الرجاء تسجيل الدخول أو الإنضمام للموقع</h5>
+                                <h5>${"{{ trans('main.please_login') }}"}</h5>
                                 <div class="swal-custom-buttons">
-                                    <a href="{{ route('login') }}" class="swal-btn swal-btn-login">دخول الموقع</a>
-                                    <a href="{{ route('register') }}" class="swal-btn swal-btn-register">الإنضمام للموقع</a>
-                                    <a href="javascript:void(0);" class="swal-btn swal-btn-later">شكراً ... ربما لاحقاً</a>
+                                    <a href="{{ route('login') }}" class="swal-btn swal-btn-login">
+                                        {{ trans('main.login_site') }}
+                                    </a>
+                                    <a href="{{ route('register') }}" class="swal-btn swal-btn-register">
+                                        {{ trans('main.register_site') }}
+                                    </a>
+                                    <a href="javascript:void(0);" class="swal-btn swal-btn-later">
+                                        {{ trans('main.thanks_later') }}
+                                    </a>
                                 </div>
                             `,
-                            showConfirmButton: false,
-                        })
+                            showConfirmButton: false
+                        });
 
                         document.addEventListener('click', function(e) {
                             if (e.target.classList.contains('swal-btn-later')) {
@@ -474,22 +480,27 @@
         });
     }
 
-    document.getElementById('productModal').addEventListener('shown.bs.modal', function() {
-        setTimeout(() => {
-            initModalSwipers();
-        }, 100); // زود الوقت شوية لـ 100ms
-    });
+    let modalEl = document.getElementById('productModal');
 
-    document.getElementById('productModal').addEventListener('hidden.bs.modal', function() {
-        if (modalSwiper) {
-            modalSwiper.destroy(true, true);
-            modalSwiper = null;
-        }
-        if (modalThumbs) {
-            modalThumbs.destroy(true, true);
-            modalThumbs = null;
-        }
-    });
+    if (modalEl) {
+        document.getElementById('productModal').addEventListener('shown.bs.modal', function() {
+            setTimeout(() => {
+                initModalSwipers();
+            }, 100); // زود الوقت شوية لـ 100ms
+        });
+
+        document.getElementById('productModal').addEventListener('hidden.bs.modal', function() {
+            if (modalSwiper) {
+                modalSwiper.destroy(true, true);
+                modalSwiper = null;
+            }
+            if (modalThumbs) {
+                modalThumbs.destroy(true, true);
+                modalThumbs = null;
+            }
+        });
+
+    }
 
     $(document).on('click', '.remove-item', function() {
 
@@ -523,8 +534,82 @@
                 // تحديث العداد
                 document.getElementById('cart-count').textContent = res.count;
 
-                toastr.success('Removed from cart successfully!');
+                toastr.success(res.message);
 
+            }
+        });
+    });
+
+    $(document).on('click', '.remove-wishlist', function() {
+
+        let btn = $(this);
+        let productId = btn.data('product');
+        let wrapper = btn.closest('tr'); // ✅ الصح
+
+        $.ajax({
+            url: '/wishlist/remove',
+            type: 'DELETE',
+            data: {
+                product_id: productId,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(res) {
+
+                wrapper.fadeOut(300, function() {
+                    $(this).remove();
+
+                    // لو الجدول فاضي
+                    if ($('tbody tr.ticket-row').length === 0) {
+                        $('tbody').html(
+                            '<tr><td colspan="3" class="text-center">Your wishlist is empty</td></tr>'
+                        );
+                    }
+                });
+
+                $('.wishlist_count').text(res.count);
+
+                toastr.success(res.message);
+            }
+        });
+    });
+
+    $(document).on('click', '.remove-product', function() {
+
+        let btn = $(this);
+        let productId = btn.data('id');
+        let td = btn.closest('td');
+        let index = td.index();
+
+        $.ajax({
+            url: '/compare/remove',
+            type: 'DELETE',
+            data: {
+                product_id: productId,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(res) {
+
+                // امسح العمود كله من كل الصفوف
+                $('table tr').each(function() {
+                    let cell = $(this).find('td').eq(index);
+
+                    cell.slideUp(300, function() {
+                        $(this).remove();
+                    });
+                });
+
+                // استنى الأنيميشن تخلص
+                setTimeout(() => {
+                    if ($('tr.cart-top td.cart-center').length === 0) {
+                        $('tbody').html(
+                            '<tr><td colspan="3" class="text-center">Your compare is empty</td></tr>'
+                        );
+                    }
+                }, 350);
+
+                $('.compare_count').text(res.count);
+
+                toastr.success(res.message);
             }
         });
     });

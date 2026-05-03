@@ -273,6 +273,7 @@ class CartController extends Controller
         return response()->json([
             'success' => true,
             'count' => $count,
+            'message' => trans('main.cart_removed_successfully'),
             'subtotal' => number_format($subtotal, 2, '.', ''),
         ]);
     }

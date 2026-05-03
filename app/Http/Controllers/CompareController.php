@@ -25,8 +25,8 @@ class CompareController extends Controller
 
             return response()->json([
                 'type' => 'success',
-                'title' => 'Removed',
-                'message' => 'Compare Removed Successfully',
+                'title' => trans('main.removed'),
+                'message' => trans('main.comparison_removed_successfully'),
                 'status' => 'removed',
                 'active' => 0,
                 "compare_count" => count($compare)
@@ -36,8 +36,8 @@ class CompareController extends Controller
         if(count($compare) >= 3){
             return response()->json([
                 'type' => 'warning',
-                'title' => 'Full',
-                'message' => 'Cannot add more than 3 products',
+                'title' => trans('main.full'),
+                'message' => trans('main.cannot_add_more_than_3_products'),
                 'status' => 'full',
             ]);
         }
@@ -49,12 +49,29 @@ class CompareController extends Controller
 
         return response()->json([
             'type' => 'success',
-            'title' => 'Added',
-            'message' => 'Compare Added Successfully',
+            'title' => trans('main.added'),
+            'message' => trans('main.comparison_added_successfully'),
             'status' => 'added',
             'active' => 1,
             "compare_count" => count($compare)
         ]);
 
+    }
+
+    public function remove(Request $request)
+    {
+        $compare = session()->get('compare', []);
+        $id = $request->input('product_id');
+        $compare = array_filter($compare, fn($p) => $p != $id);
+        session()->put('compare', $compare);
+
+        return response()->json([
+            'type' => 'success',
+            'title' => trans('main.removed'),
+            'message' => trans('main.comparison_removed_successfully'),
+            'status' => 'removed',
+            'active' => 1,
+            "count" => count($compare)
+        ]);
     }
 }

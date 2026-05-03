@@ -11,12 +11,12 @@
     <section class="blog about-blog">
         <div class="container">
             <div class="blog-bradcrum">
-                <span><a href="index-2.html">Home</a></span>
+                <span><a href="{{ url('/') }}">{{ trans('main.home') }}</a></span>
                 <span class="devider">/</span>
-                <span><a href="#">Dashboard</a></span>
+                <span><a href="#">{{ trans('main.dashboard') }}</a></span>
             </div>
             <div class="blog-heading about-heading">
-                <h1 class="heading">User Dashboard</h1>
+                <h1 class="heading">{{ trans('main.dashboard') }}</h1>
             </div>
         </div>
     </section>
@@ -25,11 +25,7 @@
         <div class="container">
             <div class="user-profile-section">
                 <div class="dashboard-heading">
-                    <h5 class="dashboard-title">Change Password</h5>
-                    <div class="dashboard-switch">
-                        <span class="text">Switch Dashboard</span>
-                        <span onclick="switchDashboard()" class="switch-icon"></span>
-                    </div>
+                    <h5 class="dashboard-title">{{ trans('main.dashboard') }}</h5>
                 </div>
                 <div class="user-dashboard">
 

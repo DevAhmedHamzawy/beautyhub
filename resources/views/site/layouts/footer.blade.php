@@ -26,9 +26,9 @@
                              </span>
                          </div>
                          <div class="service-content">
-                             <h5 class="service-info service-title">Free Shipping</h5>
+                             <h5 class="service-info service-title">{{ trans('main.free_shipping') }}</h5>
                              <p class="service-info service-details">
-                                 When ordering over $100
+                                 {{ trans('main.free_shipping_over') }}
                              </p>
                          </div>
                      </div>
@@ -48,9 +48,9 @@
                              </span>
                          </div>
                          <div class="service-content">
-                             <h5 class="service-info service-title">Free Return</h5>
+                             <h5 class="service-info service-title">{{ trans('main.free_return') }}</h5>
                              <p class="service-info service-details">
-                                 Get Return within 30 days
+                                 {{ trans('main.free_return_30_days') }}
                              </p>
                          </div>
                      </div>
@@ -75,9 +75,9 @@
                              </span>
                          </div>
                          <div class="service-content">
-                             <h5 class="service-info service-title">Secure Payment</h5>
+                             <h5 class="service-info service-title">{{ trans('main.secure_payment') }}</h5>
                              <p class="service-info service-details">
-                                 100% Secure Online Payment
+                                 {{ trans('main.secure_payment_online') }}
                              </p>
                          </div>
                      </div>
@@ -102,9 +102,9 @@
                              </span>
                          </div>
                          <div class="service-content">
-                             <h5 class="service-info service-title">Best Quality</h5>
+                             <h5 class="service-info service-title">{{ trans('main.best_quality') }}</h5>
                              <p class="service-info service-details">
-                                 Original Product Guarenteed
+                                 {{ trans('main.original_product') }}
                              </p>
                          </div>
                      </div>
@@ -116,20 +116,13 @@
                  <div class="col-lg-3 col-sm-6">
                      <div class="footer-order">
                          <div class="logo">
-                             <img src="assets/images/logos/footer-logo.webp" alt="logo" />
-                         </div>
-                         <div class="footer-link order-link">
-                             <ul>
-                                 <li><a href="order.html">Track Order</a></li>
-                                 <li><a href="cart.html">Delivery & Returns</a></li>
-                                 <li><a href="about.html">Warranty</a></li>
-                             </ul>
+                             <img src="{{ $settings->footer_logo_path }}" alt="logo" />
                          </div>
                      </div>
                  </div>
                  <div class="col-lg-3 col-sm-6">
                      <div class="about-us">
-                         <h4 class="footer-heading footer-title">About Us</h4>
+                         <h4 class="footer-heading footer-title">{{ trans('main.about') }}</h4>
                          <div class="footer-link about-link">
                              <ul>
                                  @foreach ($pagesColumn1 as $page)
@@ -142,7 +135,7 @@
                  </div>
                  <div class="col-lg-3 col-sm-6">
                      <div class="links">
-                         <h4 class="footer-heading footer-title">Useful Links</h4>
+                         <h4 class="footer-heading footer-title">{{ trans('main.useful_links') }}</h4>
                          <div class="footer-link useful-link">
                              <ul>
                                  @foreach ($pagesColumn2 as $page)
@@ -155,7 +148,7 @@
                  </div>
                  <div class="col-lg-3 col-sm-6">
                      <div class="contact-info">
-                         <h4 class="footer-heading footer-title">Contact Info</h4>
+                         <h4 class="footer-heading footer-title">{{ trans('main.contact') }}</h4>
                          <div class="footer-link contact-link">
                              <div class="address">
                                  <div class="icon">
@@ -182,7 +175,7 @@
                                      </span>
                                  </div>
                                  <div class="details">
-                                     <h4 class="footer-heading">Address:</h4>
+                                     <h4 class="footer-heading">{{ trans('main.address') }}:</h4>
                                      <p>{{ $settings->address }}</p>
                                  </div>
                              </div>
@@ -208,7 +201,7 @@
                                      </span>
                                  </div>
                                  <div class="details">
-                                     <h4 class="footer-heading">Phone:</h4>
+                                     <h4 class="footer-heading">{{ trans('main.phone') }}:</h4>
                                      <p>{{ $settings->phone }}</p>
                                  </div>
                              </div>
@@ -241,6 +234,11 @@
 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+ <script>
+     @if (session('success'))
+         toastr.success("{{ session('success') }}");
+     @endif
+ </script>
 
  @yield('footer')
 
