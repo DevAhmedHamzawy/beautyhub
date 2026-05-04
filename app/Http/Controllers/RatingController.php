@@ -26,6 +26,6 @@ class RatingController extends Controller
             ]
         );
 
-        return back()->with('success', 'تم التقييم بنجاح ⭐');
+        return back()->with('success', trans('main.review_added_successfully'));
     }
 }

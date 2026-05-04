@@ -120,7 +120,7 @@
                                      </span>
                                  </div>
                                  <div class="product-description">
-                                     <a href="product-info.html"
+                                     <a href="{{ route('products.show', $flash_sale_product->product->slug) }}"
                                          class="product-details">{{ $flash_sale_product->product->translate($locale)->name }}
                                      </a>
                                      <div class="price">

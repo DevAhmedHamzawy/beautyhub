@@ -1,130 +1,118 @@
 <script>
-    document.querySelectorAll(".favourite").forEach(function(element) {
-        element.addEventListener("click", function(e) {
-            e.preventDefault(); // منع الرابط الافتراضي
+    document.addEventListener("click", function(e) {
+        const element = e.target.closest(".favourite");
+        if (!element) return;
 
-            const productSlug = this.dataset.slug;
+        e.preventDefault();
 
-            fetch(`{{ route('wishlist.toggle', ['product' => ':slug']) }}`.replace(':slug',
-                    productSlug), {
-                    method: "POST",
-                    headers: {
-                        "X-CSRF-TOKEN": '{{ csrf_token() }}',
-                        "Accept": "application/json"
-                    }
-                })
-                .then(res => res.json())
-                .then(data => {
+        const productSlug = element.dataset.slug;
 
-                    if (data.status === 'guest') {
+        fetch(`{{ route('wishlist.toggle', ['product' => ':slug']) }}`.replace(':slug', productSlug), {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": '{{ csrf_token() }}',
+                    "Accept": "application/json"
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
 
-                        swal({
-                            title: data.title,
-                            type: data.type, // success, error, info...
-                            html: true,
-                            text: `
-                                <h5>${"{{ trans('main.please_login') }}"}</h5>
-                                <div class="swal-custom-buttons">
-                                    <a href="{{ route('login') }}" class="swal-btn swal-btn-login">
-                                        {{ trans('main.login_site') }}
-                                    </a>
-                                    <a href="{{ route('register') }}" class="swal-btn swal-btn-register">
-                                        {{ trans('main.register_site') }}
-                                    </a>
-                                    <a href="javascript:void(0);" class="swal-btn swal-btn-later">
-                                        {{ trans('main.thanks_later') }}
-                                    </a>
-                                </div>
-                            `,
-                            showConfirmButton: false
-                        });
+                if (data.status === 'guest') {
+                    swal({
+                        title: data.title,
+                        type: data.type,
+                        html: true,
+                        text: `
+                    <h5>{{ trans('main.please_login') }}</h5>
+                    <div class="swal-custom-buttons">
+                        <a href="{{ route('login') }}" class="swal-btn swal-btn-login">
+                            {{ trans('main.login_site') }}
+                        </a>
+                        <a href="{{ route('register') }}" class="swal-btn swal-btn-register">
+                            {{ trans('main.register_site') }}
+                        </a>
+                        <a href="javascript:void(0);" class="swal-btn swal-btn-later">
+                            {{ trans('main.thanks_later') }}
+                        </a>
+                    </div>
+                `,
+                        showConfirmButton: false
+                    });
 
-                        document.addEventListener('click', function(e) {
-                            if (e.target.classList.contains('swal-btn-later')) {
-                                swal.close();
-                            }
-                        });
+                    return;
+                }
 
+                swal({
+                    type: data.type,
+                    title: data.title,
+                    text: data.message,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
 
-                        return;
-                    }
+                updateIcon(element, data.active);
 
-                    if (data.status == 'added' || data.status == 'removed') {
-                        swal({
-                            type: data.type, // success, error, info...
-                            title: data.title,
-                            text: data.message,
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-                    }
+                document.querySelector('.wishlist_count').textContent = data.wishlist_count;
 
-
-                    // Update icon color
-                    updateIcon(this, data.active);
-
-                    // Update wishlist count
-                    document.querySelector('.wishlist_count').textContent = data.wishlist_count;
-
-                    // Save state for refresh
-                    this.dataset.inWishlist = data.active ? '1' : '0';
-
-                })
-                .catch(error => console.log(error));
-        });
+                element.dataset.inWishlist = data.active ? '1' : '0';
+            });
     });
 
-    document.querySelectorAll(".compaire").forEach(function(element) {
-        element.addEventListener("click", function(e) {
-            e.preventDefault(); // منع الرابط الافتراضي
+    document.addEventListener("click", function(e) {
+        const element = e.target.closest(".compaire");
+        if (!element) return;
 
-            productSlug = this.dataset.slug;
+        e.preventDefault();
 
-            fetch(`{{ route('compare.toggle', ['product' => ':slug']) }}`.replace(':slug',
-                    productSlug), {
-                    method: "POST",
-                    headers: {
-                        "X-CSRF-TOKEN": '{{ csrf_token() }}',
-                        "Accept": "application/json"
-                    }
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === 'full') {
+        const productSlug = element.dataset.slug;
 
-                        swal({
-                            type: data.type, // success, error, info...
-                            title: data.title,
-                            text: data.message,
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
+        fetch(`{{ route('compare.toggle', ['product' => ':slug']) }}`.replace(':slug', productSlug), {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": '{{ csrf_token() }}',
+                    "Accept": "application/json"
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
 
-                        return;
-                    }
+                // لو القائمة ممتلئة
+                if (data.status === 'full') {
+                    swal({
+                        type: data.type,
+                        title: data.title,
+                        text: data.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                    return;
+                }
 
-                    if (data.status == 'added' || data.status == 'removed') {
-                        swal({
-                            type: data.type, // success, error, info...
-                            title: data.title,
-                            text: data.message,
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-                    }
+                // added / removed
+                if (data.status === 'added' || data.status === 'removed') {
+                    swal({
+                        type: data.type,
+                        title: data.title,
+                        text: data.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
 
-                    // Update icon color
-                    updateIcon(this, data.active);
+                // update icon
+                updateIcon(element, data.active);
 
-                    // Update wishlist count
-                    document.querySelector('.compare_count').textContent = data.compare_count;
+                // update counter
+                const counter = document.querySelector('.compare_count');
+                if (counter) {
+                    counter.textContent = data.compare_count;
+                }
 
-                    // Save state for refresh
-                    this.dataset.inCompare = data.active ? '1' : '0';
-                })
-                .catch(error => console.log(error));
-        });
-    })
+                // update state
+                element.dataset.inCompare = data.active ? '1' : '0';
+            })
+            .catch(error => console.log(error));
+    });
 
     function updateIcon(el, active = false) {
         const rect = el.querySelector('svg rect');
@@ -360,12 +348,21 @@
             let stock_id = $(this).data('stock');
             let quantity = parseInt($(this).closest('.product').find('.quantity .number').text());
 
+            // نجمع كل الـ attributes اللي المستخدم اختارها
+            let parent = $(this).closest('.col-md-6');
+
             let selectedAttributes = {};
 
-            // جمع كل الصفات المختارة
-            $('.product-size').each(function() {
-                let attribute_id = $(this).data('attribute-id');
+            parent.find('.product-size').each(function() {
+
                 let selectedOption = $(this).find('.option.selected');
+
+                if (!selectedOption.length) {
+                    selectedOption = $(this).find('.option').first();
+                    selectedOption.addClass('selected');
+                }
+
+                let attribute_id = $(this).data('attribute-id');
                 let value_id = selectedOption.data('value');
 
                 if (attribute_id && value_id) {
@@ -405,7 +402,8 @@
                                     <div class="wrapper-content">
                                         <h5 class="wrapper-title">${item.name}</h5>
                                         <div class="price">
-                                            <p class="new-price">$${item.price}</p>
+                                            <p class="new-price">${item.price} <span
+                                                         style="font-family: 'Arshid';">$</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -418,8 +416,10 @@
 
                     $('#cart-items').html(itemsHtml);
 
-                    $('.wrapper-subtotal .wrapper-title-sub').text(`$${response.cart.subtotal}`);
-
+                    $('.wrapper-subtotal .wrapper-title-sub').html(`
+                                ${response.cart.subtotal}
+                                <span style="font-family: 'Arshid';">$</span>
+                            `);
 
                 },
                 error: function(xhr) {
@@ -532,8 +532,10 @@
                     }
                 });
 
-                $('.wrapper-subtotal .wrapper-title-sub').text(`$${res.subtotal}`);
-
+                $('.wrapper-subtotal .wrapper-title-sub').html(`
+                                ${res.subtotal}
+                                <span style="font-family: 'Arshid';">$</span>
+                            `);
                 // تحديث العداد
                 document.getElementById('cart-count').textContent = res.count;
 

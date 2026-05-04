@@ -188,11 +188,12 @@
 
                     if (res.status === 'success') {
                         $('.coupon-message').css('color', 'green').text(res.message);
-                        totalElem.text((parseFloat(res.new_total) + shipping).toFixed(2));
+                        totalElem.html((parseFloat(res.new_total) + shipping).toFixed(2) +
+                            '<span style="font-family: Arshid;">$</span>');
                     } else {
                         $('.coupon-message').css('color', 'red').text(res.message);
-                        totalElem.text((parseFloat(res.original_total) + shipping).toFixed(
-                            2));
+                        totalElem.html((parseFloat(res.original_total) + shipping).toFixed(
+                            2) + '<span style="font-family: Arshid;">$</span>');
                     }
                 },
                 error: function() {

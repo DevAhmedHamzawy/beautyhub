@@ -30,7 +30,7 @@ class RedirectIfAuthenticated
                 return redirect()->intended();
             }
 
-            return $guard == 'admin' ? redirect('admin/dashboard') : redirect('/home');
+            return $guard == 'admin' ? redirect('admin/dashboard') : redirect('/profile');
         }
 
         return $next($request);

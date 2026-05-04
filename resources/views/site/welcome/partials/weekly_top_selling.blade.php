@@ -102,7 +102,7 @@
                                      </span>
                                  </div>
                                  <div class="product-description">
-                                     <a href="product-info.html"
+                                     <a href="{{ route('products.show', $product->slug) }}"
                                          class="product-details">{{ $product->translate($locale)->name }}
                                      </a>
                                      <div class="price">

@@ -1,11 +1,11 @@
   <section class="product product-info">
       <div class="container">
           <div class="blog-bradcrum">
-              <span><a href="index-2.html">Home</a></span>
+              <span><a href="{{ url('/') }}">{{ trans('main.home') }}</a></span>
               <span class="devider">/</span>
-              <span><a href="product-sidebar.html">Shop</a></span>
+              <span><a href="{{ route('search') }}">{{ trans('main.shop') }}</a></span>
               <span class="devider">/</span>
-              <span><a href="#">Product Details</a></span>
+              <span><a href="#">{{ $product->translate($locale)->name }}</a></span>
           </div>
           <div class="product-info-section">
               <div class="row">
@@ -60,7 +60,7 @@
                                   </div>
 
                                   <span class="text-muted">
-                                      {{ $count }} تقييم
+                                      {{ $count }} {{ trans('main.rating') }}
                                   </span>
                               </div>
                           </div>
@@ -72,7 +72,7 @@
                           </p>
                           <hr />
                           <div class="product-availability">
-                              <span>Availabillity : </span>
+                              <span>{{ trans('main.availability') }} : </span>
                               <span class="inner-text" id="availability-text"></span>
                           </div>
                           @foreach ($attributes as $attribute)
@@ -98,7 +98,7 @@
 
                                   <ul class="size-option">
                                       @foreach ($attribute['values'] as $value)
-                                          <li class="option" {!! $attribute['selected'] && $attribute['selected'] == $value['id'] ? 'data-default="true"' : '' !!} data-attr="{{ $attribute['id'] }}"
+                                          <li class="option {!! $attribute['selected'] && $attribute['selected'] == $value['id'] ? 'selected' : '' !!}" data-attr="{{ $attribute['id'] }}"
                                               data-value="{{ $value['id'] }}">
                                               <span class="option-text">{{ $value['name'] }}</span>
                                           </li>
@@ -136,23 +136,21 @@
                                               fill="white" />
                                       </svg>
                                   </span>
-                                  <span class="add_to_cart">Add to Cart</span>
+                                  <span>{{ trans('main.add_to_cart') }}</span>
                               </a>
                           </div>
                           <hr />
                           <div class="product-details">
                               <p class="category">
-                                  Category : <span class="inner-text">Kitchen</span>
-                              </p>
-                              <p class="tags">
-                                  Tags : <span class="inner-text">Beer, Foamer</span>
+                                  {{ trans('main.category') }} : <span
+                                      class="inner-text">{{ $product->category->translate($locale)->name }}</span>
                               </p>
                               <p class="sku">
-                                  SKU : <span class="inner-text">KE-91039</span>
+                                  {{ trans('main.sku') }} : <span class="inner-text">{{ $product->sku }}</span>
                               </p>
                           </div>
                           <hr />
-                          <div class="product-report">
+                          {{-- <div class="product-report">
                               <a href="#" class="report" onclick="modalAction('.action')">
                                   <span>
                                       <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
@@ -194,11 +192,11 @@
                                       </div>
                                   </div>
                               </div>
-                          </div>
+                          </div> --}}
                           <div class="product-share">
                               <p>Share This:</p>
                               <div class="social-icons">
-                                  <a href="#">
+                                  <a href="#" class="share-btn" data-type="facebook">
                                       <span class="facebook">
                                           <svg width="10" height="16" viewBox="0 0 10 16" fill="none"
                                               xmlns="http://www.w3.org/2000/svg">
@@ -208,7 +206,7 @@
                                           </svg>
                                       </span>
                                   </a>
-                                  <a href="#">
+                                  <a href="#" class="share-btn" data-type="pinterest">
                                       <span class="pinterest">
                                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                               xmlns="http://www.w3.org/2000/svg">
@@ -218,7 +216,7 @@
                                           </svg>
                                       </span>
                                   </a>
-                                  <a href="#">
+                                  <a href="#" class="share-btn" data-type="twitter">
                                       <span class="twitter">
                                           <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
                                               xmlns="http://www.w3.org/2000/svg">

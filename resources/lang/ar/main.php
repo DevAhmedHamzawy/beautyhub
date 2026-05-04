@@ -148,4 +148,13 @@ return [
     'official_invoice' => 'فاتورة رسمية',
     'details' => 'التفاصيل',
     'invoice' => 'الفاتورة',
+    'shop' => 'تسوق',
+    'category' => 'التصنيف',
+    'sku' => 'الكود',
+    'description' => 'الوصف',
+    'send_review' => 'ارسال التقييم',
+    'related_products' => 'منتجات ذات صلة',
+    'write_your_review' => 'اكتب رأيك في المنتج...',
+    'review_added_successfully' => 'تم التقييم بنجاح ⭐',
+    'send_success' => 'تم الارسال بنجاح'
 ];

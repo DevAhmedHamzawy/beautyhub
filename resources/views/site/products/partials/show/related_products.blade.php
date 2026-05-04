@@ -1,8 +1,7 @@
 <section class="product weekly-sale product-weekly footer-padding">
     <div class="container">
         <div class="section-title">
-            <h5>Related Products</h5>
-            <a href="#" class="view">View All</a>
+            <h5>{{ trans('main.related_products') }}</h5>
         </div>
         <div class="weekly-sale-section">
             <div class="row g-5">

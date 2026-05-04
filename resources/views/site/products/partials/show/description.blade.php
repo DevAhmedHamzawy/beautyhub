@@ -5,11 +5,11 @@
                  <div class="nav nav-tabs nav-item" id="nav-tab" role="tablist">
                      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
                          type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-                         Description
+                         {{ trans('main.description') }}
                      </button>
                      <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review"
                          type="button" role="tab" aria-controls="nav-review" aria-selected="false">
-                         Reviews
+                         {{ trans('main.reviews') }}
                      </button>
                  </div>
              </nav>
@@ -21,7 +21,7 @@
                  <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab"
                      tabindex="0">
                      <div class="product-review-section" data-aos="fade-up">
-                         <h5 class="intro-heading">Reviews</h5>
+                         <h5 class="intro-heading">{{ trans('main.reviews') }}</h5>
                          <div class="review-wrapper">
                              <form action="{{ route('products.rate', $product) }}" method="POST">
                                  @csrf
@@ -37,12 +37,12 @@
 
                                  {{-- 📝 Review Text --}}
                                  <div class="mb-3">
-                                     <textarea name="review" class="form-control" rows="4" placeholder="اكتب رأيك في المنتج..."></textarea>
+                                     <textarea name="review" class="form-control" rows="4" placeholder="{{ trans('main.write_your_review') }}"></textarea>
                                  </div>
 
                                  {{-- Submit --}}
                                  <button class="btn btn-primary">
-                                     إرسال التقييم ⭐
+                                     {{ trans('main.send_review') }} ⭐
                                  </button>
                              </form>
                              @foreach ($product->ratings as $rating)
@@ -55,7 +55,8 @@
                                              </div>
                                              <div class="author-details">
                                                  <h5>{{ $rating->user->name }}</h5>
-                                                 <p>{{ $rating->user->defaultAddress?->full_location ?? 'Unknown' }}</p>
+                                                 <p>{{ $rating->user->defaultAddress?->full_location ?? 'Unknown' }}
+                                                 </p>
                                              </div>
                                          </div>
 

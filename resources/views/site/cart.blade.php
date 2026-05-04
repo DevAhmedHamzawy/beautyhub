@@ -150,27 +150,18 @@
 
 @section('footer')
     <script>
-        $(document).on('click', '.qty-btn', function() {
+        $(document).on('click', '.qty-btn', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation(); // 👈 دي المهمة
 
             let wrapper = $(this).closest('.quantity');
             let stockId = wrapper.data('stock');
             let numberEl = wrapper.find('.number');
 
-            let quantity = parseInt(numberEl.text());
+            let quantity = parseInt(numberEl.text()) || 1;
 
-            if ($(this).hasClass('plus')) {
-                quantity++;
-            }
-
-            if ($(this).hasClass('minus')) {
-                if (quantity <= 1) return;
-                quantity--;
-            }
-
-            // تحديث UI مباشرة
             numberEl.text(quantity);
 
-            // إرسال التحديث للسيرفر
             updateCart(stockId, quantity);
         });
 
@@ -191,12 +182,19 @@
                     let item = res.items[stockId];
                     if (item) {
                         let row = $('tr[data-stock="' + stockId + '"]');
-                        row.find('.line-total').text(item.total);
-                        row.find('.total-tax').text(item.tax);
+                        row.find('.line-total').html(
+                            item.total + ' <span style="font-family: \'Arshid\';">$</span>'
+                        );
+
+                        row.find('.total-tax').html(
+                            item.tax + ' <span style="font-family: \'Arshid\';">$</span>'
+                        );
                     }
 
                     // تحديث subtotal
-                    $('#cart-subtotal').text(res.subtotal);
+                    $('#cart-subtotal').html(
+                        res.subtotal + ' <span style="font-family: \'Arshid\';">$</span>'
+                    );
                 },
                 error: function() {
                     toastr.error('Update failed');

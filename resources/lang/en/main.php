@@ -149,4 +149,13 @@ return [
     'official_invoice' => 'Official Invoice',
     'details' => 'Details',
     'invoice' => 'Invoice',
+    'shop' => 'Shop',
+    'category' => 'Category',
+    'sku' => 'SKU',
+    'description' => 'Description',
+    'send_review' => 'Send Review',
+    'related_products' => 'Related Products',
+    'write_your_review' => 'Write your review here...',
+    'review_added_successfully' => 'Review Added Successfully',
+    'send_success' => 'Send Successfully',
     ];

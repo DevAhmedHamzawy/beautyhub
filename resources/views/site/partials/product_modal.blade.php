@@ -80,7 +80,7 @@
 
                           <ul class="size-option">
                               @foreach ($attribute['values'] as $value)
-                                  <li class="option" {!! $attribute['selected'] && $attribute['selected'] == $value['id'] ? 'data-default="true"' : '' !!} data-attr="{{ $attribute['id'] }}"
+                                  <li class="option {!! $attribute['selected'] && $attribute['selected'] == $value['id'] ? 'selected' : '' !!}" data-attr="{{ $attribute['id'] }}"
                                       data-value="{{ $value['id'] }}">
                                       <span class="option-text">{{ $value['name'] }}</span>
                                   </li>
@@ -118,7 +118,7 @@
                                       fill="white" />
                               </svg>
                           </span>
-                          <span class="add_to_cart">{{ trans('main.add_to_cart') }}</span>
+                          <span>{{ trans('main.add_to_cart') }}</span>
                       </a>
                   </div>
 

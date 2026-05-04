@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Helper\FlashSaleHelper;
 use App\Models\Product;
+use App\Helper\SeoLinksShow;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function show(Product $product)
     {
+        SeoLinksShow::getLinks($product->name, $product->description, url()->current(), $product->created_at, $product->category, $product->images);
+
         $locale = app()->getLocale();
 
         $product->load('images',

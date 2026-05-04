@@ -124,6 +124,16 @@
                                             {{ session('success') }}
                                         </div>
                                     @endif
+
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                            <ul class="mb-0">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <form action="{{ route('contact.save') }}" method="post">
                                         @csrf
 
@@ -151,8 +161,8 @@
                                         rows="3"></textarea>
                                 </div>
                                 <div class="login-btn">
-                                    <a href="#" class="shop-btn"><button type="submit"
-                                            style="color: #fff;">{{ trans('main.send_now') }}</button></a>
+                                    <button type="submit" style="color: #fff;"
+                                        class="shop-btn">{{ trans('main.send_now') }}</button>
                                 </div>
                                 </form>
                             </div>

@@ -102,7 +102,9 @@
 
                     if (data.discounted) {
                         priceBox.innerHTML =
-                            `<span class="price-cut">${data.original}</span> <span class="new-price">${data.discounted}</span>`;
+                            `<span class="price-cut">${data.original}  <span
+                                                      style="font-family: 'Arshid';">$</span></span>  <span class="new-price">${data.discounted}  <span
+                                                      style="font-family: 'Arshid';">$</span></span>`;
 
                         // ===== اظهار الخصم =====
                         if (discountBox && discountValue) {
@@ -110,7 +112,8 @@
                             discountBox.classList.remove("d-none");
                         }
                     } else {
-                        priceBox.innerHTML = `<span class="new-price">${data.original}</span>`;
+                        priceBox.innerHTML = `<span class="new-price">${data.original}  <span
+                                                      style="font-family: 'Arshid';">$</span></span>`;
 
                         // ===== اخفاء الخصم =====
                         if (discountBox) {
@@ -119,7 +122,7 @@
                     }
 
                     if (data.out_of_stock) {
-                        availability.innerText = "Out of stock";
+                        availability.innerText = "{!! trans('main.out_of_stock') !!}";
                         availability.classList.add("text-danger");
 
                         addToCartBtns.forEach(btn => {
@@ -129,7 +132,7 @@
                         });
 
                     } else {
-                        availability.innerText = "In Stock";
+                        availability.innerText = "{!! trans('main.in_stock') !!}";
                         availability.classList.remove("text-danger");
 
                         addToCartBtns.forEach(btn => {
@@ -165,11 +168,20 @@
             let quantity = parseInt($(this).closest('.product').find('.quantity .number').text());
 
             // نجمع كل الـ attributes اللي المستخدم اختارها
+            let parent = $(this).closest('.col-md-6');
+
             let selectedAttributes = {};
 
-            $('.product-size').each(function() {
-                let attribute_id = $(this).data('attribute-id');
+            parent.find('.product-size').each(function() {
+
                 let selectedOption = $(this).find('.option.selected');
+
+                if (!selectedOption.length) {
+                    selectedOption = $(this).find('.option').first();
+                    selectedOption.addClass('selected');
+                }
+
+                let attribute_id = $(this).data('attribute-id');
                 let value_id = selectedOption.data('value');
 
                 if (attribute_id && value_id) {
@@ -209,7 +221,8 @@
                                     <div class="wrapper-content">
                                         <h5 class="wrapper-title">${item.name}</h5>
                                         <div class="price">
-                                            <p class="new-price">$${item.price}</p>
+                                            <p class="new-price">$${item.price} <span
+                                                         style="font-family: 'Arshid';">$</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -222,13 +235,16 @@
 
                     $('#cart-items').html(itemsHtml);
 
-                    $('.wrapper-subtotal .wrapper-title-sub').text(`$${response.cart.subtotal}`);
+                    $('.wrapper-subtotal .wrapper-title-sub').html(`
+                                ${response.cart.subtotal}
+                                <span style="font-family: 'Arshid';">$</span>
+                            `);
                 },
                 error: function(xhr) {
                     if (xhr.status === 422) {
-                        toastr.error('Please select all options.');
+                        toastr.error("{!! trans('main.select_all_options') !!}");
                     } else {
-                        toastr.error('Something went wrong.');
+                        toastr.error("{!! trans('main.something_went_wrong') !!}");
                     }
                 },
                 complete: function() {
@@ -259,19 +275,56 @@
                         // لو الكارت فاضي
                         if ($('#cart-items .wrapper').length === 0) {
                             $('#cart-items').html(
-                                '<p class="text-center">Your cart is empty</p>'
+                                '<p class="text-center">{{ trans('main.cart_empty') }}</p>'
                             );
                         }
                     });
 
-                    $('.wrapper-subtotal .wrapper-title-sub').text(`$${res.subtotal}`);
+                    $('.wrapper-subtotal .wrapper-title-sub').html(`
+                                ${response.subtotal}
+                                <span style="font-family: 'Arshid';">$</span>
+                            `);
 
                     // تحديث العداد
                     document.getElementById('cart-count').textContent = res.count;
 
-                    toastr.success('Removed from cart successfully!');
+                    toastr.success(res.message);
 
                 }
+            });
+        });
+
+
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const type = this.dataset.type;
+                const url = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent(document.title);
+
+                let shareUrl = '';
+
+                switch (type) {
+                    case 'facebook':
+                        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                        break;
+
+                    case 'twitter':
+                        shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                        break;
+
+                    case 'pinterest':
+                        shareUrl =
+                            `https://pinterest.com/pin/create/button/?url=${url}&description=${title}`;
+                        break;
+                }
+
+                window.open(
+                    shareUrl,
+                    '_blank',
+                    'width=600,height=400'
+                );
             });
         });
     </script>
