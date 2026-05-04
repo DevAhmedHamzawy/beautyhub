@@ -1,11 +1,11 @@
 <div class="col-lg-6">
     <div class="checkout-wrapper">
         <div class="account-section billing-section" style="margin-top: 75px;">
-            <h5 class="wrapper-heading">Billing Details</h5>
+            <h5 class="wrapper-heading">{{ trans('main.billing_details') }}</h5>
             <div class="review-form">
                 <div class="account-inner-form">
                     <div class="review-form-name">
-                        <label for="fname" class="form-label">First Name*</label>
+                        <label for="fname" class="form-label">{{ trans('main.first_name') }}*</label>
                         <input type="text" id="fname" name="first_name"
                             class="form-control @error('first_name') is-invalid @enderror"
                             value="{{ auth()->user()->name }}" />
@@ -16,7 +16,7 @@
                         @enderror
                     </div>
                     <div class="review-form-name">
-                        <label for="lname" class="form-label">Last Name*</label>
+                        <label for="lname" class="form-label">{{ trans('main.last_name') }}*</label>
                         <input type="text" id="lname" name="last_name"
                             class="form-control @error('last_name') is-invalid @enderror" value="Last Name" />
                         @error('last_name')
@@ -28,7 +28,7 @@
                 </div>
                 <div class="account-inner-form">
                     <div class="review-form-name">
-                        <label for="email" class="form-label">Email*</label>
+                        <label for="email" class="form-label">{{ trans('main.email') }}*</label>
                         <input type="email" id="email" name="email"
                             class="form-control @error('email') is-invalid @enderror"
                             value="{{ auth()->user()->email }}" />
@@ -39,7 +39,7 @@
                         @enderror
                     </div>
                     <div class="review-form-name">
-                        <label for="phone" class="form-label">Phone*</label>
+                        <label for="phone" class="form-label">{{ trans('main.phone') }}*</label>
                         <input type="tel" id="phone" name="phone"
                             class="form-control @error('phone') is-invalid @enderror"
                             value="{{ auth()->user()->defaultAddress->phone }}" />
@@ -50,7 +50,7 @@
                         </span>
                     @enderror
                     <div class="review-form-name">
-                        <label for="additional_phone" class="form-label">Additional Phone*</label>
+                        <label for="additional_phone" class="form-label">{{ trans('main.additional_phone') }}*</label>
                         <input type="tel" id="additional_phone" name="additional_phone"
                             class="form-control @error('additional_phone') is-invalid @enderror"
                             value="{{ auth()->user()->defaultAddress->additional_phone }}" />
@@ -63,9 +63,9 @@
                 </div>
 
                 <div class="review-form-name address-form">
-                    <label for="address" class="form-label">Address*</label>
+                    <label for="address" class="form-label">{{ trans('main.address') }}*</label>
                     <textarea id="address" name="address" class="form-control @error('address') is-invalid @enderror"
-                        placeholder="Address">{{ auth()->user()->defaultAddress->address }}</textarea>
+                        placeholder="{{ trans('main.address') }}">{{ auth()->user()->defaultAddress->address }}</textarea>
                     @error('address')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -143,10 +143,11 @@
 
 
                 <div class="review-form-name">
-                    <label for="street" class="form-label">Street*</label>
+                    <label for="street" class="form-label">{{ trans('auth.street') }}*</label>
                     <input type="text" id="street" name="street"
                         class="form-control @error('street') is-invalid @enderror"
-                        value="{{ auth()->user()->defaultAddress->street }}" placeholder="Street" />
+                        value="{{ auth()->user()->defaultAddress->street }}"
+                        placeholder="{{ trans('auth.street') }}" />
                     @error('street')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -154,10 +155,11 @@
                     @enderror
                 </div>
                 <div class="review-form-name">
-                    <label for="building" class="form-label">Building*</label>
+                    <label for="building" class="form-label">{{ trans('auth.building') }}*</label>
                     <input type="text" id="building" name="building"
                         class="form-control @error('building') is-invalid @enderror"
-                        value="{{ auth()->user()->defaultAddress->building }}" placeholder="Building" />
+                        value="{{ auth()->user()->defaultAddress->building }}"
+                        placeholder="{{ trans('auth.building') }}" />
                     @error('building')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -165,10 +167,11 @@
                     @enderror
                 </div>
                 <div class="review-form-name">
-                    <label for="floor" class="form-label">Floor*</label>
+                    <label for="floor" class="form-label">{{ trans('auth.floor') }}*</label>
                     <input type="text" id="floor" name="floor"
                         class="form-control @error('floor') is-invalid @enderror"
-                        value="{{ auth()->user()->defaultAddress->floor }}" placeholder="Floor" />
+                        value="{{ auth()->user()->defaultAddress->floor }}"
+                        placeholder="{{ trans('auth.floor') }}" />
                     @error('floor')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -176,10 +179,11 @@
                     @enderror
                 </div>
                 <div class="review-form-name">
-                    <label for="apartment" class="form-label">Apartment*</label>
+                    <label for="apartment" class="form-label">{{ trans('auth.apartment') }}*</label>
                     <input type="text" id="apartment" name="apartment"
                         class="form-control @error('apartment') is-invalid  @enderror"
-                        value="{{ auth()->user()->defaultAddress->apartment }}" placeholder="Apartment" />
+                        value="{{ auth()->user()->defaultAddress->apartment }}"
+                        placeholder="{{ trans('auth.apartment') }}" />
                     @error('apartment')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -187,10 +191,11 @@
                     @enderror
                 </div>
                 <div class="review-form-name">
-                    <label for="postal_code" class="form-label">Postal Code*</label>
+                    <label for="postal_code" class="form-label">{{ trans('main.zip') }}*</label>
                     <input type="text" id="postal_code" name="postal_code"
                         class="form-control @error('postal_code') is-invalid @enderror"
-                        value="{{ auth()->user()->defaultAddress->postal_code }}" placeholder="Postal Code" />
+                        value="{{ auth()->user()->defaultAddress->postal_code }}"
+                        placeholder="{{ trans('main.zip') }}" />
                     @error('postal_code')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

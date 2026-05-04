@@ -14,13 +14,13 @@
         {{-- Header --}}
         <div class="invoice-actions">
             <button onclick="window.print()" class="btn-print" title="Print Invoice">
-                🖨️ Print
+                🖨️ {{ trans('main.print') }}
             </button>
         </div>
         <div class="invoice-header">
             <div class="logo">
-                <h1>YOUR STORE</h1>
-                <p>Official Invoice</p>
+                <h1>Beauty Hub</h1>
+                <p>{{ trans('main.official_invoice') }}</p>
             </div>
 
             <div class="invoice-info">
@@ -78,17 +78,18 @@
                         </td>
 
                         <td>{{ $item->qty }}</td>
-                        <td>{{ number_format($item->price, 2) }}
+                        <td>{{ number_format($item->price, 2) }} <span style="font-family: Arshid;">$</span>
                             @if ($item->discount > 0)
                                 <br>
                                 <small class="discount">
-                                    Discount: -{{ number_format($item->discount, 2) }}
+                                    Discount: -{{ number_format($item->discount, 2) }} <span
+                                        style="font-family: Arshid;">$</span>
                                 </small>
                             @endif
                         </td>
-                        <td>{{ number_format($item->vat, 2) }}</td>
+                        <td>{{ number_format($item->vat, 2) }} <span style="font-family: Arshid;">$</span></td>
                         <td class="bold">
-                            {{ number_format($item->sub_total, 2) }}
+                            {{ number_format($item->sub_total, 2) }} <span style="font-family: Arshid;">$</span>
                         </td>
                     </tr>
                 @endforeach
@@ -100,35 +101,29 @@
             <table>
                 <tr>
                     <td>{{ trans('order.subtotal') }}</td>
-                    <td>{{ number_format($order->sub_total, 2) }}</td>
+                    <td>{{ number_format($order->sub_total, 2) }} <span style="font-family: Arshid;">$</span></td>
                 </tr>
                 <tr>
                     <td>{{ trans('order.vat') }}</td>
-                    <td>{{ number_format($order->vat, 2) }}</td>
+                    <td>{{ number_format($order->vat, 2) }} <span style="font-family: Arshid;">$</span></td>
                 </tr>
                 <tr>
                     <td>{{ trans('order.shipping_cost') }}</td>
-                    <td>{{ number_format($order->shipping_cost, 2) }}</td>
+                    <td>{{ number_format($order->shipping_cost, 2) }} <span style="font-family: Arshid;">$</span></td>
                 </tr>
 
                 @if ($order->discount > 0)
                     <tr class="discount">
                         <td>{{ trans('order.discount') }}</td>
-                        <td>-{{ number_format($order->discount, 2) }}</td>
+                        <td>-{{ number_format($order->discount, 2) }} <span style="font-family: Arshid;">$</span></td>
                     </tr>
                 @endif
 
                 <tr class="total">
                     <td>{{ trans('order.total') }}</td>
-                    <td>{{ number_format($order->total, 2) }}</td>
+                    <td>{{ number_format($order->total, 2) }} <span style="font-family: Arshid;">$</span></td>
                 </tr>
             </table>
-        </div>
-
-        {{-- Footer --}}
-        <div class="invoice-footer">
-            <p>Thank you for your purchase 💙</p>
-            <small>This invoice was generated electronically.</small>
         </div>
 
     </div>

@@ -1,22 +1,22 @@
 <div class="col-lg-6">
     <div class="checkout-wrapper">
-        <a href="#" class="shop-btn show-coupon">Enter Coupon Code</a>
+        <a href="#" class="shop-btn show-coupon">{{ trans('main.enter_coupon_code') }}</a>
 
         <div class="coupon-box" style="display: none; margin-top: 10px;">
             <input type="text" class="form-control" name="couponCode" id="couponCode" style="font-size: 20px;"
-                placeholder="Enter your coupon code">
-            <button type="button" class="shop-btn" id="applyCoupon">Apply</button>
+                placeholder="{{ trans('main.enter_coupon_code') }}">
+            <button type="button" class="shop-btn" id="applyCoupon">{{ trans('main.apply') }}</button>
             <p class="coupon-message" style="color: red; margin-top: 5px;"></p>
         </div>
         <div class="account-section billing-section">
-            <h5 class="wrapper-heading">Order Summary</h5>
+            <h5 class="wrapper-heading">{{ trans('main.order_summary') }}</h5>
             <div class="order-summery">
                 <div class="subtotal product-total">
-                    <h5 class="wrapper-heading">PRODUCT</h5>
-                    <h5 class="wrapper-heading">PRICE</h5>
-                    <h5 class="wrapper-heading">TAX</h5>
-                    <h5 class="wrapper-heading">QUANTITY</h5>
-                    <h5 class="wrapper-heading">TOTAL</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.product') }}</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.price') }}</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.tax') }}</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.quantity') }}</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.total') }}</h5>
                 </div>
                 <hr />
                 <div class="subtotal product-total">
@@ -33,16 +33,20 @@
                                     </ul>
                                 </div>
                                 <div class="price">
-                                    <h5 class="wrapper-heading">${{ $item['price'] }}</h5>
+                                    <h5 class="wrapper-heading"><span
+                                            style="font-family: 'Arshid';">$</span>{{ $item['price'] }}</h5>
                                 </div>
                                 <div class="tax">
-                                    <h5 class="wrapper-heading">${{ $item['tax'] }}</h5>
+                                    <h5 class="wrapper-heading"><span
+                                            style="font-family: 'Arshid';">$</span>{{ $item['tax'] }}</h5>
                                 </div>
                                 <div class="quantity">
                                     <h5 class="wrapper-heading">x{{ $item['quantity'] }}</h5>
                                 </div>
                                 <div class="price">
-                                    <h5 class="wrapper-heading">{{ number_format($item['subtotal'], 2) }}</h5>
+                                    <h5 class="wrapper-heading"><span
+                                            style="font-family: 'Arshid';">$</span>{{ number_format($item['subtotal'], 2) }}
+                                    </h5>
                                 </div>
                             </li>
                         @endforeach
@@ -51,25 +55,27 @@
                 </div>
                 <hr />
                 <div class="subtotal product-total">
-                    <h5 class="wrapper-heading">SUBTOTAL</h5>
-                    <h5 class="wrapper-heading">{{ $subtotal }}</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.subtotal') }}</h5>
+                    <h5 class="wrapper-heading"><span style="font-family: 'Arshid';">$</span>{{ $subtotal }}</h5>
                 </div>
                 <div class="subtotal product-total">
                     <ul class="product-list">
                         <li>
                             <div class="product-info">
-                                <p class="paragraph">SHIPPING</p>
+                                <p class="paragraph">{{ trans('main.shipping') }}</p>
                             </div>
                             <div class="price">
-                                <h5 class="wrapper-heading shipping_cost">+{{ $shipping_cost }}</h5>
+                                <h5 class="wrapper-heading shipping_cost">+<span
+                                        style="font-family: 'Arshid';">$</span>{{ $shipping_cost }}</h5>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <hr />
                 <div class="subtotal total">
-                    <h5 class="wrapper-heading">TOTAL</h5>
-                    <h5 class="wrapper-heading price total_price">{{ $subtotal + $shipping_cost }}</h5>
+                    <h5 class="wrapper-heading">{{ trans('main.total') }}</h5>
+                    <h5 class="wrapper-heading price total_price">{{ $subtotal + $shipping_cost }}<span
+                            style="font-family: 'Arshid';">$</span></h5>
                 </div>
                 <div class="subtotal payment-type">
                     {{-- <div class="checkbox-item">
@@ -88,7 +94,7 @@
                     <div class="checkbox-item">
                         <input type="radio" value="cod" name="payment_method" />
                         <div class="cash">
-                            <h5 class="wrapper-heading">Cash on Delivery</h5>
+                            <h5 class="wrapper-heading">{{ trans('main.cash_on_delivery') }}</h5>
                         </div>
                     </div>
                     {{-- <div class="checkbox-item">
@@ -100,7 +106,7 @@
                         </div>
                     </div> --}}
                 </div>
-                <button type="submit" class="shop-btn">Place Order Now</button>
+                <button type="submit" class="shop-btn">{{ trans('main.place_order_now') }}</button>
             </div>
         </div>
     </div>

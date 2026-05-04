@@ -153,7 +153,7 @@ class OrderController extends Controller
             DB::commit();
 
             return redirect()->route('orders.show', $order->id)
-                ->with('success', 'Order placed successfully.');
+                ->with('success', trans('main.order_placed_successfully'));
 
         } catch (\Exception $e) {
 

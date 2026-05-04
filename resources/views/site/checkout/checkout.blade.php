@@ -149,13 +149,16 @@
                 $(this).find(':selected').data('shipping')
             ) || 0;
 
-            $('.shipping_cost').text('+' + shipping.toFixed(2));
+            $('.shipping_cost').html(
+                '+' + shipping.toFixed(2) + '<span style="font-family: Arshid;">$</span>'
+            );
 
             let total = subtotal + shipping;
-            $('.total_price').text(total.toFixed(2));
 
+            $('.total_price').html(
+                total.toFixed(2) + '<span style="font-family: Arshid;">$</span>'
+            );
         });
-
         $('.show-coupon').on('click', function(e) {
             e.preventDefault();
             $('.coupon-box').slideToggle();
@@ -179,14 +182,17 @@
                 },
                 success: function(res) {
 
-                    let shipping = parseFloat($('#area_id').find(':selected').data('shipping')) || 0;
+                    let shipping = parseFloat($('#area_id').find(':selected').data(
+                            'shipping')) ||
+                        0;
 
                     if (res.status === 'success') {
                         $('.coupon-message').css('color', 'green').text(res.message);
                         totalElem.text((parseFloat(res.new_total) + shipping).toFixed(2));
                     } else {
                         $('.coupon-message').css('color', 'red').text(res.message);
-                        totalElem.text((parseFloat(res.original_total) + shipping).toFixed(2));
+                        totalElem.text((parseFloat(res.original_total) + shipping).toFixed(
+                            2));
                     }
                 },
                 error: function() {

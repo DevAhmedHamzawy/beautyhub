@@ -38,6 +38,11 @@
                              <h5 class="table-heading">{{ trans('order.status') }}</h5>
                          </div>
                      </td>
+                     <td class="table-wrapper wrapper-total">
+                         <div class="table-wrapper-center">
+                             <h5 class="table-heading">{{ trans('main.action') }}</h5>
+                         </div>
+                     </td>
                  </tr>
 
                  @foreach (auth()->user()->orders as $order)
@@ -76,6 +81,18 @@
                          <td class="table-wrapper">
                              <div class="table-wrapper-center">
                                  {{ $order->status->name ?? '-' }}
+                             </div>
+                         </td>
+                         <td class="table-wrapper">
+                             <div class="table-wrapper-center">
+                                 <a href="{{ route('orders.show', $order->id) }}" class="btn btn-success">
+                                     {{ trans('main.details') }}
+                                 </a>
+                                 &nbsp;
+                                 <a href="{{ route('orders.invoice', $order->id) }}" target="_blank"
+                                     class="btn btn-primary">
+                                     {{ trans('main.invoice') }}
+                                 </a>
                              </div>
                          </td>
                      </tr>

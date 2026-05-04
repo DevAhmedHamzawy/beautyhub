@@ -27,7 +27,7 @@
 
         {{-- Address --}}
         <div class="order-card">
-            <h3>Shipping Address</h3>
+            <h3>{{ trans('main.shipping_address') }}</h3>
             <p>
                 {{ $order->first_name }} {{ $order->last_name }} <br>
                 {{ $order->address->address->street ?? '' }} <br>
@@ -39,17 +39,17 @@
 
         {{-- Items --}}
         <div class="order-card">
-            <h3>Order Items</h3>
+            <h3>{{ trans('main.order_items') }}</h3>
 
             <table class="order-table">
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Attributes</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                        <th>VAT</th>
-                        <th>Total</th>
+                        <th>{{ trans('main.product') }}</th>
+                        <th>{{ trans('main.attributes') }}</th>
+                        <th>{{ trans('main.quantity') }}</th>
+                        <th>{{ trans('main.price') }}</th>
+                        <th>{{ trans('main.tax') }}</th>
+                        <th>{{ trans('main.total') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,17 +66,18 @@
                             </td>
 
                             <td>{{ $item->qty }}</td>
-                            <td>{{ number_format($item->price, 2) }}
+                            <td>{{ number_format($item->price, 2) }} <span style="font-family: Arshid;">$</span>
                                 @if ($item->discount > 0)
                                     <br>
                                     <small class="discount">
-                                        Discount: -{{ number_format($item->discount, 2) }}
+                                        {{ trans('main.discount') }}: -{{ number_format($item->discount, 2) }} <span
+                                            style="font-family: Arshid;">$</span>
                                     </small>
                                 @endif
                             </td>
-                            <td>{{ number_format($item->vat, 2) }}</td>
+                            <td>{{ number_format($item->vat, 2) }} <span style="font-family: Arshid;">$</span></td>
                             <td class="bold">
-                                {{ number_format($item->sub_total, 2) }}
+                                {{ number_format($item->sub_total, 2) }} <span style="font-family: Arshid;">$</span>
                             </td>
                         </tr>
                     @endforeach
@@ -87,30 +88,30 @@
         {{-- Summary --}}
         <div class="order-summary">
             <div class="summary-row">
-                <span>Subtotal</span>
-                <span>{{ number_format($order->sub_total, 2) }}</span>
+                <span>{{ trans('main.subtotal') }}</span>
+                <span>{{ number_format($order->sub_total, 2) }} <span style="font-family: Arshid;">$</span></span>
             </div>
 
             <div class="summary-row">
-                <span>VAT</span>
-                <span>{{ number_format($order->vat, 2) }}</span>
+                <span>{{ trans('main.tax') }}</span>
+                <span>{{ number_format($order->vat, 2) }} <span style="font-family: Arshid;">$</span></span>
             </div>
 
             <div class="summary-row">
-                <span>Shipping</span>
-                <span>{{ number_format($order->shipping_cost, 2) }}</span>
+                <span>{{ trans('main.shipping') }}</span>
+                <span>{{ number_format($order->shipping_cost, 2) }} <span style="font-family: Arshid;">$</span></span>
             </div>
 
             @if ($order->discount > 0)
                 <div class="summary-row discount">
-                    <span>Discount</span>
-                    <span>-{{ number_format($order->discount, 2) }}</span>
+                    <span>{{ trans('main.discount') }}</span>
+                    <span>-{{ number_format($order->discount, 2) }} <span style="font-family: Arshid;">$</span></span>
                 </div>
             @endif
 
             <div class="summary-row total">
-                <span>Total</span>
-                <span>{{ number_format($order->total, 2) }}</span>
+                <span>{{ trans('main.total') }}</span>
+                <span>{{ number_format($order->total, 2) }} <span style="font-family: Arshid;">$</span></span>
             </div>
         </div>
 
