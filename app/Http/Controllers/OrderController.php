@@ -123,6 +123,8 @@ class OrderController extends Controller
                     'sub_total' => $item->quantity * $item->product->price_with_tax,
                 ]);
 
+                $item->stock->decrement('qty', $item->quantity);
+
                 $orderStock = Stock::create([
                     'product_id'     => $item->stock->product_id,
                     'stockable_type' => Order::class,

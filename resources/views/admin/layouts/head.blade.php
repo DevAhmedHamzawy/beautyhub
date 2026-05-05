@@ -14,6 +14,13 @@
 <!--- Internal Sweet-Alert css-->
 <link href="{{ URL::asset('assets/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet">
 
+<style>
+    @font-face {
+        font-family: "Arshid";
+        src: url("/assets/fonts/Arshid.woff") format("woff");
+    }
+</style>
+
 @switch($locale)
     @case('en')
         <!-- Sidemenu css -->

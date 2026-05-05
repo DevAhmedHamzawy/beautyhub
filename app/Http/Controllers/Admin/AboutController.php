@@ -113,6 +113,9 @@ class AboutController extends Controller
             'message' => trans('about.updated_success')
         ];
 
+        activity()->log('قام '.auth()->user()->name.' بتعديل صفحة عن الموقع');
+
+
         return redirect()->route('admin.about.edit')->with($message);
     }
 }

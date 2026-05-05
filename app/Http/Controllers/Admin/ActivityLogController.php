@@ -14,6 +14,6 @@ class ActivityLogController extends Controller
     }
     public function index()
     {
-        return view('admin.activity_logs.index')->withActivityLogs(Activity::get());
+        return view('admin.activity_logs.index')->withActivityLogs(Activity::orderBy('created_at', 'desc')->get());
     }
 }

@@ -176,7 +176,7 @@
                                         <td>{{ $item->unit_cost }}</td>
                                         <td>{{ $item->qty }}</td>
 
-                                        @php $item->discount_sort == 'percentage' ? $specialChar = "%" : $specialChar = "ج.م" @endphp
+                                        @php $item->discount_sort == 'percentage' ? $specialChar = "%" : $specialChar = "ر.س" @endphp
                                         <td>{{ $item->discount }}{{ $specialChar }}</td>
 
 

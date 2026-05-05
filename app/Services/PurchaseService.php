@@ -30,7 +30,7 @@ class PurchaseService
                 if($request->has('_method'))
                     $productId = $request->product_ids[$i];
 
-                $request->discount_sorts[$i] == 0 || $request->discount_sorts[$i] == 'percentage' ? $specialChar = "%"  :  $specialChar = "ج.م" ;
+                $request->discount_sorts[$i] == 0 || $request->discount_sorts[$i] == 'percentage' ? $specialChar = "%"  :  $specialChar = "ر.س" ;
 
                 $discount_amount = str_replace($specialChar , '' , $request->discount_amounts[$i]);
 

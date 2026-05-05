@@ -138,7 +138,7 @@
         if ($('#discount_amount').val() == 0) discount_amount = 0;
 
         discount_sort == 0 ? discount_amount += "%" : discount_amount +=
-            "ج.م";
+            "ر.س";
 
         // Hidden inputs
         $('.table tbody').append(`

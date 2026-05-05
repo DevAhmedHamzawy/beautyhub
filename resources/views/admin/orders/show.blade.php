@@ -22,10 +22,10 @@
                         <div class="invoice-header">
                             <h1 class="invoice-title">{{ trans('order.invoice') }}</h1>
                             <div class="billed-from">
-                                <h6>BootstrapDash, Inc.</h6>
-                                <p>201 Something St., Something Town, YT 242, Country 6546<br>
-                                    Tel No: 324 445-4544<br>
-                                    Email: youremail@companyname.com</p>
+                                <h6>Beauty Hub</h6>
+                                <p>{{ $settings->address }}<br>
+                                    Tel No: {{ $settings->phone }}<br>
+                                    Email: {{ $settings->email }}</p>
                             </div><!-- billed-from -->
                         </div><!-- invoice-header -->
                         <div class="row mg-t-20">
@@ -82,51 +82,51 @@
                                             <td class="tx-center">{{ $item->qty }}</td>
 
                                             <td class="tx-right">
-                                                {{ number_format($item->price, 2) }}
+                                                {{ number_format($item->price, 2) }} <span
+                                                    style="font-family: Arshid;">$</span>
                                                 @if ($item->discount > 0)
                                                     <br>
                                                     <small class="text-danger">
-                                                        -{{ number_format($item->discount, 2) }}
+                                                        -{{ number_format($item->discount, 2) }} <span
+                                                            style="font-family: Arshid;">$</span>
                                                     </small>
                                                 @endif
                                             </td>
 
                                             <td class="tx-right">
-                                                {{ number_format($item->sub_total, 2) }}
+                                                {{ number_format($item->sub_total, 2) }} <span
+                                                    style="font-family: Arshid;">$</span>
                                             </td>
                                         </tr>
                                     @endforeach
                                     <tr>
-                                        <td class="valign-middle" colspan="2" rowspan="4">
-                                            <div class="invoice-notes">
-                                                <label class="main-content-label tx-13">Notes</label>
-                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                    accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-                                                    illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                                                    explicabo.</p>
-                                            </div><!-- invoice-notes -->
-                                        </td>
+
                                         <td class="tx-right">{{ trans('order.sub_total') }}</td>
-                                        <td class="tx-right" colspan="2">{{ number_format($order->sub_total, 2) }}</td>
+                                        <td class="tx-right" colspan="2">{{ number_format($order->sub_total, 2) }} <span
+                                                style="font-family: Arshid;">$</span></td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right">{{ trans('order.vat') }}</td>
-                                        <td class="tx-right" colspan="2">{{ number_format($order->vat, 2) }}</td>
+                                        <td class="tx-right" colspan="2">{{ number_format($order->vat, 2) }} <span
+                                                style="font-family: Arshid;">$</span></td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right">{{ trans('order.shipping_cost') }}</td>
                                         <td class="tx-right" colspan="2">{{ number_format($order->shipping_cost, 2) }}
+                                            <span style="font-family: Arshid;">$</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right">{{ trans('order.discount') }}</td>
-                                        <td class="tx-right" colspan="2">-{{ number_format($order->discount, 2) }}</td>
+                                        <td class="tx-right" colspan="2">-{{ number_format($order->discount, 2) }} <span
+                                                style="font-family: Arshid;">$</span></td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right tx-uppercase tx-bold tx-inverse">{{ trans('order.total_due') }}
                                         </td>
                                         <td class="tx-right" colspan="4">
-                                            <h4 class="tx-primary tx-bold">{{ number_format($order->total, 2) }}</h4>
+                                            <h4 class="tx-primary tx-bold">{{ number_format($order->total, 2) }} <span
+                                                    style="font-family: Arshid;">$</span></h4>
                                         </td>
                                     </tr>
                                 </tbody>

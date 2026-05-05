@@ -79,6 +79,8 @@ class SettingsController extends Controller
             'message' => trans('settings.updated_success')
         ];
 
+        activity()->log('قام '.auth()->user()->name.'  بتعديل صفحة الاعدادات');
+
         return redirect()->route('admin.settings.edit')->with($message);
 
     }
