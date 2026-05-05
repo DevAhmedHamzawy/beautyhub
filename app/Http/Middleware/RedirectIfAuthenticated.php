@@ -19,17 +19,6 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
 
-            $redirect = session('redirect_after_auth');
-
-            if ($redirect === 'checkout') {
-                session()->forget('redirect_after_auth');
-                return redirect()->route('checkout');
-            }
-
-            if (session()->has('url.intended')) {
-                return redirect()->intended();
-            }
-
             return $guard == 'admin' ? redirect('admin/dashboard') : redirect('/profile');
         }
 
