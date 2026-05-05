@@ -44,6 +44,8 @@ class AboutController extends Controller
                         'locale'   => $locale
                     ],
                     [
+                        'about_id' => $about->id,
+                        'locale'   => $locale,
                         'title'   => $request->translations[$locale]['title'] ?? '',
                         'content' => $request->translations[$locale]['content'] ?? '',
                     ]

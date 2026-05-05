@@ -94,7 +94,7 @@
                                      <select class="category-select" name="category_id[]">
                                          <option value="" disabled selected>{{ trans('main.all_categories') }}
                                          </option>
-                                         @foreach ($categories as $category)
+                                         @foreach ($active_categories as $category)
                                              <option value="{{ $category->id }}">
                                                  {{ $category->translate($locale)->name }}</option>
                                          @endforeach
@@ -367,7 +367,7 @@
                  </div>
                  <div class="category-dropdown">
                      <ul class="category-list">
-                         @foreach ($categories as $category)
+                         @foreach ($active_categories as $category)
                              <li class="category-list-item">
                                  <a href="product-sidebar.html">
                                      <div class="dropdown-item d-flex justify-content-between align-items-center">
@@ -416,7 +416,7 @@
                      </button>
                      <div class="category-dropdown position-absolute" id="subMenu">
                          <ul class="category-list">
-                             @foreach ($categories as $category)
+                             @foreach ($active_categories as $category)
                                  <li class="category-list-item">
                                      <a href="product-sidebar.html">
                                          <div class="dropdown-item">

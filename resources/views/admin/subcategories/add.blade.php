@@ -87,11 +87,14 @@
 
                                 <div class="col-md-12 mg-t-10 mg-md-t-0">
                                     <div class="form-group">
+                                        <input type="hidden" name="appear_home" value="0">
+
                                         <p class="mg-b-10">{{ trans('category.appear_home') }}</p>
-                                        <div class="main-toggle main-toggle-success">
-                                            <span></span>
-                                        </div>
-                                        <input type="hidden" id="hiddenInput" name="appear_home" value="0">
+
+                                        <label>
+                                            <input type="checkbox" name="appear_home" value="1">
+                                            {{ trans('category.appear_home') }}
+                                        </label>
                                     </div>
                                 </div>
 

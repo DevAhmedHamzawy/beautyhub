@@ -10,11 +10,11 @@
         // invoke parent method
         var $rendered = _renderSearchDropdown.apply(
             this,
-            Array.prototype.slice.apply(arguments)
+            Array.prototype.slice.apply(arguments),
         );
         this.$search.attr(
             "placeholder",
-            this.options.get("searchInputPlaceholder")
+            this.options.get("searchInputPlaceholder"),
         );
         return $rendered;
     };
@@ -30,6 +30,16 @@ $(function () {
             $("#hiddenInput").val(1); // إذا كانت on
         } else {
             $("#hiddenInput").val(0); // إذا كانت off
+        }
+    });
+    $(".main-toggle-one").on("click", function () {
+        $(this).toggleClass("on");
+
+        // تحديث قيمة الـ input hidden بناءً على وجود الفئة 'on'
+        if ($(this).hasClass("on")) {
+            $("#hiddenInputOne").val(1); // إذا كانت on
+        } else {
+            $("#hiddenInputOne").val(0); // إذا كانت off
         }
     });
     // Input Masks

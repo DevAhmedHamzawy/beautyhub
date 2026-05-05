@@ -16,7 +16,7 @@ class WelcomeController extends Controller
     public function index()
     {
         $sliders = Slider::whereActive(1)->get();
-        $categories = Category::whereActive(1)->whereNull('parent_id')->get();
+        $categories = Category::whereActive(1)->whereAppearHome(1)->whereNull('parent_id')->get();
         $brands = Brand::whereActive(1)->get();
 
         $new_arrivals = Cache::remember('new_arrivals', now()->addMinutes(30), function () {

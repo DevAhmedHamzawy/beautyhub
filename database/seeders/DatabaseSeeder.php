@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /*User::factory(1)->create();
+        User::factory(1)->create();
 
         $admin = Admin::updateOrCreate(['id' => 1], [
             'name' => 'Admin',
@@ -206,10 +206,10 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'restore_purchase', 'guard_name' => 'admin', 'group_name' => 'Purchase']);
         $role->givePermissionTo('restore_purchase');
         Permission::create(['name' => 'view_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
-        $role->givePermissionTo('view_stock');*/
-        //Permission::create(['name' => 'update_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
-        //$role->givePermissionTo('update_stock');
-        /*Permission::create(['name' => 'add_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
+        $role->givePermissionTo('view_stock');
+        Permission::create(['name' => 'update_stock', 'guard_name' => 'admin', 'group_name' => 'Stock']);
+        $role->givePermissionTo('update_stock');
+        Permission::create(['name' => 'add_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
         $role->givePermissionTo('add_flash_sale');
         Permission::create(['name' => 'delete_flash_sale', 'guard_name' => 'admin', 'group_name' => 'Flash Sale']);
         $role->givePermissionTo('delete_flash_sale');
@@ -265,8 +265,8 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('edit_settings');
         Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
-        */
-        //$admin->assignRole($role);
+
+        $admin->assignRole($role);
 
 
 
@@ -285,7 +285,7 @@ class DatabaseSeeder extends Seeder
         Brand::factory()->count(10)->create();
         Tax::factory()->count(10)->create();
 */
-        /*$units = [
+        $units = [
             ['en' => 'Kilogram', 'ar' => 'كيلوجرام', 'code' => 'KG'],
             ['en' => 'Gram', 'ar' => 'جرام', 'code' => 'G'],
             ['en' => 'Liter', 'ar' => 'لتر', 'code' => 'L'],
@@ -307,8 +307,8 @@ class DatabaseSeeder extends Seeder
             $unit->save();
         }
 
-        */
-        /*$attributes = [
+
+        $attributes = [
                 'اللون' => [
                     'ar' => ['أحمر', 'وردي', 'نيود'],
                     'en' => ['Red', 'Pink', 'Nude'],
@@ -404,7 +404,7 @@ class DatabaseSeeder extends Seeder
 */
 
 
-        /*$statuses = [
+        $statuses = [
             'تم الطلب' => 'Ordered',
             'قيد التجهيز' => 'Pending',
             'تم التجهيز' => 'Prepared',
@@ -419,6 +419,6 @@ class DatabaseSeeder extends Seeder
             $status->translateOrNew('en')->name = $en;
             $status->save();
 
-        }*/
+        }
     }
 }
