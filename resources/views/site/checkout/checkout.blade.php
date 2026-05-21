@@ -49,7 +49,7 @@
 
         $(document).ready(function() {
             let item = {
-                value: '{!! $theCountry->id !!}',
+                value: '{!! $theCountry->id ?? 0 !!}',
                 dataset: {
                     level: 'governorate'
                 }
@@ -57,7 +57,7 @@
             getAreas(item);
 
             let itemone = {
-                value: '{!! $theGovernorate->id !!}',
+                value: '{!! $theGovernorate->id ?? 0 !!}',
                 dataset: {
                     level: 'city'
                 }
@@ -83,7 +83,7 @@
                             `<option value="">اختر المدينة</option>`
                         )
                         response.forEach(function(governorate) {
-                            if (governorate.id == {!! $theGovernorate->id !!}) {
+                            if (governorate.id == {!! $theGovernorate->id ?? 0 !!}) {
                                 @if ($locale == 'ar')
                                     $('#governorate_id').append(
                                         `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}" selected>${governorate.name}</option>`
@@ -114,7 +114,7 @@
 
                             let shippingCost = subtotal > 500 ? 0 : city.shipping_cost;
 
-                            if (city.id == {!! $theCity->id !!}) {
+                            if (city.id == {!! $theCity->id ?? 0 !!}) {
                                 @if ($locale == 'ar')
                                     $('#area_id').append(
                                         `<option value="${city.id}" data-shipping="${shippingCost}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.name}</option>`

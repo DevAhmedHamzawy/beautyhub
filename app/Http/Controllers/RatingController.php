@@ -5,15 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RatingController extends Controller
 {
     public function store(Request $request, Product $product)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'rating' => 'required|integer|min:1|max:5',
-            'review' => 'nullable|string|max:1000'
+            'review' => 'required|string|max:1000'
         ]);
+
+        if ($validator->fails()) {
+
+        return back()
+            ->withInput()
+            ->withErrors($validator)
+            ->with('error', $validator->errors()->first());
+         }
 
         Rating::updateOrCreate(
             [

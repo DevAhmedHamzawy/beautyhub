@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FlashSaleController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubAttributeController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -179,6 +180,10 @@ Route::resource('orders', OrderController::class)->except('update');
 Route::get('orders/{order}/invoice', [OrderController::class, 'invoice'])->name('orders.invoice');
 
 Route::put('orders/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+
+Route::get('ratings', [RatingController::class, 'index'])->name('ratings.index');
+Route::get('ratings/{rating}/approve', [RatingController::class, 'approve'])->name('ratings.approve');
+
 
 Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

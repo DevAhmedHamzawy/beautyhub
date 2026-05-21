@@ -42,7 +42,7 @@
                         <label for="phone" class="form-label">{{ trans('main.phone') }}*</label>
                         <input type="tel" id="phone" name="phone"
                             class="form-control @error('phone') is-invalid @enderror"
-                            value="{{ auth()->user()->defaultAddress->phone }}" />
+                            value="{{ auth()->user()->defaultAddress?->phone }}" />
                     </div>
                     @error('phone')
                         <span class="invalid-feedback" role="alert">
@@ -53,7 +53,7 @@
                         <label for="additional_phone" class="form-label">{{ trans('main.additional_phone') }}*</label>
                         <input type="tel" id="additional_phone" name="additional_phone"
                             class="form-control @error('additional_phone') is-invalid @enderror"
-                            value="{{ auth()->user()->defaultAddress->additional_phone }}" />
+                            value="{{ auth()->user()->defaultAddress?->additional_phone }}" />
                     </div>
                     @error('additional_phone')
                         <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
                 <div class="review-form-name address-form">
                     <label for="address" class="form-label">{{ trans('main.address') }}*</label>
                     <textarea id="address" name="address" class="form-control @error('address') is-invalid @enderror"
-                        placeholder="{{ trans('main.address') }}">{{ auth()->user()->defaultAddress->address }}</textarea>
+                        placeholder="{{ trans('main.address') }}">{{ auth()->user()->defaultAddress?->address }}</textarea>
                     @error('address')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -85,7 +85,7 @@
                                     </option>
                                     @foreach ($areas as $area)
                                         <option value="{{ $area->id }}"
-                                            @if ($theCountry->id == $area->id) selected @endif>
+                                            @if ($theCountry && $theCountry->id == $area->id) selected @endif>
                                             {{ $locale == 'ar' ? $area->name : $area->english }}
                                         </option>
                                     @endforeach
@@ -146,7 +146,7 @@
                     <label for="street" class="form-label">{{ trans('auth.street') }}*</label>
                     <input type="text" id="street" name="street"
                         class="form-control @error('street') is-invalid @enderror"
-                        value="{{ auth()->user()->defaultAddress->street }}"
+                        value="{{ auth()->user()->defaultAddress?->street }}"
                         placeholder="{{ trans('auth.street') }}" />
                     @error('street')
                         <span class="invalid-feedback" role="alert">
@@ -158,7 +158,7 @@
                     <label for="building" class="form-label">{{ trans('auth.building') }}*</label>
                     <input type="text" id="building" name="building"
                         class="form-control @error('building') is-invalid @enderror"
-                        value="{{ auth()->user()->defaultAddress->building }}"
+                        value="{{ auth()->user()->defaultAddress?->building }}"
                         placeholder="{{ trans('auth.building') }}" />
                     @error('building')
                         <span class="invalid-feedback" role="alert">
@@ -170,7 +170,7 @@
                     <label for="floor" class="form-label">{{ trans('auth.floor') }}*</label>
                     <input type="text" id="floor" name="floor"
                         class="form-control @error('floor') is-invalid @enderror"
-                        value="{{ auth()->user()->defaultAddress->floor }}"
+                        value="{{ auth()->user()->defaultAddress?->floor }}"
                         placeholder="{{ trans('auth.floor') }}" />
                     @error('floor')
                         <span class="invalid-feedback" role="alert">
@@ -182,7 +182,7 @@
                     <label for="apartment" class="form-label">{{ trans('auth.apartment') }}*</label>
                     <input type="text" id="apartment" name="apartment"
                         class="form-control @error('apartment') is-invalid  @enderror"
-                        value="{{ auth()->user()->defaultAddress->apartment }}"
+                        value="{{ auth()->user()->defaultAddress?->apartment }}"
                         placeholder="{{ trans('auth.apartment') }}" />
                     @error('apartment')
                         <span class="invalid-feedback" role="alert">
@@ -194,7 +194,7 @@
                     <label for="postal_code" class="form-label">{{ trans('main.zip') }}*</label>
                     <input type="text" id="postal_code" name="postal_code"
                         class="form-control @error('postal_code') is-invalid @enderror"
-                        value="{{ auth()->user()->defaultAddress->postal_code }}"
+                        value="{{ auth()->user()->defaultAddress?->postal_code }}"
                         placeholder="{{ trans('main.zip') }}" />
                     @error('postal_code')
                         <span class="invalid-feedback" role="alert">

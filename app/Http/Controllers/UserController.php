@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $areas = Area::getMainAreas();
 
-        $city = Area::where('id', auth()->user()->defaultAddress->area_id)->first();
+        $city = Area::where('id', auth()->user()->defaultAddress?->area_id)->first();
         $city == null ? $governorate = null : $governorate = Area::where('id', $city->parent_id)->first();
         $governorate == null ? $country = null : $country = Area::where('id', $governorate->parent_id)->first();
 

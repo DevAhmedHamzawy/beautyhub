@@ -16,7 +16,7 @@ class CheckoutController extends Controller
         $areas = Area::getMainAreas();
 
          // Get Current Country Then City
-        $city = Area::where('id', auth()->user()->defaultAddress->area_id)->first();
+        $city = Area::where('id', auth()->user()->defaultAddress?->area_id)->first();
         $city == null ? $governorate = null : $governorate = Area::where('id', $city->parent_id)->first();
         $governorate == null ? $country = null : $country = Area::where('id', $governorate->parent_id)->first();
 
@@ -48,7 +48,7 @@ class CheckoutController extends Controller
 
         $subtotal = $cartItems->sum('subtotal');
 
-        $shipping_cost = Area::where('id', auth()->user()->defaultAddress->area_id)->first()->shipping_cost;
+        $shipping_cost = Area::where('id', auth()->user()->defaultAddress?->area_id)->first()->shipping_cost ?? 0;
 
         return view('site.checkout.checkout', ['cartItems' => $cartItems, 'subtotal' => $subtotal, 'areas' => $areas, 'theCity' => $city, 'theGovernorate' => $governorate , 'theCountry' => $country, 'shipping_cost' => $shipping_cost]);
     }

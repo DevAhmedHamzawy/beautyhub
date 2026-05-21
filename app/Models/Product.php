@@ -137,7 +137,7 @@ class Product extends Model
 
     public function ratings()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class)->whereApproved(1);
     }
 
     public function averageRating()

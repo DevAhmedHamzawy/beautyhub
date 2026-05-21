@@ -63,9 +63,9 @@
                                 <div class="info-details">
                                     <p>{{ auth()->user()->name }}</p>
                                     <p>{{ auth()->user()->email }}</p>
-                                    <p>{{ auth()->user()->defaultAddress->phone }}</p>
-                                    <p>{{ auth()->user()->defaultAddress->area->name }}</p>
-                                    <p>{{ auth()->user()->defaultAddress->postal_code }}</p>
+                                    <p>{{ auth()->user()->defaultAddress->phone ?? '' }}</p>
+                                    <p>{{ auth()->user()->defaultAddress->area->name ?? '' }}</p>
+                                    <p>{{ auth()->user()->defaultAddress->postal_code ?? '' }}</p>
                                 </div>
                             </div>
                         </div>

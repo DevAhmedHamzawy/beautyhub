@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         $role = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'admin', 'active' => 1]);
 
-        Permission::create(['name' => 'add_admin', 'guard_name' => 'admin', 'group_name' => 'Admins']);
+        /*Permission::create(['name' => 'add_admin', 'guard_name' => 'admin', 'group_name' => 'Admins']);
         $role->givePermissionTo('add_admin');
         Permission::create(['name' => 'edit_admin', 'guard_name' => 'admin', 'group_name' => 'Admins']);
         $role->givePermissionTo('edit_admin');
@@ -262,11 +262,15 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'view_order', 'guard_name' => 'admin', 'group_name' => 'orders']);
         $role->givePermissionTo('view_order');
         Permission::create(['name' => 'edit_settings', 'guard_name' => 'admin', 'group_name' => 'settings']);
-        $role->givePermissionTo('edit_settings');
-        Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
+        $role->givePermissionTo('edit_settings');*/
+        Permission::create(['name' => 'view_ratings', 'guard_name' => 'admin', 'group_name' => 'Ratings']);
+        $role->givePermissionTo('view_ratings');
+         Permission::create(['name' => 'approve_rating', 'guard_name' => 'admin', 'group_name' => 'Ratings']);
+        $role->givePermissionTo('approve_rating');
+        /*Permission::create(['name' => 'view_activity_log', 'guard_name' => 'admin', 'group_name' => 'activity_logs']);
         $role->givePermissionTo('view_activity_log');
 
-        $admin->assignRole($role);
+        $admin->assignRole($role);*/
 
 
 
@@ -285,7 +289,7 @@ class DatabaseSeeder extends Seeder
         Brand::factory()->count(10)->create();
         Tax::factory()->count(10)->create();
 */
-        $units = [
+       /* $units = [
             ['en' => 'Kilogram', 'ar' => 'كيلوجرام', 'code' => 'KG'],
             ['en' => 'Gram', 'ar' => 'جرام', 'code' => 'G'],
             ['en' => 'Liter', 'ar' => 'لتر', 'code' => 'L'],
@@ -404,7 +408,7 @@ class DatabaseSeeder extends Seeder
 */
 
 
-        $statuses = [
+        /* $statuses = [
             'تم الطلب' => 'Ordered',
             'قيد التجهيز' => 'Pending',
             'تم التجهيز' => 'Prepared',
@@ -419,6 +423,6 @@ class DatabaseSeeder extends Seeder
             $status->translateOrNew('en')->name = $en;
             $status->save();
 
-        }
+        } */
     }
 }

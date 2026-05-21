@@ -106,6 +106,25 @@
                 </li>
             @endcanany
 
+
+            <li class="side-item side-item-category">{{ trans('dashboard.ratings') }}</li>
+
+            @canany(['view_ratings', 'approve_rating'])
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="side-menu__icon fe fe-star"></i>
+                        &nbsp;&nbsp;<span class="side-menu__label">{{ trans('rating.ratings') }}</span><i
+                            class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @can('view_ratings')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.ratings.index') }}">{{ trans('rating.ratings') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
+
             <li class="side-item side-item-category">{{ trans('order.orders') }}</li>
 
             @canany(['view_order'])
@@ -116,7 +135,8 @@
                             class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         @can('view_order')
-                            <li><a class="slide-item" href="{{ route('admin.orders.index') }}">{{ trans('order.orders') }}</a>
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.orders.index') }}">{{ trans('order.orders') }}</a>
                             </li>
                         @endcan
                     </ul>

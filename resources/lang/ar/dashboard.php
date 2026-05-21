@@ -35,4 +35,5 @@ return [
     'country' => 'البلدان',
     'products_stocks' => 'المنتجات والمخزون',
     'flash_sales_coupons' => 'العروض والكوبونات',
+    'ratings' => 'التقييمات',
 ];

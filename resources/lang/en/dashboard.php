@@ -35,4 +35,5 @@ return [
     'country' => 'Countries',
     'products_stocks' => 'Products And Stocks',
     'flash_sales_coupons' => 'Flash Sales And Coupons',
+    'ratings' => 'Ratings',
 ];

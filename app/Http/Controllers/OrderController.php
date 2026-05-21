@@ -41,9 +41,17 @@ class OrderController extends Controller
             return $item->quantity * $item->stock->product->tax_amount;
         });
 
-        $user->defaultAddress()->update($request->except('first_name', 'last_name', 'email', 'payment_method', '_token', 'couponCode'));
+        if($user->defaultAddress){
+            $user->defaultAddress()->update($request->except('first_name', 'last_name', 'email', 'payment_method', '_token', 'couponCode'));
+        }else{
+            $request->merge(['is_default' => 1]);
+            $user->addresses()->create($request->except('first_name', 'last_name', 'email', 'payment_method', '_token', 'couponCode'));
+        }
+
+        $user->refresh();
 
         $shipping_cost = $user->defaultAddress->area->shipping_cost;
+
 
         $discount = 0;
 
@@ -123,7 +131,7 @@ class OrderController extends Controller
                     'sub_total' => $item->quantity * $item->product->price_with_tax,
                 ]);
 
-                $item->stock->decrement('qty', $item->quantity);
+                $item->stock->update(['qty' => $item->stock->sum('qty') - $item->quantity]);
 
                 $orderStock = Stock::create([
                     'product_id'     => $item->stock->product_id,

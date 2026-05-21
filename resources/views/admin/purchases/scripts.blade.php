@@ -120,10 +120,10 @@
             resetAttributeIndexes();
         @endif
 
-        if (attributesHTML === '') {
+        /*if (attributesHTML === '') {
             alert('{{ trans('purchase.choose_attributes') }}');
             return;
-        }
+        }*/
 
         index++;
 

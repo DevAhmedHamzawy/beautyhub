@@ -49,7 +49,7 @@
                                     <input type="tel" id="phone" name="phone"
                                         placeholder="{{ trans('main.phone') }}"
                                         class="form-control @error('phone') is-invalid @enderror"
-                                        value="{{ auth()->user()->defaultAddress->phone }}" />
+                                        value="{{ auth()->user()->defaultAddress?->phone }}" />
                                 </div>
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
                                     <input type="tel" id="additional_phone" name="additional_phone"
                                         placeholder="{{ trans('main.additional_phone') }}"
                                         class="form-control @error('additional_phone') is-invalid @enderror"
-                                        value="{{ auth()->user()->defaultAddress->additional_phone }}" />
+                                        value="{{ auth()->user()->defaultAddress?->additional_phone }}" />
                                 </div>
                                 @error('additional_phone')
                                     <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@
                                 <div class="review-form-name address-form">
                                     <label for="address" class="form-label">{{ trans('main.address') }}*</label>
                                     <textarea id="address" name="address" class="form-control @error('address') is-invalid @enderror"
-                                        placeholder="{{ trans('main.address') }}">{{ auth()->user()->defaultAddress->address }}</textarea>
+                                        placeholder="{{ trans('main.address') }}">{{ auth()->user()->defaultAddress?->address }}</textarea>
                                     @error('address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -102,7 +102,7 @@
                                                     </option>
                                                     @foreach ($areas as $area)
                                                         <option value="{{ $area->id }}"
-                                                            @if ($theCountry->id == $area->id) selected @endif>
+                                                            @if ($theCountry && $theCountry->id == $area->id) selected @endif>
                                                             {{ $locale == 'ar' ? $area->name : $area->english }}
                                                         </option>
                                                     @endforeach
@@ -206,7 +206,7 @@
     <script>
         $(document).ready(function() {
             let item = {
-                value: '{!! $theCountry->id !!}',
+                value: '{!! $theCountry->id ?? 0 !!}',
                 dataset: {
                     level: 'governorate'
                 }
@@ -214,7 +214,7 @@
             getAreas(item);
 
             let itemone = {
-                value: '{!! $theGovernorate->id !!}',
+                value: '{!! $theGovernorate->id ?? 0 !!}',
                 dataset: {
                     level: 'city'
                 }
@@ -239,7 +239,7 @@
                             `<option value="">اختر المدينة</option>`
                         )
                         response.forEach(function(governorate) {
-                            if (governorate.id == {!! $theGovernorate->id !!}) {
+                            if (governorate.id == {!! $theGovernorate->id ?? 0 !!}) {
                                 @if ($locale == 'ar')
                                     $('#governorate_id').append(
                                         `<option value="${governorate.id}" data-lat="${governorate.latitude}" data-lng="${governorate.longitude}" selected>${governorate.name}</option>`
@@ -269,7 +269,7 @@
                         response.forEach(function(city) {
 
 
-                            if (city.id == {!! $theCity->id !!}) {
+                            if (city.id == {!! $theCity->id ?? 0 !!}) {
                                 @if ($locale == 'ar')
                                     $('#area_id').append(
                                         `<option value="${city.id}" data-lat="${city.latitude}" data-lng="${city.longitude}" selected>${city.name}</option>`
