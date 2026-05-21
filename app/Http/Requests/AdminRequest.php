@@ -32,7 +32,7 @@ class AdminRequest extends FormRequest
             $rules['password'] = 'nullable|min:8|max:25';
         }else{
             $rules['email'] = 'required|email|unique:admins,email';
-            $rules['main_image'] = 'mimes:jpeg,jpg,png,gif|required|max:10000';
+            $rules['main_image'] = 'mimes:jpeg,jpg,png,gif|sometimes|max:10000';
             $rules['password'] = 'required|min:8|max:25';
         }
 

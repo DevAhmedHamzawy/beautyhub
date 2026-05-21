@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
+use App\Notifications\AdminCreatedNotification;
 use App\Upload\Upload;
 use Spatie\Permission\Models\Role;
 
@@ -62,6 +63,8 @@ class AdminController extends Controller
         $admin = Admin::create($request->except('role','main_image'));
 
         $admin->assignRole($request->role);
+
+        $admin->notify(new AdminCreatedNotification());
 
         activity()->log('قام '.auth()->user()->name.'باضافة أدمن جديد'.$admin->name);
 
