@@ -25,6 +25,7 @@ class FlashSaleRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'type' => 'required|in:fixed,percent',
             'start_time' => 'required|date|after_or_equal:now',
             'end_time' => 'required|date|after:start_time',
             'discount' => 'required|numeric|min:0|between:0,100',

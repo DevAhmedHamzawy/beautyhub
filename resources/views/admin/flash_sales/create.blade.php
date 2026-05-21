@@ -97,6 +97,21 @@
 
                                 <div class="col-md-12 mg-t-10 mg-md-t-0">
                                     <div class="form-group">
+                                        <label>{{ trans('flash_sale.type') }}</label>
+                                        <select name="type" class="form-control">
+                                            <option value="percent">{{ trans('flash_sale.percent') }}</option>
+                                            <option value="fixed">{{ trans('flash_sale.fixed') }}</option>
+                                        </select>
+                                        @error('type')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mg-t-10 mg-md-t-0">
+                                    <div class="form-group">
                                         <p class="mg-b-10">{{ trans('flash_sale.discount') }}</p>
                                         <input class="form-control @error('discount') is-invalid @enderror"
                                             placeholder="{{ trans('flash_sale.discount') }}" type="text" name="discount"

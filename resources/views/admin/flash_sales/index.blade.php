@@ -48,6 +48,7 @@
                                     <th class="border-bottom-0">{{ trans('dashboard.name') }}</th>
                                     <th class="border-bottom-0">{{ trans('flash_sale.start_time') }}</th>
                                     <th class="border-bottom-0">{{ trans('flash_sale.end_time') }}</th>
+                                    <th class="border-bottom-0">{{ trans('flash_sale.type') }}</th>
                                     <th class="border-bottom-0">{{ trans('flash_sale.discount') }}</th>
                                     @canany(['view_flash_sale', 'delete_flash_sale'])
                                         <th class="border-bottom-0">{{ trans('dashboard.actions') }}</th>
@@ -61,6 +62,7 @@
                                         <td>{{ $flash_sale->name }}</td>
                                         <td>{{ $flash_sale->start_time }}</td>
                                         <td>{{ $flash_sale->end_time }}</td>
+                                        <td>{{ trans('flash_sale.' . $flash_sale->type) }}</td>
                                         <td>{{ $flash_sale->discount }}</td>
                                         @canany(['view_flash_sale', 'delete_flash_sale'])
                                             <td class="row pl-3">

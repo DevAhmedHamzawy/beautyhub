@@ -96,7 +96,11 @@ class ProductController extends Controller
 
         if($price != '-') {
            if ($flashSale && $flashSale->products->contains('product_id', $product->id)) {
-                $discounted = $price - ($price * $flashSale->discount / 100);
+                if($flashSale->type == 'fixed') {
+                    $discounted = $price - $flashSale->discount;
+                }else{
+                    $discounted = $price - ($price * $flashSale->discount / 100);
+                }
             }
         }
 
@@ -104,6 +108,7 @@ class ProductController extends Controller
         return response()->json([
             'original' => $price,
             'discount' => $flashSale ? $flashSale->discount : null,
+            'discount_type' => $flashSale ? $flashSale->type : null,
             'discounted' => $discounted,
             'stock_id' => $stock ? $stock->id : null,
             'out_of_stock' => $stock ? false : true,

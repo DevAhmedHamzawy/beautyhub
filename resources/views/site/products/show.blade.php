@@ -108,7 +108,12 @@
 
                         // ===== اظهار الخصم =====
                         if (discountBox && discountValue) {
-                            discountValue.innerText = `- ${data.discount}%`;
+                            if (data.discount_type == 'percent') {
+                                discountValue.innerText = `- ${data.discount}%`;
+                            } else {
+                                discountValue.innerHTML = `- ${data.discount} <span
+                                                      style="font-family: 'Arshid';">$</span>`;
+                            }
                             discountBox.classList.remove("d-none");
                         }
                     } else {

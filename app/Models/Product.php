@@ -94,10 +94,17 @@ class Product extends Model
 
         if ($flash_sale && $flash_sale->products->contains('product_id', $this->id)) {
 
-            return [
-                'original'   => $price,
-                'discounted' => round($price - ($price * $flash_sale->discount / 100), 2),
-            ];
+            if ($flash_sale->type == 'fixed') {
+                return [
+                    'original'   => $price,
+                    'discounted' => $price - $flash_sale->discount,
+                ];
+            }else{
+                return [
+                    'original'   => $price,
+                    'discounted' => round($price - ($price * $flash_sale->discount / 100), 2),
+                ];
+            }
         }
 
         return [

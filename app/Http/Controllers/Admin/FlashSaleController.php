@@ -52,7 +52,7 @@ class FlashSaleController extends Controller
             return redirect()->route('admin.flash_sales.index');
         }
 
-        $flash_sale = FlashSale::create($request->only('name', 'discount', 'start_time', 'end_time', 'active'));
+        $flash_sale = FlashSale::create($request->only('name', 'type', 'discount', 'start_time', 'end_time', 'active'));
 
 
         foreach ($request->input('product_ids') as $product_id) {
