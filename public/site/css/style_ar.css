@@ -5194,3 +5194,31 @@ table .ticket-row:hover {
 .page-link:focus {
     box-shadow: none;
 }
+
+.brandSwiper {
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.brandSwiper .swiper-slide {
+    height: auto !important;
+}
+
+.brand-card {
+    height: 140px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.brand-card img {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+}

@@ -353,7 +353,7 @@
             autoUpload: true,
 
             uploadcompleted: function(e, data) {
-                alert('✅ تم رفع الصورة بنجاح');
+                alert("{!! trans('product.uploaded_success') !!}");
                 if (data.result.success) {
                     const fileName = data.result.filename;
 

@@ -37,4 +37,6 @@ return [
     'disappear_home' => 'اخفاء من الصفحة الرئيسية',
     'appeared_in_home_success' => 'تم ظهور المنتج في الصفحة الرئيسية بنجاح',
     'disappeared_in_home_success' => 'تم اخفاء المنتج من الصفحة الرئيسية بنجاح',
+    'uploaded_success' => 'تم رفع الصورة بنجاح',
+    'sure_delete_image' => 'هل انت متاكد من حذف الصورة ?',
 ];

@@ -625,3 +625,42 @@
         });
     });
 </script>
+
+<script>
+    window.addEventListener('load', function() {
+
+        new Swiper(".brandSwiper", {
+
+            loop: false,
+
+            slidesPerView: 1.5,
+
+            spaceBetween: 20,
+
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+            },
+
+            speed: 1000,
+
+            breakpoints: {
+
+                576: {
+                    slidesPerView: 2,
+                },
+
+                768: {
+                    slidesPerView: 3,
+                },
+
+                992: {
+                    slidesPerView: 3,
+                }
+
+            }
+
+        });
+
+    });
+</script>

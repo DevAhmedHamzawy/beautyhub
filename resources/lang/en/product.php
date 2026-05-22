@@ -37,4 +37,6 @@ return [
     'disappear_home' => 'Disappear From Home Page',
     'appeared_in_home_success' => 'Product Appeared In Home Page Successfully',
     'disappeared_in_home_success' => 'Product Disappeared From Home Page Successfully',
+    'uploaded_success' => 'Image Uploaded Successfully',
+    'sure_delete_image' => 'Are You Sure You Want To Delete This Image ?',
 ];

@@ -368,7 +368,7 @@
             autoUpload: true,
 
             uploadcompleted: function(e, data) {
-                alert('✅ تم رفع الصورة بنجاح');
+                alert("{!! trans('product.uploaded_success') !!}");
                 if (data.result.success) {
                     const fileName = data.result.filename;
 
@@ -386,7 +386,7 @@
             let imageId = $(this).data('id');
             let wrapper = $(this).closest('.image-wrapper');
 
-            if (confirm('هل أنت متأكد من حذف الصورة؟')) {
+            if (confirm("{!! trans('product.sure_delete_image') !!}")) {
                 $.ajax({
                     url: '{{ route('admin.products.delete_image') }}',
                     method: 'POST',
