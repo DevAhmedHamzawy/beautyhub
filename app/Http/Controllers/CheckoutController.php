@@ -48,7 +48,9 @@ class CheckoutController extends Controller
 
         $subtotal = $cartItems->sum('subtotal');
 
-        $shipping_cost = Area::where('id', auth()->user()->defaultAddress?->area_id)->first()->shipping_cost ?? 0;
+        $settings = \App\Models\Settings::first();
+
+        $shipping_cost = $settings->low_shipping < $subtotal ? 0 : Area::where('id', auth()->user()->defaultAddress?->area_id)->first()->shipping_cost ?? 0;
 
         return view('site.checkout.checkout', ['cartItems' => $cartItems, 'subtotal' => $subtotal, 'areas' => $areas, 'theCity' => $city, 'theGovernorate' => $governorate , 'theCountry' => $country, 'shipping_cost' => $shipping_cost]);
     }

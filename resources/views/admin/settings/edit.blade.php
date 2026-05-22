@@ -95,6 +95,19 @@
                             </div>
                         </div>
 
+                        {{-- Phone --}}
+                        <div class="col-md-12 mg-t-10">
+                            <div class="form-group">
+                                <p class="mg-b-10">{{ trans('settings.low_shipping') }}</p>
+                                <input type="text" name="low_shipping"
+                                    class="form-control @error('low_shipping') is-invalid @enderror"
+                                    value="{{ old('low_shipping', $settings->low_shipping ?? '') }}">
+                                @error('low_shipping')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="col-md-12 mg-t-10">
                             <div class="form-group">
                                 <p class="mg-b-10">{{ trans('settings.logo') }}</p>

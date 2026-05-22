@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminPanelController;
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\BestSellWeekController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FlashSaleController;
+use App\Http\Controllers\Admin\NewArrivalController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RatingController;
@@ -29,6 +31,7 @@ use App\Http\Controllers\Admin\SubAttributeController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\TaxController;
+use App\Http\Controllers\Admin\TopSellingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -184,6 +187,14 @@ Route::put('orders/update-status', [OrderController::class, 'updateStatus'])->na
 Route::get('ratings', [RatingController::class, 'index'])->name('ratings.index');
 Route::get('ratings/{rating}/approve', [RatingController::class, 'approve'])->name('ratings.approve');
 
+Route::get('new_arrivals', [NewArrivalController::class, 'create'])->name('new_arrivals.create');
+Route::post('new_arrivals', [NewArrivalController::class, 'store'])->name('new_arrivals.store');
+
+Route::get('top_sellings', [TopSellingController::class, 'create'])->name('top_sellings.create');
+Route::post('top_sellings', [TopSellingController::class, 'store'])->name('top_sellings.store');
+
+Route::get('best_sell_weeks', [BestSellWeekController::class, 'create'])->name('best_sell_weeks.create');
+Route::post('best_sell_weeks', [BestSellWeekController::class, 'store'])->name('best_sell_weeks.store');
 
 Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs');
 

@@ -39,4 +39,5 @@ return [
     'disappeared_in_home_success' => 'Product Disappeared From Home Page Successfully',
     'uploaded_success' => 'Image Uploaded Successfully',
     'sure_delete_image' => 'Are You Sure You Want To Delete This Image ?',
+    'product_not_in_stock' => 'Product Not In Stock',
 ];

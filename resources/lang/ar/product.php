@@ -39,4 +39,5 @@ return [
     'disappeared_in_home_success' => 'تم اخفاء المنتج من الصفحة الرئيسية بنجاح',
     'uploaded_success' => 'تم رفع الصورة بنجاح',
     'sure_delete_image' => 'هل انت متاكد من حذف الصورة ?',
+    'product_not_in_stock' => 'المنتج غير متوفر في المخزن',
 ];

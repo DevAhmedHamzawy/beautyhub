@@ -80,6 +80,13 @@
                                         @canany(['view_product', 'edit_product', 'delete_product', 'active_product',
                                             'restore_product', 'add_home_product'])
                                             <td class="row pl-3">
+                                                @can('view_product')
+                                                    <a href="{{ route('admin.products.show', $product->id) }}"
+                                                        class="btn btn-success" data-placement="top" data-toggle="tooltip"
+                                                        data-original-title="{{ trans('dashboard.show') }}"><i
+                                                            class="fas fa-eye"></i></a>
+                                                @endcan
+                                                &nbsp;&nbsp;
                                                 @can('edit_product')
                                                     <a href="{{ route('admin.products.edit', $product->id) }}"
                                                         class="btn btn-warning" data-placement="top" data-toggle="tooltip"

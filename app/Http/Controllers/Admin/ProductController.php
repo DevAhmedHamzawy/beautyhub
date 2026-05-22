@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\Stock;
 use App\Models\Tax;
 use App\Models\Unit;
 use App\Upload\Upload;
@@ -88,6 +89,21 @@ class ProductController extends Controller
         ];
 
         return redirect()->route('admin.products.index')->with($message);
+    }
+
+    public function show(Product $product)
+    {
+        if(Stock::where('product_id', $product->id)->where('qty', '>', 0)->exists()){
+            return redirect()->route('products.show', $product->slug);
+        }else{
+            $message = [
+                'alert-type' => 'success',
+                'title' =>  trans('product.product_not_in_stock'),
+                'message' => trans('product.product_not_in_stock')
+            ];
+
+            return redirect()->route('admin.products.index')->with($message);
+        }
     }
 
      /**

@@ -17,4 +17,5 @@ return [
     'banner_five' => "البانر الخامس",
     'banner_six' => "البانر السادس",
     'updated_success' => 'تم تعديل الاعدادات بنجاح',
+    'low_shipping' => 'سعر التوصيل الادنى',
 ];

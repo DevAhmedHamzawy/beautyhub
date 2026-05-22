@@ -112,7 +112,8 @@
                         )
                         response.forEach(function(city) {
 
-                            let shippingCost = subtotal > 500 ? 0 : city.shipping_cost;
+                            let shippingCost = subtotal > {!! $settings->low_shipping !!} ? 0 : city
+                                .shipping_cost;
 
                             if (city.id == {!! $theCity->id ?? 0 !!}) {
                                 @if ($locale == 'ar')

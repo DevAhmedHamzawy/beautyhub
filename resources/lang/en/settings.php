@@ -17,4 +17,5 @@ return [
     'banner_five' => "Banner Five",
     'banner_six' => "Banner Six",
     'updated_success' => 'Settings Updated Successfully',
+    'low_shipping' => 'Low Shipping Price',
 ];

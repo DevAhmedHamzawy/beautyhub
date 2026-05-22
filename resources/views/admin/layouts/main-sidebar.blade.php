@@ -377,6 +377,15 @@
                             <li><a class="slide-item"
                                     href="{{ route('admin.about.edit') }}">{{ trans('about.abouts') }}</a>
                             </li>
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.new_arrivals.create') }}">{{ trans('new_arrival.new_arrival') }}</a>
+                            </li>
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.top_sellings.create') }}">{{ trans('top_selling.top_selling') }}</a>
+                            </li>
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.best_sell_weeks.create') }}">{{ trans('best_sell_week.best_sell_week') }}</a>
+                            </li>
                         @endcan
                     </ul>
                 </li>
