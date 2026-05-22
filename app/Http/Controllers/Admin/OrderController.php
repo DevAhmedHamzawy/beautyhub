@@ -61,12 +61,12 @@ class OrderController extends Controller
         $order = Order::findOrFail($request->id);
 
         // (اختياري احترافي) منع تغيير الحالة لو Delivered
-        if ($order->status && $order->status->translate('en')->name === 'Delivered') {
+        /*if ($order->status && $order->status->translate('en')->name === 'Delivered') {
             return response()->json([
                 'status' => false,
                 'message' => trans('order.cannot_change')
             ], 403);
-        }
+        }*/
 
         // Update
         $order->status_id = $request->status_id;

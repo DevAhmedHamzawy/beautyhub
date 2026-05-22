@@ -41,4 +41,15 @@ return [
     'edit_status'       => 'تحديث الحالة',
     'cannot_change'     => 'لا يمكن تغيير الحالة لو تم التسليم',
     'updated_success'   => 'تم تحديث الحالة بنجاح',
+
+    'thank_you'          => 'شكرا لك على عملية الشراء',
+    'order_placed_successfully' => 'تم اضافة طلبك بنجاح',
+
+    'thank_you_2' => 'شكرا على التسوق مع beautyhub 💖',
+    'we_preparing' => 'نحن نحضر طلبك وسوف تستلم رسالة تاكيد قريبا.',
+
+    'processing' => 'معالجة',
+
+    'back_to_home' => 'العودة للصفحة الرئيسية',
+    'view_order' => 'عرض الطلب',
 ];

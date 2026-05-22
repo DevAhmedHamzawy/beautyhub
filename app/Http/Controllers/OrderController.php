@@ -50,7 +50,9 @@ class OrderController extends Controller
 
         $user->refresh();
 
-        $shipping_cost = $user->defaultAddress->area->shipping_cost;
+        $settings = \App\Models\Settings::first();
+
+        $shipping_cost = $settings->low_shipping < $subtotal ? 0 :$user->defaultAddress->area->shipping_cost;
 
 
         $discount = 0;
@@ -162,8 +164,7 @@ class OrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('orders.show', $order->id)
-                ->with('success', trans('main.order_placed_successfully'));
+            return redirect()->route('thank.you', $order->id);;
 
         } catch (\Exception $e) {
 

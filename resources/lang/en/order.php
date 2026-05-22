@@ -40,4 +40,15 @@ return [
     'edit_status'        => 'Edit Status',
     'cannot_change'      => 'Cannot change delivered order.',
     'updated_success'    => 'Status updated successfully.',
+
+    'thank_you'          => 'Thank You For Purchasing!',
+    'order_placed_successfully' => 'Your order has been placed successfully.',
+
+    'thank_you_2' => 'Thanks for shopping with Beauty Hub 💖',
+    'we_preparing' => 'We are preparing your order and you will receive an email confirmation shortly.',
+
+    'processing' => 'Processing',
+
+    'back_to_home' => 'Back to Home',
+    'view_order' => 'View Order',
 ];

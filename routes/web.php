@@ -53,6 +53,14 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
 
+Route::get('/thank-you/{order}', function ($orderId) {
+
+    $order = \App\Models\Order::findOrFail($orderId);
+
+    return view('site.thank_you', compact('order'));
+
+})->name('thank.you');
+
 Route::middleware('verified')->group(function () {
 
     Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
