@@ -26,7 +26,7 @@ class FlashSaleController extends Controller
 
     public function chooseCategories()
     {
-        $categories = Category::whereActive(1)->get();
+        $categories = Category::whereActive(1)->whereNull('parent_id')->get();
 
         return view('admin.flash_sales.choose_categories', compact('categories'));
     }

@@ -23,7 +23,7 @@ class SearchController extends Controller
         $attributes = Attribute::whereActive(1)->whereNull('parent_id')->with('children')->get();
         $min = null;
         $max = null;
-        $products = Product::whereRelation('stocks', 'qty', '>', 0)->paginate(12);
+        $products = Product::filter($this->filters())->whereRelation('stocks', 'qty', '>', 0)->latest()->paginate(12);
 
         return view('site.products.search', compact('categories', 'brands', 'attributes', 'products', 'min', 'max'));
     }
